@@ -1,0 +1,6 @@
+# downloader output
+html/
+html_rendered/
+report.csv
+report_rendered.csv
+__pycache__/
