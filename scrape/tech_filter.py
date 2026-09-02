@@ -76,6 +76,26 @@ NON_TECH = [
         r"support services|resource cent(er|re)|by use case|by industry|by role|"
         r"by product|marketplace|learn|learning|strategy|process|customer|health|"
         r"quick links|main menu|all|more|next|previous|search)$", re.I)),
+    ("markdown or template syntax", re.compile(r"\]\s*\(|\{\{|\}\}|<[a-z]+>|\]\s*\[")),
+    ("landing or overview page", re.compile(r"\boverview$", re.I)),
+    ("demo or trial page", re.compile(
+        r"\b(book a demo|request a demo|watch a demo|free trial|start trial|demos?)\b", re.I)),
+    ("comparison or alternatives page", re.compile(
+        r"(?<![\w-])(vs\.?|versus)(?![\w-])|^(compare|alternatives? to)\b|"
+        r"\balternatives?$", re.I)),
+    ("case study, guide or collateral", re.compile(
+        r"\b(case stud(y|ies)|customer stor(y|ies)|guide to|'?s guide|dummies|"
+        r"handbook|playbook|cheat sheet|benchmark report|state of the|"
+        r"research report|tutorial|how-to)\b", re.I)),
+    ("documentation or FAQ", re.compile(
+        r"\b(faqs?|api docs|documentation|release notes|knowledge base|"
+        r"user manual|developer docs|cli reference)\b", re.I)),
+    ("partner programme or competency", re.compile(
+        r"\b(competency|partner (program|programme|ecosystem|portal|loyalty)|"
+        r"reseller program|certified partner|partner badge|find a reseller)\b", re.I)),
+    ("calculator or estimator", re.compile(
+        r"\b(roi calculator|cost calculator|tco calculator|price estimator|"
+        r"savings calculator)\b", re.I)),
     ("place or region", re.compile(
         r"^(north america|south america|emea|apac|latam|united states|usa|india|"
         r"singapore|australia|germany|france|japan|brazil|canada|united kingdom|uk|"
@@ -94,9 +114,47 @@ THIRD_PARTY = {
 }
 
 
+# A single generic word is a section header, not something anyone searches for:
+# a vendor searching "Cloud" would match almost every sponsor. Specific one-word
+# terms such as "Kubernetes", "SIEM" or "Docker" are unaffected.
+TOO_GENERIC = {
+    "cloud", "network", "networking", "security", "data", "storage", "compute",
+    "analytics", "mobile", "mobility", "automation", "monitor", "monitoring",
+    "deployment", "insight", "insights", "search", "api", "apis", "infrastructure",
+    "software", "hardware", "digital", "integration", "integrations", "connectivity",
+    "communications", "communication", "database", "databases", "server", "servers",
+    "application", "applications", "apps", "devices", "device", "identity",
+    "compliance", "governance", "risk", "payments", "payment", "commerce",
+}
+
+MINOR_WORDS = {"for", "and", "of", "the", "to", "in", "on", "with", "a", "an", "as",
+               "at", "by", "or", "per", "via", "from", "your", "our", "is", "are"}
+
+
+def looks_merged(label: str) -> bool:
+    """True when a menu label ran into its own description.
+
+    "Documentation Technical guides & API docs" is a link label glued to its
+    subtitle. "Threat Detection, Investigation, and Response (TDIR)" is a real
+    product term, so a comma alone is not enough - the tell is a lowercase word
+    where a title-cased one belongs.
+    """
+    words = label.split()
+    after_comma = re.findall(r",\s+([a-z]+)", label)
+    if len(words) > 4 and any(w not in MINOR_WORDS for w in after_comma):
+        return True
+    lower = [w for w in words[1:]
+             if w[:1].islower() and w.lower() not in MINOR_WORDS and w.isalpha()]
+    return len(words) >= 6 and len(lower) >= 2
+
+
 def classify(label: str, vendor_domain: str = "") -> tuple[str, str, str]:
     """-> (verdict, domain_or_reason, category). Verdict is keep, drop or review."""
     key = label.strip().lower()
+    if key in TOO_GENERIC:
+        return "drop", "single generic word, too broad to search on", ""
+    if looks_merged(label):
+        return "drop", "menu label merged with its description", ""
     if key in THIRD_PARTY:
         brand = key.replace(" ", "")
         if brand not in vendor_domain.replace(".", "").replace("-", ""):

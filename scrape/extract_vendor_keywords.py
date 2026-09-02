@@ -218,10 +218,13 @@ def slug_to_label(slug: str) -> str:
     return " ".join(out).strip()
 
 
+ZERO_WIDTH = re.compile(r"[\u200b-\u200f\u2028\u2029\ufeff\u00ad]")
+
+
 def clean_label(text: str) -> tuple[str | None, str]:
     """Return (label, "") when usable, or (None, reason) so rejections are auditable."""
-    raw = text
-    text = DECOR.sub(" ", text or "")
+    text = ZERO_WIDTH.sub("", text or "")   # "GDPR\u200b" arrives with a zero-width space
+    text = DECOR.sub(" ", text)
     text = re.sub(r"\s+", " ", text).strip(" \t\n\r|·—–-")
     text = re.sub(r"\s+\bnew!?$", "", text, flags=re.I)
     text = STRIP_LEAD.sub("", text).strip()
