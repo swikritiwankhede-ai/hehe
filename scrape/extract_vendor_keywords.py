@@ -210,6 +210,7 @@ class _Rejects(threading.local):
 
 
 REJECTS = _Rejects()
+SAVE_HTML = False        # set by --save-html; the pages are large
 
 
 class Session:
@@ -362,6 +363,39 @@ def diagnose(sess: Session, base: str) -> str:
     return f"homepage unreachable - {home}"
 
 
+def write_vendor_folder(d: Path, company: str, base: str, rows: list[dict],
+                        rejected: list[dict], sess: "Session", error: dict | None) -> None:
+    """One self-contained evidence folder per vendor."""
+    try:
+        d.mkdir(parents=True, exist_ok=True)
+        with (d / "keywords.csv").open("w", newline="", encoding="utf-8") as fh:
+            w = csv.DictWriter(fh, fieldnames=["source", "bucket", "label", "url"])
+            w.writeheader()
+            w.writerows([{k: r[k] for k in ("source", "bucket", "label", "url")} for r in rows])
+        with (d / "rejected.csv").open("w", newline="", encoding="utf-8") as fh:
+            w = csv.DictWriter(fh, fieldnames=["source", "label", "url", "reason"])
+            w.writeheader()
+            w.writerows([{k: r[k] for k in ("source", "label", "url", "reason")}
+                         for r in rejected])
+        (d / "sitemap_urls.txt").write_text("\n".join(sess.sitemap_pages), encoding="utf-8")
+        (d / "fetch_log.txt").write_text(
+            "\n".join(f"{v}\t{k}" for k, v in sess.outcomes.items()), encoding="utf-8")
+        (d / "summary.txt").write_text(
+            f"company        : {company}\n"
+            f"site           : {base}\n"
+            f"homepage       : {sess.outcomes.get(base, 'not attempted')}\n"
+            f"pages fetched  : {len(sess.outcomes)}\n"
+            f"sitemap URLs   : {len(sess.sitemap_pages)}\n"
+            f"keywords kept  : {len(rows)}\n"
+            f"labels dropped : {len(rejected)}\n"
+            f"error          : {(error or {}).get('error', '-')}\n",
+            encoding="utf-8")
+        if SAVE_HTML and sess.first_html:
+            (d / "homepage.html").write_text(sess.first_html, encoding="utf-8", errors="replace")
+    except OSError:
+        pass
+
+
 def scrape_vendor(company: str, url: str, raw_dir: Path | None = None) -> dict:
     """Scrape one vendor. Returns rows, rejects, a per-vendor summary and any error."""
     base = url if url.startswith(("http://", "https://")) else "https://" + url
@@ -419,17 +453,7 @@ def scrape_vendor(company: str, url: str, raw_dir: Path | None = None) -> dict:
         error = dict(company=company, url=url, error=diagnose(sess, base))
 
     if raw_dir is not None:
-        d = raw_dir / host
-        try:
-            d.mkdir(parents=True, exist_ok=True)
-            if sess.first_html:
-                (d / "homepage.html").write_text(sess.first_html, encoding="utf-8",
-                                                 errors="replace")
-            (d / "sitemap_urls.txt").write_text("\n".join(sess.sitemap_pages), encoding="utf-8")
-            (d / "fetch_log.txt").write_text(
-                "\n".join(f"{v}\t{k}" for k, v in sess.outcomes.items()), encoding="utf-8")
-        except OSError:
-            pass
+        write_vendor_folder(raw_dir / host, company, base, rows, rejected, sess, error)
 
     return dict(
         rows=rows,
@@ -452,9 +476,12 @@ def main() -> int:
     ap.add_argument("-w", "--workers", type=int, default=8,
                     help="vendors scraped in parallel (default 8)")
     ap.add_argument("-n", "--limit", type=int, default=0, help="only first N vendors")
-    ap.add_argument("--raw-dir", default="",
-                    help="also save each vendor's homepage HTML, sitemap URL list and "
-                         "fetch log under this folder, as evidence")
+    ap.add_argument("--vendor-dir", "--raw-dir", dest="vendor_dir", default="",
+                    help="write one evidence folder per vendor under this path, each with "
+                         "keywords.csv, rejected.csv, sitemap_urls.txt, fetch_log.txt "
+                         "and summary.txt")
+    ap.add_argument("--save-html", action="store_true",
+                    help="also save each homepage as HTML (adds 100-300 MB over 350 vendors)")
     args = ap.parse_args()
 
     with open(args.input, newline="", encoding="utf-8-sig") as fh:
@@ -473,7 +500,9 @@ def main() -> int:
     err_path = Path(f"{stem}_errors.csv")
     rej_path = Path(f"{stem}_rejected.csv")
     sum_path = Path(f"{stem}_summary.csv")
-    raw_dir = Path(args.raw_dir) if args.raw_dir else None
+    raw_dir = Path(args.vendor_dir) if args.vendor_dir else None
+    global SAVE_HTML
+    SAVE_HTML = args.save_html
 
     done: set[str] = set()
     if out_path.exists():
@@ -526,7 +555,8 @@ def main() -> int:
     print(f"summary   -> {sum_path}   (one row per vendor: what was fetched and found)")
     print(f"errors    -> {err_path}")
     if raw_dir:
-        print(f"raw pages -> {raw_dir}/<domain>/  (homepage.html, sitemap_urls.txt, fetch_log.txt)")
+        print(f"per vendor-> {raw_dir}/<domain>/  (keywords.csv, rejected.csv, summary.txt, "
+              f"sitemap_urls.txt, fetch_log.txt{', homepage.html' if SAVE_HTML else ''})")
     return 0
 
 

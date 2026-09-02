@@ -57,14 +57,26 @@ vendor was actually visited.
 `vendor_keywords_errors.csv` — vendors that yielded nothing, usually a
 JS-rendered nav or a bot wall. Handle those with the browser-console fallback.
 
-### Keeping the pages themselves
+### One folder per vendor
 
-Add `--raw-dir raw` and each vendor also gets `raw/<domain>/` containing
-`homepage.html` (the page exactly as fetched), `sitemap_urls.txt` (every URL
-found in the sitemap) and `fetch_log.txt` (every request and its outcome).
+Add `--vendor-dir vendors_out` and each vendor gets its own folder, so a single
+company can be checked without opening the combined CSV:
 
-That makes the chain fully auditable: keyword → source URL → the saved page it
-was read from. Budget roughly 100-300 MB for 345 vendors.
+```
+vendors_out/
+  sentinelone.com/
+    summary.txt        what was fetched and how much was found
+    keywords.csv       the keywords kept for this vendor
+    rejected.csv       what was discarded here, and why
+    sitemap_urls.txt   every URL seen in the sitemap
+    fetch_log.txt      every request and its outcome
+  qualys.com/
+    ...
+```
+
+This stays small — a few MB across 350 vendors. Add `--save-html` as well to
+keep each `homepage.html` exactly as fetched, which completes the chain from
+keyword to source URL to the stored page, at the cost of 100-300 MB.
 
 ## Where the signal comes from
 
