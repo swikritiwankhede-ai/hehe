@@ -25,6 +25,7 @@ import argparse
 import csv
 import re
 import sys
+import threading
 import time
 import xml.etree.ElementTree as ET
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -168,24 +169,47 @@ def slug_to_label(slug: str) -> str:
     return " ".join(out).strip()
 
 
-def clean_label(text: str) -> str | None:
+def clean_label(text: str) -> tuple[str | None, str]:
+    """Return (label, "") when usable, or (None, reason) so rejections are auditable."""
+    raw = text
     text = DECOR.sub(" ", text or "")
     text = re.sub(r"\s+", " ", text).strip(" \t\n\r|·—–-")
-    text = re.sub(r"\s+\bnew!?$", "", text, flags=re.I)          # "NVIDIA H200 New"
-    text = STRIP_LEAD.sub("", text).strip()                      # "Explore OpenShift"
-    if not text or len(text) < 2 or len(text) > 60:
-        return None
+    text = re.sub(r"\s+\bnew!?$", "", text, flags=re.I)
+    text = STRIP_LEAD.sub("", text).strip()
+    if not text or len(text) < 2:
+        return None, "empty"
+    if len(text) > 60:
+        return None, "too long"
     if text.lower() in STOP_LABELS:
-        return None
+        return None, "stop word"
     if not re.search(r"[A-Za-z]", text):
-        return None
-    if len(text.split()) > 7:                                    # headlines, not products
-        return None
-    if DROP_LEAD.search(text) or MARKETING.search(text):         # CTAs and promo banners
-        return None
+        return None, "no letters"
+    if len(text.split()) > 7:
+        return None, "headline, not a product name"
+    if DROP_LEAD.search(text):
+        return None, "call to action"
+    if MARKETING.search(text):
+        return None, "marketing copy"
     if "logo" in text.lower():
-        return None
-    return text
+        return None, "logo alt text"
+    return text, ""
+
+
+class _Rejects(threading.local):
+    """Per-thread buffer of discarded labels, so the audit trail stays per vendor."""
+
+    def __init__(self) -> None:
+        self.buf: list[tuple[str, str, str, str]] = []
+
+    def append(self, item: tuple[str, str, str, str]) -> None:
+        self.buf.append(item)
+
+    def drain(self) -> list[tuple[str, str, str, str]]:
+        out, self.buf = self.buf, []
+        return out
+
+
+REJECTS = _Rejects()
 
 
 class Session:
@@ -196,6 +220,8 @@ class Session:
         self.s.headers["User-Agent"] = UA
         self._last = 0.0
         self.outcomes: dict[str, str] = {}
+        self.first_html: str | None = None      # homepage, kept for the audit trail
+        self.sitemap_pages: list[str] = []
 
     def get(self, url: str) -> requests.Response | None:
         wait = POLITE_DELAY - (time.monotonic() - self._last)
@@ -205,6 +231,9 @@ class Session:
             r = self.s.get(url, timeout=TIMEOUT, allow_redirects=True)
             self._last = time.monotonic()
             self.outcomes[url] = "ok" if r.status_code == 200 else f"HTTP {r.status_code}"
+            if (r.status_code == 200 and self.first_html is None
+                    and "html" in r.headers.get("content-type", "").lower()):
+                self.first_html = r.text
             return r if r.status_code == 200 else None
         except requests.RequestException as exc:
             self._last = time.monotonic()
@@ -261,8 +290,13 @@ def from_sitemap(sess: Session, base: str) -> list[tuple[str, str, str]]:
     """-> [(bucket, label, url)] derived from URL slugs."""
     host = norm_domain(base)
     rows: list[tuple[str, str, str]] = []
-    for u in sitemap_urls(sess, base):
-        if norm_domain(u) != host or not is_offering_url(u):
+    sitemap_urls_cache = sitemap_urls(sess, base)
+    for u in sitemap_urls_cache:
+        if norm_domain(u) != host:
+            continue
+        if not is_offering_url(u):
+            REJECTS.append(("sitemap", slug_to_label(u.rstrip("/").split("/")[-1]), u,
+                            "asset or non-offering section"))
             continue
         segs = [s for s in urlparse(u).path.strip("/").split("/") if s]
         if not segs or len(segs) > 4:
@@ -271,10 +305,13 @@ def from_sitemap(sess: Session, base: str) -> list[tuple[str, str, str]]:
                        if s.lower() in SEGMENT_TO_BUCKET), None)
         if bucket is None:
             continue
-        label = clean_label(slug_to_label(segs[-1]))
+        label, why = clean_label(slug_to_label(segs[-1]))
         if label:
             rows.append((bucket, label, u))
+        else:
+            REJECTS.append(("sitemap", slug_to_label(segs[-1]), u, why))
     # Shallower URLs first — they are the top-level offerings.
+    sess.sitemap_pages = [u for u in sitemap_urls_cache]
     rows.sort(key=lambda r: urlparse(r[2]).path.count("/"))
     return rows
 
@@ -296,14 +333,18 @@ def from_nav(sess: Session, base: str) -> list[tuple[str, str, str]]:
     rows: list[tuple[str, str, str]] = []
     for source, sel in regions:
         for a in soup.select(sel):
-            label = clean_label(a.get_text(" ", strip=True))
+            original = a.get_text(" ", strip=True)
+            label, why = clean_label(original)
             if not label:
+                if original:
+                    REJECTS.append((source, original, urljoin(base, a.get("href", "")), why))
                 continue
             href = a.get("href", "")
             if href.startswith(("#", "mailto:", "tel:", "javascript:")):
                 continue
             full = urljoin(base, href)
             if not is_offering_url(full):
+                REJECTS.append((source, label, full, "asset or non-offering section"))
                 continue
             rows.append((source, label, full))
     return rows
@@ -321,11 +362,13 @@ def diagnose(sess: Session, base: str) -> str:
     return f"homepage unreachable - {home}"
 
 
-def scrape_vendor(company: str, url: str) -> tuple[list[dict], dict | None]:
+def scrape_vendor(company: str, url: str, raw_dir: Path | None = None) -> dict:
+    """Scrape one vendor. Returns rows, rejects, a per-vendor summary and any error."""
     base = url if url.startswith(("http://", "https://")) else "https://" + url
     base = f"{urlparse(base).scheme}://{urlparse(base).netloc}"
     host = norm_domain(base)
     sess = Session()
+    REJECTS.drain()          # discard anything left by the previous vendor on this thread
 
     # Same page often appears in both the sitemap and the nav. Keep one row each,
     # preferring the nav's human-written wording over the URL slug: a nav says
@@ -344,19 +387,18 @@ def scrape_vendor(company: str, url: str) -> tuple[list[dict], dict | None]:
         if cur["bucket"] in ("nav", "offering") and bucket not in ("nav", "offering"):
             cur["bucket"] = bucket
 
+    error = None
     try:
         for bucket, label, u in from_sitemap(sess, base):
             add("sitemap", bucket, label, u, prefer=False)
-
         for source, label, u in from_nav(sess, base):
             segs = [x.lower() for x in urlparse(u).path.strip("/").split("/") if x]
             bucket = next((SEGMENT_TO_BUCKET[x] for x in segs if x in SEGMENT_TO_BUCKET), "nav")
             add(source, bucket, label, u, prefer=True)
     except Exception as exc:  # never let one vendor kill the run
-        return list(by_url.values())[:MAX_LABELS_PER_VENDOR], dict(
-            company=company, url=url, error=repr(exc))
+        error = dict(company=company, url=url, error=repr(exc))
 
-    # Drop labels that repeat under different URLs, then keep the strongest ones.
+    # Drop labels repeated under different URLs, then keep the strongest ones.
     rows, seen_labels = [], set()
     for r in sorted(by_url.values(), key=lambda r: (BUCKET_RANK.get(r["bucket"], 4),
                                                     urlparse(r["url"]).path.count("/"))):
@@ -365,10 +407,41 @@ def scrape_vendor(company: str, url: str) -> tuple[list[dict], dict | None]:
             continue
         seen_labels.add(key)
         rows.append(r)
+    capped, rows = rows[MAX_LABELS_PER_VENDOR:], rows[:MAX_LABELS_PER_VENDOR]
 
-    if not rows:
-        return [], dict(company=company, url=url, error=diagnose(sess, base))
-    return rows[:MAX_LABELS_PER_VENDOR], None
+    rejected = [dict(company=company, domain=host, source=src, label=lab, url=u, reason=why)
+                for src, lab, u, why in REJECTS.drain()]
+    rejected += [dict(company=company, domain=host, source=r["source"], label=r["label"],
+                      url=r["url"], reason=f"over the {MAX_LABELS_PER_VENDOR}-label cap")
+                 for r in capped]
+
+    if error is None and not rows:
+        error = dict(company=company, url=url, error=diagnose(sess, base))
+
+    if raw_dir is not None:
+        d = raw_dir / host
+        try:
+            d.mkdir(parents=True, exist_ok=True)
+            if sess.first_html:
+                (d / "homepage.html").write_text(sess.first_html, encoding="utf-8",
+                                                 errors="replace")
+            (d / "sitemap_urls.txt").write_text("\n".join(sess.sitemap_pages), encoding="utf-8")
+            (d / "fetch_log.txt").write_text(
+                "\n".join(f"{v}\t{k}" for k, v in sess.outcomes.items()), encoding="utf-8")
+        except OSError:
+            pass
+
+    return dict(
+        rows=rows,
+        rejected=rejected,
+        error=error,
+        summary=dict(company=company, domain=host, url=base,
+                     homepage=sess.outcomes.get(base, "not attempted"),
+                     sitemap_urls_seen=len(sess.sitemap_pages),
+                     pages_fetched=len(sess.outcomes),
+                     keywords_kept=len(rows), rejected=len(rejected),
+                     error=(error or {}).get("error", "")),
+    )
 
 
 def main() -> int:
@@ -376,10 +449,12 @@ def main() -> int:
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("input", help="CSV with a 'url' column (optional 'company' column)")
     ap.add_argument("-o", "--out", default="vendor_keywords_raw.csv")
-    ap.add_argument("-e", "--errors", default="vendor_keywords_errors.csv")
     ap.add_argument("-w", "--workers", type=int, default=8,
                     help="vendors scraped in parallel (default 8)")
     ap.add_argument("-n", "--limit", type=int, default=0, help="only first N vendors")
+    ap.add_argument("--raw-dir", default="",
+                    help="also save each vendor's homepage HTML, sitemap URL list and "
+                         "fetch log under this folder, as evidence")
     args = ap.parse_args()
 
     with open(args.input, newline="", encoding="utf-8-sig") as fh:
@@ -393,7 +468,13 @@ def main() -> int:
     if args.limit:
         targets = targets[: args.limit]
 
-    out_path, err_path = Path(args.out), Path(args.errors)
+    out_path = Path(args.out)
+    stem = out_path.with_suffix("")
+    err_path = Path(f"{stem}_errors.csv")
+    rej_path = Path(f"{stem}_rejected.csv")
+    sum_path = Path(f"{stem}_summary.csv")
+    raw_dir = Path(args.raw_dir) if args.raw_dir else None
+
     done: set[str] = set()
     if out_path.exists():
         with out_path.open(newline="", encoding="utf-8") as fh:
@@ -402,31 +483,50 @@ def main() -> int:
     targets = [t for t in targets if norm_domain(
         t[1] if t[1].startswith("http") else "https://" + t[1]) not in done]
 
-    fields = ["company", "domain", "source", "bucket", "label", "url"]
-    new_out, new_err = not out_path.exists(), not err_path.exists()
-    with out_path.open("a", newline="", encoding="utf-8") as of, \
-         err_path.open("a", newline="", encoding="utf-8") as ef:
-        ow = csv.DictWriter(of, fieldnames=fields)
-        ew = csv.DictWriter(ef, fieldnames=["company", "url", "error"])
-        if new_out:
-            ow.writeheader()
-        if new_err:
-            ew.writeheader()
+    specs = [
+        (out_path, ["company", "domain", "source", "bucket", "label", "url"], "rows"),
+        (err_path, ["company", "url", "error"], "error"),
+        (rej_path, ["company", "domain", "source", "label", "url", "reason"], "rejected"),
+        (sum_path, ["company", "domain", "url", "homepage", "sitemap_urls_seen",
+                    "pages_fetched", "keywords_kept", "rejected", "error"], "summary"),
+    ]
+    handles, writers = [], {}
+    for path, fields, key in specs:
+        new = not path.exists()
+        fh = path.open("a", newline="", encoding="utf-8")
+        handles.append(fh)
+        w = csv.DictWriter(fh, fieldnames=fields)
+        if new:
+            w.writeheader()
+        writers[key] = (w, fh)
 
+    try:
         with ThreadPoolExecutor(max_workers=args.workers) as pool:
-            futures = {pool.submit(scrape_vendor, c, u): (c, u) for c, u in targets}
+            futures = {pool.submit(scrape_vendor, c, u, raw_dir): (c, u) for c, u in targets}
             for i, fut in enumerate(as_completed(futures), 1):
-                company, url = futures[fut]
-                labels, err = fut.result()
-                if labels:
-                    ow.writerows(labels)
-                if err:
-                    ew.writerow(err)
-                of.flush(); ef.flush()
-                status = f"{len(labels):3d} labels" if labels else "FAILED    "
+                company, _ = futures[fut]
+                res = fut.result()
+                for key in ("rows", "rejected"):
+                    if res[key]:
+                        writers[key][0].writerows(res[key])
+                for key in ("error", "summary"):
+                    if res[key]:
+                        writers[key][0].writerow(res[key])
+                for _, fh in writers.values():
+                    fh.flush()
+                n = len(res["rows"])
+                status = f"{n:3d} labels" if n else "FAILED    "
                 print(f"[{i}/{len(targets)}] {status}  {company}", flush=True)
+    finally:
+        for fh in handles:
+            fh.close()
 
-    print(f"\ndone -> {out_path}  (errors -> {err_path})")
+    print(f"\nkeywords  -> {out_path}")
+    print(f"rejected  -> {rej_path}   (every discarded label, with the reason)")
+    print(f"summary   -> {sum_path}   (one row per vendor: what was fetched and found)")
+    print(f"errors    -> {err_path}")
+    if raw_dir:
+        print(f"raw pages -> {raw_dir}/<domain>/  (homepage.html, sitemap_urls.txt, fetch_log.txt)")
     return 0
 
 

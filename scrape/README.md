@@ -31,7 +31,9 @@ Expect roughly 20–40 minutes for 300 vendors.
 
 ## What comes out
 
-`vendor_keywords_raw.csv`
+Four CSVs, so every keyword can be traced back to the page it came from.
+
+`vendor_keywords_raw.csv` — the keywords
 
 | column | meaning |
 |---|---|
@@ -42,8 +44,27 @@ Expect roughly 20–40 minutes for 300 vendors.
 | `label` | the candidate keyword |
 | `url` | where it was found |
 
-`vendor_keywords_errors.csv` lists vendors that yielded nothing — usually a
+`vendor_keywords_rejected.csv` — every label that was **discarded**, with the
+reason (`stop word`, `marketing copy`, `asset or non-offering section`,
+`headline, not a product name`, `over the 120-label cap`). This is how you check
+that nothing important was thrown away.
+
+`vendor_keywords_summary.csv` — one row per vendor: the homepage fetch status,
+how many sitemap URLs were seen, how many pages were fetched, how many keywords
+were kept and rejected, and any error. This is the per-URL proof that each
+vendor was actually visited.
+
+`vendor_keywords_errors.csv` — vendors that yielded nothing, usually a
 JS-rendered nav or a bot wall. Handle those with the browser-console fallback.
+
+### Keeping the pages themselves
+
+Add `--raw-dir raw` and each vendor also gets `raw/<domain>/` containing
+`homepage.html` (the page exactly as fetched), `sitemap_urls.txt` (every URL
+found in the sitemap) and `fetch_log.txt` (every request and its outcome).
+
+That makes the chain fully auditable: keyword → source URL → the saved page it
+was read from. Budget roughly 100-300 MB for 345 vendors.
 
 ## Where the signal comes from
 
