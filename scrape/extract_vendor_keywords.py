@@ -40,7 +40,7 @@ UA = (
 )
 TIMEOUT = 20
 POLITE_DELAY = 1.0          # seconds between requests to the same domain
-MAX_LABELS_PER_VENDOR = 80
+MAX_LABELS_PER_VENDOR = 120
 
 # URL path segments that mark a page as describing an offering.
 BUCKETS: dict[str, tuple[str, ...]] = {
@@ -52,6 +52,9 @@ BUCKETS: dict[str, tuple[str, ...]] = {
     "service":    ("service", "services"),
     "capability": ("capability", "capabilities", "features", "modules"),
     "industry":   ("industry", "industries", "vertical", "verticals", "sector", "sectors"),
+    "offering":   ("cloud", "compute", "storage", "network", "networking", "database",
+                   "databases", "kubernetes", "security", "gpu", "infrastructure",
+                   "software", "apps", "tools", "offerings"),
 }
 SEGMENT_TO_BUCKET = {seg: bucket for bucket, segs in BUCKETS.items() for seg in segs}
 
@@ -66,6 +69,52 @@ STOP_LABELS = {
     "free trial", "pricing", "resources", "documentation", "docs", "faq",
     "faqs", "testimonials", "case studies", "customers", "menu", "more",
     "read more", "learn more", "view all", "see all", "back to top", "skip to content",
+    "datasheets", "ebooks", "e-books", "reports", "videos", "podcasts", "whitepapers",
+    "white papers", "knowledge base", "academy", "support portal", "partner portal",
+    "product docs", "customer stories", "releases", "release notes", "news & press",
+    "become a partner", "who we are", "community forum", "legal notices",
+    "terms of service", "vulnerability disclosure policy", "marketing preference center",
+    "overview", "models", "documentation", "book consultation", "talk to an expert",
+    "speak to an engineer", "get started", "try aerospike", "features", "compare",
+    "integrations", "changelog", "status", "trust center", "company", "our story",
+    "sitemap.xml", "all rights reserved", "cookie settings", "accessibility",
+}
+
+# Decorative characters and call-to-action verbs that wrap real product names.
+DECOR = re.compile(r"[\u2197\u2198\u2192\u2190\u2794\u00bb\u203a\u2022|]+")
+STRIP_LEAD = re.compile(r"^(explore|discover|view|see|meet|our|the)\s+", re.I)
+DROP_LEAD = re.compile(
+    r"^(get|save|still|book|talk|try|download|read|watch|join|start|request|contact|"
+    r"sign|log|subscribe|introducing|announcing|why|how|what|when|schedule|claim)\b", re.I)
+MARKETING = re.compile(r"[?!%]|\bfree\b|\bsave up to\b|\d{2,}\s*%", re.I)
+
+# Non-page assets and sections that never describe an offering.
+SKIP_EXT = re.compile(
+    r"\.(webp|png|jpe?g|gif|svg|ico|pdf|zip|mp4|mp3|css|js|xml|woff2?|ttf)(\?|#|$)", re.I)
+SKIP_PATH = re.compile(
+    r"/(blog|news|press|resource|resources|support|doc|docs|documentation|legal|pricing|"
+    r"event|events|webinar|webinars|academy|career|careers|about|partner|partners|"
+    r"customer-stories|case-stud|demo|contact|login|signup|sign-up|hubfs|wp-content|"
+    r"author|tag|category|privacy|terms|cookie)(/|$)", re.I)
+
+
+def is_offering_url(url: str) -> bool:
+    """Reject assets, blog posts, and other pages that never name a product."""
+    if SKIP_EXT.search(url):
+        return False
+    return not SKIP_PATH.search(urlparse(url).path)
+
+
+def canon_url(url: str) -> str:
+    """Strip query, fragment and trailing slash so the same page dedupes."""
+    pr = urlparse(url)
+    return f"{pr.scheme}://{pr.netloc}{pr.path.rstrip('/')}".lower()
+
+
+# Ranking for the per-vendor cap: keep real offerings, shed navigation chrome.
+BUCKET_RANK = {
+    "product": 0, "solution": 1, "use_case": 1, "platform": 2, "technology": 2,
+    "offering": 2, "capability": 3, "service": 3, "nav": 4, "industry": 5,
 }
 
 # Canonical display forms for acronyms and initialisms. Keys are the slug tokens
@@ -120,12 +169,21 @@ def slug_to_label(slug: str) -> str:
 
 
 def clean_label(text: str) -> str | None:
-    text = re.sub(r"\s+", " ", text or "").strip(" \t\n\r|·—–-")
-    if not text or len(text) > 70 or len(text) < 2:
+    text = DECOR.sub(" ", text or "")
+    text = re.sub(r"\s+", " ", text).strip(" \t\n\r|·—–-")
+    text = re.sub(r"\s+\bnew!?$", "", text, flags=re.I)          # "NVIDIA H200 New"
+    text = STRIP_LEAD.sub("", text).strip()                      # "Explore OpenShift"
+    if not text or len(text) < 2 or len(text) > 60:
         return None
     if text.lower() in STOP_LABELS:
         return None
     if not re.search(r"[A-Za-z]", text):
+        return None
+    if len(text.split()) > 7:                                    # headlines, not products
+        return None
+    if DROP_LEAD.search(text) or MARKETING.search(text):         # CTAs and promo banners
+        return None
+    if "logo" in text.lower():
         return None
     return text
 
@@ -204,7 +262,7 @@ def from_sitemap(sess: Session, base: str) -> list[tuple[str, str, str]]:
     host = norm_domain(base)
     rows: list[tuple[str, str, str]] = []
     for u in sitemap_urls(sess, base):
-        if norm_domain(u) != host:
+        if norm_domain(u) != host or not is_offering_url(u):
             continue
         segs = [s for s in urlparse(u).path.strip("/").split("/") if s]
         if not segs or len(segs) > 4:
@@ -244,7 +302,10 @@ def from_nav(sess: Session, base: str) -> list[tuple[str, str, str]]:
             href = a.get("href", "")
             if href.startswith(("#", "mailto:", "tel:", "javascript:")):
                 continue
-            rows.append((source, label, urljoin(base, href)))
+            full = urljoin(base, href)
+            if not is_offering_url(full):
+                continue
+            rows.append((source, label, full))
     return rows
 
 
@@ -265,33 +326,49 @@ def scrape_vendor(company: str, url: str) -> tuple[list[dict], dict | None]:
     base = f"{urlparse(base).scheme}://{urlparse(base).netloc}"
     host = norm_domain(base)
     sess = Session()
-    out: list[dict] = []
-    seen: set[str] = set()
+
+    # Same page often appears in both the sitemap and the nav. Keep one row each,
+    # preferring the nav's human-written wording over the URL slug: a nav says
+    # "Peer-to-Peer Architecture" where the slug only gives "P2p Architecture".
+    by_url: dict[str, dict] = {}
+
+    def add(source: str, bucket: str, label: str, u: str, prefer: bool) -> None:
+        key = canon_url(u)
+        cur = by_url.get(key)
+        if cur is None:
+            by_url[key] = dict(company=company, domain=host, source=source,
+                               bucket=bucket, label=label, url=u)
+            return
+        if prefer and len(label.split()) >= len(cur["label"].split()):
+            cur["label"], cur["source"] = label, source
+        if cur["bucket"] in ("nav", "offering") and bucket not in ("nav", "offering"):
+            cur["bucket"] = bucket
 
     try:
         for bucket, label, u in from_sitemap(sess, base):
-            key = label.lower()
-            if key in seen:
-                continue
-            seen.add(key)
-            out.append(dict(company=company, domain=host, source="sitemap",
-                            bucket=bucket, label=label, url=u))
+            add("sitemap", bucket, label, u, prefer=False)
 
         for source, label, u in from_nav(sess, base):
-            key = label.lower()
-            if key in seen:
-                continue
-            seen.add(key)
-            segs = [s.lower() for s in urlparse(u).path.strip("/").split("/") if s]
-            bucket = next((SEGMENT_TO_BUCKET[s] for s in segs if s in SEGMENT_TO_BUCKET), "nav")
-            out.append(dict(company=company, domain=host, source=source,
-                            bucket=bucket, label=label, url=u))
+            segs = [x.lower() for x in urlparse(u).path.strip("/").split("/") if x]
+            bucket = next((SEGMENT_TO_BUCKET[x] for x in segs if x in SEGMENT_TO_BUCKET), "nav")
+            add(source, bucket, label, u, prefer=True)
     except Exception as exc:  # never let one vendor kill the run
-        return out[:MAX_LABELS_PER_VENDOR], dict(company=company, url=url, error=repr(exc))
+        return list(by_url.values())[:MAX_LABELS_PER_VENDOR], dict(
+            company=company, url=url, error=repr(exc))
 
-    if not out:
+    # Drop labels that repeat under different URLs, then keep the strongest ones.
+    rows, seen_labels = [], set()
+    for r in sorted(by_url.values(), key=lambda r: (BUCKET_RANK.get(r["bucket"], 4),
+                                                    urlparse(r["url"]).path.count("/"))):
+        key = r["label"].lower()
+        if key in seen_labels:
+            continue
+        seen_labels.add(key)
+        rows.append(r)
+
+    if not rows:
         return [], dict(company=company, url=url, error=diagnose(sess, base))
-    return out[:MAX_LABELS_PER_VENDOR], None
+    return rows[:MAX_LABELS_PER_VENDOR], None
 
 
 def main() -> int:
