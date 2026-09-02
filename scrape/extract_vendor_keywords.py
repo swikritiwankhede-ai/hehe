@@ -106,6 +106,34 @@ DROP_LEAD = re.compile(
     r"sign|log|subscribe|introducing|announcing|why|how|what|when|schedule|claim)\b", re.I)
 MARKETING = re.compile(r"[?!%]|\bfree\b|\bsave up to\b|\d{2,}\s*%", re.I)
 
+# A social link, not a product. Matches the platform name alone or dressed up as an
+# icon class ("Linkedin-in", "Facebook-f") or a link label ("Go to X's Twitter Account"),
+# but never a product that merely mentions a platform, such as "Facebook Messenger"
+# or "Connectors Facebook Ads Advanced Account Connector".
+SOCIAL = "facebook|linkedin|youtube|instagram|twitter|tiktok|threads|mastodon|reddit|github|x"
+SOCIAL_LINK = re.compile(
+    rf"^(?:go to .*?(?:'s)?\s+)?(?:on\s+)?(?:{SOCIAL})"
+    rf"(?:[-\s](?:f|in|square|circle|play|logo|icon))?"
+    rf"(?:\s*[:\-\u2013]\s*.*)?"          # "Facebook: open in a new window", "Instagram - US"
+    rf"(?:\s*\([^)]*\))?(?:\s+(?:account|page|profile|channel|feed))?$", re.I)
+SOCIAL_CTA = re.compile(r"^(follow|connect with|join|like) (us|me)\b", re.I)
+# "<anything> on Instagram" is a link to a profile, not a product.
+SOCIAL_SUFFIX = re.compile(rf"\bon (?:{SOCIAL})$", re.I)
+
+# Title-case tidy-ups: a trailing "It" is the noun IT, and small words stay small.
+MINOR = {"for", "and", "of", "the", "to", "in", "on", "with", "a", "an",
+         "as", "at", "by", "or", "per", "via", "from"}
+
+
+def polish_label(text: str) -> str:
+    words = text.split()
+    if len(words) > 1 and words[-1] == "It":
+        words[-1] = "IT"                       # "Falcon For It" -> "... IT"
+    for i in range(1, len(words)):
+        if words[i].lower() in MINOR and words[i][:1].isupper() and words[i].isalpha():
+            words[i] = words[i].lower()        # "Falcon For IT" -> "Falcon for IT"
+    return " ".join(words)
+
 # Non-page assets and sections that never describe an offering.
 SKIP_EXT = re.compile(
     r"\.(webp|png|jpe?g|gif|svg|ico|pdf|zip|mp4|mp3|css|js|xml|woff2?|ttf)(\?|#|$)", re.I)
@@ -214,7 +242,9 @@ def clean_label(text: str) -> tuple[str | None, str]:
     if text.endswith(".") and len(text.split()) > 3:
         return None, "sentence, not a product name"
     text = text.rstrip(".")
-    return text, ""
+    if SOCIAL_LINK.match(text) or SOCIAL_CTA.match(text) or SOCIAL_SUFFIX.search(text):
+        return None, "social link"
+    return polish_label(text), ""
 
 
 class _Rejects(threading.local):

@@ -1,0 +1,607 @@
+company,domain,source,bucket,label,url,reason
+adaptiva.com,adaptiva.com,nav_header,nav,Login to Partner Portal,https://adaptiva.com/partners-portal-content,stop word
+appsentinels.ai,appsentinels.ai,nav_footer,nav,X-twitter,https://x.com/appsentinelsai,stop word
+appsentinels.ai,appsentinels.ai,nav_footer,nav,Youtube,https://www.youtube.com/@appsentinels,stop word
+appsentinels.ai,appsentinels.ai,nav_footer,nav,Platform,https://appsentinels.ai/api-security-platform/,stop word
+appsentinels.ai,appsentinels.ai,nav_footer,nav,Linkedin,https://www.linkedin.com/company/app-sentinels/,stop word
+aws.amazon.com,aws.amazon.com,sitemap,product,Security,https://aws.amazon.com/products/security/,stop word
+blueyonder.com,blueyonder.com,nav_header,solution,Solutions,https://blueyonder.com/solutions,stop word
+blueyonder.com,blueyonder.com,nav_header,solution,Services,https://blueyonder.com/solutions/services,stop word
+blueyonder.com,blueyonder.com,nav_footer,offering,Security,https://blueyonder.com/security,stop word
+blueyonder.com,blueyonder.com,nav_header,industry,Industries,https://blueyonder.com/industries,stop word
+airowire.com,airowire.com,nav_footer,nav,Youtube,https://www.youtube.com/@airowirenetworks5808,stop word
+airowire.com,airowire.com,nav_footer,nav,Terms & Conditions,https://airowire.com/terms-and-conditions/,stop word
+airowire.com,airowire.com,nav_footer,nav,Linkedin-in,https://www.linkedin.com/company/airowire-networks?originalSubdomain=in,social link
+airowire.com,airowire.com,nav_footer,nav,Facebook-f,https://www.facebook.com/airowire/,social link
+amnex.com,amnex.com,nav_header,technology,Technology,https://amnex.com/technology/,stop word
+amnex.com,amnex.com,nav_header,industry,Industries,https://amnex.com/industries/,stop word
+acecloud.ai,acecloud.ai,nav_footer,nav,Glossary,https://acecloud.ai/glossary/,stop word
+acecloud.ai,acecloud.ai,nav_footer,industry,Industries,https://acecloud.ai/industries/,stop word
+arconnet.com,arconnet.com,nav_header,product,Products,https://arconnet.com/products/,stop word
+arconnet.com,arconnet.com,nav_header,nav,Solutions,https://arconnet.com/?page_id=182,stop word
+arconnet.com,arconnet.com,nav_footer,nav,Facebook,https://www.facebook.com/arcontechsolutions,stop word
+arconnet.com,arconnet.com,nav_footer,nav,X-twitter,https://twitter.com/ARCONRiskCtrl,stop word
+arconnet.com,arconnet.com,nav_footer,nav,Linkedin,https://www.linkedin.com/company/arcon-risk-control,stop word
+arconnet.com,arconnet.com,nav_footer,nav,Youtube,https://www.youtube.com/c/ARCONTechSolutions,stop word
+arconnet.com,arconnet.com,nav_footer,nav,Instagram,https://www.instagram.com/lifeatarcon/?hl=en,stop word
+caps.in,caps.in,nav_footer,solution,Solutions,https://caps.in/solutions/,stop word
+caps.in,caps.in,nav_footer,nav,Facebook,https://facebook.com/ecapscomputers,stop word
+caps.in,caps.in,nav_footer,nav,Instagram,https://www.instagram.com/ecapscomputers/,stop word
+caps.in,caps.in,nav_footer,nav,Terms and Conditions,https://caps.in/termsandconditions/,stop word
+centroxy.com,centroxy.com,nav_footer,nav,Terms & Conditions,https://centroxy.com/terms-conditions/,stop word
+centroxy.com,centroxy.com,nav_footer,nav,Linkedin,https://www.linkedin.com/company/centroxy/mycompany/?viewAsMember=true,stop word
+centroxy.com,centroxy.com,nav_header,industry,All Industries,https://centroxy.com/industries/,stop word
+clickhouse.com,clickhouse.com,nav_footer,nav,Security,https://trust.clickhouse.com/,stop word
+clickhouse.com,clickhouse.com,nav_footer,nav,Star us on Github,https://github.com/ClickHouse/ClickHouse?utm_source=clickhouse&utm_medium=website&utm_campaign=website-nav,social link
+clickhouse.com,clickhouse.com,nav_footer,nav,LinkedIn,https://www.linkedin.com/company/clickhouseinc,stop word
+checkred.com,checkred.com,nav_footer,platform,Platforms,https://checkred.com/platform/,stop word
+checkmarx.com,checkmarx.com,nav_footer,technology,Technology,https://checkmarx.com/technology/,stop word
+checkmarx.com,checkmarx.com,nav_footer,nav,GitHub,https://checkmarx.com/github/,stop word
+canonical.com,canonical.com,nav_header,solution,our solutions,https://canonical.com/solutions,stop word
+canonical.com,canonical.com,nav_header,nav,Solutions,https://canonical.com/navigation,stop word
+cymulate.com,cymulate.com,nav_footer,nav,Partner Portal Login,https://partner.cymulate.com/,stop word
+digitalconnexion.com,digitalconnexion.com,nav_footer,service,SERVICES,https://digitalconnexion.com/services,stop word
+coralogix.com,coralogix.com,sitemap,solution,Technology,https://coralogix.com/solutions/technology/,stop word
+coralogix.com,coralogix.com,nav_footer,nav,Terms & Conditions,https://coralogix.com/terms-conditions/,stop word
+essenvision.com,essenvision.com,nav_footer,nav,Facebook,https://www.facebook.com/facebook,stop word
+cloud.google.com,cloud.google.com,nav_header,product,Pricing calculator Calculate your cloud savings.,https://cloud.google.com/products/calculator,"sentence, not a product name"
+cloud.google.com,cloud.google.com,nav_footer,solution,Security,https://cloud.google.com/solutions/security,stop word
+cloud.google.com,cloud.google.com,nav_header,offering,"Security Protect your users, data, and apps.",https://cloud.google.com/security,"sentence, not a product name"
+cloud.google.com,cloud.google.com,nav_header,offering,Google Threat Intelligence Know who’s targeting you.,https://cloud.google.com/security/products/threat-intelligence,"sentence, not a product name"
+cloud.google.com,cloud.google.com,nav_header,nav,AI and Agents Get enterprise-ready AI.,https://cloud.google.com/ai,"sentence, not a product name"
+cloud.google.com,cloud.google.com,nav_header,nav,Executive insights Curated C-suite perspectives.,https://cloud.google.com/executive-insights,"sentence, not a product name"
+cloud.google.com,cloud.google.com,nav_header,nav,Whitepapers Browse and download popular whitepapers.,https://cloud.google.com/whitepapers,"sentence, not a product name"
+digital.ai,digital.ai,sitemap,product,Platform,https://digital.ai/products/platform/,stop word
+digital.ai,digital.ai,nav_footer,nav,Glossary,https://digital.ai/glossary/,stop word
+digital.ai,digital.ai,nav_footer,nav,Terms & Conditions,https://digital.ai/digital-ai-terms-and-policies/,stop word
+digital.ai,digital.ai,nav_footer,nav,Youtube (opens in new tab),https://www.youtube.com/channel/UC6k61LnvJGuBpHqC0uuUQ-g,social link
+cybersolve.com,cybersolve.com,nav_footer,solution,Solutions,https://cybersolve.com/solutions/,stop word
+cybersolve.com,cybersolve.com,nav_footer,nav,Youtube,https://www.youtube.com/@CyberSolve,stop word
+cybersolve.com,cybersolve.com,nav_footer,nav,Linkedin,https://www.linkedin.com/company/cybersolve-iam/,stop word
+firecompass.com,firecompass.com,nav_footer,nav,Privacy Notice,https://firecompass.com/privacy-policy,stop word
+firecompass.com,firecompass.com,nav_footer,nav,the Team,https://firecompass.com/meet-the-team/,stop word
+enreap.com,enreap.com,nav_footer,nav,Twitter,https://twitter.com/enreap_india,stop word
+enreap.com,enreap.com,nav_footer,nav,Facebook-f,https://www.facebook.com/enreap,social link
+enreap.com,enreap.com,nav_header,nav,Training,https://enreap.com/atlassian-training-services/,stop word
+enreap.com,enreap.com,nav_footer,nav,Instagram,https://www.instagram.com/enreap.global/,stop word
+enreap.com,enreap.com,nav_footer,nav,Youtube,https://www.youtube.com/channel/UCmUGxeQmII4y9TY8vEfl2Ug,stop word
+enreap.com,enreap.com,nav_footer,nav,Linkedin-in,https://www.linkedin.com/company/enreap/,social link
+harkx.ai,harkx.ai,nav_footer,nav,X (formerly Twitter),https://x.com/harkxai,social link
+harkx.ai,harkx.ai,nav_footer,nav,Instagram,https://instagram.com/harkxai,stop word
+harkx.ai,harkx.ai,nav_footer,nav,LinkedIn,https://linkedin.com/company/harkx,stop word
+info.techdata.com,info.techdata.com,nav_header,service,Services,https://www.tdsynnex.com/na/us/services/,stop word
+kissflow.com,kissflow.com,nav_header,solution,All Industries,https://kissflow.com/solutions,stop word
+kissflow.com,kissflow.com,nav_header,use_case,All Solutions,https://kissflow.com/use-cases/,stop word
+gruve.ai,gruve.ai,sitemap,service,Capabilities,https://gruve.ai/services/our-capabilities/,stop word
+exotel.com,exotel.com,nav_footer,offering,Security,https://exotel.com/security/,stop word
+exotel.com,exotel.com,nav_header,nav,Github,https://github.com/exotel/,stop word
+label.averydennison.com,label.averydennison.com,nav_header,nav,Products,https://label.averydennison.com/na/en/home/products.html,stop word
+hazelcast.com,hazelcast.com,nav_header,use_case,Kafka and Hazelcast: Better together.,https://hazelcast.com/use-cases/apache-kafka-and-hazelcast/,"sentence, not a product name"
+hazelcast.com,hazelcast.com,nav_footer,service,Services,https://hazelcast.com/services/,stop word
+hazelcast.com,hazelcast.com,sitemap,service,Training,https://hazelcast.com/services/training/,stop word
+hazelcast.com,hazelcast.com,nav_footer,nav,Terms & Conditions,https://hazelcast.com/terms-of-use/,stop word
+logrhythm.com,logrhythm.com,nav_footer,nav,GitHub,https://github.com/Exabeam,stop word
+logrhythm.com,logrhythm.com,nav_header,nav,the Team,https://logrhythm.com/company/about-us/,stop word
+netenrich.com,netenrich.com,nav_header,nav,the Team,https://netenrich.com/about-netenrich,stop word
+netenrich.com,netenrich.com,nav_footer,nav,YouTube,https://www.youtube.com/@netenrich,stop word
+netenrich.com,netenrich.com,nav_footer,nav,Terms & Conditions,https://netenrich.com/policies/terms-of-use,stop word
+netenrich.com,netenrich.com,nav_footer,nav,LinkedIn,https://www.linkedin.com/company/netenrich/,stop word
+jumpcloud.com,jumpcloud.com,nav_footer,offering,Security,https://jumpcloud.com/security,stop word
+jumpcloud.com,jumpcloud.com,nav_footer,nav,Glossary,https://jumpcloud.com/glossary,stop word
+jumpcloud.com,jumpcloud.com,nav_header,nav,YouTube Channel,https://www.youtube.com/channel/UCV9U0J9zvop_Whyh-35M_xg,social link
+newrelic.com,newrelic.com,nav_footer,platform,Platform,https://newrelic.com/platform,stop word
+newrelic.com,newrelic.com,nav_footer,offering,Security,https://newrelic.com/security,stop word
+newrelic.com,newrelic.com,nav_footer,nav,Modern Slavery Statement,https://newrelic.com/termsandconditions/modern-slavery-act,stop word
+neat.no,neat.no,nav_header,nav,Facebook: open in a new window,https://www.facebook.com/neatmeetings,social link
+neat.no,neat.no,nav_header,nav,Twitter: open in a new window,https://twitter.com/neatmeetings,social link
+neat.no,neat.no,nav_header,nav,Instagram: open in a new window,https://www.instagram.com/neatmeetings,social link
+neat.no,neat.no,nav_header,nav,YouTube: open in a new window,https://www.youtube.com/@Neatmeetings,social link
+neat.no,neat.no,nav_header,nav,LinkedIn: open in a new window,https://www.linkedin.com/company/neatmeetings,social link
+neat.no,neat.no,nav_footer,nav,Terms and Conditions,https://neat.no/terms-and-conditions/,stop word
+nividous.com,nividous.com,nav_header,solution,Solutions,https://nividous.com/solutions/,stop word
+nividous.com,nividous.com,nav_header,solution,All Industries,https://nividous.com/solutions/industry/,stop word
+nividous.com,nividous.com,nav_footer,platform,the Platform,https://nividous.com/platform/,stop word
+newgensoft.com,newgensoft.com,sitemap,solution,Industries,https://newgensoft.com/solutions/industries/,stop word
+privacypillar.com,privacypillar.com,nav_footer,service,Services,https://privacypillar.com/services/,stop word
+privacypillar.com,privacypillar.com,nav_footer,nav,Facebook-square,https://www.facebook.com/Privacypillar,social link
+privacypillar.com,privacypillar.com,nav_footer,nav,Youtube-square,https://youtube.com/@PrivacyPillar?si=Gtjl9k26SdGn8SYq,social link
+privacypillar.com,privacypillar.com,nav_footer,nav,Instagram,https://www.instagram.com/privacypillar/,stop word
+privacypillar.com,privacypillar.com,nav_footer,nav,Linkedin,https://www.linkedin.com/company/privacypillar/,stop word
+orca.security,orca.security,nav_footer,platform,the Platform,https://orca.security/platform/,stop word
+orca.security,orca.security,nav_footer,nav,Glossary,https://orca.security/glossary/,stop word
+quilr.ai,quilr.ai,nav_footer,offering,Security,https://quilr.ai/security,stop word
+quilr.ai,quilr.ai,nav_footer,nav,Glossary,https://quilr.ai/glossary,stop word
+pronteff.com,pronteff.com,nav_footer,nav,Facebook,https://www.facebook.com/Pronteff,stop word
+pronteff.com,pronteff.com,nav_footer,nav,Twitter,https://x.com/pronteff,stop word
+pronteff.com,pronteff.com,nav_footer,nav,Youtube,https://www.youtube.com/channel/UCxMkkAqPgZ-TX3Tzf2YdENA,stop word
+pronteff.com,pronteff.com,nav_header,nav,services,https://pronteff.com/digital-transformation/,stop word
+pronteff.com,pronteff.com,nav_footer,nav,Linkedin,https://www.linkedin.com/company/pronteff/,stop word
+pronteff.com,pronteff.com,nav_footer,industry,Industries,https://pronteff.com/industries/,stop word
+primeinfoserv.com,primeinfoserv.com,nav_footer,solution,Solutions,https://primeinfoserv.com/solutions/,stop word
+savex.in,savex.in,nav_footer,solution,Solutions,https://savex.in/solutions/,stop word
+savex.in,savex.in,nav_footer,service,Services,https://savex.in/services/,stop word
+savex.in,savex.in,nav_footer,nav,Twitter,https://twitter.com/SavexTechnology,stop word
+savex.in,savex.in,nav_footer,nav,Youtube,https://www.youtube.com/watch?v=ztZhifanlPo,stop word
+savex.in,savex.in,nav_footer,nav,Facebook,https://www.facebook.com/savextechnologies/,stop word
+savex.in,savex.in,nav_footer,nav,Instagram,https://www.instagram.com/savex_technologiespvt.ltd/,stop word
+savex.in,savex.in,nav_footer,nav,Linkedin,https://www.linkedin.com/company/savextechnologies/,stop word
+scalefusion.com,scalefusion.com,nav_footer,offering,Security,https://scalefusion.com/security/,stop word
+scalefusion.com,scalefusion.com,nav_header,nav,YouTube Channel,https://www.youtube.com/@Scalefusion,social link
+scalefusion.com,scalefusion.com,nav_header,industry,all industries,https://scalefusion.com/industries/,stop word
+scrutex.ai,scrutex.ai,nav_footer,nav,Glossary,https://scrutex.ai/kb/glossary,stop word
+redis.io,redis.io,nav_footer,solution,All solutions,https://redis.io/solutions/,stop word
+redis.io,redis.io,nav_footer,industry,All industries,https://redis.io/industries/,stop word
+perfios.ai,perfios.ai,nav_footer,nav,X-twitter,https://x.com/perfios,stop word
+perfios.ai,perfios.ai,nav_footer,nav,Youtube,https://www.youtube.com/@Perfios,stop word
+perfios.ai,perfios.ai,nav_footer,nav,Instagram,https://www.instagram.com/perfios_software/,stop word
+perfios.ai,perfios.ai,nav_footer,nav,Facebook,https://www.facebook.com/Perfios/,stop word
+perfios.ai,perfios.ai,nav_footer,nav,Linkedin,https://www.linkedin.com/company/perfios/,stop word
+rahinfotech.com,rahinfotech.com,nav_footer,nav,Facebook,https://www.facebook.com/rahinfotech,stop word
+rahinfotech.com,rahinfotech.com,nav_footer,nav,Instagram,https://www.instagram.com/rahinfotech?igsh=MWhxcW5sZW1sZWJvYw==,stop word
+rahinfotech.com,rahinfotech.com,nav_footer,nav,Linkedin,https://www.linkedin.com/company/rah-infotech-pvt-ltd/,stop word
+sechard.com,sechard.com,nav_footer,nav,Terms & Conditions,https://sechard.com/terms-and-conditions/,stop word
+prophaze.com,prophaze.com,nav_footer,nav,X-twitter,https://x.com/prophaze,stop word
+prophaze.com,prophaze.com,nav_footer,nav,Facebook-f,https://www.facebook.com/prophazetech,social link
+prophaze.com,prophaze.com,nav_footer,nav,Instagram,https://www.instagram.com/prophazewaf/,stop word
+prophaze.com,prophaze.com,nav_footer,nav,Terms & Conditions,https://www.prophaze.com/terms-of-service/,stop word
+prophaze.com,prophaze.com,nav_footer,nav,Linkedin-in,https://www.linkedin.com/company/prophaze/,social link
+prophaze.com,prophaze.com,nav_footer,nav,Youtube,https://www.youtube.com/channel/UCEG96Qlz74_SWO08Jr_438Q/featured,stop word
+securityscorecard.com,securityscorecard.com,nav_footer,nav,On Instagram,https://www.instagram.com/securityscorecard,social link
+securityscorecard.com,securityscorecard.com,nav_footer,nav,On LinkedIn,https://www.linkedin.com/company/security-scorecard,social link
+securityscorecard.com,securityscorecard.com,nav_footer,nav,On Facebook,https://www.facebook.com/SecScorecard/,social link
+securityscorecard.com,securityscorecard.com,nav_footer,nav,On YouTube,https://www.youtube.com/channel/UCbTCXVt5mJTV3eI5_m2chZQ,social link
+seceon.com,seceon.com,nav_footer,nav,RSS,https://seceon.com/rss-feeds/,stop word
+spharaka.com,spharaka.com,nav_footer,use_case,Use Cases,https://spharaka.com/use-cases,stop word
+spharaka.com,spharaka.com,nav_footer,solution,Industries,https://spharaka.com/solutions/industries,stop word
+spharaka.com,spharaka.com,nav_footer,platform,Platform,https://spharaka.com/platform,stop word
+spharaka.com,spharaka.com,nav_footer,technology,Technology,https://spharaka.com/technology,stop word
+spharaka.com,spharaka.com,nav_footer,capability,Capabilities,https://spharaka.com/capabilities,stop word
+snyk.io,snyk.io,nav_header,service,Services,https://snyk.io/services/,stop word
+sectona.com,sectona.com,sitemap,technology,Glossary,https://sectona.com/blogs/technology/glossary/,stop word
+spog.ai,spog.ai,nav_header,nav,FAQs Platform and governance model clarifications.,https://spog.ai/,"sentence, not a product name"
+spog.ai,spog.ai,nav_footer,nav,SPOG.AI on Instagram,https://www.instagram.com/spog.ai,social link
+spog.ai,spog.ai,nav_footer,nav,SPOG.AI on Youtube,https://www.youtube.com/@SPOG_ai,social link
+spog.ai,spog.ai,nav_footer,nav,SPOG.AI on LinkedIn,https://www.linkedin.com/company/spog-ai/,social link
+sysdig.com,sysdig.com,nav_footer,nav,github,https://github.com/draios,stop word
+sysdig.com,sysdig.com,nav_footer,nav,youtube,https://www.youtube.com/sysdig,stop word
+sysdig.com,sysdig.com,nav_footer,nav,linkedin,https://www.linkedin.com/company/sysdig/,stop word
+triamsecurity.com,triamsecurity.com,nav_header,nav,Clean Images Hardened base images. Near-zero CVEs.,https://triamsecurity.com/cleanstart-images,"sentence, not a product name"
+triamsecurity.com,triamsecurity.com,nav_footer,nav,X (Twitter),https://x.com/CleanStartX,social link
+triamsecurity.com,triamsecurity.com,nav_footer,nav,YouTube,https://www.youtube.com/@CleanStartOfficial,stop word
+triamsecurity.com,triamsecurity.com,nav_footer,nav,GitHub,https://github.com/cleanstart-dev,stop word
+triamsecurity.com,triamsecurity.com,nav_footer,nav,LinkedIn,https://www.linkedin.com/company/cleanstart-official,stop word
+strobes.co,strobes.co,nav_header,solution,Solutions,https://strobes.co/solutions/,stop word
+strobes.co,strobes.co,nav_footer,solution,Technology,https://strobes.co/solutions/industries/technology,stop word
+strobes.co,strobes.co,nav_footer,nav,the Team,https://strobes.co/company/team/,stop word
+systech.co.in,systech.co.in,nav_header,nav,Training,https://systech.co.in/training/,stop word
+systech.co.in,systech.co.in,nav_footer,nav,Terms And Conditions,https://systech.co.in/terms-and-conditions/,stop word
+tsaaro.com,tsaaro.com,nav_footer,service,Services,https://tsaaro.com/services,stop word
+tsaaro.com,tsaaro.com,nav_footer,nav,Terms & Conditions,https://tsaaro.com/terms-of-service,stop word
+1kosmos.com,1kosmos.com,sitemap,solution,Use Cases,https://www.1kosmos.com/solutions/use-cases,stop word
+truecopy.in,truecopy.in,nav_footer,nav,X-twitter,https://twitter.com/truecopyin,stop word
+truecopy.in,truecopy.in,nav_footer,nav,Truecopy Credentials Pvt. Ltd.,https://truecopy.in/,"sentence, not a product name"
+truecopy.in,truecopy.in,nav_footer,nav,Instagram,https://www.instagram.com/truesigner_one/,stop word
+truecopy.in,truecopy.in,nav_footer,nav,Youtube,https://www.youtube.com/channel/UCgYgPXnD7EHD5BupjS70ZsA,stop word
+truecopy.in,truecopy.in,nav_footer,nav,Linkedin,https://www.linkedin.com/company/truecopy-credentials/,stop word
+versa-networks.com,versa-networks.com,sitemap,solution,Security,https://versa-networks.com/solutions/wan-edge/security/,stop word
+versa-networks.com,versa-networks.com,nav_header,solution,Technology,https://versa-networks.com/solutions/industries/technology/,stop word
+versa-networks.com,versa-networks.com,sitemap,solution,Industries,https://versa-networks.com/fr/solutions/industries/,stop word
+versa-networks.com,versa-networks.com,nav_header,nav,Partner Portal Login,https://partners.versa-networks.com/,stop word
+absolute.com,absolute.com,nav_header,platform,Certifications,https://www.absolute.com/platform/certifications,stop word
+absolute.com,absolute.com,nav_header,platform,Product Tours,https://www.absolute.com/platform/product-tours,stop word
+whatfix.com,whatfix.com,nav_footer,solution,all solutions,https://whatfix.com/solutions/,stop word
+whatfix.com,whatfix.com,nav_header,nav,YouTube,https://www.youtube.com/whatfix,stop word
+whatfix.com,whatfix.com,nav_footer,nav,Twitter,https://twitter.com/whatfix/,stop word
+whatfix.com,whatfix.com,nav_header,nav,LinkedIn,https://www.linkedin.com/company/whatfix/,stop word
+socradar.io,socradar.io,nav_footer,nav,Glossary,https://socradar.io/glossary/,stop word
+accenture.com,accenture.com,nav_footer,nav,facebook,https://www.facebook.com/accenture,stop word
+accenture.com,accenture.com,nav_footer,nav,linkedin,https://www.linkedin.com/company/accenture,stop word
+accenture.com,accenture.com,nav_footer,nav,instagram,https://www.instagram.com/accenture/,stop word
+ankercloud.com,ankercloud.com,nav_footer,solution,Solutions,https://www.ankercloud.com/solutions,stop word
+ankercloud.com,ankercloud.com,nav_footer,service,Services,https://www.ankercloud.com/services,stop word
+ankercloud.com,ankercloud.com,nav_footer,industry,Industries,https://www.ankercloud.com/industry,stop word
+algosec.com,algosec.com,nav_header,service,Services,https://www.algosec.com/services,stop word
+amsshardul.com,amsshardul.com,nav_header,nav,Services,https://www.amsshardul.com/all-services/,stop word
+auriseg.com,auriseg.com,sitemap,industry,Technology,https://www.auriseg.com/industries/technology,stop word
+ashield.co,ashield.co,nav_footer,nav,Use Cases,https://details.ashield.co/usecases.html,stop word
+ashield.co,ashield.co,nav_footer,nav,Terms & Conditions,https://details.ashield.co/tnc.html,stop word
+aryaka.com,aryaka.com,nav_footer,nav,Platform,https://www.aryaka.com/unified-sase-platform/,stop word
+aryaka.com,aryaka.com,nav_footer,nav,Terms and Conditions,https://www.aryaka.com/terms-and-conditions/,stop word
+ubuntu.com,ubuntu.com,nav_footer,solution,Solutions,https://canonical.com/solutions,stop word
+ubuntu.com,ubuntu.com,nav_footer,offering,Security,https://ubuntu.com/security,stop word
+ubuntu.com,ubuntu.com,nav_footer,service,Services,https://ubuntu.com/core/services,stop word
+ubuntu.com,ubuntu.com,nav_header,nav,Use cases,https://ubuntu.com/navigation#products-navigation,stop word
+balbix.com,balbix.com,nav_header,solution,Technology,https://www.balbix.com/solutions/tech-business/,stop word
+balbix.com,balbix.com,nav_footer,offering,Security,https://www.balbix.com/security/,stop word
+barracuda.com,barracuda.com,nav_header,product,the Platform,https://www.barracuda.com/products,stop word
+barracuda.com,barracuda.com,nav_footer,product,All Products,https://www.barracuda.com/products/explore-our-products,stop word
+barracuda.com,barracuda.com,sitemap,product,Solutions,https://www.barracuda.com/products/application-protection/load-balancer/solutions,stop word
+barracuda.com,barracuda.com,sitemap,product,Use Cases,https://www.barracuda.com/products/network-protection/cloudgen-access/use-cases,stop word
+barracuda.com,barracuda.com,nav_footer,solution,All Solutions,https://www.barracuda.com/solutions,stop word
+automationanywhere.com,automationanywhere.com,nav_header,product,all Products,https://www.automationanywhere.com/products,stop word
+automationanywhere.com,automationanywhere.com,sitemap,product,Security,https://www.automationanywhere.com/products/security,stop word
+automationanywhere.com,automationanywhere.com,nav_header,solution,all Solutions,https://www.automationanywhere.com/solutions,stop word
+automationanywhere.com,automationanywhere.com,nav_header,technology,Technology,https://www.automationanywhere.com/ai/technology,stop word
+automationanywhere.com,automationanywhere.com,nav_footer,nav,Glossary,https://www.automationanywhere.com/glossary,stop word
+blusapphire.com,blusapphire.com,sitemap,solution,Technology,https://www.blusapphire.com/solutions/technology,stop word
+azul.com,azul.com,sitemap,product,Technologies,https://www.azul.com/products/core/technologies/,stop word
+azul.com,azul.com,nav_footer,nav,Glossary,https://www.azul.com/glossary/,stop word
+briskinfosec.com,briskinfosec.com,nav_header,product,All Products,https://www.briskinfosec.com/products,stop word
+briskinfosec.com,briskinfosec.com,nav_footer,nav,Terms and Conditions,https://www.briskinfosec.com/terms-and-conditions,stop word
+castlercode.com,castlercode.com,nav_footer,industry,All Industries,https://www.castlercode.com/industry,stop word
+castsoftware.com,castsoftware.com,nav_footer,nav,Glossary,https://www.castsoftware.com/glossary,stop word
+blackduck.com,blackduck.com,nav_header,nav,All Solutions,https://www.blackduck.com/solutions.html,stop word
+cleanstart.com,cleanstart.com,nav_header,nav,Clean Images Hardened base images. Near-zero CVEs.,https://www.cleanstart.com/cleanstart-images,"sentence, not a product name"
+cleanstart.com,cleanstart.com,nav_footer,nav,X (Twitter),https://x.com/CleanStartX,social link
+cleanstart.com,cleanstart.com,nav_footer,nav,YouTube,https://www.youtube.com/@CleanStartOfficial,stop word
+cleanstart.com,cleanstart.com,nav_footer,nav,GitHub,https://github.com/cleanstart-dev,stop word
+cleanstart.com,cleanstart.com,nav_footer,nav,LinkedIn,https://www.linkedin.com/company/cleanstart-official,stop word
+cloud.in,cloud.in,nav_footer,nav,Security,https://www.cloud.in/security-compliance-services,stop word
+clouddfn.com,clouddfn.com,nav_footer,nav,cloudDFN Â© 2026. All Rights Reserved.,https://clouddfn.com,"sentence, not a product name"
+cloudera.com,cloudera.com,sitemap,product,Security,https://www.cloudera.com/products/trust-center/security.html,stop word
+cloudera.com,cloudera.com,nav_header,solution,Technology,https://www.cloudera.com/solutions/technology.html,stop word
+cloudera.com,cloudera.com,nav_header,nav,Products,https://www.cloudera.com/products.html,stop word
+cloudera.com,cloudera.com,nav_header,nav,Solutions,https://www.cloudera.com/solutions.html,stop word
+cloudera.com,cloudera.com,nav_footer,nav,Training,https://www.cloudera.com/services-and-support/training.html,stop word
+cloudera.com,cloudera.com,nav_footer,nav,Certification,https://www.cloudera.com/services-and-support/training/certification.html,stop word
+cloudflare.com,cloudflare.com,nav_header,product,Products,https://www.cloudflare.com/products/,stop word
+cloudflare.com,cloudflare.com,nav_header,solution,Solutions,https://www.cloudflare.com/solutions/,stop word
+cloudsek.com,cloudsek.com,nav_header,nav,Compliance Proven compliance with top security benchmarks.,https://www.cloudsek.com/compliance,"sentence, not a product name"
+cloud4c.com,cloud4c.com,nav_header,nav,Certifications,https://www.cloud4c.com/about-us,stop word
+cloud4c.com,cloud4c.com,nav_header,nav,SECURITY,https://www.cloud4c.com/azure-cloud-services/azure-security,stop word
+consent.in,consent.in,nav_footer,nav,Terms & Conditions,https://www.consent.in/tnc,stop word
+confluent.io,confluent.io,nav_footer,technology,Technology,https://www.confluent.io/industry-solutions/technology/,stop word
+confluent.io,confluent.io,nav_footer,nav,Training,https://www.confluent.io/training/,stop word
+confluent.io,confluent.io,nav_footer,nav,Terms & Conditions,https://www.confluent.io/terms-of-use/,stop word
+cotelligent.com,cotelligent.com,nav_footer,nav,Terms & Conditions,https://www.cotelligent.com/terms-conditions,stop word
+crestron.com,crestron.com,nav_footer,nav,Training,https://www.crestron.com/Training-Events/Training,stop word
+cybermindr.com,cybermindr.com,nav_footer,nav,Youtube,https://www.youtube.com/@CybermindrSocial,stop word
+cybermindr.com,cybermindr.com,nav_footer,nav,Glossary,https://www.cybermindr.com/glossary/,stop word
+cybermindr.com,cybermindr.com,nav_footer,nav,Instagram,https://www.instagram.com/cybermindr/,stop word
+cybermindr.com,cybermindr.com,nav_footer,nav,Linkedin-in,https://www.linkedin.com/company/cybermindr/%20,social link
+cpx.net,cpx.net,nav_footer,nav,Youtube,https://www.youtube.com/@cpxholding,stop word
+cpx.net,cpx.net,nav_footer,nav,Instagram,https://www.instagram.com/cpxholding,stop word
+cpx.net,cpx.net,nav_footer,nav,X-twitter,https://x.com/cpxholding,stop word
+cpx.net,cpx.net,nav_footer,nav,Our Certifications,https://www.cpx.net/certifications/,stop word
+cpx.net,cpx.net,nav_footer,nav,Linkedin,https://www.linkedin.com/company/cpxholding/,stop word
+cyberproof.com,cyberproof.com,nav_header,solution,Solutions,https://www.cyberproof.com/solutions/,stop word
+cyberproof.com,cyberproof.com,nav_header,nav,Services,https://www.cyberproof.com/security-services/,stop word
+databahn.ai,databahn.ai,nav_footer,product,Products,https://www.databahn.ai/products,stop word
+databahn.ai,databahn.ai,nav_footer,use_case,Use cases,https://www.databahn.ai/use-cases,stop word
+databahn.ai,databahn.ai,nav_footer,platform,Platform,https://www.databahn.ai/platform,stop word
+databahn.ai,databahn.ai,nav_footer,nav,Solution Briefs,https://www.databahn.ai/solution-briefs,stop word
+cybernx.com,cybernx.com,nav_footer,nav,Twitter,https://twitter.com/CyberNX_Tech,stop word
+cybernx.com,cybernx.com,nav_footer,nav,Youtube,https://www.youtube.com/@cybernx_tech,stop word
+cybernx.com,cybernx.com,nav_footer,nav,Facebook,https://www.facebook.com/CyberNXOfficial/,stop word
+cybernx.com,cybernx.com,nav_footer,nav,Instagram,https://www.instagram.com/cybernx_tech/,stop word
+cybernx.com,cybernx.com,nav_footer,nav,Connect with us,https://www.cybernx.com/contact-us/,social link
+cybernx.com,cybernx.com,nav_footer,nav,Terms and Conditions,https://www.cybernx.com/terms-and-condition/,stop word
+cybernx.com,cybernx.com,nav_footer,nav,Linkedin,https://www.linkedin.com/company/cybernx/,stop word
+datastax.com,datastax.com,nav_header,product,Products,https://www.datastax.com/products,stop word
+databricks.com,databricks.com,nav_footer,product,Security,https://www.databricks.com/product/lakewatch,stop word
+databricks.com,databricks.com,nav_header,solution,All Industries,https://www.databricks.com/solutions,stop word
+datadoghq.com,datadoghq.com,nav_header,solution,Technology,https://www.datadoghq.com/solutions/technology/,stop word
+denodo.com,denodo.com,nav_header,solution,Solutions,https://www.denodo.com/en/solutions/overview,stop word
+denodo.com,denodo.com,nav_header,nav,Glossary,https://www.denodo.com/en/glossary,stop word
+dnif.it,dnif.it,nav_footer,nav,Terms and Conditions,https://dnif.it/terms-and-conditions/,stop word
+exterro.com,exterro.com,nav_footer,nav,Modern Slavery Statement,https://www.exterro.com/modern-slavery-statement,stop word
+exabeam.com,exabeam.com,sitemap,solution,Use Cases,https://www.exabeam.com/solutions/use-cases/,stop word
+exabeam.com,exabeam.com,sitemap,solution,Industries,https://www.exabeam.com/solutions/industries/,stop word
+exabeam.com,exabeam.com,nav_footer,nav,GitHub,https://github.com/Exabeam,stop word
+exabeam.com,exabeam.com,nav_header,nav,the Team,https://www.exabeam.com/company/about-us/,stop word
+firemon.com,firemon.com,nav_header,product,Products,https://www.firemon.com/products,stop word
+firemon.com,firemon.com,nav_header,solution,Solutions,https://www.firemon.com/solutions,stop word
+firemon.com,firemon.com,nav_footer,nav,YouTube,https://www.youtube.com/FireMonVideo,stop word
+firemon.com,firemon.com,nav_footer,nav,Partner Portal Login,https://ignite.firemon.com/,stop word
+firemon.com,firemon.com,nav_footer,nav,Facebook,https://www.facebook.com/FireMon/,stop word
+firemon.com,firemon.com,nav_footer,nav,LinkedIn,https://www.linkedin.com/company/firemon/,stop word
+exclusive-networks.com,exclusive-networks.com,nav_header,solution,all Solutions,https://www.exclusive-networks.com/cybersecurity/solutions,stop word
+exclusive-networks.com,exclusive-networks.com,nav_header,nav,Partner Portal login,https://login.x-od.com/1b_login.jsp,stop word
+flentas.com,flentas.com,nav_header,service,Services,https://www.flentas.com/services,stop word
+flentas.com,flentas.com,nav_footer,nav,Terms & Conditions,https://www.flentas.com/terms-and-conditions,stop word
+ey.com,ey.com,nav_header,service,Services,https://www.ey.com/en_us/services,stop word
+ey.com,ey.com,sitemap,service,Technology,https://www.ey.com/en_gl/services/technology,stop word
+ey.com,ey.com,sitemap,service,Platform,https://www.ey.com/en_gl/services/ai/platform,stop word
+ey.com,ey.com,sitemap,service,Use Cases,https://www.ey.com/en_gl/services/ai/use-cases,stop word
+ey.com,ey.com,sitemap,service,Platforms,https://www.ey.com/en_gl/services/blockchain/platforms,stop word
+f5.com,f5.com,nav_header,product,all products,https://www.f5.com/products,stop word
+glean.com,glean.com,nav_header,platform,Platform overview See how Glean works.,https://www.glean.com/platform,"sentence, not a product name"
+glean.com,glean.com,sitemap,platform,Security,https://www.glean.com/jp/platform/security,stop word
+glean.com,glean.com,nav_footer,nav,Go to Glean's Twitter Account,https://twitter.com/glean,social link
+glean.com,glean.com,nav_footer,nav,Go to Glean's Instagram Account,https://www.instagram.com/gleanwork/,social link
+forcepoint.com,forcepoint.com,nav_footer,product,All Products,https://www.forcepoint.com/products,stop word
+forcepoint.com,forcepoint.com,nav_footer,nav,Services,https://www.forcepoint.com/cybersecurity-services,stop word
+forcepoint.com,forcepoint.com,nav_footer,nav,Twitter,https://twitter.com/forcepointsec,stop word
+forcepoint.com,forcepoint.com,nav_footer,nav,Facebook,https://www.facebook.com/ForcepointLLC,stop word
+forcepoint.com,forcepoint.com,nav_footer,nav,LinkedIn,https://www.linkedin.com/company/forcepoint?trk=fc_badge,stop word
+forcepoint.com,forcepoint.com,nav_footer,nav,YouTube,https://www.youtube.com/channel/UC4MbQECdktvwewRlAFwT_-w,stop word
+ctrls.com,ctrls.com,nav_footer,nav,Youtube,https://www.youtube.com/@CtrlSDatacenters,stop word
+ctrls.com,ctrls.com,nav_footer,nav,Twitter,https://twitter.com/CtrlSDC,stop word
+ctrls.com,ctrls.com,nav_footer,nav,Linkedin-in,https://www.linkedin.com/company/ctrls-datacenters-ltd,social link
+ctrls.com,ctrls.com,nav_footer,nav,Facebook-f,https://www.facebook.com/CtrlSDatacenters/,social link
+hcl-software.com,hcl-software.com,nav_header,product,all products,https://www.hcl-software.com/products,stop word
+hcltech.com,hcltech.com,nav_footer,nav,Facebook,https://www.facebook.com/HCLTechOfficial,stop word
+hcltech.com,hcltech.com,nav_footer,nav,Twitter,https://twitter.com/hcltech,stop word
+hcltech.com,hcltech.com,nav_footer,nav,Instagram,http://instagram.com/hcltech,stop word
+hcltech.com,hcltech.com,nav_footer,nav,Threads,https://www.threads.net/@hcltech,stop word
+hp.com,hp.com,sitemap,solution,Industries,https://www.hp.com/au-en/solutions/industries.html,stop word
+hp.com,hp.com,sitemap,solution,Platform,https://www.hp.com/at-de/poly/solutions/platform.html,stop word
+hp.com,hp.com,sitemap,solution,Products,https://www.hp.com/au-en/solutions/education/products.html,stop word
+hp.com,hp.com,sitemap,offering,Solutions,https://www.hp.com/ar-es/security/solutions.html,stop word
+hp.com,hp.com,sitemap,offering,Use Cases,https://www.hp.com/au-en/tech-takes/software/use-cases.html,stop word
+hp.com,hp.com,sitemap,service,Security,https://www.hp.com/ar-es/services/security.html,stop word
+hitachi.com,hitachi.com,nav_header,nav,"Annual Securities Report, etc.",https://www.hitachi.com/en/ir/library/stock/,"sentence, not a product name"
+hitachi.com,hitachi.com,nav_header,nav,"Articles of Incorporation, etc.",https://www.hitachi.com/en/ir/stock/article/,"sentence, not a product name"
+iraje.com,iraje.com,nav_footer,nav,Certification,https://www.iraje.com/certification,stop word
+itrsgroup.com,itrsgroup.com,sitemap,solution,Use Cases,https://www.itrsgroup.com/solutions/use-cases,stop word
+itrsgroup.com,itrsgroup.com,sitemap,service,Training,https://www.itrsgroup.com/services/training,stop word
+jamf.com,jamf.com,nav_footer,product,Products,https://www.jamf.com/products/,stop word
+jamf.com,jamf.com,nav_footer,nav,Twitter,https://twitter.com/jamfsoftware,stop word
+jamf.com,jamf.com,nav_footer,nav,Training,https://www.jamf.com/training/,stop word
+jamf.com,jamf.com,nav_footer,nav,YouTube,https://www.youtube.com/user/JAMFMedia,stop word
+jamf.com,jamf.com,nav_footer,nav,Instagram,https://www.instagram.com/jamfsoftware/,stop word
+jamf.com,jamf.com,nav_footer,nav,Facebook,https://www.facebook.com/jamfsoftware/,stop word
+jamf.com,jamf.com,nav_footer,nav,LinkedIn,https://www.linkedin.com/company/jamf-software/,stop word
+jisasoftech.com,jisasoftech.com,nav_footer,nav,Twitter,https://twitter.com/JisaSoftech,stop word
+jisasoftech.com,jisasoftech.com,nav_footer,nav,Facebook,https://www.facebook.com/JISACryptoBind/,stop word
+jisasoftech.com,jisasoftech.com,nav_footer,nav,Instagram,https://www.instagram.com/jisasoftech/,stop word
+jisasoftech.com,jisasoftech.com,nav_footer,nav,Linkedin,https://www.linkedin.com/company/jisa-softech/,stop word
+jisasoftech.com,jisasoftech.com,nav_footer,nav,YouTube,https://www.youtube.com/channel/UCaMnPHFiqwlVDlYXhQYZxpQ/,stop word
+kyndryl.com,kyndryl.com,nav_footer,nav,Security,https://www.kyndryl.com/us/en/cyber-security,stop word
+kyndryl.com,kyndryl.com,nav_footer,nav,Certifications,https://www.kyndryl.com/us/en/compliance/certifications,stop word
+kyndryl.com,kyndryl.com,nav_header,industry,Industries,https://www.kyndryl.com/us/en/industries,stop word
+jio.com,jio.com,sitemap,service,Security,https://www.jio.com/business/services/security/,stop word
+jio.com,jio.com,nav_footer,nav,Terms & conditions,https://www.jio.com/jcms/en-in/terms-conditions/,stop word
+leegality.com,leegality.com,nav_footer,nav,Terms & Conditions,https://www.leegality.com/tnc,stop word
+kaspersky.co.in,kaspersky.co.in,nav_footer,nav,All Solutions,https://www.kaspersky.co.in/home-security,stop word
+kaspersky.co.in,kaspersky.co.in,nav_footer,nav,All Products,https://www.kaspersky.co.in/small-to-medium-business-security,stop word
+leftrightmind.com,leftrightmind.com,nav_header,platform,Platform,https://www.leftrightmind.com/platform,stop word
+infoblox.com,infoblox.com,nav_header,product,All Products,https://www.infoblox.com/products/,stop word
+infoblox.com,infoblox.com,nav_header,solution,Solutions,https://www.infoblox.com/solutions/,stop word
+infoblox.com,infoblox.com,nav_header,platform,THE PLATFORM,https://www.infoblox.com/platform/,stop word
+infoblox.com,infoblox.com,nav_footer,nav,© 2026 Infoblox. All rights reserved.,https://www.infoblox.com/,"sentence, not a product name"
+linkshadow.com,linkshadow.com,nav_header,nav,Partner Portal Login,https://portalv2.linkshadow.com/,stop word
+maxhub.com,maxhub.com,nav_header,solution,All Solutions,https://www.maxhub.com/us/solutions/,stop word
+liferay.com,liferay.com,nav_footer,solution,Solutions,https://www.liferay.com/solutions,stop word
+liferay.com,liferay.com,nav_footer,platform,Platform,https://www.liferay.com/platform,stop word
+liferay.com,liferay.com,nav_footer,capability,Products,https://www.liferay.com/capabilities,stop word
+liferay.com,liferay.com,nav_header,capability,Security,https://www.liferay.com/capabilities/security,stop word
+liferay.com,liferay.com,nav_header,nav,Customer Portal,https://support.liferay.com,stop word
+menlosecurity.com,menlosecurity.com,nav_footer,nav,Modern Slavery Statement,https://www.menlosecurity.com/modern-slavery-statement,stop word
+locuz.com,locuz.com,nav_footer,nav,YouTube,https://www.youtube.com/@shi-india,stop word
+locuz.com,locuz.com,nav_footer,nav,Facebook,https://www.facebook.com/SHISolutionsIndia/,stop word
+locuz.com,locuz.com,nav_footer,nav,LinkedIn,https://www.linkedin.com/company/shi-india/,stop word
+mendix.com,mendix.com,nav_header,product,All Products,https://www.mendix.com/products/,stop word
+mendix.com,mendix.com,nav_footer,industry,All Industries,https://www.mendix.com/industries/,stop word
+miniorange.com,miniorange.com,sitemap,solution,Technology,https://www.miniorange.com/iam/solutions/technology,stop word
+myvi.in,myvi.in,nav_footer,nav,full post on X,https://x.com/rafeeq_x/status/2063999692783120407,social link
+neo-dis.com,neo-dis.com,sitemap,service,Services,https://www.neo-dis.com/neo-discom/services/services,stop word
+nagarro.com,nagarro.com,nav_header,nav,linkedin,https://www.linkedin.com/company/nagarro,stop word
+nagarro.com,nagarro.com,nav_header,nav,facebook,https://www.facebook.com/nagarroinc/,stop word
+nagarro.com,nagarro.com,nav_header,nav,instagram,https://www.instagram.com/lifeatnagarro/,stop word
+nagarro.com,nagarro.com,nav_header,nav,youtube,https://www.youtube.com/user/nagarrovideos,stop word
+nagarro.com,nagarro.com,nav_footer,nav,privacy notice,https://www.nagarro.com/en/privacy-policy?hsLang=en,stop word
+nagarro.com,nagarro.com,nav_header,nav,I-suite: Insights that move industries forward.,https://www.nagarro.com/en/insights-events/i-suite?hsLang=en,"sentence, not a product name"
+nagarro.com,nagarro.com,nav_header,industry,all industries,https://www.nagarro.com/en/industries?hsLang=en,stop word
+mongodb.com,mongodb.com,sitemap,product,Security,https://www.mongodb.com/pt-br/products/capabilities/security,stop word
+mongodb.com,mongodb.com,sitemap,solution,Industries,https://www.mongodb.com/solutions/industries,stop word
+mongodb.com,mongodb.com,sitemap,solution,Use Cases,https://www.mongodb.com/solutions/use-cases,stop word
+npav.net,npav.net,nav_footer,nav,Terms & Conditions,https://www.npav.net/terms-of-use,stop word
+npav.net,npav.net,nav_footer,nav,Facebook,https://www.facebook.com/npav.net/,stop word
+npav.net,npav.net,nav_footer,nav,X (Twitter),https://twitter.com/netprotector/,social link
+npav.net,npav.net,nav_footer,nav,Instagram,https://www.instagram.com/netprotector/,stop word
+npav.net,npav.net,nav_footer,nav,LinkedIn,https://in.linkedin.com/company/netprotectorantivirus,stop word
+npav.net,npav.net,nav_footer,nav,YouTube,https://www.youtube.com/channel/UCQ8Ka-PVZ08DAzahAdI_dfw/videos,stop word
+netskope.com,netskope.com,nav_footer,product,Products,https://www.netskope.com/products,stop word
+netskope.com,netskope.com,nav_footer,solution,Solutions,https://www.netskope.com/solutions,stop word
+netskope.com,netskope.com,sitemap,solution,Industries,https://www.netskope.com/solutions/industries,stop word
+nopalcyber.com,nopalcyber.com,nav_footer,solution,Solutions,https://www.nopalcyber.com/solutions,stop word
+nice.com,nice.com,nav_header,product,All Products,https://www.nice.com/products,stop word
+nice.com,nice.com,nav_header,product,Platform,https://www.nice.com/products/cxone,stop word
+netwitness.com,netwitness.com,nav_footer,use_case,Use Cases,https://www.netwitness.com/use-cases/,stop word
+netwitness.com,netwitness.com,nav_footer,nav,X-twitter,https://twitter.com/netwitness,stop word
+netwitness.com,netwitness.com,nav_footer,nav,Youtube,http://www.youtube.com/@NetWitness_DefenceAccelerated,stop word
+netwitness.com,netwitness.com,nav_footer,nav,Linkedin,https://www.linkedin.com/company/netwitness-platform,stop word
+okta.com,okta.com,nav_header,solution,All Solutions,https://www.okta.com/solutions/,stop word
+okta.com,okta.com,nav_footer,nav,Security,https://trust.okta.com/,stop word
+okta.com,okta.com,nav_footer,nav,Okta on Youtube,https://www.youtube.com/OktaInc,social link
+okta.com,okta.com,nav_footer,nav,Okta on X,https://x.com/okta,social link
+okta.com,okta.com,nav_footer,nav,Okta on LinkedIn,https://www.linkedin.com/company/okta-inc-/,social link
+okta.com,okta.com,nav_header,industry,Technology,https://www.okta.com/industries/technology/,stop word
+nttdata.com,nttdata.com,sitemap,service,Security,https://www.nttdata.com/jp/ja/services/security,stop word
+opswat.com,opswat.com,nav_footer,product,All Products,https://www.opswat.com/products,stop word
+opswat.com,opswat.com,nav_footer,solution,Solutions,https://www.opswat.com/solutions,stop word
+opswat.com,opswat.com,sitemap,solution,Platform,https://www.opswat.com/solutions/peripheral-removable-media/platform,stop word
+opswat.com,opswat.com,sitemap,solution,Technology,https://www.opswat.com/solutions/email-security/industries-we-serve/technology,stop word
+optiq.ai,optiq.ai,nav_footer,nav,Glossary,https://www.optiq.ai/glossary,stop word
+outsystems.com,outsystems.com,sitemap,offering,Certifications,https://www.outsystems.com/evaluation-guide/security/certifications,stop word
+outsystems.com,outsystems.com,nav_footer,nav,Training,https://learn.outsystems.com/training?_gl=1*i0c8as*_gcl_aw*R0NMLjE3NzQwMTgxMTYuQ2owS0NRanc0UFBOQmhEOEFSSXNBTW8taWN3VWZldWlTWVBIRnFqeGNOaDRlWlgzNlpDUGozbjRmUjhQSDdfQnJFMjlOSmpVaE0xMmsxRWFBbU1DRUFMd193Y0I.*_gcl_au*MTYwMTU2ODcxNS4xNzcyNzI0MTg5*_ga*MTYxMjcxNTE2My4xNzcyNzI0MTg5*_ga_ZD4DTMHWR2*czE3NzcwMzk2OTEkbzE5JGcwJHQxNzc3MDM5NjkyJGo1OSRsMCRoMA..*_ga_HGKNZZMWJS*czE3NzcwMzk2OTEkbzE2NyRnMCR0MTc3NzAzOTY5MiRqNTkkbDEkaDM4OTI3NDQyMA..*_ga_65CD8793GS*czE3NzcwMzk2OTEkbzM5JGcwJHQxNzc3MDM5NjkyJGo1OSRsMSRoMTU4NDQxMjUyOQ..,stop word
+outsystems.com,outsystems.com,nav_footer,nav,Services,https://www.outsystems.com/success-services,stop word
+oracle.com,oracle.com,sitemap,offering,Product Tours,https://www.oracle.com/cloud/product-tours/,stop word
+parallels.com,parallels.com,nav_header,product,all products,https://www.parallels.com/products/,stop word
+parallels.com,parallels.com,sitemap,product,Use Cases,https://www.parallels.com/products/ras/use-cases/,stop word
+parallels.com,parallels.com,nav_header,solution,all solutions,https://www.parallels.com/solutions/,stop word
+parallels.com,parallels.com,nav_header,offering,GitHub,https://www.parallels.com/apps/github/,stop word
+picussecurity.com,picussecurity.com,nav_header,nav,Use Cases,https://www.picussecurity.com,stop word
+paloaltonetworks.com,paloaltonetworks.com,sitemap,offering,Product Tours,https://www.paloaltonetworks.com/cortex/cloud/product-tours,stop word
+paloaltonetworks.com,paloaltonetworks.com,sitemap,service,Certification,https://www.paloaltonetworks.com/services/education/certification,stop word
+pingcap.com,pingcap.com,nav_footer,offering,Security,https://www.pingcap.com/security/,stop word
+pingcap.com,pingcap.com,nav_header,nav,Certifications,https://www.pingcap.com/education/certification/,stop word
+pingidentity.com,pingidentity.com,sitemap,platform,Solutions,https://www.pingidentity.com/fr/platform/solutions.html,stop word
+pingidentity.com,pingidentity.com,nav_footer,nav,the Platform,https://www.pingidentity.com/en/platform.html,stop word
+pingidentity.com,pingidentity.com,nav_footer,nav,Our Capabilities,https://www.pingidentity.com/en/capability.html,stop word
+pingidentity.com,pingidentity.com,nav_footer,nav,Our Solutions,https://www.pingidentity.com/en/solution.html,stop word
+privybyidfy.com,privybyidfy.com,nav_header,solution,Solutions,https://www.privybyidfy.com/solutions,stop word
+privybyidfy.com,privybyidfy.com,nav_footer,nav,YouTube,https://www.youtube.com/playlist?list=PLx1UwAZhQG6eGPxM3ymszDMTaDBGitmk9,stop word
+privybyidfy.com,privybyidfy.com,nav_footer,nav,LinkedIn,https://www.linkedin.com/company/privybyidfy/,stop word
+privybyidfy.com,privybyidfy.com,nav_header,industry,Industries,https://www.privybyidfy.com/industries/banking-nbfc-dpdp-compliance,stop word
+peoplestrong.com,peoplestrong.com,nav_footer,nav,Twitter,https://www.linkedin.com/company/peoplestrong-hr-services,stop word
+progressive.com,progressive.com,nav_footer,nav,All Products,https://www.progressive.com/insurance/,stop word
+privyone.com,privyone.com,nav_header,product,Products,https://www.privyone.com/products/consent-governance,stop word
+privyone.com,privyone.com,nav_header,solution,Solutions,https://www.privyone.com/solutions,stop word
+privyone.com,privyone.com,nav_footer,nav,YouTube,https://www.youtube.com/playlist?list=PLx1UwAZhQG6eGPxM3ymszDMTaDBGitmk9,stop word
+privyone.com,privyone.com,nav_footer,nav,LinkedIn,https://www.linkedin.com/company/privybyidfy/,stop word
+privyone.com,privyone.com,nav_header,industry,Industries,https://www.privyone.com/industries/banking-nbfc-dpdp-compliance,stop word
+prospecta.com,prospecta.com,nav_header,offering,Login to Partner Portal,https://partners.prospecta.com/security,stop word
+protechmanize.com,protechmanize.com,nav_footer,nav,Industries,https://www.protechmanize.com/industry.html,stop word
+proofpoint.com,proofpoint.com,nav_header,product,All Products,https://www.proofpoint.com/us/products,stop word
+protiviti.com,protiviti.com,nav_footer,nav,Search Jobs Find open positions at Protiviti.,https://roberthalf.wd1.myworkdayjobs.com/ProtivitiNA,"sentence, not a product name"
+protiviti.com,protiviti.com,nav_footer,nav,Twitter,https://twitter.com/protiviti,stop word
+protiviti.com,protiviti.com,nav_footer,nav,Facebook,https://www.facebook.com/protiviti,stop word
+protiviti.com,protiviti.com,nav_footer,nav,Technology,https://www.protiviti.com/us-en/technology-consulting-services,stop word
+protiviti.com,protiviti.com,nav_footer,nav,Insights Center See our latest insights.,https://www.protiviti.com/us-en/insights,"sentence, not a product name"
+protiviti.com,protiviti.com,nav_footer,nav,Protiviti Overview Learn more about our organization.,https://www.protiviti.com/us-en/about-us,"sentence, not a product name"
+protiviti.com,protiviti.com,nav_footer,nav,Instagram - US,https://www.instagram.com/protiviti/,social link
+protiviti.com,protiviti.com,nav_footer,nav,Youtube,https://www.youtube.com/user/protivitiinc,stop word
+protiviti.com,protiviti.com,nav_footer,nav,Privacy Notice,https://www.protiviti.com/us-en/privacy-policy,stop word
+procol.ai,procol.ai,nav_footer,nav,Terms & Conditions,https://www.procol.ai/legal-terms/,stop word
+radware.com,radware.com,sitemap,solution,Industries,https://www.radware.com/solutions/industries/,stop word
+resistine.com,resistine.com,nav_footer,solution,the Solutions,https://www.resistine.com/solutions/,stop word
+resistine.com,resistine.com,nav_footer,technology,Technology,https://www.resistine.com/technology/,stop word
+resistine.com,resistine.com,nav_footer,industry,Industries,https://www.resistine.com/industries/,stop word
+rapid7.com,rapid7.com,nav_header,product,All Products,https://www.rapid7.com/products/,stop word
+rapid7.com,rapid7.com,nav_footer,solution,Solutions,https://www.rapid7.com/solutions/,stop word
+rapid7.com,rapid7.com,nav_footer,nav,X (Twitter),https://twitter.com/Rapid7,social link
+rapid7.com,rapid7.com,nav_footer,nav,Facebook,https://www.facebook.com/rapid7,stop word
+rapid7.com,rapid7.com,nav_footer,nav,LinkedIn,https://www.linkedin.com/company/39624,stop word
+rapid7.com,rapid7.com,nav_footer,nav,Instagram,https://www.instagram.com/rapid7/,stop word
+redhat.com,redhat.com,nav_header,product,All products,https://www.redhat.com/en/products,stop word
+redhat.com,redhat.com,sitemap,technology,Industries,https://www.redhat.com/en/technologies/industries,stop word
+saviynt.com,saviynt.com,nav_footer,nav,Glossary,https://saviynt.com/glossary-listing,stop word
+rapyder.com,rapyder.com,nav_footer,nav,Facebook,https://www.facebook.com/rapydercloud,stop word
+rapyder.com,rapyder.com,nav_footer,nav,X-twitter,https://x.com/TheRapyder,stop word
+rapyder.com,rapyder.com,nav_footer,nav,Instagram,https://www.instagram.com/rapydercloudsolutions/,stop word
+rapyder.com,rapyder.com,nav_footer,nav,Youtube,https://www.youtube.com/c/Rapyder,stop word
+rapyder.com,rapyder.com,nav_footer,nav,LinkedIn profile,https://www.linkedin.com/in/jay-govani-06418775/,social link
+rapyder.com,rapyder.com,nav_footer,nav,Linkedin,https://www.linkedin.com/company/rapyder/,stop word
+rapyder.com,rapyder.com,nav_footer,industry,INDUSTRIES,https://www.rapyder.com/industries/,stop word
+salesforce.com,salesforce.com,sitemap,product,Linkedin,https://www.salesforce.com/products/integrations/linkedin/,stop word
+salesforce.com,salesforce.com,sitemap,product,Solutions,https://www.salesforce.com/products/heroku/solutions/,stop word
+salesforce.com,salesforce.com,sitemap,product,Services,https://www.salesforce.com/products/einstein-gpt-multipliers/services/,stop word
+salesforce.com,salesforce.com,sitemap,product,Use Cases,https://www.salesforce.com/ap/products/quip/use-cases/,stop word
+salesforce.com,salesforce.com,sitemap,solution,Industries,https://www.salesforce.com/ap/solutions/industries/,stop word
+sailpoint.com,sailpoint.com,nav_header,product,SailPoint Platform Unified. Intelligent. Powerful.,https://www.sailpoint.com/products/platform,"sentence, not a product name"
+sailpoint.com,sailpoint.com,sitemap,product,Platform,https://www.sailpoint.com/es/products/platform,stop word
+sailpoint.com,sailpoint.com,sitemap,solution,Industries,https://www.sailpoint.com/solutions/industries,stop word
+secpod.com,secpod.com,nav_footer,nav,Terms and Conditions,https://www.secpod.com/terms-and-conditions,stop word
+seagate.com,seagate.com,nav_header,product,Products,https://www.seagate.com/products/,stop word
+securden.com,securden.com,nav_footer,nav,Glossary,https://www.securden.com/glossary.html,stop word
+rsa.com,rsa.com,nav_header,solution,Solutions Solve the hardest security challenges.,https://www.rsa.com/solutions/,"sentence, not a product name"
+singlestore.com,singlestore.com,nav_footer,offering,Security,https://www.singlestore.com/security/,stop word
+singlestore.com,singlestore.com,nav_footer,nav,Platform,https://www.singlestore.com/product-overview/,stop word
+singlestore.com,singlestore.com,nav_footer,nav,Training,https://www.singlestore.com/training/,stop word
+singlestore.com,singlestore.com,nav_footer,nav,Certifications,https://www.singlestore.com/certification/,stop word
+semperis.com,semperis.com,nav_header,solution,Solutions,https://www.semperis.com/solutions,stop word
+securonix.com,securonix.com,sitemap,solution,Industries,https://www.securonix.com/solutions/industries/,stop word
+securonix.com,securonix.com,nav_footer,service,Training,https://www.securonix.com/services/training/,stop word
+securonix.com,securonix.com,nav_footer,nav,Partner Portal Login,https://partners.securonix.com/,stop word
+securonix.com,securonix.com,nav_footer,nav,Twitter,https://twitter.com/Securonix,stop word
+securonix.com,securonix.com,nav_footer,nav,Youtube,https://www.youtube.com/@SecuronixCyberSecurity,stop word
+securonix.com,securonix.com,nav_footer,nav,Linkedin,https://in.linkedin.com/company/securonix,stop word
+skyboxsecurity.com,skyboxsecurity.com,nav_footer,nav,Partner Portal Login,https://portal.tufin.com/,stop word
+skyboxsecurity.com,skyboxsecurity.com,nav_footer,nav,Terms & Conditions,https://www.tufin.com/terms-conditions,stop word
+skyboxsecurity.com,skyboxsecurity.com,nav_footer,nav,Facebook,https://www.facebook.com/Tufintech,stop word
+skyboxsecurity.com,skyboxsecurity.com,nav_footer,nav,YouTube,https://www.youtube.com/@tufin,stop word
+skyboxsecurity.com,skyboxsecurity.com,nav_footer,nav,LinkedIn,https://www.linkedin.com/company/tufin-technologies,stop word
+silverfort.com,silverfort.com,nav_header,nav,Solutions,https://www.silverfort.com/solutions-and-use-cases,stop word
+silverfort.com,silverfort.com,nav_footer,nav,Glossary,https://www.silverfort.com/glossary,stop word
+silverfort.com,silverfort.com,nav_footer,nav,X-twitter,https://twitter.com/silverfort,stop word
+silverfort.com,silverfort.com,nav_footer,nav,Youtube,https://www.youtube.com/@silverfort,stop word
+silverfort.com,silverfort.com,nav_footer,nav,Linkedin,https://www.linkedin.com/company/silverfort/,stop word
+skyflow.com,skyflow.com,nav_footer,offering,Security,https://www.skyflow.com/security,stop word
+skyflow.com,skyflow.com,nav_footer,nav,YouTube,https://www.youtube.com/@SkyflowAPI,stop word
+sentinelone.com,sentinelone.com,nav_footer,solution,all solutions,https://www.sentinelone.com/solutions/,stop word
+sentinelone.com,sentinelone.com,nav_header,solution,All Industries,https://www.sentinelone.com/solutions/industries/,stop word
+sentinelone.com,sentinelone.com,nav_header,platform,Energy Secure OT Systems and Critical Infrastructure.,https://www.sentinelone.com/platform/energy/,"sentence, not a product name"
+sentinelone.com,sentinelone.com,nav_footer,nav,Partner Portal Login,https://partners.sentinelone.com/,stop word
+sentinelone.com,sentinelone.com,nav_footer,nav,Customer Portal,https://community.sentinelone.com/,stop word
+sentinelone.com,sentinelone.com,nav_footer,nav,Product Tours,https://www.sentinelone.com/tour/,stop word
+sentinelone.com,sentinelone.com,nav_header,nav,Customers Trusted by the World’s Leading Companies.,https://www.sentinelone.com/customers/,"sentence, not a product name"
+snowflake.com,snowflake.com,nav_footer,product,Platform,https://www.snowflake.com/en/product/platform/,stop word
+snowflake.com,snowflake.com,nav_footer,solution,Industries,https://www.snowflake.com/en/solutions/industries/,stop word
+snowflake.com,snowflake.com,nav_footer,solution,Technology,https://www.snowflake.com/en/solutions/industries/technology/,stop word
+sislinfotech.com,sislinfotech.com,nav_header,service,Services,https://www.sislinfotech.com/services/,stop word
+sislinfotech.com,sislinfotech.com,nav_footer,service,Security,https://www.sislinfotech.com/services/security/,stop word
+solarwinds.com,solarwinds.com,nav_header,product,All Products,https://www.solarwinds.com/products,stop word
+solarwinds.com,solarwinds.com,nav_header,solution,All Solutions,https://www.solarwinds.com/solutions,stop word
+sonicwall.com,sonicwall.com,sitemap,solution,Use Cases,https://www.sonicwall.com/solutions/use-cases,stop word
+splunk.com,splunk.com,sitemap,product,Platform,https://www.splunk.com/ja_jp/products/platform.html,stop word
+splunk.com,splunk.com,sitemap,solution,Industries,https://www.splunk.com/en_us/solutions/industries.html,stop word
+symphonyai.com,symphonyai.com,nav_header,nav,Glossary,https://www.symphonyai.com/glossary,stop word
+symphonyai.com,symphonyai.com,nav_footer,nav,Terms & Conditions,https://www.symphonyai.com/terms-conditions,stop word
+symphonyai.com,symphonyai.com,nav_footer,industry,Industries,https://www.symphonyai.com/industries,stop word
+stradaglobal.com,stradaglobal.com,nav_header,technology,Technology,https://www.stradaglobal.com/who-we-serve/technology/,stop word
+stradaglobal.com,stradaglobal.com,nav_footer,nav,Terms & Conditions,https://www.stradaglobal.com/terms-and-conditions/,stop word
+stradaglobal.com,stradaglobal.com,nav_footer,nav,Privacy Notice,https://www.stradaglobal.com/privacy-notice/,stop word
+tcpwave.in,tcpwave.in,nav_footer,nav,Terms & Conditions,https://www.tcpwave.in/terms-conditions,stop word
+tcpwave.in,tcpwave.in,nav_footer,nav,Training,https://www.tcpwave.in/training/,stop word
+tcpwave.in,tcpwave.in,nav_footer,nav,Glossary,https://www.tcpwave.in/twc-glossary/,stop word
+tcpwave.in,tcpwave.in,nav_header,industry,Industries Discover our solutions across several verticals.,https://www.tcpwave.in/industries,"sentence, not a product name"
+tatatelebusiness.com,tatatelebusiness.com,nav_header,nav,Scheme of Arrangement with Bharti Airtel Ltd.,https://www.tatatelebusiness.com/scheme-of-arrangement-bharti-airtel-limit/,"sentence, not a product name"
+tatatelebusiness.com,tatatelebusiness.com,nav_footer,nav,Terms & Conditions,https://www.tatatelebusiness.com/terms-and-conditions/,stop word
+tatacommunications.com,tatacommunications.com,nav_header,solution,All Products,https://www.tatacommunications.com/solutions,stop word
+tatacommunications.com,tatacommunications.com,sitemap,offering,Security,https://www.tatacommunications.com/resourcehub/cloud/security,stop word
+neosofttech.com,neosofttech.com,nav_footer,industry,Industries,https://www.neosofttech.com/industries,stop word
+teamviewer.com,teamviewer.com,sitemap,product,Solutions,https://www.teamviewer.com/ams/products/remote/solutions/,stop word
+teamviewer.com,teamviewer.com,sitemap,product,Use Cases,https://www.teamviewer.com/ams/products/remote/use-cases/,stop word
+teamviewer.com,teamviewer.com,sitemap,product,Security,https://www.teamviewer.com/ams/products/tensor/security/,stop word
+teamviewer.com,teamviewer.com,sitemap,product,Platform,https://www.teamviewer.com/ams/products/frontline/platform/,stop word
+teamviewer.com,teamviewer.com,sitemap,product,Industries,https://www.teamviewer.com/ams/products/frontline/industries/,stop word
+tenable.com,tenable.com,nav_header,product,all products,https://www.tenable.com/products,stop word
+tenable.com,tenable.com,sitemap,product,Use Cases,https://www.tenable.com/products/nessus/use-cases,stop word
+tenable.com,tenable.com,nav_header,solution,Technology,https://www.tenable.com/solutions/technology,stop word
+tothenew.com,tothenew.com,nav_footer,solution,Solutions,https://www.tothenew.com/solutions,stop word
+tothenew.com,tothenew.com,nav_footer,technology,Technologies,https://www.tothenew.com/technologies,stop word
+tothenew.com,tothenew.com,nav_footer,service,Services,https://www.tothenew.com/services,stop word
+tothenew.com,tothenew.com,nav_footer,nav,Modern Slavery Statement,https://www.tothenew.com/modern-slavery-statement,stop word
+tothenew.com,tothenew.com,nav_footer,industry,Industries,https://www.tothenew.com/industries,stop word
+uipath.com,uipath.com,nav_header,product,all products,https://www.uipath.com/product,stop word
+uipath.com,uipath.com,sitemap,product,Platform,https://www.uipath.com/fr/product/platform,stop word
+uipath.com,uipath.com,nav_header,solution,Solutions,https://www.uipath.com/solutions,stop word
+uipath.com,uipath.com,sitemap,solution,Technology,https://www.uipath.com/solutions/technology,stop word
+tricentis.com,tricentis.com,nav_header,product,all products,https://www.tricentis.com/products,stop word
+tricentis.com,tricentis.com,nav_header,solution,All solutions,https://www.tricentis.com/solutions#enterprise-applications,stop word
+tricentis.com,tricentis.com,sitemap,solution,Technology,https://www.tricentis.com/solutions/technology,stop word
+tricentis.com,tricentis.com,nav_header,nav,Customer Portal,https://support-hub.tricentis.com,stop word
+tricentis.com,tricentis.com,nav_header,nav,Product tours,https://www.tricentis.com/product-tours,stop word
+techdata.com,techdata.com,nav_header,service,Services,https://www.tdsynnex.com/na/us/services/,stop word
+unosecur.com,unosecur.com,nav_footer,nav,Glossary,https://www.unosecur.com/glossary,stop word
+wearecloudrock.com,wearecloudrock.com,nav_footer,nav,YouTube,https://www.youtube.com/@WeAreCloudRock,stop word
+wearecloudrock.com,wearecloudrock.com,nav_footer,nav,LinkedIn,https://www.linkedin.com/company/cloudrock-partners/?originalSubdomain=uk,stop word
+upguard.com,upguard.com,nav_footer,platform,Platform,https://www.upguard.com/platform,stop word
+upguard.com,upguard.com,nav_footer,offering,Security,https://www.upguard.com/security,stop word
+upguard.com,upguard.com,nav_footer,service,Services,https://www.upguard.com/services,stop word
+upguard.com,upguard.com,nav_footer,industry,Technology,https://www.upguard.com/industries/technology,stop word
+upwind.io,upwind.io,nav_footer,nav,Glossary,https://www.upwind.io/glossary,stop word
+upwind.io,upwind.io,nav_footer,nav,Instagram,https://www.instagram.com/upwindsecurity/,stop word
+upwind.io,upwind.io,nav_footer,nav,LinkedIn,https://www.linkedin.com/company/upwindsecurity/,stop word
+westconcomstor.com,westconcomstor.com,nav_footer,nav,Instagram,https://www.instagram.com/westconcomstor,stop word
+westconcomstor.com,westconcomstor.com,nav_header,nav,vendors Check out our strategic global vendors.,https://www.westconcomstor.com/global/en/vendors.html,"sentence, not a product name"
+westconcomstor.com,westconcomstor.com,nav_footer,nav,Services,https://www.westconcomstor.com/global/en/services.html,stop word
+westconcomstor.com,westconcomstor.com,nav_footer,nav,LinkedIn,https://www.linkedin.com/company/westconcomstor/,stop word
+workday.com,workday.com,sitemap,product,Use Cases,https://www.workday.com/en-us/products/employee-voice/use-cases.html,stop word
+workday.com,workday.com,sitemap,product,Technology,https://www.workday.com/en-us/products/adaptive-planning/technology.html,stop word
+zscaler.com,zscaler.com,nav_footer,nav,Product Tours,https://www.zscaler.com/tours,stop word
+zscaler.com,zscaler.com,nav_header,nav,Cloud Sandbox Defend against unknown file-based threats.,https://www.zscaler.com/products-and-solutions/cloud-sandbox,"sentence, not a product name"
+zscaler.com,zscaler.com,nav_footer,industry,Industries,https://www.zscaler.com/industries,stop word
+zvolv.com,zvolv.com,nav_footer,platform,Platform,https://zvolv.com/platform/,stop word
+xebia.com,xebia.com,nav_footer,solution,Solutions,https://xebia.com/solutions/,stop word
+xebia.com,xebia.com,nav_header,nav,Training,https://academy.xebia.com/,stop word
+xebia.com,xebia.com,nav_footer,industry,Industries,https://xebia.com/industries/,stop word
+zarthi.com,zarthi.com,sitemap,solution,Services,https://zarthi.com/solutions/services,stop word
+perfios.ai,perfios.ai,sitemap,product,Hyperpersonalization Uk,https://perfios.ai/products/hyperpersonalization-uk/,localised duplicate
+crowdstrike.com,crowdstrike.com,sitemap,product,Identity Security Risk Review IT,https://www.crowdstrike.com/products/identity-security-risk-review-it/,localised duplicate
+crowdstrike.com,crowdstrike.com,sitemap,product,Identity Security Risk Review Es,https://www.crowdstrike.com/products/identity-security-risk-review-es/,localised duplicate
+crowdstrike.com,crowdstrike.com,sitemap,product,Identity Security Risk Review Latam,https://www.crowdstrike.com/products/identity-security-risk-review-latam/,localised duplicate
+crowdstrike.com,crowdstrike.com,sitemap,product,Active Directory Risk Review Latam,https://www.crowdstrike.com/products/identity-protection/active-directory-risk-review-latam/,localised duplicate
+crowdstrike.com,crowdstrike.com,sitemap,product,Active Directory Risk Review Es,https://www.crowdstrike.com/products/identity-protection/active-directory-risk-review-es/,localised duplicate
+crowdstrike.com,crowdstrike.com,sitemap,product,Active Directory Risk Review IT,https://www.crowdstrike.com/products/identity-protection/active-directory-risk-review-it/,localised duplicate
+crowdstrike.com,crowdstrike.com,sitemap,product,Next Gen SIEM SOC Upgrade Es,https://www.crowdstrike.com/products/next-gen-siem/next-gen-siem-soc-upgrade-es/,localised duplicate
+crowdstrike.com,crowdstrike.com,sitemap,product,Next Gen SIEM SOC Upgrade IT,https://www.crowdstrike.com/products/next-gen-siem/next-gen-siem-soc-upgrade-it/,localised duplicate
+crowdstrike.com,crowdstrike.com,sitemap,product,Next Gen SIEM SOC Upgrade Latam,https://www.crowdstrike.com/products/next-gen-siem/next-gen-siem-soc-upgrade-latam/,localised duplicate
+crowdstrike.com,crowdstrike.com,sitemap,product,Next Gen SIEM Test Drive Es,https://www.crowdstrike.com/products/next-gen-siem/next-gen-siem-test-drive-es/,localised duplicate
+crowdstrike.com,crowdstrike.com,sitemap,product,Next Gen SIEM Test Drive IT,https://www.crowdstrike.com/products/next-gen-siem/next-gen-siem-test-drive-it/,localised duplicate
+nagarro.com,nagarro.com,sitemap,service,Kickstart Cloud ERP Us,https://www.nagarro.com/en/services/erp/kickstart-cloud-erp-us,localised duplicate
+sailpoint.com,sailpoint.com,sitemap,solution,Government Us,https://www.sailpoint.com/solutions/industries/government-us,localised duplicate
+snowflake.com,snowflake.com,sitemap,solution,Public Sector Uk,https://www.snowflake.com/en/solutions/industries/public-sector-uk/,localised duplicate
+zscaler.com,zscaler.com,sitemap,industry,Healthcare Uk,https://www.zscaler.com/industries/healthcare-uk,localised duplicate
