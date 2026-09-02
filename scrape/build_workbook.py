@@ -1,15 +1,21 @@
 """Build the deliverable workbook from the classified keyword CSVs."""
-import csv, collections, sys
+import argparse, csv, collections
 from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Alignment
 from openpyxl.utils import get_column_letter
 
-S = sys.argv[1] if len(sys.argv) > 1 else "."
-OUT = sys.argv[2] if len(sys.argv) > 2 else "etsignals_vendor_keywords.xlsx"
+ap = argparse.ArgumentParser(description=__doc__)
+ap.add_argument("--tech", required=True)
+ap.add_argument("--review", required=True)
+ap.add_argument("--removed", required=True)
+ap.add_argument("--summary", required=True)
+ap.add_argument("-o", "--out", default="etsignals_vendor_keywords.xlsx")
+args = ap.parse_args()
+OUT = args.out
 
-read = lambda n: list(csv.DictReader(open(f"{S}/{n}", encoding="utf-8")))
-keep, rev, drop = read("keywords_tech.csv"), read("keywords_tech_review.csv"), read("keywords_tech_dropped.csv")
-summ = read("summary.csv")
+read = lambda path: list(csv.DictReader(open(path, encoding="utf-8")))
+keep, rev, drop = read(args.tech), read(args.review), read(args.removed)
+summ = read(args.summary)
 site = {s["domain"]: s["url"] for s in summ}
 TYPE = {"product": "Product", "solution": "Solution", "use_case": "Use case",
         "platform": "Platform", "technology": "Technology", "offering": "Offering",

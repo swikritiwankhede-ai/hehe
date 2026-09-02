@@ -16,6 +16,7 @@ import argparse
 import collections
 import csv
 import re
+import signal
 from pathlib import Path
 
 from tech_vocabulary import VOCABULARY, DOMAIN_TO_CATEGORY
@@ -155,6 +156,9 @@ def main() -> int:
     write(Path(f"{stem}_review.csv"), review, ["reason"])
 
     total = len(rows)
+    if not total:
+        print("no rows to classify - the scrape step produced nothing")
+        return 0
     print(f"in     : {total:,} rows")
     print(f"keep   : {len(kept):,} ({len(kept)*100//total}%)  -> {out}")
     print(f"drop   : {len(dropped):,} ({len(dropped)*100//total}%)  -> {stem}_dropped.csv")
@@ -169,4 +173,7 @@ def main() -> int:
 
 
 if __name__ == "__main__":
+    # tolerate a truncated pipe, e.g. "... | head"
+    if hasattr(signal, "SIGPIPE"):
+        signal.signal(signal.SIGPIPE, signal.SIG_DFL)
     raise SystemExit(main())
