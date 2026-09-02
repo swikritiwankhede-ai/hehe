@@ -1,137 +1,104 @@
-import csv, collections
+"""Build the deliverable workbook from the classified keyword CSVs."""
+import csv, collections, sys
 from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Alignment
 from openpyxl.utils import get_column_letter
 
-S = "/tmp/claude-0/-home-user-hehe/5430804a-3056-5f03-b302-95e1a915dcc0/scratchpad"
-OUT = "/home/user/hehe/out/etsignals_vendor_keywords.xlsx"
+S = sys.argv[1] if len(sys.argv) > 1 else "."
+OUT = sys.argv[2] if len(sys.argv) > 2 else "etsignals_vendor_keywords.xlsx"
 
-kw = list(csv.DictReader(open(f"{S}/all352_clean.csv", encoding="utf-8")))
-summ = list(csv.DictReader(open(f"{S}/summary.csv", encoding="utf-8")))
+read = lambda n: list(csv.DictReader(open(f"{S}/{n}", encoding="utf-8")))
+keep, rev, drop = read("keywords_tech.csv"), read("keywords_tech_review.csv"), read("keywords_tech_dropped.csv")
+summ = read("summary.csv")
 site = {s["domain"]: s["url"] for s in summ}
-
 TYPE = {"product": "Product", "solution": "Solution", "use_case": "Use case",
         "platform": "Platform", "technology": "Technology", "offering": "Offering",
-        "capability": "Capability", "service": "Service", "industry": "Industry",
-        "nav": "Navigation"}
+        "capability": "Capability", "service": "Service", "industry": "Industry", "nav": "Menu"}
 FOUND = {"sitemap": "Sitemap", "nav_header": "Header menu", "nav_footer": "Footer menu"}
-RANK = {"product": 0, "solution": 1, "use_case": 1, "platform": 2, "technology": 2,
-        "offering": 2, "capability": 3, "service": 3, "nav": 4, "industry": 5}
 
-ARIAL = "Arial"
-HDR_FILL = PatternFill("solid", fgColor="1F3864")
-HDR_FONT = Font(name=ARIAL, bold=True, color="FFFFFF", size=10)
-BODY = Font(name=ARIAL, size=10)
-LINK = Font(name=ARIAL, size=10, color="0563C1", underline="single")
-
+A = "Arial"
+HF, HFONT = PatternFill("solid", fgColor="1F3864"), Font(name=A, bold=True, color="FFFFFF", size=10)
+BODY, LINK = Font(name=A, size=10), Font(name=A, size=10, color="0563C1", underline="single")
 wb = Workbook()
 
-# ---------------------------------------------------------------- Read me
-rm = wb.active
-rm.title = "Read me"
-lines = [
-    ("ETSignals — vendor keyword extraction", True),
+rm = wb.active; rm.title = "Read me"
+kv, rvc, dvc = (collections.Counter(r["domain"] for r in x) for x in (keep, rev, drop))
+for i, (txt, b) in enumerate([
+    ("ETSignals — technology and cybersecurity keywords by sponsor", True), ("", False),
+    ("Tech keywords", True),
+    (f"{len(keep):,} keywords that name a technology or cybersecurity capability, across", False),
+    (f"{len(kv)} of {len(summ)} sponsors. Each carries the domain it belongs to and the", False),
+    ("ETSignals category that domain rolls up to.", False), ("", False),
+    ("Needs review", True),
+    (f"{len(rev):,} labels containing no recognisable technology term. Most are vendor", False),
+    ("coinages and brand names — 'Nirikshak', 'Locomate PIS', 'MetaDefender Transfer", False),
+    ("Guard' — which only a person can judge. They are NOT junk, and NOT yet included.", False),
     ("", False),
-    ("What this is", True),
-    ("Every product, solution, use case and technology term found on each sponsor's own", False),
-    ("website, one keyword per row, with the page it came from.", False),
+    ("Removed", True),
+    (f"{len(drop):,} labels that are definitely not technology, each with the reason:", False),
+    ("industries, dates, CVE numbers, language switchers, careers and site sections.", False),
     ("", False),
-    ("Sheets", True),
-    ("Keywords        one row per keyword, with a link to the page it was found on", False),
-    ("Vendors         one row per sponsor: what was fetched and how much was found", False),
-    ("Not extracted   the 56 sponsors that returned nothing, and why", False),
+    ("How a keyword was judged", True),
+    ("A keyword is kept only if it contains a term from a 460-term vocabulary spanning", False),
+    ("17 domains, from Security Operations to Business Applications. Nothing is guessed:", False),
+    ("a label matching neither the vocabulary nor a removal rule goes to Needs review.", False),
     ("", False),
-    ("How the keywords were found", True),
-    ("1. sitemap.xml — URL slugs under /products/, /solutions/, /use-cases/ and similar", False),
-    ("2. the header menu — where Products, Solutions and Platform normally live", False),
-    ("3. the footer menu — often a flatter, more complete product list", False),
-    ("", False),
-    ("Checking a keyword", True),
-    ("The 'Source URL' column links to the live page the keyword was read from.", False),
-    ("The 'Vendor file' column links to that vendor's folder in vendors_out, which also", False),
-    ("holds rejected.csv, sitemap_urls.txt and fetch_log.txt.", False),
-    ("For those links to open, unzip vendors_out.zip into the SAME FOLDER as this workbook.", False),
-    ("", False),
-    ("Counts", True),
-    ("'Keywords found' records what this extraction retrieved on 2 September 2026.", False),
-    ("It is a fact about the run, not a live formula, so it will not change if rows are", False),
-    ("filtered or edited. Re-run the extractor to refresh it.", False),
-    ("", False),
-    ("Not yet done", True),
-    ("Keywords are as the vendor writes them. They have not yet been mapped to shared", False),
-    ("concepts (so 'aiSIEM' and 'Percept XDR' do not yet resolve to SIEM and XDR), and", False),
-    ("they have not been assigned to the ETSignals category taxonomy.", False),
-]
-for i, (text, bold) in enumerate(lines, start=1):
-    c = rm.cell(row=i, column=1, value=text)
-    c.font = Font(name=ARIAL, size=11, bold=bold)
-rm.column_dimensions["A"].width = 95
-rm.sheet_view.showGridLines = False
+    ("Checking any row", True),
+    ("'Source URL' links to the live page the keyword came from. 'Vendor file' links to", False),
+    ("that sponsor's folder — unzip vendors_out.zip beside this workbook for it to open.", False),
+], start=1):
+    rm.cell(row=i, column=1, value=txt).font = Font(name=A, size=11, bold=b)
+rm.column_dimensions["A"].width = 92; rm.sheet_view.showGridLines = False
 
-# ---------------------------------------------------------------- Keywords
-ws = wb.create_sheet("Keywords")
-headers = ["Vendor", "Vendor site", "Keyword", "Type", "Found in", "Source URL", "Vendor file"]
-ws.append(headers)
-kw.sort(key=lambda r: (r["domain"], RANK.get(r["bucket"], 4), r["label"].lower()))
-for r in kw:
-    d = r["domain"]
-    ws.append([d, site.get(d, f"https://{d}"), r["label"], TYPE.get(r["bucket"], r["bucket"]),
-               FOUND.get(r["source"], r["source"]), r["url"], f"vendors_out/{d}/keywords.csv"])
-for row in ws.iter_rows(min_row=2, max_row=ws.max_row):
-    for c in row:
-        c.font = BODY
-    row[1].hyperlink, row[1].font = row[1].value, LINK
-    row[5].hyperlink, row[5].font = row[5].value, LINK
-    row[6].hyperlink, row[6].font = row[6].value, LINK
+def sheet(name, rows, cols, extra_get):
+    ws = wb.create_sheet(name); ws.append(cols)
+    for r in rows:
+        d = r["domain"]
+        ws.append([d, site.get(d, f"https://{d}"), r["label"], *extra_get(r),
+                   TYPE.get(r["bucket"], r["bucket"]), FOUND.get(r["source"], r["source"]),
+                   r["url"], f"vendors_out/{d}/keywords.csv"])
+    for row in ws.iter_rows(min_row=2):
+        for c in row: c.font = BODY
+        row[1].hyperlink, row[1].font = row[1].value, LINK
+        row[-2].hyperlink, row[-2].font = row[-2].value, LINK
+        row[-1].hyperlink, row[-1].font = row[-1].value, LINK
+    return ws
 
-# ---------------------------------------------------------------- Vendors
+keep.sort(key=lambda r: (r["domain"], r["category"], r["label"].lower()))
+sheet("Tech keywords", keep,
+      ["Vendor", "Vendor site", "Keyword", "Domain", "Category", "Type", "Found in",
+       "Source URL", "Vendor file"], lambda r: (r["tech_domain"], r["category"]))
+rev.sort(key=lambda r: (r["domain"], r["label"].lower()))
+sheet("Needs review", rev,
+      ["Vendor", "Vendor site", "Label", "Why", "Type", "Found in", "Source URL", "Vendor file"],
+      lambda r: (r["reason"],))
+drop.sort(key=lambda r: (r["reason"], r["domain"]))
+sheet("Removed", drop,
+      ["Vendor", "Vendor site", "Label", "Reason", "Type", "Found in", "Source URL", "Vendor file"],
+      lambda r: (r["reason"],))
+
 vs = wb.create_sheet("Vendors")
-vs.append(["Vendor", "Site", "Status", "Keywords found", "Sitemap URLs seen",
-           "Pages fetched", "Vendor file", "Note"])
-kw_count = collections.Counter(r["domain"] for r in kw)
-summ.sort(key=lambda s: s["domain"])
-for i, s in enumerate(summ, start=2):
-    status = "OK" if s["homepage"] == "ok" and int(s["keywords_kept"] or 0) else "No keywords"
-    note = s["error"][:120] if s["error"] else ""
-    vs.append([s["domain"], s["url"], status,
-               kw_count[s["domain"]],
-               int(s["sitemap_urls_seen"] or 0), int(s["pages_fetched"] or 0),
-               f"vendors_out/{s['domain']}/", note])
-for row in vs.iter_rows(min_row=2, max_row=vs.max_row):
-    for c in row:
-        c.font = BODY
+vs.append(["Vendor", "Site", "Tech keywords", "Needs review", "Removed", "Status", "Vendor file", "Note"])
+for s in sorted(summ, key=lambda s: -kv[s["domain"]]):
+    d = s["domain"]
+    st = ("OK" if kv[d] else "No tech keywords" if (rvc[d] or dvc[d]) else "Not extracted")
+    vs.append([d, s["url"], kv[d], rvc[d], dvc[d], st, f"vendors_out/{d}/", (s["error"] or "")[:110]])
+for row in vs.iter_rows(min_row=2):
+    for c in row: c.font = BODY
     row[1].hyperlink, row[1].font = row[1].value, LINK
     row[6].hyperlink, row[6].font = row[6].value, LINK
 
-# ---------------------------------------------------------------- Failures
-fs = wb.create_sheet("Not extracted")
-fs.append(["Vendor", "Site", "Reason", "Category"])
-for s in summ:
-    if not s["error"]:
-        continue
-    e = s["error"]
-    cat = ("Bot wall" if "HTTP" in e else
-           "JavaScript-rendered menu" if "JS-rendered" in e else "Network or certificate")
-    fs.append([s["domain"], s["url"], e[:150], cat])
-for row in fs.iter_rows(min_row=2, max_row=fs.max_row):
-    for c in row:
-        c.font = BODY
-    row[1].hyperlink, row[1].font = row[1].value, LINK
-
-# ---------------------------------------------------------------- formatting
-WIDTHS = {"Keywords": [24, 34, 46, 13, 13, 62, 40],
-          "Vendors": [26, 36, 14, 15, 18, 14, 30, 60],
-          "Not extracted": [26, 36, 90, 26]}
-for name, widths in WIDTHS.items():
+for name, widths in {"Tech keywords": [22, 30, 44, 30, 26, 12, 13, 56, 38],
+                     "Needs review": [22, 30, 46, 26, 12, 13, 56, 38],
+                     "Removed": [22, 30, 44, 44, 12, 13, 52, 38],
+                     "Vendors": [24, 32, 14, 14, 11, 18, 28, 58]}.items():
     sh = wb[name]
     for j, w in enumerate(widths, start=1):
         sh.column_dimensions[get_column_letter(j)].width = w
     for c in sh[1]:
-        c.font, c.fill = HDR_FONT, HDR_FILL
-        c.alignment = Alignment(vertical="center")
-    sh.row_dimensions[1].height = 22
-    sh.freeze_panes = "A2"
+        c.font, c.fill, c.alignment = HFONT, HF, Alignment(vertical="center")
+    sh.row_dimensions[1].height = 22; sh.freeze_panes = "A2"
     sh.auto_filter.ref = f"A1:{get_column_letter(sh.max_column)}{sh.max_row}"
 
 wb.save(OUT)
-print("written:", OUT, f"({len(kw):,} keyword rows, {len(summ)} vendors)")
+print(f"written {OUT}: {len(keep):,} tech / {len(rev):,} review / {len(drop):,} removed")
