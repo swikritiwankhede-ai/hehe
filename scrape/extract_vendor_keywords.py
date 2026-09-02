@@ -35,6 +35,8 @@ from urllib.parse import urljoin, urlparse
 import requests
 from bs4 import BeautifulSoup
 
+from tech_filter import classify
+
 UA = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
     "(KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36"
@@ -416,14 +418,21 @@ def diagnose(sess: Session, base: str) -> str:
 
 
 def write_vendor_folder(d: Path, company: str, base: str, rows: list[dict],
-                        rejected: list[dict], sess: "Session", error: dict | None) -> None:
+                        review: list[dict], rejected: list[dict],
+                        sess: "Session", error: dict | None) -> None:
     """One self-contained evidence folder per vendor."""
     try:
         d.mkdir(parents=True, exist_ok=True)
         with (d / "keywords.csv").open("w", newline="", encoding="utf-8") as fh:
-            w = csv.DictWriter(fh, fieldnames=["source", "bucket", "label", "url"])
+            cols = ["label", "tech_domain", "category", "bucket", "source", "url"]
+            w = csv.DictWriter(fh, fieldnames=cols)
             w.writeheader()
-            w.writerows([{k: r[k] for k in ("source", "bucket", "label", "url")} for r in rows])
+            w.writerows([{k: r[k] for k in cols} for r in rows])
+        with (d / "needs_review.csv").open("w", newline="", encoding="utf-8") as fh:
+            cols = ["label", "reason", "bucket", "source", "url"]
+            w = csv.DictWriter(fh, fieldnames=cols)
+            w.writeheader()
+            w.writerows([{k: r[k] for k in cols} for r in review])
         with (d / "rejected.csv").open("w", newline="", encoding="utf-8") as fh:
             w = csv.DictWriter(fh, fieldnames=["source", "label", "url", "reason"])
             w.writeheader()
@@ -438,8 +447,9 @@ def write_vendor_folder(d: Path, company: str, base: str, rows: list[dict],
             f"homepage       : {sess.outcomes.get(base, 'not attempted')}\n"
             f"pages fetched  : {len(sess.outcomes)}\n"
             f"sitemap URLs   : {len(sess.sitemap_pages)}\n"
-            f"keywords kept  : {len(rows)}\n"
-            f"labels dropped : {len(rejected)}\n"
+            f"tech keywords  : {len(rows)}\n"
+            f"needs review   : {len(review)}\n"
+            f"removed        : {len(rejected)}\n"
             f"error          : {(error or {}).get('error', '-')}\n",
             encoding="utf-8")
         if SAVE_HTML and sess.first_html:
@@ -473,6 +483,7 @@ def scrape_vendor(company: str, url: str, raw_dir: Path | None = None) -> dict:
         if cur["bucket"] in ("nav", "offering") and bucket not in ("nav", "offering"):
             cur["bucket"] = bucket
 
+    rejected: list[dict] = []
     error = None
     try:
         for bucket, label, u in from_sitemap(sess, base):
@@ -483,6 +494,9 @@ def scrape_vendor(company: str, url: str, raw_dir: Path | None = None) -> dict:
             add(source, bucket, label, u, prefer=True)
     except Exception as exc:  # never let one vendor kill the run
         error = dict(company=company, url=url, error=repr(exc))
+
+    rejected += [dict(company=company, domain=host, source=src, label=lab, url=u, reason=why)
+                 for src, lab, u, why in REJECTS.drain()]
 
     # Collapse localised copies: two or more labels sharing a base ("... Es",
     # "... Latam") become the base itself, even when the base has no page of its
@@ -500,7 +514,7 @@ def scrape_vendor(company: str, url: str, raw_dir: Path | None = None) -> dict:
             if k != winner:
                 del by_url[k]
 
-    # Drop labels repeated under different URLs, then keep the strongest ones.
+    # Drop labels repeated under different URLs.
     rows, seen_labels = [], set()
     for r in sorted(by_url.values(), key=lambda r: (BUCKET_RANK.get(r["bucket"], 4),
                                                     urlparse(r["url"]).path.count("/"))):
@@ -509,29 +523,38 @@ def scrape_vendor(company: str, url: str, raw_dir: Path | None = None) -> dict:
             continue
         seen_labels.add(key)
         rows.append(r)
-    capped, rows = rows[MAX_LABELS_PER_VENDOR:], rows[:MAX_LABELS_PER_VENDOR]
 
-    rejected = [dict(company=company, domain=host, source=src, label=lab, url=u, reason=why)
-                for src, lab, u, why in REJECTS.drain()]
-    rejected += [dict(company=company, domain=host, source=r["source"], label=r["label"],
-                      url=r["url"], reason=f"over the {MAX_LABELS_PER_VENDOR}-label cap")
+    # Keep only technology and cybersecurity terms. This runs BEFORE the cap so a
+    # vendor's budget is spent on real offerings: CrowdStrike previously filled all
+    # 120 slots with industries and menu items and lost actual products.
+    tech, review = [], []
+    for r in rows:
+        verdict, detail, category = classify(r["label"], host)
+        if verdict == "keep":
+            tech.append({**r, "tech_domain": detail, "category": category})
+        elif verdict == "review":
+            review.append({**r, "reason": detail})
+        else:
+            rejected.append({**r, "reason": detail})
+    capped, tech = tech[MAX_LABELS_PER_VENDOR:], tech[:MAX_LABELS_PER_VENDOR]
+    rejected += [{**r, "reason": f"over the {MAX_LABELS_PER_VENDOR}-keyword cap"}
                  for r in capped]
-
-    if error is None and not rows:
-        error = dict(company=company, url=url, error=diagnose(sess, base))
+    rows = tech
 
     if raw_dir is not None:
-        write_vendor_folder(raw_dir / host, company, base, rows, rejected, sess, error)
+        write_vendor_folder(raw_dir / host, company, base, rows, review, rejected, sess, error)
 
     return dict(
         rows=rows,
+        review=review,
         rejected=rejected,
         error=error,
         summary=dict(company=company, domain=host, url=base,
                      homepage=sess.outcomes.get(base, "not attempted"),
                      sitemap_urls_seen=len(sess.sitemap_pages),
                      pages_fetched=len(sess.outcomes),
-                     keywords_kept=len(rows), rejected=len(rejected),
+                     keywords_kept=len(rows), needs_review=len(review),
+                     rejected=len(rejected),
                      error=(error or {}).get("error", "")),
     )
 
@@ -566,7 +589,7 @@ def main() -> int:
     out_path = Path(args.out)
     stem = out_path.with_suffix("")
     err_path = Path(f"{stem}_errors.csv")
-    rej_path = Path(f"{stem}_rejected.csv")
+    rej_path = Path(f"{stem}_removed.csv")
     sum_path = Path(f"{stem}_summary.csv")
     raw_dir = Path(args.vendor_dir) if args.vendor_dir else None
     global SAVE_HTML
@@ -581,18 +604,22 @@ def main() -> int:
         t[1] if t[1].startswith("http") else "https://" + t[1]) not in done]
 
     specs = [
-        (out_path, ["company", "domain", "source", "bucket", "label", "url"], "rows"),
+        (out_path, ["company", "domain", "source", "bucket", "label", "url",
+                    "tech_domain", "category"], "rows"),
+        (Path(f"{stem}_review.csv"),
+         ["company", "domain", "source", "bucket", "label", "url", "reason"], "review"),
         (err_path, ["company", "url", "error"], "error"),
         (rej_path, ["company", "domain", "source", "label", "url", "reason"], "rejected"),
         (sum_path, ["company", "domain", "url", "homepage", "sitemap_urls_seen",
-                    "pages_fetched", "keywords_kept", "rejected", "error"], "summary"),
+                    "pages_fetched", "keywords_kept", "needs_review", "rejected",
+                    "error"], "summary"),
     ]
     handles, writers = [], {}
     for path, fields, key in specs:
         new = not path.exists()
         fh = path.open("a", newline="", encoding="utf-8")
         handles.append(fh)
-        w = csv.DictWriter(fh, fieldnames=fields)
+        w = csv.DictWriter(fh, fieldnames=fields, extrasaction="ignore")
         if new:
             w.writeheader()
         writers[key] = (w, fh)
@@ -603,7 +630,7 @@ def main() -> int:
             for i, fut in enumerate(as_completed(futures), 1):
                 company, _ = futures[fut]
                 res = fut.result()
-                for key in ("rows", "rejected"):
+                for key in ("rows", "review", "rejected"):
                     if res[key]:
                         writers[key][0].writerows(res[key])
                 for key in ("error", "summary"):
@@ -612,7 +639,7 @@ def main() -> int:
                 for _, fh in writers.values():
                     fh.flush()
                 n = len(res["rows"])
-                status = f"{n:3d} labels" if n else "FAILED    "
+                status = f"{n:3d} keywords" if n else "no keywords"
                 print(f"[{i}/{len(targets)}] {status}  {company}", flush=True)
     finally:
         for fh in handles:

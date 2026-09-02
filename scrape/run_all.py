@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """
-Run the whole pipeline: scrape, clean, classify, then build the workbook.
+Scrape the vendor sites and build the workbook.
+
+The scraper keeps only technology and cybersecurity terms, so nothing has to be
+cleaned afterwards.
 
     python run_all.py vendors.csv --out-dir results
 
@@ -38,28 +41,23 @@ def main() -> int:
 
     out = Path(args.out_dir)
     out.mkdir(parents=True, exist_ok=True)
-    raw = out / "keywords_raw.csv"
-    clean = out / "keywords_clean.csv"
-    tech = out / "tech_keywords.csv"
+    keywords = out / "keywords.csv"
 
     extract = [str(HERE / "extract_vendor_keywords.py"), args.vendors,
-               "-o", str(raw), "-w", str(args.workers),
+               "-o", str(keywords), "-w", str(args.workers),
                "--vendor-dir", str(out / "vendors_out")]
     if args.limit:
         extract += ["-n", str(args.limit)]
     if args.save_html:
         extract += ["--save-html"]
 
-    step("1/4  scraping vendor sites", extract)
-    step("2/4  cleaning labels", [str(HERE / "clean_keywords.py"), str(raw), "-o", str(clean)])
-    step("3/4  keeping only technology and cybersecurity terms",
-         [str(HERE / "classify_keywords.py"), str(clean), "-o", str(tech)])
-    step("4/4  building the workbook",
+    step("1/2  scraping vendor sites, keeping technology and cybersecurity terms", extract)
+    step("2/2  building the workbook",
          [str(HERE / "build_workbook.py"),
-          "--tech", str(tech),
-          "--review", str(out / "tech_keywords_review.csv"),
-          "--removed", str(out / "tech_keywords_dropped.csv"),
-          "--summary", str(out / "keywords_raw_summary.csv"),
+          "--tech", str(keywords),
+          "--review", str(out / "keywords_review.csv"),
+          "--removed", str(out / "keywords_removed.csv"),
+          "--summary", str(out / "keywords_summary.csv"),
           "-o", str(out / "etsignals_vendor_keywords.xlsx")])
 
     print(f"\nAll done. Everything is in {out}/")

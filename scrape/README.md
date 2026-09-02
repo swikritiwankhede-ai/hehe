@@ -11,8 +11,9 @@ This script throws away the 99.5% that is noise before anything is shared.
 
 ## Run it
 
-One command runs everything: scrape, clean, keep only technology terms, build
-the workbook.
+One command scrapes the sites and builds the workbook. The scraper keeps only
+technology and cybersecurity terms as it goes, so there is nothing to clean up
+afterwards.
 
 ```bash
 pip install -r requirements.txt
@@ -23,15 +24,33 @@ Add `-n 5` to try five vendors first. Everything lands in `results/`, and the
 scrape step resumes, so re-running after an interruption continues where it
 stopped.
 
-The four stages can also be run individually:
+The stages can also be run individually:
 
 ```bash
-python extract_vendor_keywords.py vendors.csv -o raw.csv --vendor-dir vendors_out
-python clean_keywords.py raw.csv -o clean.csv
-python classify_keywords.py clean.csv -o tech.csv
-python build_workbook.py --tech tech.csv --review tech_review.csv \
-       --removed tech_dropped.csv --summary raw_summary.csv -o keywords.xlsx
+python extract_vendor_keywords.py vendors.csv -o keywords.csv --vendor-dir vendors_out
+python build_workbook.py --tech keywords.csv --review keywords_review.csv \
+       --removed keywords_removed.csv --summary keywords_summary.csv -o out.xlsx
 ```
+
+`clean_keywords.py` and `classify_keywords.py` are no longer part of the run.
+They remain for replaying an updated vocabulary over data already collected,
+without re-crawling.
+
+## What counts as a keyword
+
+`tech_vocabulary.py` holds around 460 terms across 17 domains, from Security
+Operations to Business Applications. A label is kept only if it contains one,
+and the matched term also supplies its domain and the category that domain
+rolls up to.
+
+Labels matching a removal rule - industries, dates, CVE numbers, language
+switchers, careers, site sections, third-party brand references - are dropped
+with the reason recorded. Anything matching neither goes to `needs_review`
+rather than being guessed at: these are vendor coinages such as "Nirikshak" or
+"MetaDefender Transfer Guard" that only a person can judge.
+
+The per-vendor cap applies **after** this filter, so a vendor's budget is spent
+on real offerings rather than on menu items.
 
 `vendors.csv` needs a `url` column; a `company` column is optional.
 See `vendors.sample.csv`.
