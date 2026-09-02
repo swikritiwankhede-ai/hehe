@@ -137,6 +137,7 @@ class Session:
         self.s = requests.Session()
         self.s.headers["User-Agent"] = UA
         self._last = 0.0
+        self.outcomes: dict[str, str] = {}
 
     def get(self, url: str) -> requests.Response | None:
         wait = POLITE_DELAY - (time.monotonic() - self._last)
@@ -145,9 +146,12 @@ class Session:
         try:
             r = self.s.get(url, timeout=TIMEOUT, allow_redirects=True)
             self._last = time.monotonic()
+            self.outcomes[url] = "ok" if r.status_code == 200 else f"HTTP {r.status_code}"
             return r if r.status_code == 200 else None
-        except requests.RequestException:
+        except requests.RequestException as exc:
             self._last = time.monotonic()
+            detail = re.sub(r"\s+", " ", str(exc))[:120] or type(exc).__name__
+            self.outcomes[url] = f"{type(exc).__name__}: {detail}"
             return None
 
 
@@ -244,6 +248,18 @@ def from_nav(sess: Session, base: str) -> list[tuple[str, str, str]]:
     return rows
 
 
+def diagnose(sess: Session, base: str) -> str:
+    """Explain an empty result: unreachable vs. bot-walled vs. JS-rendered."""
+    home = sess.outcomes.get(base, sess.outcomes.get(base + "/", "not attempted"))
+    if home == "ok":
+        return "homepage fetched but no nav or sitemap labels found (likely JS-rendered nav)"
+    if home.startswith("HTTP"):
+        return f"homepage returned {home} (bot wall or geo block)"
+    if home == "not attempted":
+        return "homepage never fetched"
+    return f"homepage unreachable - {home}"
+
+
 def scrape_vendor(company: str, url: str) -> tuple[list[dict], dict | None]:
     base = url if url.startswith(("http://", "https://")) else "https://" + url
     base = f"{urlparse(base).scheme}://{urlparse(base).netloc}"
@@ -274,7 +290,7 @@ def scrape_vendor(company: str, url: str) -> tuple[list[dict], dict | None]:
         return out[:MAX_LABELS_PER_VENDOR], dict(company=company, url=url, error=repr(exc))
 
     if not out:
-        return [], dict(company=company, url=url, error="no labels found (JS-rendered or blocked)")
+        return [], dict(company=company, url=url, error=diagnose(sess, base))
     return out[:MAX_LABELS_PER_VENDOR], None
 
 
