@@ -79,7 +79,24 @@ STOP_LABELS = {
     "speak to an engineer", "get started", "try aerospike", "features", "compare",
     "integrations", "changelog", "status", "trust center", "company", "our story",
     "sitemap.xml", "all rights reserved", "cookie settings", "accessibility",
+    # social links harvested from footers
+    "linkedin", "youtube", "instagram", "facebook", "twitter", "x-twitter", "x",
+    "github", "reddit", "tiktok", "threads", "mastodon", "rss", "follow us",
+    # section headers, not offerings
+    "solutions", "all solutions", "industries", "all industries", "products",
+    "all products", "platform", "platforms", "technology", "technologies",
+    "security", "services", "capabilities", "use cases", "why us", "customers",
+    "glossary", "terms & conditions", "terms and conditions", "privacy notice",
+    "modern slavery statement", "product tours", "partner portal login",
+    "customer portal", "status", "login to partner portal", "training",
+    "certification", "certifications", "webinars", "events", "solution briefs",
 }
+
+# Localised copies of the same page: "Next Gen SIEM SOC Upgrade Es". Only collapsed
+# when the un-suffixed label also exists for that vendor, so "Managed IT" survives.
+LOCALE_SUFFIX = re.compile(
+    r"\s+(it|es|de|fr|jp|pt|br|kr|cn|uk|au|in|nl|ru|tr|mx|ca|sg|latam|apac|emea|"
+    r"anz|na|us|eu|za|ae|id|th|vn|pl|se|dk|no|fi)$", re.I)
 
 # Decorative characters and call-to-action verbs that wrap real product names.
 DECOR = re.compile(r"[\u2197\u2198\u2192\u2190\u2794\u00bb\u203a\u2022|]+")
@@ -137,6 +154,8 @@ _ACRONYM_LIST = [
     "GST", "TDS", "RBI", "BFSI", "SaaS", "PaaS", "IaaS", "DRaaS", "MSSP", "MSP",
     "VAR", "GIS", "LiDAR", "GPS", "RFID", "ANPR", "OCR", "AR", "VR", "5G", "DR",
     "CPaaS", "UCaaS", "DRM", "eKYC", "eSign", "PII", "PHI",
+    "EC2", "S3", "VPC", "RDS", "SLA", "SLO", "SKU", "CPG", "FSI", "SLG", "EBC",
+    "SAP", "SaaS", "SMB", "SME", "OEM", "POS", "ATM", "CCTV", "VMS", "NVR",
 ]
 CANON = {re.sub(r"[^a-z0-9]", "", a.lower()): a for a in _ACRONYM_LIST}
 
@@ -192,6 +211,9 @@ def clean_label(text: str) -> tuple[str | None, str]:
         return None, "marketing copy"
     if "logo" in text.lower():
         return None, "logo alt text"
+    if text.endswith(".") and len(text.split()) > 3:
+        return None, "sentence, not a product name"
+    text = text.rstrip(".")
     return text, ""
 
 
@@ -431,6 +453,22 @@ def scrape_vendor(company: str, url: str, raw_dir: Path | None = None) -> dict:
             add(source, bucket, label, u, prefer=True)
     except Exception as exc:  # never let one vendor kill the run
         error = dict(company=company, url=url, error=repr(exc))
+
+    # Collapse localised copies: two or more labels sharing a base ("... Es",
+    # "... Latam") become the base itself, even when the base has no page of its
+    # own. A lone label is never rewritten, so "Managed IT" is safe.
+    groups: dict[str, list[str]] = {}
+    for key, r in by_url.items():
+        groups.setdefault(LOCALE_SUFFIX.sub("", r["label"]).strip().lower(), []).append(key)
+    for base_lc, keys in groups.items():
+        if len(keys) == 1:
+            continue
+        exact = [k for k in keys if by_url[k]["label"].lower() == base_lc]
+        winner = exact[0] if exact else keys[0]
+        by_url[winner]["label"] = LOCALE_SUFFIX.sub("", by_url[winner]["label"]).strip()
+        for k in keys:
+            if k != winner:
+                del by_url[k]
 
     # Drop labels repeated under different URLs, then keep the strongest ones.
     rows, seen_labels = [], set()
