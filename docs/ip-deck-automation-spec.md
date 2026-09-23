@@ -1,25 +1,37 @@
 # Automated IP Post-Event Deck: Slide Spec (Brand World Summit)
 
-**Goal:** the BWS post-event deck is generated automatically and shared with all sponsors on **T+1** (the day after the event).
+**Goal:** an internal Post-Event Report page in the events portal assembles all event data automatically. From it the events team generates the BWS post-event PPT and shares it with all sponsors on **T+1** (the day after the event).
 
 **Scope:** it is an **IP** deck. It shows the value the event delivered **at scale, to the whole ecosystem**. It does **not** give each sponsor a separate section; per-sponsor detail belongs to Custom decks.
 
-## 0. Output format: web report first, deck as an export
+## 0. Output format: internal report page with a "Generate PPT" button
 
-**Recommendation (pending confirmation):** the primary output is a **live post-event report page** on the existing event platform, with a gated partner view. A **PDF/PPTX export is generated from the same data** for forwarding. The 16 "slides" below become the report's 16 sections, in the same order and with the same data.
+**Decided:**
+1. The product is an **internal web page inside the events portal**, used only by the events team. It is a new module next to Activity & Reporting, e.g. **Post-Event Report**.
+2. The page carries **more data than the deck**: drill-downs, lists, per-post and per-source tables, data-quality flags.
+3. From it, the team **generates the PPT** that is shared with sponsors. Sponsors never see the page.
 
-| Need | Deck only | Web report + export |
-|---|---|---|
-| Ready on T+1, but numbers keep maturing (social tail, Studio videos at T+14 and later) | A static file goes stale, and v2 must be re-sent | Updates in place with an "as of" stamp; T+14 is a refresh, not a re-send |
-| Knowing whether the sponsor looked at it | No signal | Opens, time spent and sections viewed, per sponsor. **Not opened = renewal risk** |
-| Speaker moments with audio / video | Stills only | Clips play inline |
-| Sponsor's marketing manager reuses it with their own leadership | ✅ | ✅ via PDF/PPTX export and downloadable charts |
-| Next edition's sales material | The report is copied by hand into a new sales deck | A public version of the same page *is* the proof for the next edition |
-| Generation effort with variable content (n speakers, logos, photos) | Fragile slide layouts | Responsive templates; the website template already exists (Design → Top Banner) |
-| Attendee-level data (brands in the room) | Loose once attached | Kept behind the sponsor login; exports aggregate only |
+### The page (internal)
+| Area | What it shows |
+|---|---|
+| **Readiness checklist** | Each input for T+1 with a status: check-in recorded, media uploaded, audio received, social posts logged, survey sent, targets entered, sessions tagged. Shows what blocks the deck |
+| **Report sections** | The 16 sections in §2, each with the headline number **plus the drill-down behind it** |
+| **Drill-downs (internal only)** | The attendee and no-show lists; registrations by lead / conversion source; speakers target → confirmed → spoke; per-post social table (pre / during windows); wishlist users vs attendees; photo and quote candidates |
+| **Data-quality flags** | Unclassified designations, encoding errors ("DGM Ã¢â‚¬Å“"), duplicate people or companies, speakers on the website with no agenda slot, figures that conflict with the last deck (e.g. 7.18x vs 17.8x) |
+| **Year on year** | This edition vs previous editions on every headline metric |
 
-- **Not a dashboard.** Sponsors need a story with a verdict, not filters. The report keeps the narrative order, with numbers inside each section.
-- **IP light events** use the same report with fewer sections: headline, audience and attendee list.
+### Generate PPT (sponsor-facing)
+- **Choose sections and metrics** to include; the default is the 16-slide IP deck in §2. Drill-downs and attendee-level lists are **never** exported, only totals.
+- **Template** comes from Design → Top Banner (banner, logos, colours).
+- **Editable text fields** for narrative lines and captions. AI drafts them; the team edits.
+- **Photos and quotes**: the team approves AI-suggested picks.
+- **Output:** PPTX and PDF, stamped "data as of <date/time>". Every export is logged with its version.
+- **T+1 flow:** the team opens the page on the morning after the event, clears any flags, clicks Generate, and sends the deck. **T+14:** data refreshes and the team generates v2.
+
+### Why this shape
+- **The events team needs more than sponsors see:** lists, sources and flags, to check the numbers before they go out. This is what stops the next 7.18x vs 17.8x.
+- **The PPT stays the sponsor format,** so sponsors' habits don't change. Only the manual assembly goes away.
+- **The page becomes the system of record per edition.** Next year's sales deck pulls from it rather than from last year's slides.
 
 ## 1. What we now know about the sources
 
