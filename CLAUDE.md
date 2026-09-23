@@ -76,6 +76,8 @@ Internal capture → accurate ROI report → the sponsor's marketing manager has
   - Glimpses: image and video assets.
   - The website is a **fallback/cross-check** for the setup sheet, not a new source. The events module already uses a sibling-reuse/HTML-import pattern.
 
+- **IP deep dive (Brand World Summit):** see `docs/ip-post-event-deck-sources.md`. It covers the deck categories, every source, the consolidation flow and the data-quality issues. It draws on the BWS 2024 and 2025 web pages, the BWS 2024 post-event report, the BWS 2025 sales deck, the Secufest sponsorship grid and the ETCIO Cloud Summit sales tracker. Key finding: the **sponsorship grid** (tier → inclusions, with delegate passes, 1:1 counts, RT size and online deliverables) is already a machine-readable "promised" baseline for IPs.
+
 ## 7. Data categories by source team
 
 | Category | Contents | Source team | Used in | Structured today? |
