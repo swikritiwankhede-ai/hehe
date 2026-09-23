@@ -12,6 +12,8 @@ Inputs reviewed:
   - `ETCISO Secufest 2026 (1).xlsx`
   - `ETCIO Cloud Summit 2026 Attendee_RT & 1_1.xlsx`
 
+> **Scope: BrandEquity only.** The BWS web pages, the 2024 report and the 2025 deck are BrandEquity data. The four `.xlsx` files come from ETCIO/ETCISO events. They're used here only as **format references** for sources C, D, B and J. See §5 for the BrandEquity versions still needed.
+
 ## Key observation
 
 The post-event report for edition N becomes the sales deck for edition N+1. The BWS 2025 sales deck reuses the 2024 report's multipliers, keynote speakers, partner logo wall and testimonials, then adds partnership opportunities. So the IP post-event deck is a sponsor-retention and renewal asset as well as a report, which is the value chain in CLAUDE.md §1 applied to IPs.
@@ -71,3 +73,17 @@ OOH/print (G), photos/videos (H)             → manual                       �
 - **Promised vs actual attendance:** the website promised "1000+ industry experts" and "over 300 attendees" on the same page. The report states 715 attendees.
 - **Stale website copy:** the 2024 page header says "6th Edition" but the body says "5th edition". The 2025 FAQ says "In its sixth edition… two tracks" while the page says 7th edition, 3+ tracks. Website text can't be trusted for facts.
 - **Tier labels vary by event:** BWS 2024 used 14+ tier names (Engagement, Wellness, Insights, Delegate Kit…). BWS 2025 used Presenting, Powered By, Co-Powered, In Association, Gold, Silver, Associate, NBFC Fintech, Outdoor, Exhibitors, Gifting, Creative, Startup Arena. The Secufest grid uses 6 priced tiers. The data model needs a canonical tier list plus an event-specific "category partner" label.
+
+## 5. BrandEquity inputs still needed
+
+We have BWS content (website, 2024 report, 2025 deck) but no BrandEquity operational files. To build the BWS deck from real data rather than format references, we need:
+
+| Need | Stands in for today | Why |
+|---|---|---|
+| BWS sponsorship grid / rate card (tier → inclusions, price) | Secufest grid (C) | "Promised" baseline per BWS partner. BWS tiers (Presenting, Powered By, Co-Powered, In Association, Gold, Silver, Associate, category partners) differ from Secufest's |
+| BWS sales tracker (booth, RT, Pitch Room wishlist, partner delegates) | ETCIO Cloud Summit tracker (D) | "Delivered" status per partner |
+| BWS setup sheet (`Calendar`, `Partner`, `Speaker`, agenda, Studio/video tabs) | Secufest setup sheet (B) | Agenda, partner list and media post URLs |
+| BWS registration + check-in export | none | Headline 715 count, and 40% CMO / 65% brand splits |
+| BrandEquity channel analytics + baseline method | none | Settles 17.8x vs 7.18x and makes multipliers repeatable |
+| Pitch Room / Leadership Dialogues attendee lists | ETCIO RT sheet (J) | Per-partner accounts-met cut |
+| One BrandEquity Custom deck (optional) | Lenovo deck | BrandEquity runs Customs too |

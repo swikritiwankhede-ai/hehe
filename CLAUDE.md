@@ -2,6 +2,8 @@
 
 Context carried over from earlier planning chats. Read this before working on anything in this repo.
 
+> **Current focus: ET BrandEquity events only** (e.g. Brand World Summit). Scope all analysis, specs and examples to BrandEquity for now. ETCIO/ETCISO/HR files already reviewed (Secufest setup sheet and sponsorship grid, ETCIO Cloud Summit sales tracker and RT sheet) serve only as **format references** for what the BrandEquity equivalents probably look like. They aren't BrandEquity data. BrandEquity runs both IPs and Customs (§3).
+
 ## 1. What we're building
 
 A sponsor-retention product for **ET B2B** events. It starts with an internal data layer and automated post-event reporting. Right now the focus is **automating the post-event deck**, which shows sponsors and leadership the value we delivered, backed by analytics.
