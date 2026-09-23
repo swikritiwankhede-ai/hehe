@@ -4,6 +4,23 @@
 
 **Scope:** it is an **IP** deck. It shows the value the event delivered **at scale, to the whole ecosystem**. It does **not** give each sponsor a separate section; per-sponsor detail belongs to Custom decks.
 
+## 0. Output format: web report first, deck as an export
+
+**Recommendation (pending confirmation):** the primary output is a **live post-event report page** on the existing event platform, with a gated partner view. A **PDF/PPTX export is generated from the same data** for forwarding. The 16 "slides" below become the report's 16 sections, in the same order and with the same data.
+
+| Need | Deck only | Web report + export |
+|---|---|---|
+| Ready on T+1, but numbers keep maturing (social tail, Studio videos at T+14 and later) | A static file goes stale, and v2 must be re-sent | Updates in place with an "as of" stamp; T+14 is a refresh, not a re-send |
+| Knowing whether the sponsor looked at it | No signal | Opens, time spent and sections viewed, per sponsor. **Not opened = renewal risk** |
+| Speaker moments with audio / video | Stills only | Clips play inline |
+| Sponsor's marketing manager reuses it with their own leadership | ✅ | ✅ via PDF/PPTX export and downloadable charts |
+| Next edition's sales material | The report is copied by hand into a new sales deck | A public version of the same page *is* the proof for the next edition |
+| Generation effort with variable content (n speakers, logos, photos) | Fragile slide layouts | Responsive templates; the website template already exists (Design → Top Banner) |
+| Attendee-level data (brands in the room) | Loose once attached | Kept behind the sponsor login; exports aggregate only |
+
+- **Not a dashboard.** Sponsors need a story with a verdict, not filters. The report keeps the narrative order, with numbers inside each section.
+- **IP light events** use the same report with fewer sections: headline, audience and attendee list.
+
 ## 1. What we now know about the sources
 
 ### Event backend (ETB2B event platform)

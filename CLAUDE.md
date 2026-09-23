@@ -93,7 +93,7 @@ Internal capture → accurate ROI report → the sponsor's marketing manager has
   - Media Center (images / videos)
 
   Social impressions are exported by hand per post: pre-event = post date → event start; during = event days. Photos and speaker audio come from the video team.
-- **Automated IP deck spec:** see `docs/ip-deck-automation-spec.md`. It covers 16 slides with data points, sources and T+1 readiness, the must-add data points, and the T+1 pipeline. **Decided:** an IP deck shows event-level value at scale, with no per-sponsor section, and is shared with all sponsors on T+1 (refresh at T+14).
+- **Automated IP deck spec:** see `docs/ip-deck-automation-spec.md`. It covers 16 slides with data points, sources and T+1 readiness, the must-add data points, and the T+1 pipeline. **Decided:** an IP deck shows event-level value at scale, with no per-sponsor section, and is shared with all sponsors on T+1 (refresh at T+14). **Proposed output format (pending confirmation):** a live web report on the event platform, gated for partners, plus an auto-generated PDF/PPTX export. Per-sponsor open tracking doubles as a renewal-risk signal.
 
 ## 7. Data categories by source team
 
