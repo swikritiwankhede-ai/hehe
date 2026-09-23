@@ -81,6 +81,19 @@ Internal capture → accurate ROI report → the sponsor's marketing manager has
 - **IP deep dive (Brand World Summit):** see `docs/ip-post-event-deck-sources.md`. It covers the deck categories, every source, the consolidation flow and the data-quality issues. It draws on the BWS 2024 and 2025 web pages, the BWS 2024 post-event report, the BWS 2025 sales deck, the Secufest sponsorship grid and the ETCIO Cloud Summit sales tracker. Key finding: the **sponsorship grid** (tier → inclusions, with delegate passes, 1:1 counts, RT size and online deliverables) is already a machine-readable "promised" baseline for IPs.
 - **Custom deep dive (Lenovo Leaders Circle '26, an ETBrandEquity Custom):** see `docs/custom-post-event-deck-sources.md`. It has 12 deck categories, each mapped to its source: proposal/SOW, check-in roster plus classifier, run-of-show with session-owner tags, ops checklist, assets and narrative. Key finding: the deck reports delivered vs committed (34 vs 30, 78% share of voice, a Delivered table) but has **no wishlist-met, follow-up, feedback or media section**.
 - **Retention root causes:** see `docs/retention-root-causes.md`. It groups the reasons into 4 families: the deck doesn't prove the sponsor's outcome; the numbers aren't defensible; the data is scattered and slow to assemble; and there is no system of record for the relationship. Proxy billing data (ETCIO/ETCISO/ETCFO, `Custom Clients.xlsx`) shows only 30–44% of Custom clients buy Custom again the next year, and 73% of the 140 Custom clients in FY23–26 bought only once.
+- **Event backend (ETB2B event platform, confirmed from screenshots):** these modules can be pulled directly:
+  - Design → Template / Top Banner (cover template)
+  - Event Details
+  - Speakers (name, designation, company, group, weightage)
+  - Agenda
+  - Sponsors (26 sponsors in 13 groups for BWS 2025)
+  - Target Audience: Registrations with lead / visitor / conversion source, Attendees, Shortlisted, **Wishlist Users**
+  - Email Marketing
+  - Activity & Reporting
+  - Media Center (images / videos)
+
+  Social impressions are exported by hand per post: pre-event = post date → event start; during = event days. Photos and speaker audio come from the video team.
+- **Automated IP deck spec:** see `docs/ip-deck-automation-spec.md`. It covers 16 slides with data points, sources and T+1 readiness, the must-add data points, and the T+1 pipeline. **Decided:** an IP deck shows event-level value at scale, with no per-sponsor section, and is shared with all sponsors on T+1 (refresh at T+14).
 
 ## 7. Data categories by source team
 
