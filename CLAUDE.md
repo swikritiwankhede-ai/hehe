@@ -94,6 +94,12 @@ Internal capture → accurate ROI report → the sponsor's marketing manager has
 
   Social impressions are exported by hand per post: pre-event = post date → event start; during = event days. Photos and speaker audio come from the video team.
 - **Automated IP deck spec:** see `docs/ip-deck-automation-spec.md`. It covers 16 slides with data points, sources and T+1 readiness, the must-add data points, and the T+1 pipeline. **Decided:** an IP deck shows event-level value at scale, with no per-sponsor section, and is shared with all sponsors on T+1 (refresh at T+14). **Decided output format:** an **internal Post-Event Report page in the events portal** (events team only). It carries more data than the deck: drill-downs, a readiness checklist and data-quality flags. The team clicks **Generate PPT** (PPTX/PDF, totals only, template from Design → Top Banner) to produce the sponsor-facing deck. Sponsors don't access the page.
+- **Platform design:** see `docs/platform-design.md`. It covers:
+  - 9 components: connectors, canonical event data store, processing and AI services, metrics registry, quality and readiness checks, internal report page, PPT generator, orchestration (T0 → T+1 → T+14), access and audit.
+  - The data domains, the data model, the 16-section mapping and phases:
+    - Phase 1 (MVP): internal data, social via CSV, PPT, 12 of 16 sections.
+    - Phase 2: AI quotes and photos, social APIs, survey.
+    - Phase 3: cross-edition sponsor history for retention.
 
 ## 7. Data categories by source team
 
