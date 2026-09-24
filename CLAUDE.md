@@ -107,6 +107,16 @@ Internal capture → accurate ROI report → the sponsor's marketing manager has
   4. T+1 timeline and versioning.
   5. Polish and self-tests.
 - **Prototype and workflow chart:** `prototype/report-studio.html` is a clickable Report Studio: fictional BWS 2025 sample data, 16 sections, readiness, data quality, a working review queue, and a Generate PPT preview. `prototype/report-workflow.html` is a swimlane of who does what from T-30 to T+14, plus the platform pipeline with its gates. Both are published as private artifacts.
+- **Data intake prototype:** `prototype/report-intake.html` (published as a private artifact) is the upload mechanism, designed first. It has 7 steps with a readiness rail:
+  1. Event and theme: from OneWorld event settings; the website is a cross-check.
+  2. Sponsors and logos: OneWorld; dedupes 37 carousel entries to 26 and maps groups to tiers.
+  3. Key speakers: OneWorld Speakers plus agenda; CXO rule pre-ticks key speakers.
+  4. Attendees: Excel/CSV upload while the OneWorld export is broken, with a saved column mapping, validation, dedupe and no mobile numbers stored.
+  5. Session and sponsor media: two Drive folders, filename/agenda auto-matching, overnight auto-transcription; the team picks quotes, not files.
+  6. Social: analytics connect or page-level export, with pre/during windows.
+  7. Market insights: a per-vertical stats library with source and year.
+
+  Real BWS 2025 website data is used for event, sponsors and speakers; attendee, media and social rows are fictional samples.
 - **Lovable integrations:** see `docs/lovable-integrations.md`. It covers:
   - Feasibility: Excel upload, Drive, transcription, the summary / quotes / themes prompt and photo scoring are fine. LinkedIn impressions can't be read from public URLs; use the page-analytics export now and the official API after approval. OneWorld needs an ET engineering API plus DPDP sign-off.
   - The setup checklist.

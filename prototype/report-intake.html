@@ -1,0 +1,345 @@
+<title>Report Studio Intake</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+:root{
+  --bg:#F4F2F0; --surface:#FFFFFF; --surface-2:#F9F7F5; --ink:#1C1B1E; --ink-2:#48434A; --muted:#766F73; --line:#E4DEDA; --line-2:#EFEAE6;
+  --accent:#C8232C; --accent-soft:#F8E4E3; --brand:#E7425F;
+  --good:#1D7349; --good-soft:#E2F1E8; --warn:#9A5D08; --warn-soft:#FAEFD9; --bad:#B4431A; --bad-soft:#F9E3D8; --info:#2D5B85; --info-soft:#E3ECF5;
+  --btn:#1C1B1E; --btn-ink:#FFFFFF;
+  --serif:"Newsreader", Georgia, "Times New Roman", serif; --sans:"IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif; --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){color-scheme:dark;
+  --bg:#141315; --surface:#1C1B1E; --surface-2:#222024; --ink:#F2EEEC; --ink-2:#CEC7C5; --muted:#9A9195; --line:#34303A; --line-2:#29262B;
+  --accent:#F0575E; --accent-soft:#3A1D20; --good:#5CC08D; --good-soft:#17301F; --warn:#E3A948; --warn-soft:#33270F; --bad:#F08A5D; --bad-soft:#3A2216; --info:#7FB0DD; --info-soft:#18283A; --btn:#F2EEEC; --btn-ink:#1C1B1E}}
+:root[data-theme="dark"]{color-scheme:dark;
+  --bg:#141315; --surface:#1C1B1E; --surface-2:#222024; --ink:#F2EEEC; --ink-2:#CEC7C5; --muted:#9A9195; --line:#34303A; --line-2:#29262B;
+  --accent:#F0575E; --accent-soft:#3A1D20; --good:#5CC08D; --good-soft:#17301F; --warn:#E3A948; --warn-soft:#33270F; --bad:#F08A5D; --bad-soft:#3A2216; --info:#7FB0DD; --info-soft:#18283A; --btn:#F2EEEC; --btn-ink:#1C1B1E}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.5}
+h1,h2,h3{font-family:var(--serif);font-weight:600;margin:0;text-wrap:balance}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.app{max-width:1320px;margin:0 auto;padding-inline:16px;padding-block:0 56px}
+.topbar{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;padding-block:12px;border-bottom:1px solid var(--line);margin-bottom:18px}
+.brand{display:flex;align-items:center;gap:10px}
+.mark{width:28px;height:28px;border-radius:6px;background:var(--accent);color:#fff;display:grid;place-items:center;font-family:var(--serif);font-weight:600}
+.brand b{font-family:var(--serif);font-size:17px}
+.brand small{display:block;color:var(--muted);font-size:12px;line-height:1.2}
+.evt strong{display:block;font-size:14px}.evt span{color:var(--muted);font-size:12px}
+.spacer{flex:1}
+.chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:3px 10px;font-size:12px;color:var(--ink-2);white-space:nowrap}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:7px 14px;font-weight:500;text-decoration:none;color:var(--ink);display:inline-flex;align-items:center;gap:6px}
+.btn:hover{border-color:var(--ink-2)}
+.btn.primary{background:var(--btn);color:var(--btn-ink);border-color:var(--btn)}
+.btn.small{padding:4px 10px;font-size:12px}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.layout{display:grid;grid-template-columns:250px minmax(0,1fr);gap:24px;align-items:start}
+.rail{position:sticky;top:12px;display:flex;flex-direction:column;gap:4px}
+.rail .sum{font-size:12px;color:var(--muted);padding:0 10px 8px}
+.rail .sum b{font-family:var(--mono);color:var(--ink)}
+.stepbtn{display:grid;grid-template-columns:22px 1fr;gap:10px;align-items:start;text-align:left;border:0;background:none;border-radius:10px;padding:9px 10px}
+.stepbtn:hover{background:var(--surface)}
+.stepbtn[aria-current="step"]{background:var(--surface);box-shadow:inset 3px 0 0 var(--accent)}
+.stepbtn .ic{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:600;font-family:var(--mono);border:1px solid var(--line);background:var(--surface)}
+.ic.done{background:var(--good-soft);color:var(--good);border-color:transparent}
+.ic.warn{background:var(--warn-soft);color:var(--warn);border-color:transparent}
+.ic.todo{color:var(--muted)}
+.stepbtn .t{font-weight:500;font-size:13.5px;line-height:1.3}
+.stepbtn .s{font-size:12px;color:var(--muted);line-height:1.3}
+main{min-width:0;display:flex;flex-direction:column;gap:14px}
+.head h1{font-size:26px}
+.head p{margin:4px 0 0;color:var(--ink-2);max-width:74ch}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+.panel h2{font-size:18px}
+.panel .hint{color:var(--muted);font-size:12.5px;margin:0}
+.srcrow{display:flex;flex-wrap:wrap;gap:8px}
+.src{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:10px;padding:10px 12px;flex:1;min-width:220px;cursor:pointer;background:var(--surface)}
+.src input{margin-top:3px;accent-color:var(--accent)}
+.src b{display:block;font-size:13.5px}
+.src span{font-size:12px;color:var(--muted)}
+.src.on{border-color:var(--ink-2);background:var(--surface-2)}
+.pill{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:2px 9px;font-size:11.5px;font-weight:500;white-space:nowrap}
+.pill.good{background:var(--good-soft);color:var(--good)}.pill.warn{background:var(--warn-soft);color:var(--warn)}.pill.bad{background:var(--bad-soft);color:var(--bad)}.pill.info{background:var(--info-soft);color:var(--info)}.pill.neutral{background:var(--line-2);color:var(--ink-2)}
+.flag{display:grid;grid-template-columns:18px 1fr;gap:8px;font-size:12.5px;align-items:start;border-radius:8px;padding:8px 10px}
+.flag.warn{background:var(--warn-soft)}.flag.info{background:var(--info-soft)}.flag.good{background:var(--good-soft)}
+.flag i{font-style:normal;font-weight:600}
+.flag.warn i{color:var(--warn)}.flag.info i{color:var(--info)}.flag.good i{color:var(--good)}
+.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.kv div{border:1px solid var(--line-2);border-radius:8px;padding:8px 10px}
+.kv label{display:block;font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.kv span{font-size:13.5px;word-break:break-word}
+.swatch{display:inline-block;width:14px;height:14px;border-radius:3px;vertical-align:-2px;margin-right:6px;border:1px solid var(--line)}
+.cover{border-radius:10px;padding:18px 20px;color:#fff;max-width:520px;aspect-ratio:16/7;display:flex;flex-direction:column;justify-content:space-between}
+.cover b{font-family:var(--serif);font-size:24px;line-height:1.15}
+.cover span{font-size:12px;opacity:.9}
+textarea,input[type=text],input[type=url],select{border:1px solid var(--line);border-radius:8px;padding:7px 10px;background:var(--surface);width:100%}
+textarea{min-height:90px;font-family:var(--mono);font-size:12px}
+.row2{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.row2 > input,.row2 > select{flex:1;min-width:200px;width:auto}
+.drop{border:1.5px dashed var(--line);border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:6px;align-items:flex-start;background:var(--surface-2)}
+.drop.over{border-color:var(--accent);background:var(--accent-soft)}
+.drop b{font-size:14px}
+.drop span{font-size:12.5px;color:var(--muted)}
+.filebtn{position:relative;overflow:hidden}
+.filebtn input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.tbl{overflow-x:auto;border:1px solid var(--line-2);border-radius:8px}
+table{border-collapse:collapse;width:100%;font-size:12.5px}
+th{text-align:left;font-weight:500;color:var(--muted);font-size:11px;letter-spacing:.04em;text-transform:uppercase;border-bottom:1px solid var(--line);padding:7px 9px;white-space:nowrap;background:var(--surface-2)}
+td{border-bottom:1px solid var(--line-2);padding:6px 9px;vertical-align:middle}
+tr:last-child td{border-bottom:0}
+td.r,th.r{text-align:right;font-family:var(--mono)}
+td select{padding:4px 6px;font-size:12.5px}
+td input[type=text]{padding:4px 6px;font-size:12.5px}
+.mono{font-family:var(--mono);font-size:12px}
+.mono.b{word-break:break-all}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.logo{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:8px;padding:4px 9px 4px 4px;background:var(--surface-2);font-size:12.5px}
+.logo i{width:24px;height:24px;border-radius:5px;display:grid;place-items:center;font-style:normal;font-weight:600;font-size:11px;background:var(--surface);border:1px solid var(--line);color:var(--ink-2)}
+.grouprow{display:grid;grid-template-columns:minmax(150px,200px) minmax(140px,170px) 1fr;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line-2)}
+.grouprow:last-child{border-bottom:0}
+.grouprow .g{font-weight:500;font-size:13px}
+.stats{display:flex;flex-wrap:wrap;gap:8px}
+.stat{border:1px solid var(--line-2);border-radius:8px;padding:6px 10px;min-width:120px}
+.stat b{font-family:var(--mono);font-size:18px;font-weight:500;display:block;line-height:1.2}
+.stat span{font-size:11.5px;color:var(--muted)}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line)}
+.tabs button{border:0;background:none;padding:8px 12px;border-bottom:2px solid transparent;color:var(--ink-2)}
+.tabs button[aria-selected="true"]{border-color:var(--accent);color:var(--ink);font-weight:600}
+.leader{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr) auto;gap:12px;padding:10px 0;border-bottom:1px solid var(--line-2);align-items:start}
+.leader:last-child{border-bottom:0}
+.leader .nm{font-weight:500}
+.leader .sub{font-size:12px;color:var(--muted)}
+.leader blockquote{margin:0;font-family:var(--serif);font-size:14px;color:var(--ink-2)}
+.navfoot{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.note{font-size:12.5px;color:var(--ink-2);background:var(--info-soft);border-radius:8px;padding:9px 12px}
+@media (max-width:880px){.topbar .chip{white-space:normal;max-width:100%}.layout{grid-template-columns:1fr}.rail{position:static;flex-direction:row;overflow-x:auto}.rail .sum{display:none}.stepbtn{min-width:170px}.grouprow{grid-template-columns:1fr}.leader{grid-template-columns:1fr}}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+<div class="app">
+  <header class="topbar">
+    <div class="brand"><div class="mark" aria-hidden="true">R</div><div><b>Report Studio</b><small>ETBrandEquity · Events</small></div></div>
+    <div class="evt"><strong>Brand World Summit 2025 · Data intake</strong><span>4 Jul 2025 · Grand Hyatt, BKC, Mumbai</span></div>
+    <div class="spacer"></div>
+    <span class="chip">Website data: BWS 2025 page · attendee, media and social rows are samples</span>
+    <a class="btn primary" href="https://claude.ai/artifact/GiYvpNh2vPmBCj1bjtBJTZ" target="_blank" rel="noopener">Continue to report ↗</a>
+  </header>
+  <div class="layout">
+    <nav class="rail" id="rail" aria-label="Intake steps"></nav>
+    <main id="main"></main>
+  </div>
+</div>
+
+<script>
+var SITE={"event": {"name": "Brand World Summit 2025", "edition": "7th edition", "theme": "Reimagining Marketing In The Age of AI", "hashtag": "#ETBWS2025", "date": "4 July 2025", "venue": "Grand Hyatt, BKC, Mumbai", "themeColor": "rgba(231, 66, 95, 1)", "bodyFont": "Montserrat", "headingFont": "SangBleu Versailles", "banner": "https://img.etb2bimg.com/files/data_file_1741773556_14436.jpg"}, "sponsors": [{"group": "Presenting Partner", "name": "Samsung ads", "logo": "https://img.etb2bimg.com/files/retail_files/file_1750847125_SA_logo_PPTshape_1_.pptx.png"}, {"group": "Powered By", "name": "Monotype", "logo": "https://img.etb2bimg.com/files/retail_files/file_1751376697_MT_Monotype_Logo_Black_RGB_1_2.png"}, {"group": "Co-Powered by", "name": "Route Mobile", "logo": "https://img.etb2bimg.com/files/retail_files/file_1750156918_TS_BICS_RM_Proximus_Global_SMALL_PXS_Global_RGB_1_.png"}, {"group": "In Association With", "name": "Flipkart Ads", "logo": "https://img.etb2bimg.com/files/retail_files/file_1750917223_Logo_new_2_02_1_.png"}, {"group": "Gold Partners", "name": "Google Messages", "logo": "https://img.etb2bimg.com/files/retail_files/file_1746534561_Google_Messages_logo_vertical_CMYK.png"}, {"group": "Gold Partners", "name": "TATA Communication", "logo": "https://img.etb2bimg.com/files/retail_files/file_1751264577_Tata_communication_logo_3_.png"}, {"group": "Silver Partner", "name": "Trade Desk", "logo": "https://img.etb2bimg.com/files/retail_files/file_1747804283_TTD_Lockup_BlueSky_2_1_.png"}, {"group": "Associate Partners", "name": "FROG", "logo": "https://img.etb2bimg.com/files/retail_files/file_1750760037_frog_Cap_Invent_logo_horizontal_black_1_.png"}, {"group": "Associate Partners", "name": "Shakuniya", "logo": "https://img.etb2bimg.com/files/retail_files/file_1751271208_SSPL_1x3_Logo_1_.png"}, {"group": "NBFC Fintech Partner", "name": "L&T", "logo": "https://img.etb2bimg.com/files/retail_files/file_1750682712_L_T_logo_1_.jpg"}, {"group": "Outdoor Media Partner", "name": "Roshan Space", "logo": "https://img.etb2bimg.com/files/retail_files/file_1751271612_For_Logo_PNGs_02_1_.png"}, {"group": "Exhibitors", "name": "ImageKit", "logo": "https://img.etb2bimg.com/files/retail_files/file_1749533369_imagekit_logo_true_size.png"}, {"group": "Exhibitors", "name": "Gobble cube", "logo": "https://img.etb2bimg.com/files/retail_files/file_1750759823_GC_logo_blue.png"}, {"group": "Exhibitors", "name": "Notify Visitors", "logo": "https://img.etb2bimg.com/files/retail_files/file_1751271968__Group_.png"}, {"group": "Exhibitors", "name": "oogw.ai", "logo": "https://img.etb2bimg.com/files/retail_files/file_1751278180_logo_for_post_1_.png"}, {"group": "Exhibitors", "name": "WhilterAi", "logo": "https://img.etb2bimg.com/files/retail_files/file_1751271509_CMYK_Trans_1_.png"}, {"group": "Exhibitors", "name": "Big City Promotions", "logo": "https://img.etb2bimg.com/files/retail_files/file_1751451340_BCP_Logo_Vector.svg"}, {"group": "Gifting Partners", "name": "Lenskart", "logo": "https://img.etb2bimg.com/files/retail_files/file_1750916950_Logo.png"}, {"group": "Gifting Partners", "name": "fixderma", "logo": "https://img.etb2bimg.com/files/retail_files/file_1750759643_New_Logo_1_.png"}, {"group": "Gifting Partners", "name": "Good Bug", "logo": "https://img.etb2bimg.com/files/retail_files/file_1751542176_TGB_Probiotic_Logo_01_1_.png"}, {"group": "Creative Partner", "name": "Refreshing", "logo": "https://img.etb2bimg.com/files/retail_files/file_1751442905_Logo_png_1_.png"}, {"group": "Startup Arena Showcase", "name": "Analytics LIV", "logo": "https://img.etb2bimg.com/files/retail_files/file_1751358445_AnalyticsLiv_V_1_1_.png"}, {"group": "Startup Arena Showcase", "name": "Crewtangle LP", "logo": "https://img.etb2bimg.com/files/retail_files/file_1751358541_Crewtangle_Logo.png"}, {"group": "Startup Arena Showcase", "name": "Envigo", "logo": "https://img.etb2bimg.com/files/retail_files/file_1751358636_envigo_logo_1_1_1_.png"}, {"group": "Startup Arena Showcase", "name": "FilterYou", "logo": "https://img.etb2bimg.com/files/retail_files/file_1751358687_FY_Black_1_.png"}, {"group": "Startup Arena Showcase", "name": "POOCHO", "logo": "https://img.etb2bimg.com/files/retail_files/file_1751358760_logo_yellow_website_1_1_1_.png"}], "rawSponsors": 37, "speakers": [{"name": "Sanjiv Mehta", "desig": "Executive Chairman", "company": "L Catterton India"}, {"name": "Prabha Narasimhan", "desig": "MD & CEO", "company": "Colgate-Palmolive India"}, {"name": "Prasoon Joshi", "desig": "CEO, McCann World Group India and Chairman APAC", "company": ""}, {"name": "Sudhanshu Vats", "desig": "Managing Director", "company": "Pidilite Industries"}, {"name": "Rohit Bhasin", "desig": "President and CMO", "company": "Kotak Mahindra Bank"}, {"name": "Vicky Kaushal", "desig": "Actor", "company": ""}, {"name": "Virat Khullar", "desig": "AVP & Vertical Head, Marketing", "company": "Hyundai Motor India"}, {"name": "Daniel Kim", "desig": "Vice President Marketing APAC", "company": "Tinder"}, {"name": "Jan Bures", "desig": "Executive Director of Sales, Marketing and Digital", "company": "Skoda Auto Volkswagen India"}, {"name": "Sandeep Tanwani", "desig": "CMO", "company": ""}, {"name": "Kapil Grover", "desig": "CMO", "company": "Restaurant Brands Asia (Burger King)"}, {"name": "Ashwin Moorthy", "desig": "CMO", "company": "Godrej Consumer Products"}, {"name": "Lakshmi Narayanan", "desig": "CMO", "company": "CEAT"}, {"name": "Anuradha Aggarwal", "desig": "Director User Growth and CMO", "company": "Amazon Pay"}, {"name": "Chandrika Jain", "desig": "CMO", "company": "Lenovo India"}, {"name": "Nipun Kaushal", "desig": "CMO", "company": "Yes Bank"}, {"name": "Sunder Balasubramanian", "desig": "CMO", "company": "Myntra"}, {"name": "Bhawna Sikka", "desig": "CMO", "company": "Adidas"}, {"name": "Maneesh Mittal", "desig": "Senior Vice President", "company": ""}, {"name": "Zameer kochar", "desig": "CMO", "company": "Angel One"}, {"name": "Darshana Shah", "desig": "CMO", "company": "Aditya Birla Capital"}, {"name": "Sachin Vashishtha", "desig": "CMO", "company": "Paisabazaar"}, {"name": "Ashish Mishra", "desig": "CMO", "company": "Acko"}, {"name": "Milind Pathak", "desig": "Chief Corporate Marketing Officer", "company": "Proximus Global"}, {"name": "Saloni Anand", "desig": "Co-Founder", "company": "Traya Health"}, {"name": "Kavita Jagtiani", "desig": "Chief Marketing Officer", "company": "L&T Finance"}, {"name": "Robin Das", "desig": "Founder & CEO", "company": "Brandintelle"}, {"name": "Gagandeep Gadri", "desig": "EVP & Global MD", "company": "frog, a part of Capgemini Invent"}, {"name": "Nishit Kanchan", "desig": "Head of Sales, India", "company": ""}, {"name": "Tarun Joshi", "desig": "Founder & CEO", "company": "IGP"}, {"name": "Saikot Das", "desig": "Senior Director, Marketing & Brand Experience - South Asia, Middle East & Africa", "company": "Levi Strauss & Co."}, {"name": "Namrata Soni", "desig": "Founder", "company": "Simply Nam"}, {"name": "Nisha khatri", "desig": "Head of Marketing", "company": "Libas"}, {"name": "Tarun Sharma", "desig": "Co-Founder", "company": "Mcaffeine & Hyphen"}, {"name": "Prabhu Karthikeyan", "desig": "Co-Founder", "company": "Goodbug"}], "rawSpeakers": 35};
+(function(){
+/* ---------- helpers ---------- */
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function fmt(n){return Math.round(n).toLocaleString('en-IN')}
+function norm(s){return String(s||'').toLowerCase().replace(/[^a-z0-9]/g,'')}
+function initials(s){var p=String(s).replace(/[^A-Za-z0-9 &]/g,' ').split(/\s+/).filter(Boolean);return ((p[0]||'?')[0]+(p[1]?p[1][0]:'')).toUpperCase()}
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+var rnd=mulberry32(4072025);function pick(a){return a[Math.floor(rnd()*a.length)]}
+function seniorityOf(t){var x=String(t).toLowerCase();
+  if(/\b(vp|vice president|svp|evp|avp)\b/.test(x))return 'VP';
+  if(/\b(chief|cxo|ceo|cmo|cto|cio|cdo|founder|co-founder|managing director|md|chairman|president)\b/.test(x))return 'CXO';
+  if(/\b(director|head)\b/.test(x))return 'Director';
+  if(/\b(manager|lead|gm|dgm|agm)\b/.test(x))return 'Manager';
+  if(/\b(actor|artist|athlete|author)\b/.test(x))return 'Guest';
+  return 'Other'}
+var TIERMAP={"Presenting Partner":"Presenting","Powered By":"Powered by","Co-Powered by":"Co-powered","In Association With":"In association","Gold Partners":"Gold","Silver Partner":"Silver","Associate Partners":"Associate","NBFC Fintech Partner":"Category partner","Outdoor Media Partner":"Category partner","Gifting Partners":"Category partner","Creative Partner":"Category partner","Exhibitors":"Exhibitor","Startup Arena Showcase":"Start-up"};
+var TIERS=["Presenting","Powered by","Co-powered","In association","Gold","Silver","Associate","Category partner","Exhibitor","Start-up"];
+
+/* ---------- state ---------- */
+var S={step:0,
+  eventSrc:'oneworld',site:SITE,siteSource:'Saved BWS 2025 page (23 Sep)',
+  sponsorSrc:'oneworld',tierOverride:{},
+  speakerSrc:'oneworld',key:{},
+  att:{src:'upload',file:null,headers:[],rows:[],map:{},preset:false,imported:null},
+  media:{sessions:[],social:[],auto:true,tab:'leaders'},
+  social:{conn:{LinkedIn:false,Instagram:false,YouTube:false},uploads:{},posts:null},
+  insights:{vertical:'BrandEquity',rows:{BrandEquity:[
+    {stat:'Indian advertising market',value:'₹1,64,137 crore; +7% YoY, digital 60%',source:'GroupM TYNY',year:'2025'},
+    {stat:'Internet users',value:'971.5 million',source:'TRAI',year:'2025'},
+    {stat:'High-net-worth individuals',value:'85,698; +6% a year',source:'Knight Frank',year:'2025'},
+    {stat:'E-commerce market by 2030',value:'$350 billion',source:'Redseer',year:'2024'},
+    {stat:'Middle class share by 2047',value:'61% of population',source:'PwC',year:'2024'}],CIO:[],CISO:[]},reviewed:{BrandEquity:'Jun 2025',CIO:'',CISO:''}}
+};
+function applySpeakerDefaults(){S.key={};S.site.speakers.forEach(function(s,i){s.sen=seniorityOf(s.desig);S.key[i]=(s.sen==='CXO')})}
+applySpeakerDefaults();
+
+/* ---------- step definitions ---------- */
+var STEPS=[
+ {id:'event',t:'Event and theme',st:function(){return 'done'},s:function(){return 'From OneWorld event settings'}},
+ {id:'sponsors',t:'Sponsors and logos',st:function(){return 'done'},s:function(){return S.site.sponsors.length+' sponsors · '+groups().length+' groups'}},
+ {id:'speakers',t:'Key speakers',st:function(){return keyCount()?'done':'todo'},s:function(){return keyCount()+' key of '+S.site.speakers.length}},
+ {id:'attendees',t:'Attendees',st:function(){return S.att.imported?'done':'todo'},s:function(){return S.att.imported?fmt(S.att.imported.rows)+' imported':'Upload the OneWorld export'}},
+ {id:'media',t:'Session and sponsor media',st:function(){var n=S.media.sessions.length+S.media.social.length;return n?(S.media.sessions.some(function(f){return f.status!=='done'&&f.speaker!==''})?'warn':'done'):'todo'},s:function(){var n=S.media.sessions.length+S.media.social.length;var d=S.media.sessions.concat(S.media.social).filter(function(f){return f.status==='done'}).length;return n?n+' files · '+d+' transcribed':'Connect the two folders'}},
+ {id:'social',t:'Social media',st:function(){return S.social.posts?'done':'todo'},s:function(){return S.social.posts?S.social.posts.length+' posts':'Connect or upload exports'}},
+ {id:'insights',t:'Market insights',st:function(){return 'done'},s:function(){return 'Library · BrandEquity, CIO, CISO'}}
+];
+function keyCount(){return Object.keys(S.key).filter(function(k){return S.key[k]}).length}
+function groups(){var g=[];S.site.sponsors.forEach(function(s){if(g.indexOf(s.group)<0)g.push(s.group)});return g}
+
+/* ---------- rendering ---------- */
+var rail=document.getElementById('rail'),main=document.getElementById('main');
+function renderRail(){var done=STEPS.filter(function(s){return s.st()==='done'}).length;
+  rail.innerHTML='<div class="sum"><b>'+done+' of '+STEPS.length+'</b> sources ready for the report</div>'+STEPS.map(function(s,i){var st=s.st();return '<button class="stepbtn" data-step="'+i+'" '+(S.step===i?'aria-current="step"':'')+'><span class="ic '+st+'">'+(st==='done'?'✓':st==='warn'?'!':(i+1))+'</span><span><span class="t">'+s.t+'</span><br><span class="s">'+esc(s.s())+'</span></span></button>'}).join('')}
+function srcPick(name,cur,opts){return '<div class="srcrow" role="radiogroup">'+opts.map(function(o){return '<label class="src'+(cur===o[0]?' on':'')+'"><input type="radio" name="'+name+'" value="'+o[0]+'" '+(cur===o[0]?'checked':'')+'><span><b>'+o[1]+'</b><span>'+o[2]+'</span></span></label>'}).join('')+'</div>'}
+function navfoot(){return '<div class="navfoot"><button class="btn" data-step="'+Math.max(0,S.step-1)+'" '+(S.step===0?'disabled':'')+'>Back</button>'+(S.step<STEPS.length-1?'<button class="btn primary" data-step="'+(S.step+1)+'">Next: '+STEPS[S.step+1].t+'</button>':'<a class="btn primary" href="https://claude.ai/artifact/GiYvpNh2vPmBCj1bjtBJTZ" target="_blank" rel="noopener">Continue to report ↗</a>')+'</div>'}
+function flag(kind,txt){return '<div class="flag '+kind+'"><i>'+(kind==='good'?'✓':kind==='warn'?'!':'i')+'</i><span>'+txt+'</span></div>'}
+
+function vEvent(){var e=S.site.event;var col=e.themeColor;
+  return '<div class="head"><h1>Event and theme</h1><p>Name, date, venue, theme line and the website’s look. OneWorld’s event settings are what render the website, so they give the exact website view without scraping it.</p></div>'+
+  '<div class="panel"><h2>Source</h2>'+srcPick('eventSrc',S.eventSrc,[['oneworld','OneWorld event settings','Automatic · recommended. Same data the website is built from'],['website','Read the event web page','Fallback: paste the page HTML when OneWorld is unavailable']])+
+  (S.eventSrc==='website'?'<div><label for="html" class="hint">Paste the event page’s HTML (View source → copy). It is read in your browser only.</label><textarea id="html" placeholder="<html>… paste here …"></textarea></div><div class="row2"><button class="btn" id="parseBtn">Read page</button><span class="hint" id="parseMsg">Currently loaded: '+esc(S.siteSource)+'</span></div>':flag('info','Prototype: OneWorld isn’t connected here, so the values below come from the saved BWS 2025 page, which OneWorld generated.'))+'</div>'+
+  '<div class="panel"><h2>What the report will use</h2><div class="kv"><div><label>Event</label><span>'+esc(e.name)+' · '+esc(e.edition)+'</span></div><div><label>Theme line</label><span>'+esc(e.theme)+'</span></div><div><label>Date and venue</label><span>'+esc(e.date)+' · '+esc(e.venue)+'</span></div><div><label>Hashtag</label><span>'+esc(e.hashtag)+'</span></div><div><label>Brand colour</label><span><i class="swatch" style="background:'+esc(col)+'"></i>'+esc(col)+'</span></div><div><label>Fonts</label><span>'+esc(e.headingFont)+' / '+esc(e.bodyFont)+'</span></div><div style="grid-column:1/-1"><label>Banner image</label><span class="mono b">'+esc(e.banner)+'</span></div></div>'+
+  flag('warn','Two theme lines are in use: the website says “'+esc(e.theme)+'”, the sales deck says “Redefining Marketing for 1.4 Billion Indians”. The report uses the OneWorld / website line; confirm it once here.')+
+  '<div><div class="hint" style="margin-bottom:6px">Cover preview in the website’s colour</div><div class="cover" style="background:linear-gradient(135deg,#1C1B1E 10%,'+esc(col)+' 140%)"><span>'+esc(e.hashtag)+'</span><div><b>'+esc(e.name)+'</b><br><span>'+esc(e.theme)+' · '+esc(e.date)+' · '+esc(e.venue)+'</span></div><span>Post-event report</span></div></div></div>'+navfoot()}
+
+function vSponsors(){var g=groups();var dup=S.site.rawSponsors-S.site.sponsors.length;
+  var h='<div class="head"><h1>Sponsors and logos</h1><p>Sponsor names, groups and logo files come from OneWorld’s Sponsors module. Each event group is mapped once to a standard tier so partner presence can be compared across editions.</p></div><div class="panel"><h2>Source</h2>'+srcPick('sponsorSrc',S.sponsorSrc,[['oneworld','OneWorld Sponsors module','Automatic · names, groups, logo files'],['upload','Upload a sponsor sheet','Fallback: Excel with name, group, logo URL']])+
+  (S.sponsorSrc==='upload'?'<div class="row2"><label class="btn filebtn">Choose Excel or CSV<input type="file" accept=".xlsx,.xls,.csv" id="spFile"></label><span class="hint" id="spMsg">Expected columns: sponsor_name, group_name, logo_url</span></div>':'')+
+  (dup>0?flag('info','Read '+S.site.rawSponsors+' sponsor entries and kept '+S.site.sponsors.length+'. '+dup+' were repeats from the website’s logo carousel.'):'')+'</div>';
+  h+='<div class="panel"><h2>Groups mapped to standard tiers</h2><p class="hint">'+S.site.sponsors.length+' sponsors in '+g.length+' groups · logos captured for '+S.site.sponsors.filter(function(s){return s.logo}).length+'. Logo images display in the report; this preview shows initials.</p>';
+  g.forEach(function(gr){var list=S.site.sponsors.filter(function(s){return s.group===gr});var cur=S.tierOverride[gr]||TIERMAP[gr]||'';
+    h+='<div class="grouprow"><span class="g">'+esc(gr)+'</span><select data-tier="'+esc(gr)+'" aria-label="Standard tier for '+esc(gr)+'">'+(cur?'':'<option value="">Choose tier</option>')+TIERS.map(function(t){return '<option'+(t===cur?' selected':'')+'>'+t+'</option>'}).join('')+'</select><div class="chips">'+list.map(function(s){return '<span class="logo"><i>'+esc(initials(s.name))+'</i>'+esc(s.name)+'</span>'}).join('')+'</div></div>'});
+  return h+'</div>'+navfoot()}
+
+function vSpeakers(){var sp=S.site.speakers;var noCo=sp.filter(function(s){return !s.company}).length;
+  var h='<div class="head"><h1>Key speakers</h1><p>Speakers come from OneWorld’s Speakers module, which also feeds the website. Key speakers are pre-selected by rule: CXO-level titles. Adjust the ticks; the choice drives the speaker line-up and which recordings are transcribed first.</p></div><div class="panel"><h2>Source</h2>'+srcPick('speakerSrc',S.speakerSrc,[['oneworld','OneWorld Speakers module + agenda','Automatic · includes weightage and the session each speaker is in'],['website','Speaker list on the website','Fallback · shows announced speakers only']])+
+  flag('warn','The website’s speaker cards show job titles without companies. Companies were filled from the agenda for '+(sp.length-noCo)+' of '+sp.length+'; '+noCo+' still need one.')+
+  flag('info','Neither the website nor the export says who actually spoke. The agenda on event day (or check-in at the speaker desk) marks that.')+'</div>';
+  h+='<div class="panel"><div class="row2" style="justify-content:space-between"><h2>'+keyCount()+' key speakers of '+sp.length+'</h2><span class="row2" style="flex:0"><button class="btn small" id="keyCxo">Reset to CXO rule</button><button class="btn small" id="keyNone">Clear all</button></span></div><div class="tbl"><table><thead><tr><th>Key</th><th>Name</th><th>Designation</th><th>Company</th><th>Level</th></tr></thead><tbody>'+
+  sp.map(function(s,i){return '<tr><td><input type="checkbox" data-key="'+i+'" aria-label="Key speaker: '+esc(s.name)+'" '+(S.key[i]?'checked':'')+' style="accent-color:var(--accent)"></td><td>'+esc(s.name)+'</td><td>'+esc(s.desig)+'</td><td>'+(s.company?esc(s.company)+' <span class="pill neutral">from agenda</span>':'<input type="text" data-co="'+i+'" placeholder="Add company" aria-label="Company for '+esc(s.name)+'">')+'</td><td>'+(s.sen==='CXO'?'<span class="pill good">CXO</span>':s.sen==='Guest'?'<span class="pill info">Guest</span>':'<span class="pill neutral">'+s.sen+'</span>')+'</td></tr>'}).join('')+'</tbody></table></div></div>'+navfoot();
+  return h}
+
+var FIELDS=[['','Ignore'],['first_name','First name'],['last_name','Last name'],['email','Email'],['company','Company'],['designation','Designation'],['city','City'],['lead_source','Lead source'],['conversion_source','Conversion source'],['registered_at','Registration date'],['status','Status (registered / shortlisted / attended)'],['mobile','Mobile (not stored)']];
+function guessField(h){var x=norm(h);if(/first/.test(x))return 'first_name';if(/last|surname/.test(x))return 'last_name';if(/mail/.test(x))return 'email';if(/company|organi/.test(x))return 'company';if(/designation|title|role/.test(x))return 'designation';if(/city|location/.test(x))return 'city';if(/leadsource/.test(x))return 'lead_source';if(/conversion/.test(x))return 'conversion_source';if(/regist.*date|date/.test(x))return 'registered_at';if(/status|attend/.test(x))return 'status';if(/mobile|phone/.test(x))return 'mobile';return ''}
+function vAttendees(){var A=S.att;
+  var h='<div class="head"><h1>Attendees</h1><p>Registrations, shortlist and check-in status. The OneWorld export isn’t working yet, so the team uploads the file; the column mapping is saved so the next upload needs no setup.</p></div>'+
+  '<div class="panel"><h2>Source</h2>'+srcPick('attSrc',A.src,[['oneworld','OneWorld registrations','Not working: the export fails today. Engineering fix needed for automation'],['upload','Upload the export (Excel or CSV)','Works today · mapping saved as a preset']])+
+  (A.src==='oneworld'?flag('warn','OneWorld registrations export is not available. Switch to upload for now; this card turns automatic once engineering fixes the export or provides an API.'):'')+'</div>';
+  if(A.src==='upload'){
+    h+='<div class="panel"><div class="drop" id="attDrop"><b>Drop the OneWorld registrations export here</b><span>.xlsx, .xls or .csv · read in your browser · mobile numbers are not stored</span><div class="row2"><label class="btn small filebtn">Choose file<input type="file" accept=".xlsx,.xls,.csv" id="attFile"></label><button class="btn small" id="attSample">Use a sample export</button></div></div>'+(A.file?'<p class="hint">Loaded <b>'+esc(A.file)+'</b> · '+fmt(A.rows.length)+' rows · '+A.headers.length+' columns'+(A.preset?' · <span class="pill good">Preset “OneWorld registrations export” applied</span>':'')+'</p>':'')+'</div>';
+    if(A.headers.length){
+      var mapped=Object.keys(A.map).filter(function(k){return A.map[k]});var need=['email','designation','company'].filter(function(f){return !mapped.some(function(k){return A.map[k]===f})});
+      h+='<div class="panel"><h2>Match the columns</h2><p class="hint">Suggested from the column names. Change any that are wrong.</p><div class="tbl"><table><thead><tr><th>Column in file</th><th>Example</th><th>Use as</th></tr></thead><tbody>'+A.headers.map(function(hd){return '<tr><td>'+esc(hd)+'</td><td class="mono">'+esc(String((A.rows[0]||{})[hd]||'').slice(0,40))+'</td><td><select data-map="'+esc(hd)+'" aria-label="Use column '+esc(hd)+' as">'+FIELDS.map(function(f){return '<option value="'+f[0]+'"'+(A.map[hd]===f[0]?' selected':'')+'>'+f[1]+'</option>'}).join('')+'</select></td></tr>'}).join('')+'</tbody></table></div>'+
+      (need.length?flag('warn','Still needed: '+need.join(', ')):flag('good','Required columns matched: email, designation, company'))+'</div>';
+      var v=validate();
+      h+='<div class="panel"><h2>Check before import</h2><div class="stats"><div class="stat"><b>'+fmt(v.ok)+'</b><span>rows ready</span></div><div class="stat"><b>'+fmt(v.noEmail)+'</b><span>missing email</span></div><div class="stat"><b>'+fmt(v.dups)+'</b><span>duplicate emails merged</span></div><div class="stat"><b>'+fmt(v.attended)+'</b><span>marked attended</span></div><div class="stat"><b>'+fmt(v.cxo)+'</b><span>CXO titles</span></div></div>'+
+      '<div class="tbl"><table><thead><tr><th>Name</th><th>Designation</th><th>Company</th><th>Status</th><th>Level</th></tr></thead><tbody>'+v.preview.map(function(r){return '<tr><td>'+esc(r.name)+'</td><td>'+esc(r.designation)+'</td><td>'+esc(r.company)+'</td><td>'+esc(r.status)+'</td><td>'+esc(seniorityOf(r.designation))+'</td></tr>'}).join('')+'</tbody></table></div>'+
+      '<div class="row2"><button class="btn primary" id="attImport" '+(need.length?'disabled':'')+'>Import '+fmt(v.ok)+' rows</button><label style="display:inline-flex;align-items:center;gap:6px;font-size:12.5px"><input type="checkbox" id="savePreset" '+(A.preset?'checked':'')+' style="accent-color:var(--accent)"> Save mapping as “OneWorld registrations export”</label></div>'+
+      (A.imported?flag('good','Imported '+fmt(A.imported.rows)+' registrations ('+fmt(A.imported.attended)+' attended) at '+A.imported.time+'. The report recalculates from these.'):'')+'</div>'}}
+  return h+navfoot()}
+function mappedRow(r){var o={};Object.keys(S.att.map).forEach(function(h){var f=S.att.map[h];if(f&&f!=='mobile')o[f]=r[h]});o.name=((o.first_name||'')+' '+(o.last_name||'')).trim();o.status=String(o.status||'registered').toLowerCase();return o}
+function validate(){var seen={},ok=0,noEmail=0,dups=0,att=0,cxo=0,prev=[];S.att.rows.forEach(function(r){var m=mappedRow(r);var e=String(m.email||'').trim().toLowerCase();if(!e){noEmail++;return}if(seen[e]){dups++;return}seen[e]=1;ok++;if(/attend|yes/.test(m.status))att++;if(seniorityOf(m.designation)==='CXO')cxo++;if(prev.length<8)prev.push(m)});return {ok:ok,noEmail:noEmail,dups:dups,attended:att,cxo:cxo,preview:prev}}
+function sampleAttendees(){var F=["Aarav","Ananya","Rohan","Ishita","Kabir","Meera","Vikram","Priya","Arjun","Neha","Kavya","Rahul","Tanvi","Aditya","Riya","Karan","Pooja","Nikhil","Shreya","Varun"],L=["Sharma","Iyer","Mehta","Nair","Kapoor","Rao","Banerjee","Gupta","Menon","Desai","Joshi","Reddy","Bhatia","Pillai","Malhotra"],C=["Sunrise Foods","Kestrel Motors","Banyan Finance","Indigo Retail","Saffron Beverages","Monsoon Media","Lotus Naturals","Everest Telecom","Coral Creative","Meridian Bank","Cedar Home Care","Amber Fashion"],D=["Chief Marketing Officer","CMO","Founder & CEO","Vice President - Marketing","Head of Brand","Brand Manager","Director - Digital","DGM – Brand Marketing","Senior Manager - Marketing","Marketing Director"],SRC=["nl_Mailer_newsletter_brandequity_news_2025-06-20","Direct","linkedin_organic","partner_samsungads","referral_nl_newsletter_brandequity_news_2025-06-18"];
+  var rows=[];for(var i=0;i<420;i++){var f=pick(F),l=pick(L),c=pick(C);var st=rnd()<.6?'Attended':(rnd()<.5?'Shortlisted':'Registered');rows.push({'First Name':f,'Last Name':l,'Official Email':(i%61===7?'':(f+'.'+l+(i%5?i:'')+'@'+norm(c)+'.in').toLowerCase()),'Mobile Number':'9'+String(Math.floor(rnd()*1e9)).padStart(9,'0'),'Company':c,'Designation':pick(D),'City':pick(['Mumbai','Bengaluru','Delhi NCR','Pune','Chennai']),'Lead Source':rnd()<.5?'newsletter':'Others','Conversion Source':pick(SRC),'Registration Date':'2025-06-'+String(1+Math.floor(rnd()*30)).padStart(2,'0'),'Status':st})}
+  for(var d=0;d<6;d++)rows.push(Object.assign({},rows[d*11+3]));return rows}
+function loadRows(name,rows){var A=S.att;A.file=name;A.rows=rows;A.headers=rows.length?Object.keys(rows[0]):[];A.map={};A.headers.forEach(function(h){A.map[h]=guessField(h)});A.preset=true;A.imported=null;render()}
+
+function sampleMedia(){var sp=S.site.speakers;function f(n,t,sz){return {name:n,type:t,size:sz,speaker:'',status:'new',selected:false,transcript:''}}
+  S.media.sessions=[f('1015_Audi1_Inaugural_Prabha-Narasimhan_Sudhanshu-Vats.mp4','video',812),f('1055_Audi1_Featured_Jan-Bures.mp4','video',406),f('1140_Audi1_Panel_Rohit-Bhasin_Ashwin-Moorthy.mp4','video',1240),f('Sanjiv_Mehta_keynote_cut.mp3','audio',38),f('1230_Audi1_GenZ_Daniel-Kim.mp4','video',510),f('1400_Audi2_Panel_Kavita-Jagtiani.mp4','video',990),f('IMG_4481.MOV','video',215),f('1600_Audi1_Fireside_Vicky-Kaushal.mp4','video',640)];
+  S.media.social=[f('SamsungAds_speaker_byte_final.mp4','video',96),f('Monotype_5D_byte.mp4','video',180),f('RouteMobile_TicTac_v2.mp4','video',44),f('Studio_FlipkartAds_chat.mp4','video',420),f('GoogleMessages_reel.mp4','video',36),f('Crowd_montage_day1.mp4','video',120)];
+  automatch()}
+function automatch(){var sp=S.site.speakers;
+  S.media.sessions.forEach(function(f){if(f.speaker)return;var n=norm(f.name);var hits=[];sp.forEach(function(s,i){var p=s.name.toLowerCase().split(/\s+/);if(p.length>=2&&n.indexOf(norm(p[0]))>=0&&n.indexOf(norm(p[p.length-1]))>=0)hits.push(i)});f.cands=hits;f.speaker=hits.length?String(hits.find(function(i){return S.key[i]})!=null?hits.find(function(i){return S.key[i]}):hits[0]):'';f.how=hits.length?(hits.length>1?'Filename · '+hits.length+' names':'Filename'):'Not matched'});
+  S.media.social.forEach(function(f){if(f.sponsor!=null)return;var n=norm(f.name);var hit=S.site.sponsors.find(function(s){var k=norm(s.name).replace(/ads$/,'ads');return k.length>2&&(n.indexOf(k)>=0||n.indexOf(norm(s.name.split(' ')[0]))===0)});f.sponsor=hit?hit.name:'';f.how=hit?'Filename':'Not matched'})}
+var SAMPLE_TX=["The next billion consumers won’t discover brands the way we did; they will meet them on a phone screen first.","AI gives every marketer speed. What it cannot give you is taste, and taste is still the brand’s job.","Gen Z doesn’t want a brand to be perfect. They want it to be honest about who it is.","We stopped asking what the campaign should say and started asking what the customer is already saying."];
+function vMedia(){var M=S.media;var files=M.tab==='social'?M.social:M.sessions;
+  var h='<div class="head"><h1>Session and sponsor media</h1><p>Two Google Drive folders: <b>Sessions</b> (key speakers on stage) and <b>Social & sponsor speakers</b> (bytes, reels, studio chats). Files are matched to leaders by filename and agenda time, then transcribed automatically; the team picks quotes, not files.</p></div>';
+  h+='<div class="panel"><h2>Folders</h2><div class="row2"><input type="url" id="drive1" placeholder="Sessions folder link (Google Drive)" aria-label="Sessions folder link"><input type="url" id="drive2" placeholder="Social & sponsor speakers folder link" aria-label="Social and sponsor speakers folder link"><button class="btn" id="driveConnect">Connect folders</button></div><p class="hint">Prototype: connecting loads a sample file list. You can also drop real files below to try matching by filename.</p>'+
+  '<label style="display:inline-flex;align-items:center;gap:6px;font-size:12.5px"><input type="checkbox" id="autoTx" '+(M.auto?'checked':'')+' style="accent-color:var(--accent)"> Transcribe every matched session file automatically overnight (recommended)</label></div>';
+  if(!(M.sessions.length+M.social.length)){h+='<div class="panel"><div class="drop" id="mediaDrop"><b>No files yet</b><span>Connect the folders above, or drop audio / video files here to test the matching.</span><label class="btn small filebtn">Choose files<input type="file" multiple accept="audio/*,video/*" id="mediaFile"></label></div></div>';return h+navfoot()}
+  h+='<div class="panel"><div class="tabs" role="tablist"><button role="tab" data-mtab="leaders" aria-selected="'+(M.tab==='leaders')+'">Top leaders</button><button role="tab" data-mtab="sessions" aria-selected="'+(M.tab==='sessions')+'">Sessions folder ('+M.sessions.length+')</button><button role="tab" data-mtab="social" aria-selected="'+(M.tab==='social')+'">Social & sponsor folder ('+M.social.length+')</button></div>';
+  if(M.tab==='leaders'){var sp=S.site.speakers;var keys=sp.map(function(s,i){return i}).filter(function(i){return S.key[i]});
+    h+='<p class="hint">Every key speaker, with their matched file and transcript. Speakers without a file are what the video team still owes.</p>'+keys.map(function(i){var s=sp[i];var fl=M.sessions.filter(function(f){return f.speaker===String(i)});var f=fl[0];
+      return '<div class="leader"><div><div class="nm">'+esc(s.name)+'</div><div class="sub">'+esc(s.desig)+(s.company?', '+esc(s.company):'')+'</div></div><div>'+(f?'<div class="mono b">'+esc(f.name)+'</div>'+(f.status==='done'?'<blockquote>“'+esc(f.transcript)+'”</blockquote><div class="sub">Sample transcript excerpt (prototype)</div>':'<div class="sub">'+(f.status==='queued'?'Transcribing…':'Not transcribed yet')+'</div>'):'<div class="sub">No recording matched</div>')+'</div><div>'+(f?(f.status==='done'?'<span class="pill good">Transcribed</span>':f.status==='queued'?'<span class="pill info">Queued</span>':'<span class="pill neutral">File matched</span>'):'<span class="pill warn">Missing file</span>')+'</div></div>'}).join('')}
+  else{var sel=files.filter(function(f){return f.selected}).length;
+    h+='<div class="row2" style="justify-content:space-between"><span class="hint">'+files.filter(function(f){return M.tab==='social'?f.sponsor:f.speaker!==''}).length+' of '+files.length+' matched automatically</span><button class="btn primary small" id="txSel" '+(sel?'':'disabled')+'>Transcribe selected ('+sel+')</button></div><div class="tbl"><table><thead><tr><th>Pick</th><th>File</th><th class="r">MB</th><th>'+(M.tab==='social'?'Sponsor':'Leader')+'</th><th>Matched by</th><th>Transcript</th></tr></thead><tbody>'+
+    files.map(function(f,ix){var opts=M.tab==='social'?['<option value="">Unassigned</option>'].concat(S.site.sponsors.map(function(s){return '<option'+(f.sponsor===s.name?' selected':'')+'>'+esc(s.name)+'</option>'})).join(''):['<option value="">Unassigned</option>'].concat(S.site.speakers.map(function(s,i){return '<option value="'+i+'"'+(f.speaker===String(i)?' selected':'')+'>'+esc(s.name)+(S.key[i]?' ★':'')+'</option>'})).join('');
+      return '<tr><td><input type="checkbox" data-msel="'+ix+'" '+(f.selected?'checked':'')+' aria-label="Pick '+esc(f.name)+'" style="accent-color:var(--accent)"></td><td class="mono b">'+esc(f.name)+'</td><td class="r">'+f.size+'</td><td><select data-massign="'+ix+'" aria-label="Assign '+esc(f.name)+'">'+opts+'</select></td><td>'+(f.how==='Not matched'?'<span class="pill warn">Not matched</span>':'<span class="pill neutral">'+esc(f.how)+'</span>')+'</td><td>'+(f.status==='done'?'<span class="pill good">Done</span>':f.status==='queued'?'<span class="pill info">Queued</span>':'<span class="pill neutral">Not started</span>')+'</td></tr>'}).join('')+'</tbody></table></div>'}
+  return h+'</div>'+navfoot()}
+
+var PLATS=['LinkedIn','Instagram','YouTube'];
+function samplePosts(){var out=[],d0=new Date('2025-05-12');var types=['Announcement','Speaker post','Partner post','Countdown','Event video','Reel','Panel clip'];
+  for(var i=0;i<28;i++){var pre=i<18;var dt=pre?new Date(d0.getTime()+Math.floor(rnd()*52)*864e5):new Date('2025-07-04');var pl=pick(PLATS);var imp=Math.round((pre?(pl==='LinkedIn'?26000:pl==='Instagram'?21000:15000):(pl==='LinkedIn'?9000:7000))*(0.5+rnd()));out.push({platform:pl,type:pre?pick(types.slice(0,4)):pick(types.slice(4)),date:dt.toISOString().slice(0,10),window:pre?'Pre-event':'Event day',impressions:imp})}
+  return out.sort(function(a,b){return a.date<b.date?-1:1})}
+function vSocial(){var So=S.social;
+  var h='<div class="head"><h1>Social media</h1><p>Pre-event posts and event videos across LinkedIn, Instagram and YouTube. Analytics connections fetch impressions daily; until a connection is approved, the team uploads each platform’s <b>page-level</b> export once, not post by post.</p></div><div class="panel"><h2>Platforms</h2><div class="srcrow">'+PLATS.map(function(p){var c=So.conn[p],u=So.uploads[p];return '<div class="src" style="cursor:default;flex-direction:column"><b>'+p+'</b><span>'+(c?'<span class="pill good">Connected (sample)</span>':u?'<span class="pill good">Export uploaded · '+esc(u)+'</span>':'<span class="pill warn">Not connected</span>')+'</span><span>'+(p==='LinkedIn'?'Page analytics API needs LinkedIn approval.':p==='Instagram'?'Needs the business account linked to a Meta app.':'YouTube Analytics API · channel owner sign-in.')+'</span><div class="row2"><button class="btn small" data-conn="'+p+'">'+(c?'Disconnect':'Connect analytics')+'</button><label class="btn small filebtn">Upload export<input type="file" accept=".xlsx,.xls,.csv" data-sup="'+p+'"></label></div></div>'}).join('')+'</div>'+
+  flag('info','Windows used in the report: pre-event = post date to event start (4 Jul, 08:00); event day = 4 Jul. Every post URL is logged in the post register as it goes live.')+'</div>';
+  if(So.posts){var pre=So.posts.filter(function(p){return p.window==='Pre-event'}),dur=So.posts.filter(function(p){return p.window==='Event day'});var s=function(a){return a.reduce(function(t,p){return t+p.impressions},0)};
+    h+='<div class="panel"><h2>Posts received</h2><div class="stats"><div class="stat"><b>'+pre.length+'</b><span>pre-event posts</span></div><div class="stat"><b>'+fmt(s(pre))+'</b><span>pre-event impressions</span></div><div class="stat"><b>'+dur.length+'</b><span>event-day posts and videos</span></div><div class="stat"><b>'+fmt(s(dur))+'</b><span>event-day impressions</span></div></div><div class="tbl"><table><thead><tr><th>Date</th><th>Platform</th><th>Type</th><th>Window</th><th class="r">Impressions</th></tr></thead><tbody>'+So.posts.map(function(p){return '<tr><td class="mono">'+p.date+'</td><td>'+p.platform+'</td><td>'+p.type+'</td><td>'+p.window+'</td><td class="r">'+fmt(p.impressions)+'</td></tr>'}).join('')+'</tbody></table></div><p class="hint">Sample rows for the prototype.</p></div>'}
+  return h+navfoot()}
+
+function vInsights(){var I=S.insights,v=I.vertical,rows=I.rows[v];
+  var h='<div class="head"><h1>Market insights</h1><p>A small library of market statistics per vertical, kept with source and year. It isn’t event data, so it is maintained once a year, not uploaded for every event.</p></div><div class="panel"><div class="tabs" role="tablist">'+['BrandEquity','CIO','CISO'].map(function(x){return '<button role="tab" data-vert="'+x+'" aria-selected="'+(x===v)+'">'+x+'</button>'}).join('')+'</div>'+
+  '<p class="hint">'+(I.reviewed[v]?'Last reviewed '+I.reviewed[v]+'. Stats older than 12 months are flagged in the report.':'No stats yet for '+v+'.')+'</p><div class="tbl"><table><thead><tr><th>Statistic</th><th>Value</th><th>Source</th><th>Year</th></tr></thead><tbody>'+
+  rows.map(function(r,ix){return '<tr>'+['stat','value','source','year'].map(function(k){return '<td><input type="text" data-ins="'+ix+'" data-k="'+k+'" value="'+esc(r[k])+'" aria-label="'+k+'"></td>'}).join('')+'</tr>'}).join('')+'</tbody></table></div><div class="row2"><button class="btn small" id="insAdd">Add statistic</button></div></div>';
+  return h+navfoot()}
+
+function render(){renderRail();main.innerHTML=[vEvent,vSponsors,vSpeakers,vAttendees,vMedia,vSocial,vInsights][S.step]()}
+
+/* ---------- website parser (fallback) ---------- */
+function parseSite(html){var d=new DOMParser().parseFromString(html,'text/html');var body=d.body,style=(body&&body.getAttribute('style'))||'';
+  function cssVar(n){var m=style.match(new RegExp('--'+n+':\\s*([^;]+)'));return m?m[1].trim():''}
+  var ban=d.getElementById('banner');var hid=ban?ban.querySelectorAll('.hidden'):[];var name='',theme='';hid.forEach(function(x){if(x.tagName==='H3')name=x.textContent.trim();if(x.tagName==='P')theme=x.textContent.trim()});
+  var lcn=ban?Array.prototype.map.call(ban.querySelectorAll('.lcn .icn-box, .lcn div'),function(x){return x.textContent.trim()}).filter(Boolean):[];
+  var bg=ban&&ban.getAttribute('style')?(ban.getAttribute('style').match(/url\(([^)]+)\)/)||[])[1]:'';
+  var sp=[],seen={},raw=0;d.querySelectorAll('.sponsor-box').forEach(function(box){var g=box.querySelector('h4');g=g?g.textContent.trim():'';box.querySelectorAll('a[title]').forEach(function(a){raw++;var k=g+'|'+a.getAttribute('title');if(seen[k])return;seen[k]=1;var img=a.querySelector('img');sp.push({group:g,name:a.getAttribute('title'),logo:img?(img.getAttribute('src')||img.getAttribute('data-src')||''):''})})});
+  var comp={};var ag=d.getElementById('agenda');if(ag){var parts=ag.innerText?ag.innerText.split('\n'):ag.textContent.split('\n');parts=parts.map(function(x){return x.trim()}).filter(Boolean);for(var i=0;i<parts.length-1;i++){if(parts[i].split(' ').length<=4&&parts[i+1].indexOf(',')>0&&!/\d/.test(parts[i]))comp[parts[i].toLowerCase()]=comp[parts[i].toLowerCase()]||parts[i+1]}}
+  var spk=[],sn={},rawS=0;d.querySelectorAll('article').forEach(function(a){var h5=a.querySelector('h5');var c=a.querySelector('.caption span');if(!h5||!c)return;rawS++;var n=h5.textContent.trim();if(sn[n])return;sn[n]=1;var ds=c.textContent.trim().replace(/ /g,' ');var full=comp[n.toLowerCase()]||'';var co='';if(full&&full.toLowerCase().indexOf(ds.toLowerCase())===0)co=full.slice(ds.length).replace(/^[ ,]+/,'');else if(full)co=full.split(',').pop().trim();spk.push({name:n,desig:ds,company:co})});
+  if(!name&&!sp.length&&!spk.length)return null;
+  var hash=d.querySelector('.banner-hash');
+  return {event:{name:name||S.site.event.name,edition:S.site.event.edition,theme:theme||'',hashtag:hash?hash.textContent.trim():'',date:lcn[0]||'',venue:lcn[1]||'',themeColor:cssVar('theme-color')||'#C8232C',bodyFont:(cssVar('body-font-family').split(',')[0]||''),headingFont:(cssVar('heading-font-family').split(',')[0]||''),banner:bg||''},sponsors:sp,rawSponsors:raw,speakers:spk,rawSpeakers:rawS}}
+
+/* ---------- events ---------- */
+document.addEventListener('click',function(e){var t=e.target.closest('button,[data-step]');if(!t)return;
+  if(t.dataset.step!=null){S.step=+t.dataset.step;render();window.scrollTo(0,0);return}
+  if(t.id==='parseBtn'){var r=parseSite(document.getElementById('html').value);var m=document.getElementById('parseMsg');if(!r){m.textContent='Could not find the banner, sponsors or speakers in that HTML. Paste the full page source.';return}S.site=r;S.siteSource='Pasted page';applySpeakerDefaults();render();return}
+  if(t.id==='keyCxo'){applySpeakerDefaults();render();return}
+  if(t.id==='keyNone'){S.key={};render();return}
+  if(t.id==='attSample'){loadRows('OneWorld_BWS2025_registrations.xlsx (sample)',sampleAttendees());return}
+  if(t.id==='attImport'){var v=validate();S.att.imported={rows:v.ok,attended:v.attended,time:new Date().toTimeString().slice(0,5)};render();return}
+  if(t.id==='driveConnect'){sampleMedia();S.media.tab='leaders';if(S.media.auto)autoTranscribe();render();return}
+  if(t.dataset.mtab){S.media.tab=t.dataset.mtab;render();return}
+  if(t.id==='txSel'){var files=S.media.tab==='social'?S.media.social:S.media.sessions;transcribe(files.filter(function(f){return f.selected}));return}
+  if(t.dataset.conn){var p=t.dataset.conn;S.social.conn[p]=!S.social.conn[p];if(!S.social.posts&&S.social.conn[p])S.social.posts=samplePosts();render();return}
+  if(t.dataset.vert){S.insights.vertical=t.dataset.vert;render();return}
+  if(t.id==='insAdd'){S.insights.rows[S.insights.vertical].push({stat:'',value:'',source:'',year:''});render();return}
+});
+function transcribe(list){list.forEach(function(f){f.status='queued';f.selected=false});render();setTimeout(function(){list.forEach(function(f,i){f.status='done';f.transcript=SAMPLE_TX[(f.name.length+i)%SAMPLE_TX.length]});render()},1400)}
+function autoTranscribe(){transcribe(S.media.sessions.filter(function(f){return f.speaker!==''}))}
+document.addEventListener('change',function(e){var t=e.target;
+  if(t.name==='eventSrc'){S.eventSrc=t.value;render()}
+  else if(t.name==='sponsorSrc'){S.sponsorSrc=t.value;render()}
+  else if(t.name==='speakerSrc'){S.speakerSrc=t.value;render()}
+  else if(t.name==='attSrc'){S.att.src=t.value;render()}
+  else if(t.dataset.tier!=null){S.tierOverride[t.dataset.tier]=t.value}
+  else if(t.dataset.key!=null){S.key[t.dataset.key]=t.checked;renderRail();var h2=main.querySelector('.panel:nth-of-type(2) h2');if(h2)h2.textContent=keyCount()+' key speakers of '+S.site.speakers.length}
+  else if(t.dataset.co!=null){S.site.speakers[+t.dataset.co].company=t.value.trim();render()}
+  else if(t.dataset.map!=null){S.att.map[t.dataset.map]=t.value;S.att.preset=false;render()}
+  else if(t.id==='savePreset'){S.att.preset=t.checked}
+  else if(t.id==='autoTx'){S.media.auto=t.checked}
+  else if(t.dataset.msel!=null){var fl=S.media.tab==='social'?S.media.social:S.media.sessions;fl[+t.dataset.msel].selected=t.checked;render()}
+  else if(t.dataset.massign!=null){var fl2=S.media.tab==='social'?S.media.social:S.media.sessions;var f=fl2[+t.dataset.massign];if(S.media.tab==='social'){f.sponsor=t.value}else{f.speaker=t.value}f.how=t.value?'Assigned by you':'Not matched';render()}
+  else if(t.id==='attFile'&&t.files[0]){readSheet(t.files[0],function(rows){loadRows(t.files[0].name,rows)})}
+  else if(t.id==='spFile'&&t.files[0]){readSheet(t.files[0],function(rows){document.getElementById('spMsg').textContent='Read '+rows.length+' rows · columns: '+(rows[0]?Object.keys(rows[0]).join(', '):'none')+' (preview only in the prototype)'})}
+  else if(t.dataset.sup&&t.files[0]){var p=t.dataset.sup,nm=t.files[0].name;readSheet(t.files[0],function(rows){S.social.uploads[p]=nm+' · '+rows.length+' rows';if(!S.social.posts)S.social.posts=samplePosts();render()})}
+  else if(t.id==='mediaFile'&&t.files.length){addMedia(t.files)}
+});
+document.addEventListener('input',function(e){var t=e.target;if(t.dataset.ins!=null){S.insights.rows[S.insights.vertical][+t.dataset.ins][t.dataset.k]=t.value}});
+function readSheet(file,cb){var fr=new FileReader();fr.onload=function(){try{var wb=window.XLSX?XLSX.read(fr.result,{type:'array'}):null;if(!wb){cb([]);return}var ws=wb.Sheets[wb.SheetNames[0]];cb(XLSX.utils.sheet_to_json(ws,{defval:''}))}catch(err){cb([])}};fr.readAsArrayBuffer(file)}
+function addMedia(fileList){Array.prototype.forEach.call(fileList,function(f){S.media.sessions.push({name:f.name,type:/audio/.test(f.type)?'audio':'video',size:Math.max(1,Math.round(f.size/1048576)),speaker:'',status:'new',selected:false,transcript:''})});automatch();S.media.tab='sessions';render()}
+document.addEventListener('dragover',function(e){var d=e.target.closest('.drop');if(d){e.preventDefault();d.classList.add('over')}});
+document.addEventListener('dragleave',function(e){var d=e.target.closest('.drop');if(d)d.classList.remove('over')});
+document.addEventListener('drop',function(e){var d=e.target.closest('.drop');if(!d)return;e.preventDefault();d.classList.remove('over');var fs=e.dataTransfer.files;if(!fs||!fs.length)return;
+  if(d.id==='attDrop')readSheet(fs[0],function(rows){loadRows(fs[0].name,rows)});else if(d.id==='mediaDrop')addMedia(fs)});
+render();
+})();
+</script>
