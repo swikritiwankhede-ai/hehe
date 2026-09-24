@@ -106,6 +106,7 @@ Internal capture → accurate ROI report → the sponsor's marketing manager has
   3. PPT export with pptxgenjs: frozen versions, totals only.
   4. T+1 timeline and versioning.
   5. Polish and self-tests.
+- **Prototype and workflow chart:** `prototype/report-studio.html` is a clickable Report Studio: fictional BWS 2025 sample data, 16 sections, readiness, data quality, a working review queue, and a Generate PPT preview. `prototype/report-workflow.html` is a swimlane of who does what from T-30 to T+14, plus the platform pipeline with its gates. Both are published as private artifacts.
 
 ## 7. Data categories by source team
 

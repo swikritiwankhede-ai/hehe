@@ -1,0 +1,778 @@
+<title>Post-Event Report Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F4F2F0; --surface:#FFFFFF; --surface-2:#F9F7F5; --ink:#1C1B1E; --ink-2:#48434A; --muted:#766F73; --line:#E4DEDA; --line-2:#EFEAE6;
+  --accent:#C8232C; --accent-soft:#F8E4E3;
+  --good:#1D7349; --good-soft:#E2F1E8; --warn:#9A5D08; --warn-soft:#FAEFD9; --bad:#B4431A; --bad-soft:#F9E3D8; --info:#2D5B85; --info-soft:#E3ECF5;
+  --c1:#C8232C; --c2:#2D5B85; --c3:#C98A1C; --c4:#3C7D68; --c5:#7E5A9B; --c6:#A59DA0;
+  --btn:#1C1B1E; --btn-ink:#FFFFFF;
+  --serif:"Newsreader", Georgia, "Times New Roman", serif;
+  --sans:"IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme: dark;
+    --bg:#141315; --surface:#1C1B1E; --surface-2:#222024; --ink:#F2EEEC; --ink-2:#CEC7C5; --muted:#9A9195; --line:#34303A; --line-2:#29262B;
+    --accent:#F0575E; --accent-soft:#3A1D20;
+    --good:#5CC08D; --good-soft:#17301F; --warn:#E3A948; --warn-soft:#33270F; --bad:#F08A5D; --bad-soft:#3A2216; --info:#7FB0DD; --info-soft:#18283A;
+    --c1:#F0575E; --c2:#6FA4D8; --c3:#E3A948; --c4:#6CC3A4; --c5:#B88BD0; --c6:#7E767A;
+    --btn:#F2EEEC; --btn-ink:#1C1B1E;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --bg:#141315; --surface:#1C1B1E; --surface-2:#222024; --ink:#F2EEEC; --ink-2:#CEC7C5; --muted:#9A9195; --line:#34303A; --line-2:#29262B;
+  --accent:#F0575E; --accent-soft:#3A1D20;
+  --good:#5CC08D; --good-soft:#17301F; --warn:#E3A948; --warn-soft:#33270F; --bad:#F08A5D; --bad-soft:#3A2216; --info:#7FB0DD; --info-soft:#18283A;
+  --c1:#F0575E; --c2:#6FA4D8; --c3:#E3A948; --c4:#6CC3A4; --c5:#B88BD0; --c6:#7E767A;
+  --btn:#F2EEEC; --btn-ink:#1C1B1E;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.5}
+h1,h2,h3{font-family:var(--serif);font-weight:600;text-wrap:balance;margin:0}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.num,.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.app{max-width:1380px;margin:0 auto;padding-inline:16px;padding-block:0 48px}
+
+/* top bar */
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;padding-block:12px}
+.brand{display:flex;align-items:center;gap:10px}
+.mark{width:28px;height:28px;border-radius:6px;background:var(--accent);color:#fff;display:grid;place-items:center;font-family:var(--serif);font-weight:600;font-size:15px}
+.brand b{font-family:var(--serif);font-size:17px;font-weight:600}
+.brand small{display:block;color:var(--muted);font-size:12px;line-height:1.2}
+.evt{display:flex;flex-direction:column;line-height:1.3;min-width:0}
+.evt strong{font-size:14px}
+.evt span{color:var(--muted);font-size:12px}
+.spacer{flex:1}
+.meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:3px 10px;font-size:12px;color:var(--ink-2);white-space:nowrap}
+.chip.sample{border-style:dashed}
+.dot{width:8px;height:8px;border-radius:50%;background:currentColor;flex:none}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:7px 14px;font-weight:500}
+.btn:hover{border-color:var(--ink-2)}
+.btn.primary{background:var(--btn);color:var(--btn-ink);border-color:var(--btn)}
+.btn.small{padding:4px 10px;font-size:12px}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+
+/* timeline */
+.timeline{display:flex;gap:0;margin-block:14px 18px;overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+.stage{flex:1;min-width:150px;padding:10px 14px;border-right:1px solid var(--line-2);position:relative}
+.stage:last-child{border-right:0}
+.stage .when{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.stage .what{font-size:13px;font-weight:500}
+.stage .sub{font-size:12px;color:var(--muted)}
+.stage.done .what{color:var(--ink-2)}
+.stage.now{background:var(--accent-soft)}
+.stage.now::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent)}
+
+/* layout */
+.body{display:grid;grid-template-columns:210px minmax(0,1fr);gap:24px;align-items:start}
+nav.side{position:sticky;top:calc(env(safe-area-inset-top,0px) + 78px);display:flex;flex-direction:column;gap:2px}
+nav.side button{display:flex;justify-content:space-between;align-items:center;gap:8px;text-align:left;border:0;background:none;border-radius:8px;padding:8px 12px;color:var(--ink-2)}
+nav.side button:hover{background:var(--surface)}
+nav.side button[aria-current="page"]{background:var(--surface);color:var(--ink);font-weight:600;box-shadow:inset 3px 0 0 var(--accent)}
+.count{font-family:var(--mono);font-size:11px;border-radius:999px;padding:1px 7px;background:var(--line-2);color:var(--ink-2)}
+.count.warn{background:var(--warn-soft);color:var(--warn)}
+.count.bad{background:var(--bad-soft);color:var(--bad)}
+.navsec{margin-top:14px;padding:0 12px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.navsecs{display:flex;flex-direction:column;gap:0;margin-top:4px}
+.navsecs a{padding:4px 12px;color:var(--ink-2);text-decoration:none;font-size:12.5px;border-radius:6px;display:flex;gap:8px;align-items:center}
+.navsecs a:hover{background:var(--surface)}
+.navsecs .sdot{width:7px;height:7px;border-radius:50%;flex:none}
+
+main{min-width:0;display:flex;flex-direction:column;gap:16px}
+.pagehead{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:10px}
+.pagehead h1{font-size:26px}
+.pagehead p{margin:4px 0 0;color:var(--muted);max-width:70ch}
+.banner{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;border:1px solid var(--line);border-left:3px solid var(--warn);background:var(--surface);border-radius:10px;padding:10px 14px}
+.banner b{font-weight:600}
+.linkbtn{border:0;background:none;padding:0;color:var(--accent);font-weight:500;text-decoration:underline;text-underline-offset:3px}
+
+/* section cards */
+.sec{background:var(--surface);border:1px solid var(--line);border-radius:12px;scroll-margin-top:90px}
+.sec-h{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;padding:14px 18px 10px;border-bottom:1px solid var(--line-2)}
+.sec-h .idx{font-family:var(--mono);font-size:12px;color:var(--muted);min-width:24px}
+.sec-h h2{font-size:19px}
+.sec-h .right{margin-left:auto;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.toggle{display:inline-flex;gap:6px;align-items:center;font-size:12px;color:var(--ink-2)}
+.toggle input{accent-color:var(--accent);width:15px;height:15px}
+.pill{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:2px 9px;font-size:11.5px;font-weight:500;white-space:nowrap}
+.pill.good{background:var(--good-soft);color:var(--good)}
+.pill.warn{background:var(--warn-soft);color:var(--warn)}
+.pill.bad{background:var(--bad-soft);color:var(--bad)}
+.pill.info{background:var(--info-soft);color:var(--info)}
+.pill.neutral{background:var(--line-2);color:var(--ink-2)}
+.sec-b{padding:16px 18px;display:flex;flex-direction:column;gap:16px}
+.take{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;background:var(--surface-2);border:1px solid var(--line-2);border-radius:8px;padding:9px 12px}
+.take p{margin:0;flex:1;min-width:220px;font-family:var(--serif);font-size:16px;line-height:1.4}
+.foot{font-size:11.5px;color:var(--muted);font-family:var(--mono)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.tile{border:1px solid var(--line-2);border-radius:10px;padding:10px 12px;background:var(--surface)}
+.tile .v{font-family:var(--mono);font-size:24px;font-weight:500;line-height:1.2;font-variant-numeric:tabular-nums}
+.tile .l{font-size:12px;color:var(--ink-2)}
+.tile .n{font-size:11px;color:var(--muted);font-family:var(--mono)}
+.sub-h{font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin:0 0 8px;font-family:var(--sans);font-weight:500}
+
+/* charts */
+.bars{display:flex;flex-direction:column;gap:7px}
+.bar{display:grid;grid-template-columns:minmax(90px,150px) 1fr auto;gap:10px;align-items:center;font-size:12.5px}
+.bar .lab{color:var(--ink-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar .trk{display:block;height:12px;background:var(--line-2);border-radius:3px;overflow:hidden}
+.bar .fil{display:block;height:100%;border-radius:3px}
+.bar .val{font-family:var(--mono);font-size:12px;min-width:74px;text-align:right;font-variant-numeric:tabular-nums}
+.donutwrap{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+.donut{width:140px;height:140px;border-radius:50%;position:relative;flex:none}
+.donut::after{content:"";position:absolute;inset:26px;border-radius:50%;background:var(--surface)}
+.donut .ctr{position:absolute;inset:0;display:grid;place-items:center;z-index:1;text-align:center;line-height:1.1}
+.donut .ctr b{font-family:var(--mono);font-size:20px;font-weight:500}
+.donut .ctr span{font-size:11px;color:var(--muted);display:block}
+.legend{display:flex;flex-direction:column;gap:5px;font-size:12.5px;min-width:160px;flex:1}
+.legend div{display:grid;grid-template-columns:10px 1fr auto auto;gap:8px;align-items:center}
+.legend i{width:10px;height:10px;border-radius:2px}
+.legend .num{color:var(--muted)}
+.wall{display:flex;flex-wrap:wrap;gap:6px}
+.wall span{border:1px solid var(--line);border-radius:6px;padding:4px 9px;font-size:12.5px;background:var(--surface-2)}
+.wall span em{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--muted);margin-left:6px}
+.curve svg{width:100%;height:auto;display:block}
+.curve text{font-family:var(--mono);font-size:10px;fill:var(--muted)}
+table{border-collapse:collapse;width:100%;font-size:12.5px}
+th{text-align:left;font-weight:500;color:var(--muted);font-size:11.5px;letter-spacing:.03em;text-transform:uppercase;border-bottom:1px solid var(--line);padding:6px 8px;white-space:nowrap}
+td{border-bottom:1px solid var(--line-2);padding:6px 8px;vertical-align:top}
+td.r,th.r{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}
+.tbl{overflow-x:auto}
+details.dd{border-top:1px solid var(--line-2)}
+details.dd summary{cursor:pointer;padding:10px 18px;font-size:12.5px;color:var(--ink-2);list-style:none;display:flex;gap:8px;align-items:center}
+details.dd summary::-webkit-details-marker{display:none}
+details.dd summary::before{content:"▸";font-size:10px;transition:transform .15s}
+details.dd[open] summary::before{transform:rotate(90deg)}
+details.dd .inner{padding:0 18px 16px;display:flex;flex-direction:column;gap:8px}
+.ddtools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-size:12px;color:var(--muted)}
+.ddtools input{border:1px solid var(--line);border-radius:6px;padding:4px 8px;background:var(--surface);min-width:200px}
+.empty{border:1px dashed var(--line);border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:6px;background:var(--surface-2)}
+.empty b{font-size:14px}
+.photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.ph{aspect-ratio:3/2;border-radius:8px;position:relative;overflow:hidden;background:var(--line-2);max-width:100%}
+.ph .lbl{position:absolute;left:6px;bottom:6px;font-size:11px;background:var(--surface);border-radius:4px;padding:1px 6px}
+.ph.missing{border:1px dashed var(--line);background:transparent;display:grid;place-items:center;color:var(--muted);font-size:12px}
+.quote{margin:0;font-family:var(--serif);font-size:15px}
+
+/* list pages */
+.list{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.row{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line-2);align-items:start}
+.row:last-child{border-bottom:0}
+.row .ic{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:600}
+.ic.good{background:var(--good-soft);color:var(--good)}
+.ic.warn{background:var(--warn-soft);color:var(--warn)}
+.ic.bad{background:var(--bad-soft);color:var(--bad)}
+.ic.info{background:var(--info-soft);color:var(--info)}
+.row .t{font-weight:500}
+.row .d{color:var(--muted);font-size:12.5px}
+.row .side-r{display:flex;flex-direction:column;align-items:end;gap:4px;font-size:12px;color:var(--muted);text-align:right}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:12px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+.card h3{font-size:16px}
+.card .mod{font-size:12px;color:var(--muted)}
+.card code{font-family:var(--mono);font-size:11px;color:var(--ink-2);background:var(--surface-2);border:1px solid var(--line-2);border-radius:6px;padding:6px 8px;display:block;white-space:normal;word-break:break-word}
+.card .stat{display:flex;justify-content:space-between;align-items:center;font-size:12.5px}
+.card .acts{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.card .msg{font-size:12px;color:var(--good)}
+.filebtn{position:relative;overflow:hidden}
+.filebtn input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.rq{display:grid;grid-template-columns:minmax(0,1.4fr) auto minmax(0,1fr) minmax(0,1fr) auto;gap:10px;align-items:center;padding:10px 16px;border-bottom:1px solid var(--line-2)}
+.rq:last-child{border-bottom:0}
+.rq select{border:1px solid var(--line);border-radius:6px;padding:5px 8px;background:var(--surface);width:100%}
+.rq .raw{font-family:var(--mono);font-size:12.5px;word-break:break-word}
+.rqhead{font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;background:var(--surface-2)}
+
+/* modal */
+.modal[hidden]{display:none}
+.modal{position:fixed;inset:0;z-index:50;background:rgba(20,18,20,.45);display:grid;place-items:center;padding:16px}
+.dialog{background:var(--surface);border:1px solid var(--line);border-radius:14px;width:min(980px,100%);max-height:calc(100% - 32px);overflow:auto;display:flex;flex-direction:column}
+.dialog header{display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--line-2);position:sticky;top:0;background:var(--surface);z-index:2}
+.dialog header h2{font-size:20px}
+.dialog .db{padding:16px 20px;display:flex;flex-direction:column;gap:14px}
+.dialog footer{display:flex;gap:10px;justify-content:flex-end;padding:14px 20px;border-top:1px solid var(--line-2);position:sticky;bottom:0;background:var(--surface)}
+.pick{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:6px}
+.pick label{display:flex;gap:8px;align-items:center;border:1px solid var(--line-2);border-radius:8px;padding:7px 10px;font-size:13px}
+.pick label input{accent-color:var(--accent)}
+.pick label .pill{margin-left:auto}
+textarea{border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:var(--surface);width:100%;min-height:60px}
+.note{font-size:12.5px;color:var(--ink-2);background:var(--info-soft);border-radius:8px;padding:9px 12px}
+
+/* slides */
+.slides{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.slide{aspect-ratio:16/9;max-width:100%;border:1px solid var(--line);border-radius:6px;background:#FFFFFF;color:#1C1B1E;container-type:inline-size;position:relative;overflow:hidden;display:flex;flex-direction:column;padding:5cqw 5.5cqw 3cqw}
+.slide .st{font-family:var(--serif);font-weight:600;font-size:5.4cqw;line-height:1.15}
+.slide .sk{font-family:var(--serif);font-size:3.3cqw;color:#48434A;margin-top:1.5cqw;line-height:1.3}
+.slide .sn{display:flex;gap:4cqw;margin-top:auto;flex-wrap:wrap}
+.slide .sn div{display:flex;flex-direction:column}
+.slide .sn b{font-family:var(--mono);font-weight:500;font-size:6cqw;line-height:1.1;color:#C8232C}
+.slide .sn span{font-size:2.5cqw;color:#48434A}
+.slide .sf{font-family:var(--mono);font-size:1.9cqw;color:#766F73;margin-top:3cqw;border-top:1px solid #E4DEDA;padding-top:1.5cqw}
+.slide .snum{position:absolute;right:3cqw;top:2.5cqw;font-family:var(--mono);font-size:2cqw;color:#766F73}
+.slide.cover{background:linear-gradient(135deg,#1C1B1E 0%,#3A1418 60%,#C8232C 130%);color:#fff}
+.slide.cover .st{font-size:7cqw}
+.slide.cover .sk{color:#EBD9D8}
+.slide.cover .sf{color:#D8C8C8;border-color:rgba(255,255,255,.2)}
+.slide.cover .snum{color:#D8C8C8}
+
+@media (max-width: 860px){
+  .body{grid-template-columns:1fr}
+  nav.side{position:static;flex-direction:row;overflow-x:auto;gap:4px;padding-bottom:4px}
+  nav.side button{white-space:nowrap}
+  nav.side button[aria-current="page"]{box-shadow:inset 0 -2px 0 var(--accent)}
+  .navsec,.navsecs{display:none}
+  .rq{grid-template-columns:1fr 1fr}
+  .rq .raw{grid-column:1 / -1}
+  .rqhead{display:none}
+  .topbar{position:static}
+}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+
+<div class="app">
+  <header class="topbar">
+    <div class="brand"><div class="mark" aria-hidden="true">R</div><div><b>Report Studio</b><small>ETBrandEquity · Events</small></div></div>
+    <div class="evt"><strong>Brand World Summit 2025 · 7th edition</strong><span>4 Jul 2025 · Mumbai · IP event</span></div>
+    <div class="spacer"></div>
+    <div class="meta">
+      <span class="chip sample" title="All people, attendance and engagement figures in this prototype are fictional sample data. Sponsor names are from the public BWS 2025 website.">Sample data</span>
+      <span class="chip">Data as of <b class="num" style="margin-left:4px">5 Jul, 06:00</b></span>
+      <span class="chip" id="verChip">Draft · not frozen</span>
+      <span class="chip" id="readyChip"></span>
+      <button class="btn primary" id="genBtn">Generate PPT</button>
+    </div>
+  </header>
+
+  <div class="timeline" id="timeline"></div>
+
+  <div class="body">
+    <nav class="side" id="nav" aria-label="Workspace"></nav>
+    <main id="main"></main>
+  </div>
+</div>
+
+<div class="modal" id="modal" hidden>
+  <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+    <header><h2 id="mTitle">Generate PPT</h2><div class="spacer"></div><button class="btn small" id="mClose">Close</button></header>
+    <div class="db" id="mBody"></div>
+    <footer id="mFoot"></footer>
+  </div>
+</div>
+
+<script>
+(function(){
+/* ---------- utilities ---------- */
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+var rnd=mulberry32(20250704);
+function pick(a){return a[Math.floor(rnd()*a.length)]}
+function wpick(pairs){var s=0,i;for(i=0;i<pairs.length;i++)s+=pairs[i][1];var r=rnd()*s;for(i=0;i<pairs.length;i++){r-=pairs[i][1];if(r<0)return pairs[i][0]}return pairs[pairs.length-1][0]}
+function ri(a,b){return a+Math.floor(rnd()*(b-a+1))}
+function fmt(n){return Math.round(n).toLocaleString('en-IN')}
+function pct(x){var v=x*100;return (v<10?v.toFixed(1):Math.round(v))+'%'}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function addDays(d,n){var x=new Date(d+'T00:00:00Z');x.setUTCDate(x.getUTCDate()+n);return x.toISOString().slice(0,10)}
+function shortDate(s){var m=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];var p=s.split('-');return (+p[2])+' '+m[+p[1]-1]}
+function countBy(arr,f){var o={};arr.forEach(function(x){var k=f(x);o[k]=(o[k]||0)+1});return o}
+
+/* ---------- sample data (fictional people; public sponsor names) ---------- */
+var FIRST=["Aarav","Ananya","Rohan","Ishita","Kabir","Meera","Vikram","Priya","Arjun","Neha","Siddharth","Kavya","Rahul","Tanvi","Aditya","Riya","Karan","Pooja","Nikhil","Shreya","Varun","Aditi","Manish","Sneha","Harsh","Divya","Akash","Nandini","Gaurav","Swati","Rajat","Isha","Pranav","Lavanya","Dev","Sanya","Amit","Radhika","Yash","Mitali"];
+var LAST=["Sharma","Iyer","Mehta","Nair","Kapoor","Rao","Banerjee","Gupta","Menon","Desai","Joshi","Kulkarni","Reddy","Chatterjee","Bhatia","Pillai","Malhotra","Saxena","Kaur","Agarwal","Das","Shetty","Verma","Sinha","Chopra","Bose","Thakur","Patil","Mishra","Khanna","Naidu","Sethi","Trivedi","Ghosh","Hegde","Arora","Jain","Pandey","Mukherjee","Varma"];
+var ROOTS=["Sunrise","Kestrel","Banyan","Indigo","Saffron","Monsoon","Peacock","Lotus","Everest","Coral","Harbour","Meridian","Cedar","Amber","Northstar","Tamarind","Nilgiri","Deccan","Konark","Sahyadri","Ganga","Marigold","Jasmine","Teak","Bluepine","Riverstone","Halcyon","Orchid","Vellum","Zephyr","Aravalli","Cobalt","Juniper","Mistral","Sable","Terracotta"];
+var ORGSPEC=[
+ ["brand",300,[["FMCG",["Foods","Consumer Products","Beverages","Home Care"]],["BFSI",["Finance","Bank","Insurance","Capital"]],["Auto",["Motors","Mobility"]],["Retail & e-commerce",["Retail","Fashion","Marketplace"]],["D2C",["Naturals","Wellness","Essentials"]],["Telecom & electronics",["Telecom","Electronics"]],["Healthcare",["Healthcare","Pharma"]]]],
+ ["agency",70,[["Agency",["Media","Creative","Digital","Communications"]]]],
+ ["tech_vendor",60,[["Martech",["Labs","Cloud","AI","Analytics"]]]],
+ ["publisher",20,[["Media & publishing",["Publishing","Network"]]]],
+ ["startup",40,[["Startup",["Studio","Works"]]]]
+];
+var ORGS=[],seenOrg={},BYTYPE={};
+ORGSPEC.forEach(function(spec){var type=spec[0],count=spec[1],inds=spec[2],made=0,guard=0;BYTYPE[type]=[];
+  while(made<count&&guard<8000){guard++;var ind=pick(inds);var name=pick(ROOTS)+' '+pick(ind[1]);if(seenOrg[name])continue;seenOrg[name]=1;
+    var o={id:ORGS.length,name:name,type:type,industry:ind[0],domain:name.toLowerCase().replace(/[^a-z]/g,'')+'.in'};ORGS.push(o);BYTYPE[type].push(o);made++}});
+var ORGTYPE_LABEL={brand:'Brand',agency:'Agency',tech_vendor:'Tech / martech',publisher:'Publisher',startup:'Start-up',other:'Other'};
+
+var TITLES={CXO:["Chief Marketing Officer","CMO","Chief Executive Officer","Founder & CEO","Chief Digital Officer","Chief Growth Officer","Managing Director","Chief Brand Officer"],
+ VP:["Vice President - Marketing","VP Brand","Senior Vice President - Growth","AVP - Digital Marketing","EVP Marketing"],
+ Director:["Director - Marketing","Head of Brand","Head - Digital","Marketing Director","Head of Media"],
+ Manager:["Brand Manager","Senior Manager - Marketing","Manager - Digital","DGM - Brand","AGM Marketing","Media Lead"],
+ Other:["Executive - Marketing","Consultant","Analyst","Strategist","Associate - Brand"],
+ Unknown:["Brand Custodian","Evangelist","Storyteller","Culture Catalyst","Growth Partner"]};
+var MOJI=["DGM Ã¢â‚¬Å“ Brand Marketing","Head Ã¢â‚¬Å“ Digital","VP Ã¢â‚¬Å“ Marketing"];
+var NLDATES=['2025-05-15','2025-05-29','2025-06-12','2025-06-20','2025-06-27','2025-07-01'];
+var SPONSORS=[
+ ["Samsung Ads","Presenting Partner"],["Monotype","Powered By"],["Route Mobile","Co-Powered by"],["Flipkart Ads","In Association With"],
+ ["Google Messages","Gold Partners"],["Tata Communications","Gold Partners"],["The Trade Desk","Silver Partner"],["frog","Associate Partners"],["Shakuniya","Associate Partners"],
+ ["L&T Finance","NBFC Fintech Partner"],["Roshan Space","Outdoor Partner"],["ImageKit","Exhibitors"],["Pixelcraft (sample)","Exhibitors"],["Adwise (sample)","Exhibitors"],["Loopline (sample)","Exhibitors"],["Brandverse (sample)","Exhibitors"],["Kettle Analytics (sample)","Exhibitors"],
+ ["Lenskart","Gifting Partners"],["Fixderma","Gifting Partners"],["The Good Bug","Gifting Partners"],["Refreshing","Creative Partner"],
+ ["Startup A (sample)","Startup Arena"],["Startup B (sample)","Startup Arena"],["Startup C (sample)","Startup Arena"],["Startup D (sample)","Startup Arena"],["Startup E (sample)","Startup Arena"]
+].map(function(s,i){return {id:i,name:s[0],group:s[1]}});
+var TIERMAP={"Presenting Partner":"Presenting","Powered By":"Powered by","Co-Powered by":"Co-powered","In Association With":"In association","Gold Partners":"Gold","Silver Partner":"Silver","Associate Partners":"Associate","NBFC Fintech Partner":"Category partner","Outdoor Partner":"Category partner","Gifting Partners":"Category partner","Creative Partner":"Category partner","Exhibitors":"Exhibitor","Startup Arena":"Start-up"};
+var TIER_ORDER=["Presenting","Powered by","Co-powered","In association","Gold","Silver","Associate","Category partner","Exhibitor","Start-up"];
+
+/* registrations */
+var REGS=[],usedEmail={};
+for(var i=0;i<1340;i++){
+  var type=wpick([["brand",62],["agency",14],["tech_vendor",14],["publisher",4],["startup",6]]);
+  var pool=BYTYPE[type];var org=pool[Math.floor(Math.pow(rnd(),1.5)*pool.length)];
+  var f=pick(FIRST),l=pick(LAST);
+  var sen=wpick([["CXO",30],["VP",18],["Director",22],["Manager",20],["Other",7],["Unknown",3]]);
+  var title=pick(TITLES[sen]);if(rnd()<0.012)title=pick(MOJI);
+  var ch=wpick([["Newsletter",46],["Direct",18],["Social",14],["Partner",9],["Referral",6],["Paid",5],["Unknown",2]]);
+  var lead='Others',conv='',date;
+  if(ch==='Newsletter'){var nd=pick(NLDATES);lead='newsletter';conv='nl_Mailer_newsletter_brandequity_news_'+nd;date=addDays(nd,ri(0,3))}
+  else if(ch==='Referral'){var nd2=pick(NLDATES);lead='newsletter';conv='referral_nl_newsletter_brandequity_news_'+nd2;date=addDays(nd2,ri(0,4))}
+  else{date=addDays('2025-05-05',ri(0,59));
+    if(ch==='Direct'){lead='Others';conv=rnd()<.5?'Direct':''}
+    else if(ch==='Social'){conv=pick(['linkedin_organic','instagram_bio','x_post','facebook_page','youtube_description'])}
+    else if(ch==='Partner'){conv=pick(['partner_samsungads','partner_monotype','partner_routemobile','partner_flipkartads'])}
+    else if(ch==='Paid'){conv=pick(['paid_search_gclid','paid_linkedin_ads'])}
+    else {conv=pick(['wa_group_forward','event_listing_site'])}}
+  if(date>'2025-07-03')date='2025-07-03';
+  var base=(f+'.'+l).toLowerCase(),em=base+'@'+org.domain,k2=2;while(usedEmail[em]){em=base+k2+'@'+org.domain;k2++}usedEmail[em]=1;
+  REGS.push({id:i,first:f,last:l,email:em,designation:title,truthSen:sen,orgId:org.id,lead:lead,conv:conv,registered:date,status:'registered'});
+}
+/* shortlist and attendance */
+var SENW={CXO:1.2,VP:1.0,Director:.9,Manager:.6,Other:.2,Unknown:.5};
+REGS.map(function(r){return {r:r,s:SENW[r.truthSen]+(ORGS[r.orgId].type==='brand'?.2:0)+rnd()*1.2}}).sort(function(a,b){return b.s-a.s}).slice(0,960).forEach(function(x){x.r.status='shortlisted'});
+var SL=REGS.filter(function(r){return r.status==='shortlisted'}).map(function(r){return {r:r,s:rnd()}}).sort(function(a,b){return a.s-b.s});
+SL.slice(0,812).forEach(function(x){x.r.status='attended';var h=8+Math.floor(rnd()*3.5),m=ri(0,59);x.r.checkin='09:'+(''+ri(0,59)).padStart(2,'0');x.r.checkin=(''+(h)).padStart(2,'0')+':'+(''+m).padStart(2,'0')});
+/* duplicates (same email, different case) */
+for(var d=0;d<6;d++){var src=REGS[d*37+5];REGS.push(Object.assign({},src,{id:REGS.length,email:src.email.toUpperCase(),status:'registered',dup:true}))}
+
+/* speakers & sessions */
+var THEMES=["Building brands for India 2047","Marketing for 1.4 billion Indians","Expansion into new ventures","AI as the CMO's accelerator","Short video, long impact","Chatbots in the age of AI","Sports on TV: the CMO's cheque","The GenZ cohort"];
+var SPK=[];
+function addSpk(title,company,group,status){SPK.push({id:SPK.length,name:pick(FIRST)+' '+pick(LAST),title:title,company:company,group:group,status:status,sessions:[],indicative:false})}
+for(i=0;i<58;i++){var sn=wpick([["CXO",70],["VP",18],["Director",12]]);addSpk(pick(TITLES[sn]),pick(BYTYPE.brand).name,'Brand leaders','spoke')}
+var PSTITLES=["Head of Marketing, India","Director - Partnerships","VP Sales","Country Manager","Head - Solutions","Director - Brand"];
+for(i=0;i<12;i++){addSpk(PSTITLES[i%6],SPONSORS[Math.floor(i/2)].name,'Partner speakers','spoke')}
+["Editor","Senior Editor","Associate Editor","Editor","Special Correspondent","Senior Editor"].forEach(function(t){addSpk(t,'ETBrandEquity','ET editors','spoke')});
+for(i=0;i<7;i++){addSpk(pick(TITLES.CXO),pick(BYTYPE.brand).name,'Brand leaders','indicative');SPK[SPK.length-1].indicative=true}
+for(i=0;i<2;i++){addSpk(pick(TITLES.VP),pick(BYTYPE.brand).name,'Brand leaders','confirmed')}
+for(i=0;i<13;i++){SPK[i*4].indicative=true}
+
+var SESS=[];
+function addSess(track,title,format,owner,theme,mins,spk,partner){SESS.push({id:SESS.length,track:track,title:title,format:format,owner:owner,theme:theme,mins:mins,speakers:spk,partner:partner||null})}
+var brand=SPK.filter(function(s){return s.group==='Brand leaders'&&s.status==='spoke'}),bi=0;
+function take(n){var out=[];for(var j=0;j<n;j++){out.push(brand[bi%brand.length].id);bi++}return out}
+var ed=SPK.filter(function(s){return s.group==='ET editors'}).map(function(s){return s.id});
+var ps=SPK.filter(function(s){return s.group==='Partner speakers'}).map(function(s){return s.id});
+addSess('Main stage','Welcome address','Other','ET',null,10,[ed[0]]);
+addSess('Main stage',"Editor's note: the state of Indian marketing",'Other','ET',null,10,[ed[1]]);
+for(i=0;i<3;i++)addSess('Main stage','Keynote: '+THEMES[i],'Keynote','Brand',THEMES[i],20,take(1));
+var panelSizes=[5,5,5,4,4,4,4,4,4,4];
+for(i=0;i<10;i++){var tr=i<4?'Main stage':(i<8?'Brand studio':'Commerce & tech');addSess(tr,THEMES[(i+3)%8],'Panel','Brand',THEMES[(i+3)%8],40,take(panelSizes[i]))}
+for(i=0;i<4;i++)addSess(i<2?'Main stage':'Brand studio','In conversation: '+THEMES[(i+5)%8],'Fireside','Brand',THEMES[(i+5)%8],25,take(2));
+for(i=0;i<2;i++)addSess('Commerce & tech','Case study: '+THEMES[(i+6)%8],'Case study','Brand',THEMES[(i+6)%8],20,take(2));
+var PTITLES=["Connected TV and the Indian household","Type as brand identity","Conversational messaging at scale","Retail media on the marketplace","RCS: rich messaging for brands","Networks that carry the brand"];
+for(i=0;i<6;i++)addSess(i<3?'Brand studio':'Commerce & tech',SPONSORS[i].name+': '+PTITLES[i],i%2?'Case study':'Keynote','Partner',THEMES[(i+1)%8],15+ (i%2?5:0),[ps[i*2],ps[i*2+1]],SPONSORS[i].id);
+addSess('Main stage','Closing remarks','Other','ET',null,10,[ed[2]]);
+SESS.forEach(function(s){s.speakers.forEach(function(id){SPK[id].sessions.push(s.id)})});
+/* start times per track */
+var tclock={};SESS.forEach(function(s){var t=tclock[s.track]||570;s.start=t;s.end=t+s.mins;tclock[s.track]=s.end+15});
+function hhmm(m){return (''+Math.floor(m/60)).padStart(2,'0')+':'+(''+m%60).padStart(2,'0')}
+
+/* wishlist & programmes */
+var WISH=[],senior=REGS.filter(function(r){return !r.dup&&(r.truthSen==='CXO'||r.truthSen==='VP')}),usedW={};
+SPONSORS.slice(0,6).forEach(function(sp){var n=0,g=0;while(n<15&&g<2000){g++;var r=pick(senior);if(usedW[sp.id+'-'+r.id])continue;usedW[sp.id+'-'+r.id]=1;WISH.push({sponsor:sp.name,regId:r.id});n++}});
+var attendedWish=WISH.filter(function(w){return REGS[w.regId].status==='attended'});
+var PROG=[];
+for(i=0;i<12;i++){var w=attendedWish[i%attendedWish.length];PROG.push({type:'Pitch Room',sponsor:w.sponsor,attendees:1})}
+PROG.push({type:'Leadership Dialogue',sponsor:'Samsung Ads',attendees:14},{type:'Leadership Dialogue',sponsor:'Tata Communications',attendees:12},{type:'Leadership Dialogue',sponsor:'Google Messages',attendees:15},{type:'Customer Success Showcase',sponsor:'Route Mobile',attendees:46},{type:'Welcome Soirée',sponsor:'Monotype',attendees:62});
+
+/* social posts */
+var START='2025-07-04',POSTS=[];
+var PLAT=[["LinkedIn",13,7,30000,9000],["Instagram",9,5,24000,8000],["X",8,4,9000,5000],["Facebook",6,2,14000,3000],["YouTube",4,2,20000,4000]];
+PLAT.forEach(function(p){var j;
+  for(j=0;j<p[1];j++){var imp=Math.round(p[3]*(0.5+rnd()));POSTS.push({platform:p[0],posted:addDays('2025-05-10',ri(0,54)),window:'Pre-event',impressions:imp,reach:Math.round(imp*(0.62+rnd()*.12)),eng:Math.round(imp*(0.025+rnd()*.035)),views:(p[0]==='YouTube'||p[0]==='Instagram')?Math.round(imp*(0.35+rnd()*.2)):0})}
+  for(j=0;j<p[2];j++){var imp2=Math.round(p[4]*(0.6+rnd()*.8));POSTS.push({platform:p[0],posted:START,window:'During event',impressions:imp2,reach:Math.round(imp2*(0.66+rnd()*.12)),eng:Math.round(imp2*(0.035+rnd()*.04)),views:(p[0]==='YouTube'||p[0]==='Instagram')?Math.round(imp2*(0.4+rnd()*.2)):0})}
+});
+POSTS.forEach(function(p,ix){p.url='https://'+p.platform.toLowerCase().replace('x','x')+'.com/…/bws25-'+(100+ix)});
+var OWNED=[
+ {kind:'Article',title:'CMOs on building brands for India 2047',views:18240},{kind:'Article',title:'Why short video is the new brand film',views:12610},{kind:'Article',title:'AI as the CMO’s accelerator: 6 takeaways',views:15930},
+ {kind:'Article',title:'Inside the GenZ cohort: channels that work',views:9870},{kind:'Article',title:'Retail media and the marketplace shelf',views:7340},{kind:'Article',title:'BWS 2025 in pictures',views:5210},
+ {kind:'Livestream',title:'Main stage livestream (ETBrandEquity homepage)',views:24300},{kind:'BWS Studio',title:'8 partner-led studio chats',views:41200},
+ {kind:'Newsletter',title:'Day-of newsletter (sends 1,86,000)',views:38900}];
+var COMMENTS=["The CMO panel on GenZ was the most practical session I've attended this year.","Great room. I met three brand heads I'd been trying to reach for months.","Too many sessions ran over time on the main stage.","The Pitch Room format worked: short, pre-briefed and with the right people.","Loved the studio chats; the livestream helped my team follow along.","Would like more case studies with real numbers.","Registration desk queues were long between 9 and 10.","Excellent speaker line-up; the keynote on India 2047 was a highlight."];
+var SURVEY=[];for(i=0;i<45;i++){var rt=i<38?'Attendee':'Partner';SURVEY.push({type:rt,rating:wpick([[5,48],[4,34],[3,14],[2,4]]),nps:wpick([[10,26],[9,24],[8,20],[7,14],[6,8],[5,5],[3,3]]),ret:rnd()<.82,comment:i<COMMENTS.length?COMMENTS[i]:''})}
+var PHOTOS=[{tag:'Main stage'},{tag:'Audience'},{tag:'Networking'},{tag:'Partner activation'},{tag:'Speaker'},{tag:'BWS Studio'}];
+var PREV={edition:6,year:2024,attendees:715,speakers:102,orgs:352,cxo:0.40,impressionsDuring:96000};
+var TARGETS=[
+ {label:'Attendees',target:1000,stated:'Website ("1000+ professionals")',metric:'attendees'},
+ {label:'Speakers / thought leaders',target:100,stated:'Website ("100+ thought leaders")',metric:'speakers'},
+ {label:'CXO share of attendees',target:0.40,stated:'Sales deck',metric:'cxo',isPct:true},
+ {label:'Partners',target:25,stated:'Sales plan',metric:'partners'},
+ {label:'Indicative speakers who spoke',target:20,stated:'Sales deck (20 named)',metric:'indicative'}];
+
+/* ---------- processing (rules, overrides) ---------- */
+var OVR={title:{},channel:{}};
+function fixText(s){return s.replace(/Ã¢â‚¬Å“|â€“/g,'–').replace(/â€™/g,'’').replace(/\s+/g,' ').trim()}
+function seniorityOf(t){var x=t.toLowerCase();
+  if(/\b(vp|vice president|svp|evp|avp)\b/.test(x))return 'VP';
+  if(/\b(chief|cxo|ceo|cmo|cto|cio|cdo|founder|managing director|president)\b/.test(x))return 'CXO';
+  if(/\b(director|head)\b/.test(x))return 'Director';
+  if(/\b(manager|lead|gm|dgm|agm)\b/.test(x))return 'Manager';
+  if(/\b(executive|analyst|consultant|associate|strategist|intern|specialist|editor|correspondent)\b/.test(x))return 'Other';
+  return null}
+function functionOf(t){var x=t.toLowerCase();
+  if(/\b(ceo|chief executive|founder|managing director)\b/.test(x))return 'Leadership';
+  if(/market|brand|media|growth|communicat|marcom|digital|content|advertis|story|culture|evangel/.test(x))return 'Marketing';
+  if(/tech|\bit\b|\bcto\b|\bcio\b|data|product|engineer/.test(x))return 'Tech';
+  if(/sales|revenue|business development|partnership/.test(x))return 'Sales';
+  return 'Other'}
+function channelOf(conv){var x=(conv||'').toLowerCase();
+  if(!x||x==='direct')return 'Direct';
+  if(x.indexOf('referral')===0)return 'Referral';
+  if(/paid|gclid|_ads\b/.test(x))return 'Paid';
+  if(x.indexOf('partner_')===0)return 'Partner';
+  if(/nl_|newsletter|mailer/.test(x))return 'Newsletter';
+  if(/linkedin|instagram|facebook|x_post|youtube/.test(x))return 'Social';
+  return null}
+var PEOPLE=[],MERGED=[],FIXED=0;
+function processAll(){
+  var byEmail={},merged=[];
+  REGS.forEach(function(r){var k=r.email.toLowerCase();if(byEmail[k]){merged.push(r);return}byEmail[k]=r});
+  FIXED=0;
+  PEOPLE=Object.keys(byEmail).map(function(k){var r=byEmail[k];var clean=fixText(r.designation);if(clean!==r.designation)FIXED++;
+    var ov=OVR.title[clean];var sen=(ov&&ov.sen)||seniorityOf(clean)||'Unclassified';var fn=(ov&&ov.fn)||functionOf(clean);
+    var ch=OVR.channel[r.conv]||channelOf(r.conv)||'Unmapped';var org=ORGS[r.orgId];
+    return {id:r.id,name:r.first+' '+r.last,email:r.email.toLowerCase(),title:clean,sen:sen,fn:fn,org:org,channel:ch,conv:r.conv||'(blank)',registered:r.registered,status:r.status,checkin:r.checkin||''}});
+  MERGED=merged;
+  SPK.forEach(function(s){s.sen=seniorityOf(s.title)||'Unclassified'});
+}
+
+/* ---------- metrics registry (single source for page and PPT) ---------- */
+var M={};
+function computeMetrics(){
+  var P=PEOPLE,att=P.filter(function(p){return p.status==='attended'}),sl=P.filter(function(p){return p.status!=='registered'});
+  var spoke=SPK.filter(function(s){return s.status==='spoke'});
+  var orgsAtt={};att.forEach(function(p){orgsAtt[p.org.id]=(orgsAtt[p.org.id]||0)+1});
+  var pre=POSTS.filter(function(p){return p.window==='Pre-event'}),dur=POSTS.filter(function(p){return p.window==='During event'});
+  var sum=function(a,f){return a.reduce(function(s,x){return s+f(x)},0)};
+  var firstPost=pre.reduce(function(m,p){return p.posted<m?p.posted:m},'9999');
+  var preDays=Math.round((new Date(START)-new Date(firstPost))/864e5);
+  var impPre=sum(pre,function(p){return p.impressions}),impDur=sum(dur,function(p){return p.impressions});
+  var perPlat=PLAT.map(function(pl){var a=pre.filter(function(p){return p.platform===pl[0]}),b=dur.filter(function(p){return p.platform===pl[0]});
+    var ip=sum(a,function(p){return p.impressions}),id=sum(b,function(p){return p.impressions});
+    return {platform:pl[0],posts:a.length+b.length,pre:ip,during:id,reach:sum(b,function(p){return p.reach}),eng:sum(b,function(p){return p.eng})/Math.max(1,id),mult:(id/1)/(ip/preDays)}});
+  var sessMin=sum(SESS,function(s){return s.mins});
+  var wAtt=WISH.filter(function(w){var p=PEOPLE.find(function(x){return x.id===w.regId});return p&&p.status==='attended'}).length;
+  var progAtt=sum(PROG,function(p){return p.attendees});
+  var npsArr=SURVEY.map(function(s){return s.nps});var prom=npsArr.filter(function(v){return v>=9}).length,det=npsArr.filter(function(v){return v<=6}).length;
+  var titleCmo=att.filter(function(p){return /\b(cmo|chief marketing)\b/i.test(p.title)}).length;
+  var titleCeo=att.filter(function(p){return /\b(ceo|chief executive|founder|managing director)\b/i.test(p.title)}).length;
+  var cxo=att.filter(function(p){return p.sen==='CXO'}).length;
+  M={
+    registrations:{v:P.length,n:P.length,src:'Registrations (deduplicated)'},
+    shortlisted:{v:sl.length,n:P.length,src:'Shortlisted users'},
+    attendees:{v:att.length,n:att.length,src:'Attendees (check-in)'},
+    showup:{v:att.length/sl.length,n:sl.length,src:'Attendees ÷ shortlisted'},
+    orgs:{v:Object.keys(orgsAtt).length,n:att.length,src:'Attendees → organisations'},
+    orgsAtt:orgsAtt,
+    cxo:{v:cxo/att.length,n:att.length,src:'Attendees → seniority rules'},
+    cxoCount:cxo,cmo:titleCmo,ceo:titleCeo,
+    senMix:countBy(att,function(p){return p.sen}),fnMix:countBy(att,function(p){return p.fn}),
+    orgTypeMix:countBy(att,function(p){return p.org.type}),
+    industryMix:countBy(att.filter(function(p){return p.org.type==='brand'}),function(p){return p.org.industry}),
+    channels:countBy(P,function(p){return p.channel}),
+    speakers:{v:spoke.length,n:SPK.length,src:'Speakers (status spoke) + agenda'},
+    indicative:{v:SPK.filter(function(s){return s.indicative&&s.status==='spoke'}).length,n:SPK.filter(function(s){return s.indicative}).length,src:'Indicative list vs agenda'},
+    spkSen:countBy(spoke,function(s){return s.sen}),spkType:countBy(spoke,function(s){return s.group}),
+    sessions:{v:SESS.length,n:SESS.length,src:'Agenda'},minutes:{v:sessMin,n:SESS.length,src:'Agenda'},
+    formats:countBy(SESS,function(s){return s.format}),themes:countBy(SESS.filter(function(s){return s.theme}),function(s){return s.theme}),tracks:countBy(SESS,function(s){return s.track}),
+    partners:{v:SPONSORS.length,n:SPONSORS.length,src:'Sponsors'},
+    tiers:countBy(SPONSORS,function(s){return TIERMAP[s.group]||'Unmapped'}),
+    partnerSessions:SESS.filter(function(s){return s.owner==='Partner'}).length,partnerMinutes:sum(SESS.filter(function(s){return s.owner==='Partner'}),function(s){return s.mins}),
+    partnerSpeakers:SPK.filter(function(s){return s.group==='Partner speakers'&&s.status==='spoke'}).length,
+    pitch:PROG.filter(function(p){return p.type==='Pitch Room'}).length,progAtt:progAtt,progTypes:(function(){var o={};PROG.forEach(function(p){o[p.type]=(o[p.type]||0)+p.attendees});return o})(),
+    wish:{v:wAtt/WISH.length,n:WISH.length,src:'Wishlist users ⨝ attendees (all partners)'},wishAtt:wAtt,
+    impPre:{v:impPre,n:pre.length,src:'Social exports, pre window'},impDur:{v:impDur,n:dur.length,src:'Social exports, event day'},
+    reachDur:sum(dur,function(p){return p.reach}),engRate:sum(dur,function(p){return p.eng})/impDur,
+    mult:{v:(impDur/1)/(impPre/preDays),n:POSTS.length,src:'(event-day impressions ÷ 1 day) ÷ (pre-event impressions ÷ '+preDays+' days)'},preDays:preDays,firstPost:firstPost,
+    views:sum(POSTS,function(p){return p.views}),perPlat:perPlat,
+    owned:{v:sum(OWNED,function(o){return o.views}),n:OWNED.length,src:'Site analytics, livestream, Email Marketing'},
+    rating:{v:sum(SURVEY,function(s){return s.rating})/SURVEY.length,n:SURVEY.length,src:'Feedback survey'},
+    nps:{v:Math.round((prom-det)/npsArr.length*100),n:npsArr.length,src:'Feedback survey'},
+    ret:{v:SURVEY.filter(function(s){return s.ret}).length/SURVEY.length,n:SURVEY.length,src:'Feedback survey'},
+    surveyTypes:countBy(SURVEY,function(s){return s.type})
+  };
+}
+
+/* ---------- readiness & quality ---------- */
+var READY=[];var DQ=[];
+function computeReadiness(){
+  READY=[
+    {id:'settings',t:'Event settings and cover template',own:'Events team',st:'good',d:'Banner, theme, date, venue and top-tier logos set (Design → Top Banner)'},
+    {id:'targets',t:'Pre-event targets entered',own:'Sales / Editorial',st:'good',d:TARGETS.length+' targets, each with where it was stated'},
+    {id:'sponsors',t:'Sponsors imported',own:'Sales',st:'good',d:fmt(SPONSORS.length)+' sponsors in 13 groups'},
+    {id:'tiers',t:'Sponsor groups mapped to standard tiers',own:'Sales',st:'good',d:'13 of 13 groups mapped'},
+    {id:'agenda',t:'Agenda imported, sessions tagged',own:'Content',st:'good',d:SESS.length+' of '+SESS.length+' sessions have format, theme and owner'},
+    {id:'speakers',t:'Speakers imported',own:'Content',st:'good',d:SPK.length+' speakers with status'},
+    {id:'regs',t:'Registrations imported',own:'Delegate acquisition',st:'good',d:fmt(REGS.length)+' rows'},
+    {id:'checkin',t:'Check-in recorded (≥ 50% of shortlisted)',own:'Ops',st:'good',d:fmt(M.attendees.v)+' of '+fmt(M.shortlisted.v)+' shortlisted checked in'},
+    {id:'wishlist',t:'Wishlist users imported',own:'Sales',st:'good',d:WISH.length+' entries from 6 partners'},
+    {id:'prog',t:'Programme attendance imported',own:'Ops',st:'good',d:PROG.length+' sessions (Pitch Room, Leadership Dialogues, Showcase, Soirée)'},
+    {id:'social',t:'Social posts logged on every platform',own:'Social media team',st:'good',d:POSTS.length+' posts, 5 platforms, snapshot 5 Jul 06:00'},
+    {id:'owned',t:'Owned media snapshot',own:'Editorial',st:'good',d:OWNED.length+' items (articles, livestream, Studio, newsletter)'},
+    {id:'photos',t:'Photos approved (≥ 8)',own:'Video team',st:'warn',d:PHOTOS.length+' of 8 approved; 14 uploaded awaiting review'},
+    {id:'audio',t:'Speaker audio uploaded',own:'Video team',st:'bad',d:'0 of '+SESS.length+' sessions. Needed for speaker quotes'},
+    {id:'survey',t:'Survey responses (≥ 20)',own:'Events team',st:'good',d:SURVEY.length+' responses (38 attendees, 7 partners)'},
+    {id:'prev',t:'Previous edition imported',own:'Events team',st:'good',d:'BWS 2024 (6th edition) headline metrics'}
+  ];
+  var unTitles=PEOPLE.filter(function(p){return p.sen==='Unclassified'});
+  var unCh=PEOPLE.filter(function(p){return p.channel==='Unmapped'});
+  var att=PEOPLE.filter(function(p){return p.status==='attended'});
+  var senSum=Object.keys(M.senMix).reduce(function(s,k){return s+M.senMix[k]},0);
+  var chSum=Object.keys(M.channels).reduce(function(s,k){return s+M.channels[k]},0);
+  var noSess=SPK.filter(function(s){return s.status==='confirmed'&&s.sessions.length===0});
+  DQ=[
+    {sev:senSum===att.length?'good':'bad',t:'Seniority buckets add up to attendees',d:fmt(senSum)+' = '+fmt(att.length),kind:'Blocking check'},
+    {sev:chSum===PEOPLE.length?'good':'bad',t:'Channel totals add up to registrations',d:fmt(chSum)+' = '+fmt(PEOPLE.length),kind:'Blocking check'},
+    {sev:M.showup.v<=1?'good':'bad',t:'Show-up rate within range',d:pct(M.showup.v),kind:'Blocking check'},
+    {sev:M.mult.v<=20?'good':'warn',t:'Social multiplier within plausible range (≤ 20x)',d:M.mult.v.toFixed(1)+'x',kind:'Plausibility'},
+    {sev:unTitles.length/PEOPLE.length>0.05?'warn':(unTitles.length?'info':'good'),t:unTitles.length?(fmt(unTitles.length)+' registrants with unclassified designations'):'All designations classified',d:unTitles.length?pct(unTitles.length/PEOPLE.length)+' of registrations. Resolve in Review queue':'',kind:'Coverage',go:unTitles.length?'review':null},
+    {sev:unCh.length?'info':'good',t:unCh.length?(fmt(unCh.length)+' registrations with an unmapped sign-up source'):'All sign-up sources mapped',d:unCh.length?'Values such as "wa_group_forward". Resolve in Review queue':'',kind:'Coverage',go:unCh.length?'review':null},
+    {sev:'warn',t:'Partner survey base is small',d:'n = '+M.surveyTypes.Partner+' partner responses. Show as quotes, not as a percentage',kind:'Plausibility'},
+    {sev:noSess.length?'warn':'good',t:noSess.length+' speakers confirmed on the website with no agenda slot',d:noSess.map(function(s){return s.name+' ('+s.company+')'}).join(', ')+'. Check whether they spoke',kind:'Cross-source'},
+    {sev:'warn',t:'2024 social multiplier conflicts between documents',d:'BWS 2025 sales deck says 7.18x; BWS 2024 report says 17.8x. YoY uses absolute event-day impressions instead',kind:'Cross-source'},
+    {sev:'info',t:MERGED.length+' duplicate registrations merged',d:'Same email in different case: '+MERGED.slice(0,3).map(function(r){return r.email.toLowerCase()}).join(', ')+(MERGED.length>3?' …':''),kind:'Cleaning'},
+    {sev:'info',t:FIXED+' designations with broken characters fixed',d:'e.g. "DGM Ã¢â‚¬Å“ Brand Marketing" → "DGM – Brand Marketing"',kind:'Cleaning'}
+  ];
+}
+function readyOf(id){for(var i=0;i<READY.length;i++)if(READY[i].id===id)return READY[i].st;return 'good'}
+
+/* ---------- charts ---------- */
+var PALETTE=['var(--c1)','var(--c2)','var(--c3)','var(--c4)','var(--c5)','var(--c6)'];
+function bars(obj,opts){opts=opts||{};var keys=opts.order?opts.order.filter(function(k){return obj[k]!=null}):Object.keys(obj).sort(function(a,b){return obj[b]-obj[a]});
+  var tot=keys.reduce(function(s,k){return s+obj[k]},0),mx=Math.max.apply(null,keys.map(function(k){return obj[k]}));
+  return '<div class="bars">'+keys.map(function(k,ix){var v=obj[k];return '<div class="bar"><span class="lab" title="'+esc(k)+'">'+esc(opts.label?opts.label(k):k)+'</span><span class="trk"><span class="fil" style="width:'+(v/mx*100).toFixed(1)+'%;background:'+(opts.color||PALETTE[0])+'"></span></span><span class="val">'+(opts.fmtv?opts.fmtv(v):fmt(v)+(opts.share?' · '+pct(v/tot):''))+'</span></div>'}).join('')+'</div>'}
+function donut(obj,center,sub,order,labelFn){var keys=order?order.filter(function(k){return obj[k]}):Object.keys(obj).sort(function(a,b){return obj[b]-obj[a]});
+  var tot=keys.reduce(function(s,k){return s+obj[k]},0),acc=0,stops=[];
+  keys.forEach(function(k,ix){var a=acc/tot*360,b=(acc+obj[k])/tot*360;stops.push(PALETTE[ix%6]+' '+a.toFixed(2)+'deg '+b.toFixed(2)+'deg');acc+=obj[k]});
+  return '<div class="donutwrap"><div class="donut" style="background:conic-gradient('+stops.join(',')+')" role="img" aria-label="'+esc(sub)+'"><div class="ctr"><div><b>'+center+'</b><span>'+esc(sub)+'</span></div></div></div><div class="legend">'+keys.map(function(k,ix){return '<div><i style="background:'+PALETTE[ix%6]+'"></i><span>'+esc(labelFn?labelFn(k):k)+'</span><span class="num">'+fmt(obj[k])+'</span><span class="num">'+pct(obj[k]/tot)+'</span></div>'}).join('')+'</div></div>'}
+function tiles(list){return '<div class="tiles">'+list.map(function(t){return '<div class="tile"><div class="v">'+t[1]+'</div><div class="l">'+esc(t[0])+'</div>'+(t[2]?'<div class="n">'+esc(t[2])+'</div>':'')+'</div>'}).join('')+'</div>'}
+function curve(){var byDay={},d,days=[];for(d='2025-05-05';d<='2025-07-03';d=addDays(d,1)){byDay[d]=0;days.push(d)}
+  PEOPLE.forEach(function(p){if(byDay[p.registered]!=null)byDay[p.registered]++});
+  var W=640,H=190,L=40,R=12,T=14,B=26,cum=0,pts=[],max=PEOPLE.length;
+  days.forEach(function(dd,ix){cum+=byDay[dd];var x=L+ix/(days.length-1)*(W-L-R),y=T+(1-cum/max)*(H-T-B);pts.push([x,y])});
+  var line=pts.map(function(p){return p[0].toFixed(1)+','+p[1].toFixed(1)}).join(' ');
+  var area='M'+L+','+(H-B)+' L'+line.split(' ').join(' L')+' L'+(W-R)+','+(H-B)+' Z';
+  var nl=NLDATES.map(function(nd){var ix=days.indexOf(nd);if(ix<0)return '';var x=L+ix/(days.length-1)*(W-L-R);return '<line x1="'+x+'" x2="'+x+'" y1="'+T+'" y2="'+(H-B)+'" stroke="var(--line)" stroke-dasharray="3 3"/><text x="'+x+'" y="'+(T-3)+'" text-anchor="middle">NL</text>'}).join('');
+  var grid=[0.5,1].map(function(f){var y=T+(1-f)*(H-T-B);return '<line x1="'+L+'" x2="'+(W-R)+'" y1="'+y+'" y2="'+y+'" stroke="var(--line-2)"/><text x="'+(L-6)+'" y="'+(y+3)+'" text-anchor="end">'+fmt(max*f)+'</text>'}).join('');
+  var last=pts[pts.length-1];
+  return '<div class="curve"><svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Cumulative registrations from 5 May to 3 July">'+grid+nl+'<path d="'+area+'" fill="var(--c2)" opacity=".12"/><polyline points="'+line+'" fill="none" stroke="var(--c2)" stroke-width="2"/><circle cx="'+last[0]+'" cy="'+last[1]+'" r="4" fill="var(--c2)"/><text x="'+L+'" y="'+(H-8)+'">5 May</text><text x="'+(W-R)+'" y="'+(H-8)+'" text-anchor="end">3 Jul</text><text x="'+(L-6)+'" y="'+(H-B+3)+'" text-anchor="end">0</text></svg><div class="foot">Cumulative registrations · dashed lines = newsletter sends</div></div>'}
+function table(cols,rows,limit){limit=limit||60;var shown=rows.slice(0,limit);
+  return '<div class="tbl"><table><thead><tr>'+cols.map(function(c){return '<th class="'+(c.r?'r':'')+'">'+esc(c.h)+'</th>'}).join('')+'</tr></thead><tbody>'+shown.map(function(r){return '<tr>'+cols.map(function(c){return '<td class="'+(c.r?'r':'')+'">'+c.f(r)+'</td>'}).join('')+'</tr>'}).join('')+'</tbody></table></div>'+(rows.length>limit?'<div class="foot">Showing '+limit+' of '+fmt(rows.length)+' rows</div>':'')}
+
+/* ---------- report sections ---------- */
+var SEN_ORDER=['CXO','VP','Director','Manager','Other','Unclassified'];
+var attendeeCols=[{h:'Name',f:function(p){return esc(p.name)}},{h:'Designation',f:function(p){return esc(p.title)}},{h:'Seniority',f:function(p){return p.sen}},{h:'Function',f:function(p){return p.fn}},{h:'Organisation',f:function(p){return esc(p.org.name)}},{h:'Org type',f:function(p){return ORGTYPE_LABEL[p.org.type]}},{h:'Channel',f:function(p){return p.channel}},{h:'Status',f:function(p){return p.status}}];
+var SECTIONS=[
+ {id:'cover',no:'Cover',title:'Cover',deps:['settings'],src:'Design → Top Banner, Event Details, Sponsors',
+  take:function(){return 'Brand World Summit 2025 · 7th edition · Redefining Marketing for 1.4 Billion Indians'},
+  body:function(){return '<div class="slide cover" style="max-width:520px"><div class="snum">Cover</div><div class="st">Brand World Summit’25</div><div class="sk">Redefining Marketing for 1.4 Billion Indians · 4 July 2025 · Mumbai</div><div class="sn"><div><span>Presented by Samsung Ads · Powered by Monotype · Co-powered by Route Mobile · In association with Flipkart Ads</span></div></div><div class="sf">Post-event report · 7th edition</div></div>'},
+  slide:function(){return null}},
+ {id:'glance',no:'1',title:'Edition at a glance',deps:['regs','checkin','agenda','speakers','sponsors','social'],src:'Registrations, Attendees, Agenda, Speakers, Sponsors, Social',
+  take:function(){return fmt(M.attendees.v)+' marketing leaders from '+fmt(M.orgs.v)+' organisations attended, with '+M.speakers.v+' speakers across '+M.sessions.v+' sessions.'},
+  body:function(){return tiles([['Registrations',fmt(M.registrations.v),'deduplicated'],['Attended',fmt(M.attendees.v),'checked in'],['Show-up rate',pct(M.showup.v),'n = '+fmt(M.showup.n)+' shortlisted'],['Organisations',fmt(M.orgs.v),'among attendees'],['Speakers',fmt(M.speakers.v),'spoke on stage'],['Sessions',fmt(M.sessions.v),'3 tracks'],['Content hours',(M.minutes.v/60).toFixed(1),fmt(M.minutes.v)+' min'],['Partners',fmt(M.partners.v),'13 groups'],['Event-day impressions',fmt(M.impDur.v),M.impDur.n+' posts'],['Video views',fmt(M.views),'YouTube + Instagram']])},
+  details:function(){return table([{h:'Metric',f:function(r){return r[0]}},{h:'Value',r:1,f:function(r){return r[1]}},{h:'Base (n)',r:1,f:function(r){return r[2]}},{h:'Source',f:function(r){return r[3]}}],[['Registrations',fmt(M.registrations.v),fmt(M.registrations.n),M.registrations.src],['Attendees',fmt(M.attendees.v),fmt(M.attendees.n),M.attendees.src],['Show-up rate',pct(M.showup.v),fmt(M.showup.n),M.showup.src],['Organisations',fmt(M.orgs.v),fmt(M.orgs.n),M.orgs.src],['Speakers',fmt(M.speakers.v),fmt(M.speakers.n),M.speakers.src],['Event-day impressions',fmt(M.impDur.v),fmt(M.impDur.n),M.impDur.src]])},
+  slide:function(){return [[fmt(M.attendees.v),'attended'],[fmt(M.orgs.v),'organisations'],[fmt(M.speakers.v),'speakers'],[fmt(M.impDur.v),'event-day impressions']]}},
+ {id:'promise',no:'2',title:'Promised vs delivered',deps:['targets','checkin'],src:'Event Targets form vs computed metrics',
+  take:function(){var met=promRows().filter(function(r){return r.met}).length;return met+' of '+TARGETS.length+' pre-event promises met. Attendance reached '+pct(M.attendees.v/1000)+' of the 1,000 promised on the website.'},
+  body:function(){var rows=promRows();return table([{h:'Promise',f:function(r){return esc(r.label)}},{h:'Where stated',f:function(r){return esc(r.stated)}},{h:'Target',r:1,f:function(r){return r.tv}},{h:'Actual',r:1,f:function(r){return r.av}},{h:'Delivered',r:1,f:function(r){return r.dv}},{h:'Status',f:function(r){return '<span class="pill '+(r.met?'good':'warn')+'">'+(r.met?'Met':'Missed')+'</span>'}}],rows)},
+  slide:function(){var r=promRows();return [[r[0].av,'attended vs '+r[0].tv+' promised'],[r[1].av,'speakers vs '+r[1].tv],[r[2].av,'CXO share vs '+r[2].tv],[r[3].av,'partners vs '+r[3].tv]]}},
+ {id:'seniority',no:'3',title:'Who was in the room: seniority and roles',deps:['checkin'],src:'Attendees → designation rules + review overrides',
+  take:function(){return pct(M.cxo.v)+' of attendees were CXOs, including '+fmt(M.cmo)+' CMOs and '+fmt(M.ceo)+' CEOs, founders or MDs.'},
+  body:function(){return '<div class="grid2"><div><div class="sub-h">Seniority of attendees</div>'+donut(M.senMix,fmt(M.attendees.v),'attendees',SEN_ORDER)+'</div><div><div class="sub-h">Function</div>'+bars(M.fnMix,{share:1,color:'var(--c2)'})+'<div style="height:12px"></div>'+tiles([['CMOs',fmt(M.cmo),'by title'],['CEOs / founders / MDs',fmt(M.ceo),'by title'],['CXOs in total',fmt(M.cxoCount),'n = '+fmt(M.attendees.v)]])+'</div></div>'},
+  details:function(){return {rows:PEOPLE.filter(function(p){return p.status==='attended'}),cols:attendeeCols}},
+  slide:function(){return [[pct(M.cxo.v),'CXOs'],[fmt(M.cmo),'CMOs'],[fmt(M.ceo),'CEOs, founders, MDs'],[pct((M.senMix.VP||0)/M.attendees.v),'VPs']]}},
+ {id:'brands',no:'4',title:'Brands in the room',deps:['checkin'],src:'Attendees → organisations, org-type and industry lookup',
+  take:function(){return fmt(M.orgs.v)+' organisations attended; '+pct((M.orgTypeMix.brand||0)/M.attendees.v)+' of attendees came from brands.'},
+  body:function(){var top=Object.keys(M.orgsAtt).map(function(k){return {o:ORGS[k],n:M.orgsAtt[k]}}).filter(function(x){return x.o.type==='brand'}).sort(function(a,b){return b.n-a.n}).slice(0,40);
+    return '<div class="grid2"><div><div class="sub-h">Attendees by organisation type</div>'+donut(M.orgTypeMix,fmt(M.orgs.v),'organisations',null,function(k){return ORGTYPE_LABEL[k]})+'</div><div><div class="sub-h">Brand attendees by industry</div>'+bars(M.industryMix,{share:1,color:'var(--c4)'})+'</div></div><div><div class="sub-h">Top 40 brands present (attendee count)</div><div class="wall">'+top.map(function(x){return '<span>'+esc(x.o.name)+'<em>'+x.n+'</em></span>'}).join('')+'</div><div class="foot" style="margin-top:6px">The PPT shows organisation names or logos only, never people.</div></div>'},
+  details:function(){return {rows:Object.keys(M.orgsAtt).map(function(k){return {o:ORGS[k],n:M.orgsAtt[k]}}).sort(function(a,b){return b.n-a.n}),cols:[{h:'Organisation',f:function(x){return esc(x.o.name)}},{h:'Type',f:function(x){return ORGTYPE_LABEL[x.o.type]}},{h:'Industry',f:function(x){return x.o.industry}},{h:'Attendees',r:1,f:function(x){return x.n}}]}},
+  slide:function(){return [[fmt(M.orgs.v),'organisations'],[pct((M.orgTypeMix.brand||0)/M.attendees.v),'from brands'],[pct((M.orgTypeMix.agency||0)/M.attendees.v),'from agencies']]}},
+ {id:'signup',no:'5',title:'How people found and signed up',deps:['regs','checkin'],src:'Registrations: lead / conversion source → channel rules; Shortlisted; Attendees',
+  take:function(){var nl=M.channels.Newsletter||0;return 'ETBrandEquity newsletters brought in '+pct(nl/M.registrations.v)+' of '+fmt(M.registrations.v)+' registrations; '+pct(M.showup.v)+' of shortlisted delegates attended.'},
+  body:function(){return '<div class="grid2"><div><div class="sub-h">Funnel</div>'+bars({'Registered':M.registrations.v,'Shortlisted':M.shortlisted.v,'Attended':M.attendees.v},{order:['Registered','Shortlisted','Attended'],color:'var(--c2)'})+'<div style="height:14px"></div><div class="sub-h">Registrations by channel</div>'+bars(M.channels,{share:1,color:'var(--c3)'})+'</div><div><div class="sub-h">Registration curve</div>'+curve()+'</div></div>'},
+  details:function(){return {rows:PEOPLE.slice().sort(function(a,b){return a.registered<b.registered?-1:1}),cols:[{h:'Name',f:function(p){return esc(p.name)}},{h:'Registered',f:function(p){return shortDate(p.registered)}},{h:'Conversion source (raw)',f:function(p){return '<span class="mono">'+esc(p.conv)+'</span>'}},{h:'Channel',f:function(p){return p.channel}},{h:'Status',f:function(p){return p.status}}]}},
+  slide:function(){return [[fmt(M.registrations.v),'registrations'],[pct((M.channels.Newsletter||0)/M.registrations.v),'via ET newsletters'],[pct(M.showup.v),'show-up rate']]}},
+ {id:'content',no:'6',title:'Content delivered',deps:['agenda'],src:'Agenda (format, theme, owner tags)',
+  take:function(){return M.sessions.v+' sessions and '+(M.minutes.v/60).toFixed(1)+' hours of content across 3 tracks, covering all 8 announced themes.'},
+  body:function(){return tiles([['Sessions',fmt(M.sessions.v),''],['Content hours',(M.minutes.v/60).toFixed(1),fmt(M.minutes.v)+' min'],['Tracks',Object.keys(M.tracks).length,Object.keys(M.tracks).join(' · ')]])+'<div class="grid2"><div><div class="sub-h">Sessions by format</div>'+bars(M.formats,{color:'var(--c5)'})+'</div><div><div class="sub-h">Sessions by theme</div>'+bars(M.themes,{color:'var(--c5)'})+'</div></div>'},
+  details:function(){return {rows:SESS,cols:[{h:'Time',f:function(s){return '<span class="mono">'+hhmm(s.start)+'</span>'}},{h:'Track',f:function(s){return s.track}},{h:'Session',f:function(s){return esc(s.title)}},{h:'Format',f:function(s){return s.format}},{h:'Owner',f:function(s){return s.owner}},{h:'Min',r:1,f:function(s){return s.mins}},{h:'Speakers',r:1,f:function(s){return s.speakers.length}}]}},
+  slide:function(){return [[fmt(M.sessions.v),'sessions'],[(M.minutes.v/60).toFixed(1),'content hours'],['8','themes covered']]}},
+ {id:'speakers',no:'7',title:'Speaker line-up',deps:['speakers','agenda'],src:'Speakers (group, status) + agenda + seniority rules',
+  take:function(){return M.speakers.v+' speakers took the stage; '+M.indicative.v+' of the '+M.indicative.n+' names announced as indicative spoke.'},
+  body:function(){return tiles([['Speakers who spoke',fmt(M.speakers.v),'of '+SPK.length+' listed'],['Indicative → spoke',M.indicative.v+' / '+M.indicative.n,pct(M.indicative.v/M.indicative.n)],['CXO speakers',pct((M.spkSen.CXO||0)/M.speakers.v),'n = '+M.speakers.v]])+'<div class="grid2"><div><div class="sub-h">Speaker seniority</div>'+bars(M.spkSen,{order:SEN_ORDER,share:1,color:'var(--c1)'})+'</div><div><div class="sub-h">Speaker type</div>'+bars(M.spkType,{share:1,color:'var(--c2)'})+'</div></div>'},
+  details:function(){return {rows:SPK,cols:[{h:'Name',f:function(s){return esc(s.name)}},{h:'Designation',f:function(s){return esc(s.title)}},{h:'Company',f:function(s){return esc(s.company)}},{h:'Group',f:function(s){return s.group}},{h:'Status',f:function(s){return s.status}},{h:'Indicative',f:function(s){return s.indicative?'Yes':''}},{h:'Sessions',r:1,f:function(s){return s.sessions.length}}]}},
+  slide:function(){return [[fmt(M.speakers.v),'speakers'],[pct((M.spkSen.CXO||0)/M.speakers.v),'at CXO level'],[M.indicative.v+'/'+M.indicative.n,'indicative names who spoke']]}},
+ {id:'moments',no:'8',title:'What speakers said',deps:['audio','photos'],src:'Media Center audio → transcript → quotes (AI suggests, verbatim only; team approves)',
+  take:function(){return ''},
+  body:function(){return '<div class="empty"><b>Waiting for speaker audio</b><span>The video team has uploaded audio for 0 of '+SESS.length+' sessions. Once files are tagged to a session, transcripts are made and 3–5 verbatim quotes per session are suggested for approval.</span><span><button class="linkbtn" data-go="readiness">See readiness</button> · Owner: Video team</span></div>'},
+  slide:function(){return null}},
+ {id:'partners',no:'9',title:'Partner presence, all partners combined',deps:['sponsors','tiers','agenda'],src:'Sponsors (group → standard tier), agenda owner tags, programme sessions',
+  take:function(){return M.partners.v+' partners across '+Object.keys(M.tiers).length+' tiers led '+M.partnerSessions+' sessions ('+M.partnerMinutes+' minutes) with '+M.partnerSpeakers+' partner speakers.'},
+  body:function(){var byGroup={};SPONSORS.forEach(function(s){(byGroup[s.group]=byGroup[s.group]||[]).push(s.name)});
+    return tiles([['Partners',fmt(M.partners.v),'13 groups'],['Partner-led sessions',M.partnerSessions,M.partnerMinutes+' min'],['Partner speakers',M.partnerSpeakers,''],['BWS Studio chats','8','partner-led']])+'<div class="grid2"><div><div class="sub-h">Partners by standard tier</div>'+bars(M.tiers,{order:TIER_ORDER,color:'var(--c1)'})+'</div><div><div class="sub-h">Partners by event group</div><div class="bars">'+Object.keys(byGroup).map(function(g){return '<div style="font-size:12.5px"><span style="color:var(--muted)">'+esc(g)+':</span> '+byGroup[g].map(esc).join(', ')+'</div>'}).join('')+'</div></div></div>'},
+  details:function(){return {rows:SPONSORS,cols:[{h:'Partner',f:function(s){return esc(s.name)}},{h:'Event group',f:function(s){return esc(s.group)}},{h:'Standard tier',f:function(s){return TIERMAP[s.group]}},{h:'Sessions',r:1,f:function(s){return SESS.filter(function(x){return x.partner===s.id}).length}}]}},
+  slide:function(){return [[fmt(M.partners.v),'partners'],[M.partnerSessions,'partner-led sessions'],[M.partnerSpeakers,'partner speakers']]}},
+ {id:'access',no:'10',title:'Access programmes delivered, all partners combined',deps:['wishlist','prog','checkin'],src:'Wishlist users ⨝ attendees; programme attendance',
+  take:function(){return pct(M.wish.v)+' of accounts on partner wishlists attended; '+M.pitch+' Pitch Room meetings were held.'},
+  body:function(){return tiles([['Wishlist accounts that attended',pct(M.wish.v),M.wishAtt+' of '+M.wish.n+' (6 partners)'],['Pitch Room meetings',M.pitch,'with wishlist CMOs'],['Programme attendees',fmt(M.progAtt),PROG.length+' sessions']])+'<div><div class="sub-h">Attendees by programme</div>'+bars(M.progTypes,{color:'var(--c4)'})+'</div><div class="foot">Combined across partners. Per-partner results stay in the portal for account managers.</div>'},
+  details:function(){return {rows:WISH.map(function(w){var p=PEOPLE.find(function(x){return x.id===w.regId});return {w:w,p:p}}),cols:[{h:'Partner',f:function(x){return esc(x.w.sponsor)}},{h:'Wishlist person',f:function(x){return esc(x.p.name)}},{h:'Designation',f:function(x){return esc(x.p.title)}},{h:'Organisation',f:function(x){return esc(x.p.org.name)}},{h:'Outcome',f:function(x){return x.p.status==='attended'?'<span class="pill good">Attended</span>':'<span class="pill neutral">'+x.p.status+'</span>'}}]}},
+  slide:function(){return [[pct(M.wish.v),'wishlist accounts attended'],[M.pitch,'Pitch Room meetings'],[fmt(M.progAtt),'programme attendees']]}},
+ {id:'social',no:'11',title:'Social reach',deps:['social'],src:'Social post register + platform exports; windows: pre = post date → event start, during = event day',
+  take:function(){return 'Event-day impressions ran at '+M.mult.v.toFixed(1)+'x the pre-event daily average, with '+fmt(M.impDur.v)+' impressions on 4 July.'},
+  body:function(){return tiles([['Pre-event impressions',fmt(M.impPre.v),M.impPre.n+' posts over '+M.preDays+' days'],['Event-day impressions',fmt(M.impDur.v),M.impDur.n+' posts'],['Event-day reach',fmt(M.reachDur),''],['Engagement rate',pct(M.engRate),'event day'],['Multiplier (per day)',M.mult.v.toFixed(1)+'x','see formula'],['Video views',fmt(M.views),'']])+table([{h:'Platform',f:function(r){return r.platform}},{h:'Posts',r:1,f:function(r){return r.posts}},{h:'Pre-event impr.',r:1,f:function(r){return fmt(r.pre)}},{h:'Event-day impr.',r:1,f:function(r){return fmt(r.during)}},{h:'Event-day reach',r:1,f:function(r){return fmt(r.reach)}},{h:'Eng. rate',r:1,f:function(r){return pct(r.eng)}},{h:'Multiplier',r:1,f:function(r){return r.mult.toFixed(1)+'x'}}],M.perPlat)+'<div class="foot">Multiplier = '+esc(M.mult.src)+'. First logged post: '+shortDate(M.firstPost)+'.</div>'},
+  details:function(){return {rows:POSTS,cols:[{h:'Platform',f:function(p){return p.platform}},{h:'Posted',f:function(p){return shortDate(p.posted)}},{h:'Window',f:function(p){return p.window}},{h:'Impressions',r:1,f:function(p){return fmt(p.impressions)}},{h:'Reach',r:1,f:function(p){return fmt(p.reach)}},{h:'Engagements',r:1,f:function(p){return fmt(p.eng)}},{h:'Views',r:1,f:function(p){return p.views?fmt(p.views):''}},{h:'Post',f:function(p){return '<span class="mono">'+esc(p.url)+'</span>'}}]}},
+  slide:function(){return [[M.mult.v.toFixed(1)+'x','event-day vs pre-event daily'],[fmt(M.impDur.v),'event-day impressions'],[fmt(M.reachDur),'event-day reach'],[fmt(M.views),'video views']]}},
+ {id:'owned',no:'12',title:"ET's own media reach",deps:['owned'],src:'Site analytics, livestream, BWS Studio, Email Marketing',
+  take:function(){return 'ETBrandEquity coverage, livestream and studio chats added '+fmt(M.owned.v)+' views; more arrive as Studio videos publish.'},
+  body:function(){var by={};OWNED.forEach(function(o){by[o.kind]=(by[o.kind]||0)+o.views});return tiles(Object.keys(by).map(function(k){return [k+(k==='Newsletter'?' opens':' views'),fmt(by[k]),'']}))+table([{h:'Type',f:function(o){return o.kind}},{h:'Title',f:function(o){return esc(o.title)}},{h:'Views / opens',r:1,f:function(o){return fmt(o.views)}}],OWNED)+'<div class="foot">Partial on T+1. Refreshes automatically at T+14 when ET Studio videos are published.</div>'},
+  slide:function(){return [[fmt(M.owned.v),'owned-media views'],['6','articles'],['24,300','livestream views']]}},
+ {id:'photos',no:'13',title:'Photos',deps:['photos'],src:'Media Center → Event Images (approved)',
+  take:function(){return ''},
+  body:function(){return '<div class="photos">'+PHOTOS.map(function(p,ix){return '<div class="ph" style="background:linear-gradient('+(120+ix*37)+'deg,var(--c'+(ix%5+1)+'),var(--surface-2))"><span class="lbl">'+esc(p.tag)+'</span></div>'}).join('')+'<div class="ph missing">Needs 1 more</div><div class="ph missing">Needs 1 more</div></div><div class="foot">6 of 8 approved · 14 uploads waiting in Media Center review (placeholders shown in this prototype)</div>'},
+  slide:function(){return [['6','approved photos']]}},
+ {id:'feedback',no:'14',title:'Attendee and partner feedback',deps:['survey'],src:'Feedback survey (portal form, sent at event close)',
+  take:function(){return 'Attendees rated the summit '+M.rating.v.toFixed(1)+' out of 5; '+pct(M.ret.v)+' say they would return.'},
+  body:function(){var cm=SURVEY.filter(function(s){return s.comment}).slice(0,3);return tiles([['Average rating',M.rating.v.toFixed(1)+' / 5','n = '+M.rating.n],['NPS',(M.nps.v>0?'+':'')+M.nps.v,'n = '+M.nps.n],['Would return',pct(M.ret.v),'n = '+M.ret.n],['Responses',M.surveyTypes.Attendee+' + '+M.surveyTypes.Partner,'attendees + partners']])+'<div class="grid2">'+cm.map(function(c){return '<blockquote class="quote">“'+esc(c.comment)+'”<div class="foot">'+c.type+' · rated '+c.rating+'/5</div></blockquote>'}).join('')+'</div>'},
+  details:function(){return {rows:SURVEY,cols:[{h:'Respondent',f:function(s){return s.type}},{h:'Rating',r:1,f:function(s){return s.rating}},{h:'NPS',r:1,f:function(s){return s.nps}},{h:'Would return',f:function(s){return s.ret?'Yes':'No'}},{h:'Comment',f:function(s){return esc(s.comment)}}]}},
+  slide:function(){return [[M.rating.v.toFixed(1)+'/5','average rating'],[(M.nps.v>0?'+':'')+M.nps.v,'NPS'],[pct(M.ret.v),'would return']]}},
+ {id:'yoy',no:'15',title:'Growth vs last year, plus next edition',deps:['prev'],src:'Previous edition metrics (BWS 2024) vs this edition',
+  take:function(){return 'Compared with 2024: attendance '+(M.attendees.v>=PREV.attendees?'up ':'down ')+pct(Math.abs(M.attendees.v/PREV.attendees-1))+', organisations '+(M.orgs.v>=PREV.orgs?'up ':'down ')+pct(Math.abs(M.orgs.v/PREV.orgs-1))+'.'},
+  body:function(){var rows=yoyRows();return '<div class="bars">'+rows.map(function(r){var mx=Math.max(r.a,r.b);return '<div style="display:flex;flex-direction:column;gap:3px"><div style="display:flex;justify-content:space-between;font-size:12.5px"><span>'+r.label+'</span><span class="num" style="color:'+(r.b>=r.a?'var(--good)':'var(--bad)')+'">'+(r.b>=r.a?'+':'−')+pct(Math.abs(r.b/r.a-1))+'</span></div><div class="bar"><span class="lab">2024</span><span class="trk"><span class="fil" style="width:'+(r.a/mx*100)+'%;background:var(--c6)"></span></span><span class="val">'+r.fa+'</span></div><div class="bar"><span class="lab">2025</span><span class="trk"><span class="fil" style="width:'+(r.b/mx*100)+'%;background:var(--c1)"></span></span><span class="val">'+r.fb+'</span></div></div>'}).join('')+'</div><div class="take" style="background:var(--surface)"><p>Next edition: Brand World Summit 2026, 8th edition · July 2026, Mumbai (date to be confirmed)</p></div>'},
+  slide:function(){var r=yoyRows();return r.slice(0,4).map(function(x){return [(x.b>=x.a?'+':'−')+pct(Math.abs(x.b/x.a-1)),x.label.toLowerCase()+' vs 2024']})}}
+];
+function promRows(){return TARGETS.map(function(t){var a,av,tv,met,dv;
+  if(t.metric==='attendees'){a=M.attendees.v;av=fmt(a);tv=fmt(t.target)}
+  else if(t.metric==='speakers'){a=M.speakers.v;av=fmt(a);tv=fmt(t.target)}
+  else if(t.metric==='cxo'){a=M.cxo.v;av=pct(a);tv=pct(t.target)}
+  else if(t.metric==='partners'){a=M.partners.v;av=fmt(a);tv=fmt(t.target)}
+  else {a=M.indicative.v;av=fmt(a);tv=fmt(t.target)}
+  met=a>=t.target;dv=pct(a/t.target);return {label:t.label,stated:t.stated,tv:tv,av:av,dv:dv,met:met}})}
+function yoyRows(){return [{label:'Attendees',a:PREV.attendees,b:M.attendees.v,fa:fmt(PREV.attendees),fb:fmt(M.attendees.v)},{label:'Organisations',a:PREV.orgs,b:M.orgs.v,fa:fmt(PREV.orgs),fb:fmt(M.orgs.v)},{label:'Event-day impressions',a:PREV.impressionsDuring,b:M.impDur.v,fa:fmt(PREV.impressionsDuring),fb:fmt(M.impDur.v)},{label:'CXO share',a:PREV.cxo,b:M.cxo.v,fa:pct(PREV.cxo),fb:pct(M.cxo.v)},{label:'Speakers',a:PREV.speakers,b:M.speakers.v,fa:fmt(PREV.speakers),fb:fmt(M.speakers.v)}]}
+function secStatus(s){var worst='good';s.deps.forEach(function(d){var st=readyOf(d);if(st==='bad')worst='bad';else if(st==='warn'&&worst!=='bad')worst='warn'});return worst}
+
+/* ---------- state ---------- */
+var S={tab:'report',include:{},approved:{},version:null,exports:[],deck:null,sourcesMsg:{}};
+SECTIONS.forEach(function(s){S.include[s.id]=secStatus==null?true:true});
+
+/* ---------- rendering ---------- */
+var main=document.getElementById('main'),nav=document.getElementById('nav');
+function renderTimeline(){var st=[['T-7 → T-1','Readiness checks','Owners fix red items','done'],['T0 · 4 Jul','Event day','Check-in, uploads, posts logged','done'],['T0 night','Auto-build v1','Import, rules, metrics, checks','done'],['T+1 · 5 Jul','Review and send','Deck due by 12:00 · 3h 50m left','now'],['T+14 · 18 Jul','Refresh v2','Studio videos, social tail, survey','']];
+  document.getElementById('timeline').innerHTML=st.map(function(s){return '<div class="stage '+s[3]+'"><div class="when">'+s[0]+'</div><div class="what">'+s[1]+'</div><div class="sub">'+s[2]+'</div></div>'}).join('')}
+function renderTop(){var g=READY.filter(function(r){return r.st==='good'}).length;var sc=Math.round(g/READY.length*100);var bad=READY.filter(function(r){return r.st==='bad'}).length;
+  document.getElementById('readyChip').innerHTML='<span class="dot" style="color:'+(bad?'var(--bad)':'var(--good)')+'"></span>Readiness <b class="num" style="margin-left:4px">'+sc+'%</b>';
+  document.getElementById('verChip').textContent=S.version?S.version:'Draft · not frozen'}
+function renderNav(){var tabs=[['report','Report',SECTIONS.length,''],['readiness','Readiness',READY.filter(function(r){return r.st!=='good'}).length,READY.some(function(r){return r.st==='bad'})?'bad':'warn'],['sources','Data sources',13,''],['quality','Data quality',DQ.filter(function(d){return d.sev==='warn'||d.sev==='bad'}).length,'warn'],['review','Review queue',reviewItems().length,reviewItems().length?'warn':''],['exports','Exports',S.exports.length,'']];
+  var h=tabs.map(function(t){return '<button data-tab="'+t[0]+'" '+(S.tab===t[0]?'aria-current="page"':'')+'><span>'+t[1]+'</span><span class="count '+t[3]+'">'+t[2]+'</span></button>'}).join('');
+  if(S.tab==='report'){h+='<div class="navsec">Sections</div><div class="navsecs">'+SECTIONS.map(function(s){var st=secStatus(s);return '<a href="#sec-'+s.id+'" data-jump="'+s.id+'"><span class="sdot" style="background:var(--'+st+')"></span>'+esc(s.no==='Cover'?'Cover':s.no+'. '+s.title.split(':')[0].split(',')[0])+'</a>'}).join('')+'</div>'}
+  nav.innerHTML=h}
+function renderReport(){var bads=READY.filter(function(r){return r.st!=='good'});
+  var h='<div class="pagehead"><div><h1>Post-event report</h1><p>Built automatically from the portal and team uploads. Every number shows its base and source; the PPT uses the same values.</p></div></div>';
+  if(bads.length)h+='<div class="banner"><b>'+(READY.length-bads.length)+' of '+READY.length+' inputs ready.</b>'+bads.map(function(r){return '<span><span class="pill '+r.st+'">'+(r.st==='bad'?'Missing':'Partial')+'</span> '+esc(r.t)+' · '+esc(r.own)+'</span>'}).join('')+'<button class="linkbtn" data-go="readiness">Open readiness</button></div>';
+  SECTIONS.forEach(function(s,ix){var st=secStatus(s);var tk=s.take();var det=s.details?s.details():null;
+    h+='<section class="sec" id="sec-'+s.id+'"><div class="sec-h"><span class="idx">'+(s.no==='Cover'?'00':(''+s.no).padStart(2,'0'))+'</span><h2>'+esc(s.title)+'</h2><div class="right">'+(st==='bad'?'<span class="pill bad">Not ready</span>':st==='warn'?'<span class="pill warn">Partial data</span>':'<span class="pill good">Ready</span>')+'<label class="toggle"><input type="checkbox" data-inc="'+s.id+'" '+(S.include[s.id]&&st!=='bad'?'checked':'')+'> Include in PPT</label></div></div><div class="sec-b">';
+    if(tk){var ap=S.approved[s.id];h+='<div class="take"><p>'+esc(tk)+'</p>'+(ap?'<span class="pill good">Approved</span>':'<span class="pill info">Draft</span><button class="btn small" data-approve="'+s.id+'">Approve</button>')+'</div>'}
+    h+=s.body()+'<div class="foot">Source: '+esc(s.src)+' · Data as of 5 Jul 2025, 06:00 IST</div></div>';
+    if(det){var rows=Array.isArray(det)?null:det.rows;if(Array.isArray(det)||typeof det==='string'){h+='<details class="dd"><summary>Details</summary><div class="inner">'+det+'</div></details>'}
+      else{h+='<details class="dd" data-det="'+s.id+'"><summary>Details · '+fmt(det.rows.length)+' rows'+(s.id==='seniority'||s.id==='signup'||s.id==='access'?' · people-level, portal only':'')+'</summary><div class="inner"><div class="ddtools"><input type="search" placeholder="Filter rows" data-filter="'+s.id+'" aria-label="Filter rows"><span>Never exported to the PPT</span></div><div data-tbl="'+s.id+'">'+table(det.cols,det.rows)+'</div></div></details>'}}
+    h+='</section>'});
+  main.innerHTML=h}
+function renderReadiness(){var g=READY.filter(function(r){return r.st==='good'}).length;
+  var h='<div class="pagehead"><div><h1>Readiness</h1><p>Every input the T+1 deck needs, with its owner. Red items block the sections that depend on them.</p></div><span class="chip">'+g+' of '+READY.length+' ready</span></div><div class="list">';
+  READY.forEach(function(r){var deps=SECTIONS.filter(function(s){return s.deps.indexOf(r.id)>=0}).map(function(s){return s.no==='Cover'?'Cover':s.no});
+    h+='<div class="row"><span class="ic '+r.st+'">'+(r.st==='good'?'✓':r.st==='warn'?'!':'✕')+'</span><div><div class="t">'+esc(r.t)+'</div><div class="d">'+esc(r.d)+'</div></div><div class="side-r"><span>'+esc(r.own)+'</span><span>Feeds sections '+deps.join(', ')+'</span>'+(r.st!=='good'?'<button class="btn small" data-go="sources">Fix in Data sources</button>':'')+'</div></div>'});
+  main.innerHTML=h+'</div>'}
+var SOURCES=[
+ ['Event settings','Event Setup → Event Details; Design → Top Banner','name, edition, theme, dates, venue, banner, colour, logos',1,'Portal'],
+ ['Targets','New: Event Targets form','metric, target_value, stated_where',TARGETS.length,'Form'],
+ ['Registrations','Target Audience → Registrations','first_name, last_name, email, designation, company, location, lead_source, conversion_source, registration_date, form_type',REGS.length,'Portal'],
+ ['Attendees (check-in)','Target Audience → Attendees','email, checked_in_at',812,'Portal'],
+ ['Shortlisted','Target Audience → Shortlisted Users','email',960,'Portal'],
+ ['Wishlist users','Target Audience → Wishlist Users','sponsor_name, email, company',WISH.length,'Portal'],
+ ['Speakers','Event Setup → Speakers','name, designation, company, speaker_group, status',SPK.length,'Portal'],
+ ['Agenda','Event Setup → Agenda (+ new tags)','start_time, end_time, title, format, theme, owner_type, partner_name, speakers',SESS.length,'Portal'],
+ ['Sponsors','Event Setup → Sponsors','sponsor_name, group_name, logo_url',SPONSORS.length,'Portal'],
+ ['Programme attendance','New: session check-in','programme_type, sponsor_name, session_time, email',PROG.length,'Ops upload'],
+ ['Social posts','Social team post register (CSV now, APIs later)','platform, url, posted_at, impressions, reach, engagements, views, captured_at',POSTS.length,'CSV'],
+ ['Owned media','Site analytics, livestream, Email Marketing','kind, title, url, views',OWNED.length,'CSV'],
+ ['Media: photos & audio','Media Center → Event Images / Videos (tag by session)','file, session, speaker, tag',PHOTOS.length,'Upload']];
+function renderSources(){var h='<div class="pagehead"><div><h1>Data sources</h1><p>Each card mirrors a portal module or team export. In production most are read directly from the portal; this prototype also accepts a CSV to preview its columns.</p></div></div><div class="cards">';
+  SOURCES.forEach(function(s,ix){var m=S.sourcesMsg[ix];var zero=(ix===12);
+    h+='<div class="card"><h3>'+esc(s[0])+'</h3><div class="mod">'+esc(s[1])+'</div><code>'+esc(s[2])+'</code><div class="stat"><span>'+fmt(s[3])+' rows · '+s[4]+'</span>'+(zero?'<span class="pill warn">Audio missing</span>':'<span class="pill good">Imported 5 Jul, 05:40</span>')+'</div><div class="acts"><label class="btn small filebtn">Preview a CSV<input type="file" accept=".csv,text/csv" data-csv="'+ix+'"></label>'+(m?'<span class="msg">'+esc(m)+'</span>':'')+'</div></div>'});
+  main.innerHTML=h+'</div>'}
+function renderQuality(){var order={bad:0,warn:1,info:2,good:3};var list=DQ.slice().sort(function(a,b){return order[a.sev]-order[b.sev]});
+  var h='<div class="pagehead"><div><h1>Data quality</h1><p>Recomputed after every import. Blocking checks must pass before export; warnings need an approver’s acknowledgement.</p></div></div><div class="list">';
+  list.forEach(function(d){h+='<div class="row"><span class="ic '+d.sev+'">'+(d.sev==='good'?'✓':d.sev==='bad'?'✕':d.sev==='warn'?'!':'i')+'</span><div><div class="t">'+esc(d.t)+'</div><div class="d">'+esc(d.d)+'</div></div><div class="side-r"><span>'+esc(d.kind)+'</span>'+(d.go?'<button class="btn small" data-go="'+d.go+'">Resolve</button>':'')+'</div></div>'});
+  main.innerHTML=h+'</div>'}
+function reviewItems(){var t={},c={};PEOPLE.forEach(function(p){if(p.sen==='Unclassified')t[p.title]=(t[p.title]||0)+1;if(p.channel==='Unmapped')c[p.conv]=(c[p.conv]||0)+1});
+  return Object.keys(t).map(function(k){return {kind:'title',raw:k,n:t[k],sug:functionOf(k)}}).concat(Object.keys(c).map(function(k){return {kind:'channel',raw:k,n:c[k]}}))}
+function renderReview(){var items=reviewItems();var h='<div class="pagehead"><div><h1>Review queue</h1><p>Values the rules could not place. Your choice is saved as an override and reused for every future event.</p></div></div>';
+  if(!items.length){main.innerHTML=h+'<div class="empty"><b>Nothing to review</b><span>All designations and sign-up sources are classified. Numbers in the report have been recomputed.</span></div>';return}
+  h+='<div class="list"><div class="rq rqhead"><span>Raw value</span><span>Rows</span><span>Classify as</span><span></span><span></span></div>';
+  items.forEach(function(it,ix){if(it.kind==='title'){h+='<div class="rq"><span class="raw">'+esc(it.raw)+'<br><span class="foot">Designation</span></span><span class="num">'+it.n+'</span><select id="rqs'+ix+'" aria-label="Seniority for '+esc(it.raw)+'">'+['CXO','VP','Director','Manager','Other'].map(function(o){return '<option'+(o==='Director'&&/custodian|partner/i.test(it.raw)?' selected':o==='Other'&&!/custodian|partner/i.test(it.raw)?' selected':'')+'>'+o+'</option>'}).join('')+'</select><select id="rqf'+ix+'" aria-label="Function for '+esc(it.raw)+'">'+['Marketing','Leadership','Tech','Sales','Other'].map(function(o){return '<option'+(o===it.sug?' selected':'')+'>'+o+'</option>'}).join('')+'</select><button class="btn small" data-apply="'+ix+'">Apply</button></div>'}
+    else{h+='<div class="rq"><span class="raw">'+esc(it.raw)+'<br><span class="foot">Sign-up source</span></span><span class="num">'+it.n+'</span><select id="rqs'+ix+'" aria-label="Channel for '+esc(it.raw)+'">'+['Direct','Newsletter','Social','Partner','Referral','Paid','Other'].map(function(o){return '<option'+(o==='Other'?' selected':'')+'>'+o+'</option>'}).join('')+'</select><span></span><button class="btn small" data-apply="'+ix+'">Apply</button></div>'}});
+  main.innerHTML=h+'</div>'}
+function renderExports(){var h='<div class="pagehead"><div><h1>Exports</h1><p>Every generated deck is frozen with its data version, so what a sponsor received can always be traced.</p></div></div>';
+  if(!S.exports.length){main.innerHTML=h+'<div class="empty"><b>No deck generated yet</b><span>Use Generate PPT once the report looks right. The deck is due to sponsors by 12:00 today.</span><span><button class="btn small primary" data-gen="1">Generate PPT</button></span></div>';return}
+  h+='<div class="list">'+S.exports.map(function(e){return '<div class="row"><span class="ic good">✓</span><div><div class="t">'+esc(e.version)+' · '+e.sections+' slides</div><div class="d">'+esc(e.note)+'</div></div><div class="side-r"><span>'+esc(e.by)+'</span><span class="num">'+esc(e.time)+'</span></div></div>'}).join('')+'</div>';
+  if(S.deck)h+='<h2 style="font-size:19px;margin-top:6px">Slides in '+esc(S.exports[0].version)+'</h2>'+S.deck;
+  main.innerHTML=h}
+function render(){renderTop();renderNav();({report:renderReport,readiness:renderReadiness,sources:renderSources,quality:renderQuality,review:renderReview,exports:renderExports})[S.tab]()}
+function recompute(){processAll();computeMetrics();computeReadiness();render()}
+
+/* ---------- PPT generation (preview) ---------- */
+var modal=document.getElementById('modal'),mBody=document.getElementById('mBody'),mFoot=document.getElementById('mFoot');
+function openGen(){var h='<p style="margin:0;color:var(--ink-2)">Choose the sections to include. Generating freezes the current numbers as <b>v1 · T+1</b>; the deck reads only that frozen version and carries totals only, never names or emails.</p><div class="pick">';
+  SECTIONS.forEach(function(s){var st=secStatus(s);h+='<label><input type="checkbox" id="pk-'+s.id+'" '+(S.include[s.id]&&st!=='bad'?'checked':'')+'> '+esc(s.no==='Cover'?'Cover':s.no+'. '+s.title)+(st==='bad'?'<span class="pill bad">Not ready</span>':st==='warn'?'<span class="pill warn">Partial</span>':'')+'</label>'});
+  h+='</div><div><label for="ovr" style="font-size:12.5px;color:var(--ink-2)">If you include a section that is not ready, give a reason (logged)</label><textarea id="ovr" placeholder="e.g. Quotes to follow in v2 at T+14"></textarea></div><div id="genErr" class="foot" style="color:var(--bad)"></div>';
+  mBody.innerHTML=h;mFoot.innerHTML='<button class="btn" id="gCancel">Cancel</button><button class="btn primary" id="gGo">Freeze v1 and build slides</button>';modal.hidden=false;
+  document.getElementById('gCancel').onclick=closeGen;document.getElementById('gGo').onclick=doGen}
+function closeGen(){modal.hidden=true}
+function doGen(){var chosen=SECTIONS.filter(function(s){var el=document.getElementById('pk-'+s.id);return el&&el.checked});
+  var notReady=chosen.filter(function(s){return secStatus(s)==='bad'});var reason=document.getElementById('ovr').value.trim();
+  if(notReady.length&&!reason){document.getElementById('genErr').textContent='Add a reason to include: '+notReady.map(function(s){return s.title}).join(', ');return}
+  if(!chosen.length){document.getElementById('genErr').textContent='Choose at least one section.';return}
+  var blocking=DQ.filter(function(d){return d.sev==='bad'});if(blocking.length){document.getElementById('genErr').textContent='Fix blocking data-quality checks first.';return}
+  var n=0,slides=chosen.map(function(s){n++;var fig=s.slide();var cover=s.id==='cover';
+    return '<div class="slide'+(cover?' cover':'')+'"><div class="snum">'+n+' / '+chosen.length+'</div><div class="st">'+(cover?'Brand World Summit’25':esc(s.title))+'</div><div class="sk">'+esc(cover?'Post-event report · 4 July 2025 · Mumbai':(s.take()||''))+'</div>'+(fig?'<div class="sn">'+fig.map(function(f){return '<div><b>'+esc(f[0])+'</b><span>'+esc(f[1])+'</span></div>'}).join('')+'</div>':'<div class="sn"></div>')+'<div class="sf">Source: '+esc(s.src.split(';')[0])+' · Data as of 5 Jul 2025, 06:00 IST · v1</div></div>'}).join('');
+  S.version='v1 · T+1 · frozen 08:14';S.deck='<div class="slides">'+slides+'</div>';
+  S.exports.unshift({version:'v1 · T+1',sections:chosen.length,note:(notReady.length?'Included not-ready sections: '+notReady.map(function(s){return s.title}).join(', ')+' ("'+reason+'"). ':'')+'PPTX + PDF · template: Design → Top Banner',by:'You (approver)',time:'5 Jul 2025, 08:14'});
+  mBody.innerHTML='<div class="note">In production this step downloads the PPTX and PDF. This prototype shows the slides that would be exported.</div>'+S.deck;
+  mFoot.innerHTML='<button class="btn" id="gDone">Done</button><button class="btn primary" id="gExp">Open Exports</button>';
+  document.getElementById('gDone').onclick=function(){closeGen();render()};document.getElementById('gExp').onclick=function(){closeGen();S.tab='exports';render();window.scrollTo(0,0)};renderTop()}
+
+/* ---------- events ---------- */
+document.addEventListener('click',function(e){var t=e.target.closest('[data-tab],[data-go],[data-approve],[data-apply],[data-gen],[data-jump]');if(!t)return;
+  if(t.dataset.tab){S.tab=t.dataset.tab;render();window.scrollTo(0,0)}
+  else if(t.dataset.go){S.tab=t.dataset.go;render();window.scrollTo(0,0)}
+  else if(t.dataset.approve){S.approved[t.dataset.approve]=1;render()}
+  else if(t.dataset.gen){openGen()}
+  else if(t.dataset.jump){e.preventDefault();var el=document.getElementById('sec-'+t.dataset.jump);if(el)el.scrollIntoView({behavior:'smooth',block:'start'})}
+  else if(t.dataset.apply!=null){var it=reviewItems()[+t.dataset.apply];var ix=t.dataset.apply;
+    if(it.kind==='title'){OVR.title[it.raw]={sen:document.getElementById('rqs'+ix).value,fn:document.getElementById('rqf'+ix).value}}
+    else{OVR.channel[it.raw]=document.getElementById('rqs'+ix).value}
+    recompute()}});
+document.addEventListener('change',function(e){var t=e.target;
+  if(t.dataset.inc){S.include[t.dataset.inc]=t.checked}
+  if(t.dataset.csv!=null&&t.files&&t.files[0]){var ix=+t.dataset.csv,fr=new FileReader();fr.onload=function(){var lines=String(fr.result).split(/\r?\n/).filter(function(l){return l.trim()});var hdr=(lines[0]||'').split(',').map(function(x){return x.trim()}).slice(0,6).join(', ');S.sourcesMsg[ix]='Read '+fmt(Math.max(0,lines.length-1))+' rows · columns: '+hdr+(hdr?'…':'')+' (preview only; sample data kept)';render()};fr.readAsText(t.files[0])}});
+document.addEventListener('input',function(e){var t=e.target;if(!t.dataset.filter)return;var id=t.dataset.filter,q=t.value.toLowerCase();var s=SECTIONS.filter(function(x){return x.id===id})[0];var det=s.details();
+  var rows=det.rows.filter(function(r){return JSON.stringify(r,function(k,v){return k==='org'?v.name:v}).toLowerCase().indexOf(q)>=0});document.querySelector('[data-tbl="'+id+'"]').innerHTML=table(det.cols,rows)});
+document.getElementById('genBtn').onclick=openGen;document.getElementById('mClose').onclick=closeGen;
+modal.addEventListener('click',function(e){if(e.target===modal)closeGen()});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!modal.hidden)closeGen()});
+
+renderTimeline();recompute();
+})();
+</script>

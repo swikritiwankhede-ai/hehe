@@ -1,0 +1,171 @@
+<title>Post-Event Report Workflow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F4F2F0; --surface:#FFFFFF; --surface-2:#F9F7F5; --ink:#1C1B1E; --ink-2:#48434A; --muted:#766F73; --line:#E4DEDA; --line-2:#EFEAE6;
+  --accent:#C8232C; --accent-soft:#F8E4E3; --auto:#2D5B85; --auto-soft:#E3ECF5; --good:#1D7349; --good-soft:#E2F1E8; --warn:#9A5D08; --warn-soft:#FAEFD9;
+  --serif:"Newsreader", Georgia, "Times New Roman", serif; --sans:"IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif; --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){color-scheme:dark;
+  --bg:#141315; --surface:#1C1B1E; --surface-2:#222024; --ink:#F2EEEC; --ink-2:#CEC7C5; --muted:#9A9195; --line:#34303A; --line-2:#29262B;
+  --accent:#F0575E; --accent-soft:#3A1D20; --auto:#7FB0DD; --auto-soft:#18283A; --good:#5CC08D; --good-soft:#17301F; --warn:#E3A948; --warn-soft:#33270F}}
+:root[data-theme="dark"]{color-scheme:dark;
+  --bg:#141315; --surface:#1C1B1E; --surface-2:#222024; --ink:#F2EEEC; --ink-2:#CEC7C5; --muted:#9A9195; --line:#34303A; --line-2:#29262B;
+  --accent:#F0575E; --accent-soft:#3A1D20; --auto:#7FB0DD; --auto-soft:#18283A; --good:#5CC08D; --good-soft:#17301F; --warn:#E3A948; --warn-soft:#33270F}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.5}
+.wrap{max-width:1320px;margin:0 auto;padding-inline:16px;padding-block:28px 56px;display:flex;flex-direction:column;gap:28px}
+h1,h2,h3{font-family:var(--serif);font-weight:600;margin:0;text-wrap:balance}
+h1{font-size:32px}
+h2{font-size:22px}
+.lede{color:var(--ink-2);max-width:72ch;margin:6px 0 0}
+.eyebrow{font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.keyline{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:12.5px;color:var(--ink-2)}
+.keyline span{display:inline-flex;gap:6px;align-items:center}
+.sw{width:12px;height:12px;border-radius:3px;border:1px solid var(--line)}
+.sw.team{background:var(--surface)}
+.sw.auto{background:var(--auto-soft);border-color:var(--auto)}
+.sw.gate{background:var(--warn-soft);border-color:var(--warn)}
+.sw.out{background:var(--accent-soft);border-color:var(--accent)}
+
+/* swimlane */
+.lanes{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.grid{display:grid;grid-template-columns:170px repeat(6,minmax(170px,1fr));min-width:1180px}
+.hd{padding:10px 12px;border-bottom:1px solid var(--line);background:var(--surface-2)}
+.hd .w{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.04em;text-transform:uppercase}
+.hd .t{font-weight:600;font-size:13px}
+.hd.now{background:var(--accent-soft);box-shadow:inset 0 3px 0 var(--accent)}
+.lane{padding:10px 12px;border-bottom:1px solid var(--line-2);font-weight:600;font-size:13px;display:flex;flex-direction:column;gap:2px}
+.lane small{font-weight:400;color:var(--muted);font-size:11.5px}
+.lane.auto{background:var(--auto-soft);color:var(--auto)}
+.cell{padding:8px;border-bottom:1px solid var(--line-2);border-left:1px solid var(--line-2);display:flex;flex-direction:column;gap:6px}
+.cell.auto{background:color-mix(in srgb,var(--auto-soft) 55%,transparent)}
+.st{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:6px 8px;font-size:12.5px;line-height:1.35;display:grid;grid-template-columns:auto 1fr;gap:6px;align-items:start}
+.st .n{font-family:var(--mono);font-size:10.5px;color:var(--muted);padding-top:1px}
+.st.auto{border-color:var(--auto);background:var(--surface)}
+.st.auto .n{color:var(--auto)}
+.st.gate{border-color:var(--warn);background:var(--warn-soft)}
+.st.gate .n{color:var(--warn)}
+.st.out{border-color:var(--accent);background:var(--accent-soft)}
+.st.out .n{color:var(--accent)}
+.st b{font-weight:600}
+
+/* pipeline */
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px}
+.flow{overflow-x:auto}
+.flow svg{display:block;min-width:1080px;width:100%;height:auto}
+.flow text{font-family:var(--sans);fill:var(--ink)}
+.flow .sm{font-size:11px;fill:var(--muted)}
+.flow .lb{font-size:13px;font-weight:600}
+.flow .ln{stroke:var(--muted);stroke-width:1.5;fill:none}
+.flow .box{fill:var(--surface);stroke:var(--line)}
+.flow .boxa{fill:var(--auto-soft);stroke:var(--auto)}
+.flow .boxg{fill:var(--warn-soft);stroke:var(--warn)}
+.flow .boxo{fill:var(--accent-soft);stroke:var(--accent)}
+.flow .no{fill:var(--warn);font-size:11px;font-weight:600}
+.flow .yes{fill:var(--good);font-size:11px;font-weight:600}
+.flow marker path{fill:var(--muted)}
+
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.rule{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:6px}
+.rule h3{font-size:16px}
+.rule p{margin:0;color:var(--ink-2);font-size:13px}
+.foot{font-size:12px;color:var(--muted)}
+a{color:var(--accent)}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">ETBrandEquity · Post-Event Report Studio · IP events</div>
+    <h1>How the post-event deck gets made</h1>
+    <p class="lede">From the first target entered before the event to the deck in sponsors’ inboxes by 12:00 the day after, and the refreshed v2 two weeks later. Teams capture data in the portal as they work; the platform does the assembling, checking and slide-building.</p>
+  </header>
+
+  <section style="display:flex;flex-direction:column;gap:10px">
+    <h2>Who does what, and when</h2>
+    <div class="keyline"><span><i class="sw team"></i>Team action in the portal</span><span><i class="sw auto"></i>Automatic platform step</span><span><i class="sw gate"></i>Check or approval</span><span><i class="sw out"></i>Goes to sponsors</span><span>Numbers show the order of the main path</span></div>
+    <div class="lanes" role="region" aria-label="Swimlane workflow by team and time" tabindex="0">
+      <div class="grid" id="lanes"></div>
+    </div>
+  </section>
+
+  <section class="panel" style="display:flex;flex-direction:column;gap:12px">
+    <h2>What the platform does with the data</h2>
+    <p class="lede" style="margin:0">Every number is computed once in the metrics registry. The report page and the PPT both read from it, so they can never disagree.</p>
+    <div class="flow" role="img" aria-label="Pipeline: sources to connectors to event data store to cleaning and classification to metrics registry, then a blocking-checks gate, report page, a readiness gate, approvals, frozen version, PPT and PDF sent to sponsors, and a T+14 refresh back into the pipeline.">
+      <svg id="flow" viewBox="0 0 1180 400"></svg>
+    </div>
+    <div class="foot">Rejected paths loop back: failed checks go to the Review queue or the source module; a not-ready section is dropped or included with a logged reason.</div>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:12px">
+    <h2>Rules the flow enforces</h2>
+    <div class="cols">
+      <div class="rule"><h3>Capture on the day</h3><p>Check-in, session-tagged photos and audio, and every social post URL are recorded during the event. The readiness checklist names the owner of anything missing from T-7 onwards.</p></div>
+      <div class="rule"><h3>One number, one definition</h3><p>Each metric carries its formula, base (n), source and “as of” time. Social reach uses the agreed windows: pre-event = post date → event start; during = event days.</p></div>
+      <div class="rule"><h3>AI drafts, people approve</h3><p>AI suggests classifications, verbatim quotes from speaker audio, photo picks and one-line takeaways. It never writes a number, and nothing reaches a slide without approval.</p></div>
+      <div class="rule"><h3>Totals only leave the portal</h3><p>Names, emails and attendee lists stay in the internal page. The deck shows aggregates and organisation names, and every export is frozen and logged.</p></div>
+    </div>
+  </section>
+</div>
+
+<script>
+(function(){
+var COLS=[['T-30 → T-1','Before the event',''],['T0 · event day','During the event',''],['T0 night','Overnight',''],['T+1 · by 12:00','Review and send','now'],['T+1 → T+14','Data keeps arriving',''],['T+14','Refresh','']];
+var LANES=[
+ {name:'Sales & Editorial',sub:'targets, tiers, wishlists',cells:[[['1','Enter pre-event <b>targets</b> (attendees, speakers, CXO share, partners, indicative speakers)'],['2','Map sponsor groups to <b>standard tiers</b>; upload partner <b>wishlists</b>']],[],[],[],[],[['','Use the frozen deck and year-on-year view in renewal talks (phase 3)']]]},
+ {name:'Content team',sub:'agenda, speakers',cells:[[['3','Publish <b>agenda</b> with format, theme and owner tags; <b>speakers</b> with status']],[['8','Update speakers who actually <b>spoke</b> and agenda changes']],[],[],[],[]]},
+ {name:'Delegate acquisition & Ops',sub:'registrations, check-in',cells:[[['4','Registrations flow in with lead and conversion source; <b>shortlist</b> delegates']],[['9','<b>Check-in</b> at the door; check-in for Pitch Room, dialogues and showcase']],[],[],[],[]]},
+ {name:'Social media team',sub:'post register',cells:[[['5','Log every promo <b>post URL</b> in the post register']],[['10','Log every event-day post']],[],[],[['','Daily snapshots of each post (CSV now, APIs later)']],[]]},
+ {name:'Video team',sub:'photos, audio',cells:[[],[['11','Upload <b>photos and speaker audio</b> to Media Center, tagged by session']],[],[],[['','Publish ET Studio videos and 5D bytes']],[]]},
+ {name:'Platform',sub:'automatic',auto:true,cells:[[['6','Daily <b>readiness report</b> to owners from T-7','auto']],[['12','Hourly sync of check-in and posts; send <b>feedback survey</b> at close','auto']],[['13','Import all sources → clean and classify → compute <b>metrics</b> → run checks → draft <b>report v1</b>','auto']],[['14','07:00: notify event lead with readiness score and open flags','auto']],[['','Daily snapshots: social, owned media, survey','auto']],[['20','Build <b>v2</b> and show what changed since v1','auto']]]},
+ {name:'Events team',sub:'review, approve, send',cells:[[['7','Fix red readiness items before the event']],[],[],[['15','Clear <b>blocking checks</b>; resolve the review queue','gate'],['16','Approve takeaways, quotes and photos','gate'],['17','<b>Generate PPT</b>: freeze v1, build PPTX + PDF'],['18','Send deck to all sponsors','out']],[],[['21','Generate <b>v2</b> and re-send','out']]]}
+];
+var h='<div class="hd"></div>'+COLS.map(function(c){return '<div class="hd '+c[2]+'"><div class="w">'+c[0]+'</div><div class="t">'+c[1]+'</div></div>'}).join('');
+LANES.forEach(function(l){h+='<div class="lane'+(l.auto?' auto':'')+'">'+l.name+'<small>'+l.sub+'</small></div>';
+  l.cells.forEach(function(c){h+='<div class="cell'+(l.auto?' auto':'')+'">'+c.map(function(s){var k=s[2]||(l.auto?'auto':'');return '<div class="st '+k+'"><span class="n">'+(s[0]||'·')+'</span><span>'+s[1]+'</span></div>'}).join('')+'</div>'})});
+document.getElementById('lanes').innerHTML=h;
+
+/* pipeline SVG */
+var svg=document.getElementById('flow');var NS='http://www.w3.org/2000/svg';
+function el(t,a,txt){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(txt!=null)e.textContent=txt;svg.appendChild(e);return e}
+var defs=el('defs',{});var mk=document.createElementNS(NS,'marker');mk.setAttribute('id','ar');mk.setAttribute('viewBox','0 0 10 10');mk.setAttribute('refX','9');mk.setAttribute('refY','5');mk.setAttribute('markerWidth','7');mk.setAttribute('markerHeight','7');mk.setAttribute('orient','auto-start-reverse');var mp=document.createElementNS(NS,'path');mp.setAttribute('d','M0,0 L10,5 L0,10 z');mk.appendChild(mp);defs.appendChild(mk);
+function box(x,y,w,hgt,cls,title,sub){el('rect',{x:x,y:y,width:w,height:hgt,rx:8,class:cls});el('text',{x:x+w/2,y:y+(sub?hgt/2-3:hgt/2+5),'text-anchor':'middle',class:'lb'},title);if(sub){sub.split('|').forEach(function(s,i){el('text',{x:x+w/2,y:y+hgt/2+13+i*13,'text-anchor':'middle',class:'sm'},s)})}}
+function diamond(cx,cy,w,hgt,title){el('path',{d:'M'+cx+','+(cy-hgt/2)+' L'+(cx+w/2)+','+cy+' L'+cx+','+(cy+hgt/2)+' L'+(cx-w/2)+','+cy+' Z',class:'boxg'});title.split('|').forEach(function(t,i,a){el('text',{x:cx,y:cy+4+(i-(a.length-1)/2)*14,'text-anchor':'middle',class:'lb',style:'font-size:12px'},t)})}
+function line(d){el('path',{d:d,class:'ln','marker-end':'url(#ar)'})}
+/* row 1 */
+box(10,30,150,74,'box','Sources','portal modules · uploads|social · survey');
+box(190,30,150,74,'boxa','Connectors','read portal · CSV now|APIs later');
+box(370,30,150,74,'boxa','Event data store','people, orgs, sessions,|posts, media, targets');
+box(550,30,160,74,'boxa','Clean & classify','dedupe · fix text ·|seniority · org · channel');
+box(740,30,160,74,'boxa','Metrics registry','formula · n · source ·|as of');
+diamond(1040,67,190,92,'Blocking checks|pass?');
+line('M160,67 L188,67');line('M340,67 L368,67');line('M520,67 L548,67');line('M710,67 L738,67');line('M900,67 L943,67');
+/* no branch from checks */
+box(950,160,180,56,'box','Fix at source','or in the review queue');
+line('M1040,113 L1040,158');el('text',{x:1048,y:140,class:'no'},'No');
+line('M950,188 L630,188 L630,106');
+/* row 2 */
+el('text',{x:1136,y:62,class:'yes'},'Yes');
+line('M1135,67 L1165,67 L1165,260 L1110,260');
+box(930,232,178,56,'box','Internal report page','16 sections · drill-downs');
+diamond(800,260,190,92,'Every chosen|section ready?');
+line('M930,260 L897,260');
+box(560,300,150,56,'boxg','Include with reason','or drop the section');
+line('M800,306 L800,328 L712,328');el('text',{x:808,y:322,class:'no'},'No');
+line('M635,300 L635,280');
+box(513,232,182,52,'boxg','Approve drafts','takeaways · quotes · photos');
+line('M705,260 L697,260');el('text',{x:684,y:226,class:'yes'},'Yes');
+box(330,232,160,56,'boxa','Freeze version','v1 at T+1 · v2 at T+14');
+line('M513,256 L492,256');
+box(140,232,160,56,'boxo','PPTX + PDF','totals only · logged');
+line('M330,260 L302,260');
+box(10,232,110,56,'boxo','Sponsors','by 12:00, T+1');
+line('M140,260 L122,260');
+/* refresh loop */
+box(330,330,160,50,'boxa','T+14 refresh','new snapshots');
+line('M490,355 L505,355 L505,106');el('text',{x:512,y:320,class:'sm'},'re-run');
+})();
+</script>
