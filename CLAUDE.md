@@ -117,6 +117,14 @@ Internal capture → accurate ROI report → the sponsor's marketing manager has
   7. Market insights: a per-vertical stats library with source and year.
 
   Real BWS 2025 website data is used for event, sponsors and speakers; attendee, media and social rows are fictional samples.
+- **Intake build kit:** `docs/intake-prd.md` is the PRD for the intake screen (7 steps, data contracts, seniority rule, acceptance criteria). `docs/intake-prompts.md` has Lovable Prompts A–D, the Claude Design prompt and a table of what to attach to each tool. Screenshots are in `prototype/screens/`; test files in `samples/`: OneWorld registrations sample, real BWS 2025 sponsors and speakers, Drive filenames, LinkedIn page export.
+- **Access and distribution:** see `docs/platform-access-and-distribution.md`. It covers:
+  - dependencies: systems, people, open decisions
+  - roles: Owner / Editor / Contributor / Viewer / Sponsor
+  - company SSO for internal users
+  - a **recommended** sponsor viewer: personal magic link, then a one-time code, same domain only, watermarked downloads, view tracking. This is still a proposal; the current decision is PPT/PDF only.
+  - the T-30 → T+30 communication timeline
+  - login-first design mechanisms, and Lovable Prompt E
 - **Lovable integrations:** see `docs/lovable-integrations.md`. It covers:
   - Feasibility: Excel upload, Drive, transcription, the summary / quotes / themes prompt and photo scoring are fine. LinkedIn impressions can't be read from public URLs; use the page-analytics export now and the official API after approval. OneWorld needs an ET engineering API plus DPDP sign-off.
   - The setup checklist.
