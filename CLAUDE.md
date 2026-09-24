@@ -107,6 +107,10 @@ Internal capture → accurate ROI report → the sponsor's marketing manager has
   4. T+1 timeline and versioning.
   5. Polish and self-tests.
 - **Prototype and workflow chart:** `prototype/report-studio.html` is a clickable Report Studio: fictional BWS 2025 sample data, 16 sections, readiness, data quality, a working review queue, and a Generate PPT preview. `prototype/report-workflow.html` is a swimlane of who does what from T-30 to T+14, plus the platform pipeline with its gates. Both are published as private artifacts.
+- **Lovable integrations:** see `docs/lovable-integrations.md`. It covers:
+  - Feasibility: Excel upload, Drive, transcription, the summary / quotes / themes prompt and photo scoring are fine. LinkedIn impressions can't be read from public URLs; use the page-analytics export now and the official API after approval. OneWorld needs an ET engineering API plus DPDP sign-off.
+  - The setup checklist.
+  - Prompts 6–11: Excel with saved mappings, Drive via a service account, async transcription with verbatim-quote checks, the LinkedIn post register, photo prominence without face ID, and a OneWorld connector.
 
 ## 7. Data categories by source team
 
