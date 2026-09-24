@@ -100,6 +100,12 @@ Internal capture → accurate ROI report → the sponsor's marketing manager has
     - Phase 1 (MVP): internal data, social via CSV, PPT, 12 of 16 sections.
     - Phase 2: AI quotes and photos, social APIs, survey.
     - Phase 3: cross-edition sponsor history for retention.
+- **Lovable build prompts:** see `docs/lovable-prompt.md`. There are 5 sequential prompts:
+  1. Foundation: data model, CSV imports that mirror the portal exports, processing rules, metrics registry, 16-section report, readiness and data-quality checks, review queues, fictional BWS 2025 seed data.
+  2. AI assists: drafts that need approval, verbatim quotes only, and no AI-generated numbers.
+  3. PPT export with pptxgenjs: frozen versions, totals only.
+  4. T+1 timeline and versioning.
+  5. Polish and self-tests.
 
 ## 7. Data categories by source team
 
