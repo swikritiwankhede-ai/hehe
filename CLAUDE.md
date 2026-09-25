@@ -159,6 +159,12 @@ Internal capture → accurate ROI report → the sponsor's marketing manager has
   - **Event leads' workspace:** a Today queue across events; an Events list (theme swatch, lifecycle bar, 7 source squares, stage facts); event tabs for Overview, Video brief (status actions), Market insights and Sponsor links.
   - **Sponsor view:** personal link plus email code, in the event's own theme, totals only. Order: at a glance, seniority, leader quotes, partner wall, photos, then watermarked downloads and same-domain sharing. The same link updates at T+14.
   - Lovable Prompt J is in the doc.
+- **Source requirements:** see `docs/source-requirements.md`. It covers 14 sources, each with must-have fields, rules, due date and owner, v1 and v2 access, and arrival checks. It also lists five non-negotiables:
+  1. one event key
+  2. speaker names spelt as in the agenda
+  3. the video plan by T-3
+  4. the event hashtag on every post
+  5. check-in as "attended", with tier promises entered once
 - **Lovable integrations:** see `docs/lovable-integrations.md`. It covers:
   - Feasibility: Excel upload, Drive, transcription, the summary / quotes / themes prompt and photo scoring are fine. LinkedIn impressions can't be read from public URLs; use the page-analytics export now and the official API after approval. OneWorld needs an ET engineering API plus DPDP sign-off.
   - The setup checklist.
