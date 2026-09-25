@@ -85,6 +85,26 @@ Then:
 - **YouTube and Instagram** posts are found and counted automatically every day until T+14.
 - **LinkedIn** posts are matched from the export by the same keys, so nobody collects post links by hand.
 
+### What about a scraping service such as Apify?
+Apify runs ready-made scrapers ("actors") for LinkedIn, Instagram and YouTube. They work, but they don't change the answer.
+
+**Same terms problem.** The platforms' terms still apply to whoever commissions the scraping. Apify's own terms put that responsibility on the customer, so here that is ET.
+
+**Still no impressions.** Actors only see what's public:
+- **LinkedIn:** reactions, comments, reposts, and sometimes video views. Not impressions.
+- **Instagram:** likes (unless hidden), comments and reel plays. Not reach or impressions.
+- **YouTube:** views, likes and comments. The free YouTube API already gives these.
+
+**Account risk.** LinkedIn actors often ask for a logged-in session cookie. Never give one from an ETBrandEquity admin or employee account.
+
+**Reliability.** The actors are third-party code that breaks when a site changes its layout. That makes them a weak basis for numbers sent to sponsors.
+
+**If leadership still wants it:**
+- Use it only for **LinkedIn public engagement** (reactions, comments, reposts) on ET's own posts, with no-login actors.
+- Label it "public engagement" and keep it off the headline slide.
+- Get legal and IT sign-off first.
+- Impressions still come from the page export.
+
 ## 4. What to build (in order)
 
 1. **Website harvester** (automation): event, theme CSS, sponsors, speakers, agenda from the public event URL. Scheduled daily from T-30. The BWS 2025 page already parses.
