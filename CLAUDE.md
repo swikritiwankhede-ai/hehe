@@ -24,6 +24,13 @@ Internal capture → accurate ROI report → the sponsor's marketing manager has
     - `[Your name]` placeholder in the footer.
     - Open: whether to add the churn-number caveat as a footnote.
   - **Build-spec** tab: data model, deliverable catalog, auto-report feature.
+- **Automation one-pager for business** (Claude Doc, https://claude.ai/code/artifact/701cc447-a812-487f-8324-5f6ce6d20fe2). It covers:
+  - why T+1 matters
+  - "define before, approve after"
+  - an 11-source table: today → how it becomes automatic → what's left for people
+  - what stays human: approvals, the OneWorld upload, LinkedIn exports, no scraping
+  - five team habits, plus the IT and Legal asks
+  - next steps: build, BWS 2025 dry run, pilot
 - **Leadership 1-pager (.docx)**: Word export of the 1-pager, for sharing.
 - A "Sponsor Retention — Leadership Clarity One-Pager" design artifact was started, then replaced by the simpler doc version.
 
