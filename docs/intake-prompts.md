@@ -50,10 +50,22 @@ Data model (Supabase):
 Seed BWS 2025: 7th edition, 4 Jul 2025, Grand Hyatt BKC Mumbai, theme "Reimagining Marketing In The Age of AI", #ETBWS2025. Sponsors from bws2025_sponsors.csv (26) and speakers from bws2025_speakers.csv (35).
 
 Step 1 – Event and theme:
-- Two source cards (radio): "OneWorld event settings" (default; for now reads the seeded event) and "Paste the website HTML".
+- Two source cards (radio): "OneWorld event settings" (default) and "Paste the website HTML".
+- Table event_theme(event_id, body_font, heading_font, heading_font_licensed bool, size_h1, size_h2, size_body, color_bg, color_text, color_accent, color_heading, heading_weight, heading_case, heading_layout, section_spacing, hashtag, edition_text, edition_image_url, banner_url, bg_image_url, source oneworld|website, captured_at).
+- The OneWorld fields come from Event Website → Colors & Fonts and Templates (see PRD §5 "Visual theme"). Until the API exists, give the user a form with exactly those OneWorld labels so values can be copied in, prefilled for BWS 2025:
+  - Montserrat (Sans); 24/20/14
+  - body rgba(255,255,255,1) / text rgba(0,0,0,1) / theme rgba(231,66,95,1); spacing 50
+  - #ETBWS2025; 7th Edition
+  - heading SangBleu Versailles, colour rgba(231,66,95,1), weight 700, Initial, Style 1
+- Show a "Theme from OneWorld" table: OneWorld screen · field · value (with colour swatches) · used in report as.
+- The theme LINE comes from Event Details, not Colors & Fonts.
 - For the HTML option, add a textarea + "Read page". Parse in the browser with DOMParser: event name, date, venue, theme line, hashtag, theme colour (from inline styles / CSS variables), fonts, banner image.
-- Show a brand-colour swatch and a cover preview (banner + name + theme + date).
+- Website cross-check: compare theme colour, body font, heading font, hashtag and edition; show "N of 5 match" (green if all match).
+- If the heading font isn't a Google font (e.g. SangBleu Versailles), show an amber flag: "Licensed font. Upload the font file or the PPT uses Georgia".
+- Convert rgba to hex for later PPT use and show a contrast warning when white on the accent is below 4.5:1.
+- Show a cover preview (banner + edition badge + name + theme line + date) in the theme colour and fonts.
 - If the theme line differs from the sales-deck theme line (a field on the event), show an amber flag with both lines and a picker. Store theme_source.
+- Freeze a copy of event_theme with every report version.
 
 Step 2 – Sponsors and logos:
 - Source cards: "OneWorld Sponsors" (default) or "Upload Excel/CSV" (Group, Sponsor Name, Logo URL).

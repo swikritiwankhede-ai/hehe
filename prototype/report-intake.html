@@ -174,7 +174,7 @@ applySpeakerDefaults();
 
 /* ---------- step definitions ---------- */
 var STEPS=[
- {id:'event',t:'Event and theme',st:function(){return 'done'},s:function(){return 'From OneWorld event settings'}},
+ {id:'event',t:'Event and theme',st:function(){return 'done'},s:function(){return 'OneWorld Colors & Fonts'}},
  {id:'sponsors',t:'Sponsors and logos',st:function(){return 'done'},s:function(){return S.site.sponsors.length+' sponsors · '+groups().length+' groups'}},
  {id:'speakers',t:'Key speakers',st:function(){return keyCount()?'done':'todo'},s:function(){return keyCount()+' key of '+S.site.speakers.length}},
  {id:'attendees',t:'Attendees',st:function(){return S.att.imported?'done':'todo'},s:function(){return S.att.imported?fmt(S.att.imported.rows)+' imported':'Upload the OneWorld export'}},
@@ -193,11 +193,34 @@ function srcPick(name,cur,opts){return '<div class="srcrow" role="radiogroup">'+
 function navfoot(){return '<div class="navfoot"><button class="btn" data-step="'+Math.max(0,S.step-1)+'" '+(S.step===0?'disabled':'')+'>Back</button>'+(S.step<STEPS.length-1?'<button class="btn primary" data-step="'+(S.step+1)+'">Next: '+STEPS[S.step+1].t+'</button>':'<a class="btn primary" href="https://claude.ai/artifact/GiYvpNh2vPmBCj1bjtBJTZ" target="_blank" rel="noopener">Continue to report ↗</a>')+'</div>'}
 function flag(kind,txt){return '<div class="flag '+kind+'"><i>'+(kind==='good'?'✓':kind==='warn'?'!':'i')+'</i><span>'+txt+'</span></div>'}
 
+var OW_THEME=[
+ ['Colors & Fonts · Website Typography','Font Family','Montserrat (Sans)','Body font on report page and PPT'],
+ ['Colors & Fonts · Website Typography','Heading / Subheading / Paragraph size','24 / 20 / 14','Type scale (PPT scales ×1.5)'],
+ ['Colors & Fonts · Body Appearance','Body Background Color','rgba(255, 255, 255, 1)','Page and slide background'],
+ ['Colors & Fonts · Body Appearance','Body Text Color','rgba(0, 0, 0, 1)','Body text'],
+ ['Colors & Fonts · Body Appearance','Default Theme Color','rgba(231, 66, 95, 1)','Accent: cover, section bars, charts'],
+ ['Colors & Fonts · Body Appearance','Spacing between Sections','50','Section spacing on the report page'],
+ ['Colors & Fonts · Banner Customization','Banner Hashtag','#ETBWS2025','Cover and closing slide'],
+ ['Colors & Fonts · Banner Customization','Edition Text','7th Edition','Cover subtitle'],
+ ['Colors & Fonts · Banner Customization','Edition Image','7th edition badge (image)','Cover badge'],
+ ['Colors & Fonts · Heading Style','Heading Font Family','SangBleu Versailles (Saved legacy value)','Headings (licensed font: fallback needed in PPT)'],
+ ['Colors & Fonts · Heading Style','Heading Color / weight / capitalisation','rgba(231, 66, 95, 1) · 700 · Initial','Section headings'],
+ ['Templates','Template / Top Banner','Banner image','Cover background']];
+function owThemePanel(){var e=S.site.event;
+  var checks=[['Theme colour',norm(e.themeColor)===norm('rgba(231, 66, 95, 1)')],['Body font',/montserrat/i.test(e.bodyFont)],['Heading font',/sangbleu/i.test(e.headingFont)],['Hashtag',e.hashtag==='#ETBWS2025'],['Edition',/7th/i.test(e.edition)]];
+  var ok=checks.filter(function(c){return c[1]}).length;
+  return '<div class="panel"><h2>Theme from OneWorld</h2><p class="hint">Event Website → Colors &amp; Fonts, and Templates. These settings render the website, so the report and PPT use exactly what the website shows. Values below are from the BWS 2025 settings screens.</p>'+
+  '<div class="tbl"><table><thead><tr><th>OneWorld screen</th><th>Field</th><th>BWS 2025 value</th><th>Used in report as</th></tr></thead><tbody>'+
+  OW_THEME.map(function(r){var v=r[2];var sw=/^rgba/.test(v)?'<i class="swatch" style="background:'+esc(v.split(' · ')[0])+'"></i>':'';return '<tr><td class="hint">'+esc(r[0])+'</td><td>'+esc(r[1])+'</td><td class="mono">'+sw+esc(v)+'</td><td>'+esc(r[3])+'</td></tr>'}).join('')+
+  '</tbody></table></div>'+
+  flag(ok===checks.length?'good':'warn','Website cross-check: '+ok+' of '+checks.length+' fields match OneWorld ('+checks.map(function(c){return c[0]+(c[1]?' ✓':' ✗')}).join(' · ')+').')+
+  flag('warn','SangBleu Versailles is a licensed font saved as a legacy value. The PPT needs the font file from the design team, or falls back to a serif (Georgia). Montserrat is free and embeds fine.')+
+  flag('info','The theme <b>line</b> (“Reimagining Marketing In The Age of AI”) is not on these screens; it comes from Event Details.')+'</div>'}
 function vEvent(){var e=S.site.event;var col=e.themeColor;
   return '<div class="head"><h1>Event and theme</h1><p>Name, date, venue, theme line and the website’s look. OneWorld’s event settings are what render the website, so they give the exact website view without scraping it.</p></div>'+
   '<div class="panel"><h2>Source</h2>'+srcPick('eventSrc',S.eventSrc,[['oneworld','OneWorld event settings','Automatic · recommended. Same data the website is built from'],['website','Read the event web page','Fallback: paste the page HTML when OneWorld is unavailable']])+
-  (S.eventSrc==='website'?'<div><label for="html" class="hint">Paste the event page’s HTML (View source → copy). It is read in your browser only.</label><textarea id="html" placeholder="<html>… paste here …"></textarea></div><div class="row2"><button class="btn" id="parseBtn">Read page</button><span class="hint" id="parseMsg">Currently loaded: '+esc(S.siteSource)+'</span></div>':flag('info','Prototype: OneWorld isn’t connected here, so the values below come from the saved BWS 2025 page, which OneWorld generated.'))+'</div>'+
-  '<div class="panel"><h2>What the report will use</h2><div class="kv"><div><label>Event</label><span>'+esc(e.name)+' · '+esc(e.edition)+'</span></div><div><label>Theme line</label><span>'+esc(e.theme)+'</span></div><div><label>Date and venue</label><span>'+esc(e.date)+' · '+esc(e.venue)+'</span></div><div><label>Hashtag</label><span>'+esc(e.hashtag)+'</span></div><div><label>Brand colour</label><span><i class="swatch" style="background:'+esc(col)+'"></i>'+esc(col)+'</span></div><div><label>Fonts</label><span>'+esc(e.headingFont)+' / '+esc(e.bodyFont)+'</span></div><div style="grid-column:1/-1"><label>Banner image</label><span class="mono b">'+esc(e.banner)+'</span></div></div>'+
+  (S.eventSrc==='website'?'<div><label for="html" class="hint">Paste the event page’s HTML (View source → copy). It is read in your browser only.</label><textarea id="html" placeholder="<html>… paste here …"></textarea></div><div class="row2"><button class="btn" id="parseBtn">Read page</button><span class="hint" id="parseMsg">Currently loaded: '+esc(S.siteSource)+'</span></div>':flag('info','Prototype: OneWorld isn’t connected here. Visual theme values are copied from the BWS 2025 Colors & Fonts screens; event details come from the saved BWS 2025 page.'))+'</div>'+owThemePanel()+
+  '<div class="panel"><h2>What the report will use</h2><div class="kv"><div><label>Event</label><span>'+esc(e.name)+' · '+esc(e.edition)+'</span></div><div><label>Theme line</label><span>'+esc(e.theme)+'</span></div><div><label>Date and venue</label><span>'+esc(e.date)+' · '+esc(e.venue)+'</span></div><div><label>Hashtag</label><span>'+esc(e.hashtag)+'</span></div><div><label>Brand colour</label><span><i class="swatch" style="background:'+esc(col)+'"></i>'+esc(col)+'</span></div><div><label>Fonts</label><span>'+esc(e.headingFont)+' / '+esc(e.bodyFont)+'</span></div><div><label>Type sizes</label><span>24 / 20 / 14 · headings 700</span></div><div style="grid-column:1/-1"><label>Banner image</label><span class="mono b">'+esc(e.banner)+'</span></div></div>'+
   flag('warn','Two theme lines are in use: the website says “'+esc(e.theme)+'”, the sales deck says “Redefining Marketing for 1.4 Billion Indians”. The report uses the OneWorld / website line; confirm it once here.')+
   '<div><div class="hint" style="margin-bottom:6px">Cover preview in the website’s colour</div><div class="cover" style="background:linear-gradient(135deg,#1C1B1E 10%,'+esc(col)+' 140%)"><span>'+esc(e.hashtag)+'</span><div><b>'+esc(e.name)+'</b><br><span>'+esc(e.theme)+' · '+esc(e.date)+' · '+esc(e.venue)+'</span></div><span>Post-event report</span></div></div></div>'+navfoot()}
 

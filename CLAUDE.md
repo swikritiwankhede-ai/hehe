@@ -83,6 +83,13 @@ Internal capture → accurate ROI report → the sponsor's marketing manager has
 - **Retention root causes:** see `docs/retention-root-causes.md`. It groups the reasons into 4 families: the deck doesn't prove the sponsor's outcome; the numbers aren't defensible; the data is scattered and slow to assemble; and there is no system of record for the relationship. Proxy billing data (ETCIO/ETCISO/ETCFO, `Custom Clients.xlsx`) shows only 30–44% of Custom clients buy Custom again the next year, and 73% of the 140 Custom clients in FY23–26 bought only once.
 - **Event backend (ETB2B event platform, confirmed from screenshots):** these modules can be pulled directly:
   - Design → Template / Top Banner (cover template)
+  - Event Website → **Colors & Fonts** (confirmed for BWS 2025). This is the visual-theme source:
+    - Font Family: Montserrat; sizes 24/20/14
+    - body white / text black; Default Theme Color rgba(231, 66, 95, 1); section spacing 50
+    - Banner Hashtag #ETBWS2025; Edition Text "7th Edition" plus an edition image
+    - Heading Font SangBleu Versailles (licensed legacy value, so the PPT needs a fallback), colour = theme colour, weight 700, Initial case, Style 1
+
+    Other tabs are Templates, Settings and Global CSS. The theme **line** is in Event Details, not here. The field contract is in `docs/intake-prd.md` §5.
   - Event Details
   - Speakers (name, designation, company, group, weightage)
   - Agenda

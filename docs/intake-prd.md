@@ -50,12 +50,16 @@ One screen where the events team gets every input for an event's report into the
 The layout is a left rail listing the steps, each with a status and a one-line summary, and "N of 7 sources ready" at the top. The main panel shows the current step, with Back / Next at the bottom. The top bar shows the event name, date and venue, plus "Continue to report".
 
 ### Step 1: Event and theme
-- **Default:** OneWorld event settings. Pull name, edition, date, venue, theme line, hashtag, brand colour, fonts and banner (Design → Top Banner).
-- **Fallback:** paste the event website's HTML. Parse the same fields from it.
+- **Default:** OneWorld. Two areas:
+  - **Event Website → Colors & Fonts** (and Templates) for the **visual theme**. Field-by-field contract in §5.
+  - **Event Details** for name, date, venue and the **theme line**. The theme line is not on the Colors & Fonts screen.
+- **Fallback:** paste the event website's HTML and parse the same fields from it.
 - **Checks:**
-  - Flag when the website theme line differs from the sales-deck theme line. Example: "Reimagining Marketing In The Age of AI" vs "Redefining Marketing for 1.4 Billion Indians". The user picks one.
-  - Show a colour swatch and a cover preview built from the banner and brand colour.
-- **Ready when:** name, date, venue, theme line and brand colour are set.
+  - **Website cross-check:** compare theme colour, body font, heading font, hashtag and edition between OneWorld and the website; show "N of 5 match". BWS 2025: 5 of 5.
+  - **Licensed-font flag:** the heading font "SangBleu Versailles (Saved legacy value)" is a commercial font. The PPT needs the font file from the design team, or it uses a serif fallback (Georgia). Montserrat is free.
+  - **Theme-line conflict:** flag when the Event Details theme line differs from the sales-deck line. Example: "Reimagining Marketing In The Age of AI" vs "Redefining Marketing for 1.4 Billion Indians". The user picks one.
+  - Show a colour swatch and a cover preview built from the banner, edition image and theme colour.
+- **Ready when:** name, date, venue, theme line, theme colour and fonts are set.
 
 ### Step 2: Sponsors and logos
 - **Default:** OneWorld Sponsors module (group, name, logo).
@@ -128,6 +132,37 @@ The layout is a left rail listing the steps, each with a status and a one-line s
 - **Ready when:** the event's vertical has at least 3 statistics reviewed in the last 12 months.
 
 ## 5. Data contracts
+
+### Visual theme (OneWorld → Event Website)
+Confirmed from the BWS 2025 settings screens. The Event Website page has four tabs: Templates, Colors & Fonts, Settings, Global CSS.
+
+| OneWorld tab · section | Field | BWS 2025 value | Theme token | Used in |
+|---|---|---|---|---|
+| Colors & Fonts · Website Typography | Font Family | Montserrat (Sans) | `font.body` | Report page and PPT body |
+| Colors & Fonts · Website Typography | Heading Font Size | 24 | `size.h1` | Type scale (PPT ×1.5) |
+| Colors & Fonts · Website Typography | Subheading Font Size | 20 | `size.h2` | Type scale |
+| Colors & Fonts · Website Typography | Paragraph Font Size | 14 | `size.body` | Type scale |
+| Colors & Fonts · Body Appearance | Body Background Color | rgba(255, 255, 255, 1) | `color.bg` | Page and slide background |
+| Colors & Fonts · Body Appearance | Body Text Color | rgba(0, 0, 0, 1) | `color.text` | Body text |
+| Colors & Fonts · Body Appearance | Default Theme Color | rgba(231, 66, 95, 1) | `color.accent` | Cover, section bars, charts, buttons |
+| Colors & Fonts · Body Appearance | Spacing between Sections | 50 | `space.section` | Report page |
+| Colors & Fonts · Body Appearance | Body Background Image | (none) | `image.bg` | Optional slide background |
+| Colors & Fonts · Navigation Bar | Navigation Alignment / Font Size / colours | Center · 14 · black | — | Not used in the report |
+| Colors & Fonts · Banner Customization | Banner Hashtag | #ETBWS2025 | `event.hashtag` | Cover, closing slide |
+| Colors & Fonts · Banner Customization | Edition Text | 7th Edition | `event.edition` | Cover subtitle |
+| Colors & Fonts · Banner Customization | Edition Image | 7th edition badge | `image.edition` | Cover badge |
+| Colors & Fonts · Heading Style | Heading Font Family | SangBleu Versailles (Saved legacy value) | `font.heading` | Headings; **licensed, fallback Georgia** |
+| Colors & Fonts · Heading Style | Heading Color | rgba(231, 66, 95, 1) | `color.heading` | Section headings |
+| Colors & Fonts · Heading Style | Heading Font weight | 700 | `weight.heading` | Headings |
+| Colors & Fonts · Heading Style | Heading Capitalization Style | Initial | `case.heading` | Headings |
+| Colors & Fonts · Heading Style | Section Heading Layout | Style 1 | `layout.heading` | Report page section header style |
+| Templates | Template / Top Banner | banner image | `image.banner` | Cover background |
+| Global CSS | custom CSS | — | — | Not used (don't parse CSS) |
+
+Rules:
+- Store colours as given (rgba) and convert to hex for pptxgenjs. rgba(231, 66, 95, 1) → `#E7425F`.
+- Check contrast: if white text on `color.accent` is under 4.5:1, use `color.text` on a tinted accent for small text. #E7425F with white is about 3.9:1, so it's fine for large cover titles but not for body text.
+- Snapshot the theme when a report version is frozen, so later website redesigns don't change sent decks.
 
 ### Attendee upload (OneWorld registrations export)
 | Header in file | Field | Stored? |
