@@ -28,12 +28,13 @@ Two layers do the removing:
 | 8 | Wishlist | Download the export | **Automation** (partly) | Same bookmarklet on the Wishlist Users page | One click |
 | 9 | Seniority / location / industry | Classify titles and companies | **Automation** + **AI** | Rule for seniority. Location only from data. AI suggests industry for companies not yet in the lookup table | Confirm industry for *new* companies only |
 | 10 | Video plan | Fill 30 rows by hand at T-3 | **AI** + **Automation** | Draft the plan automatically from the agenda (every panel/keynote = a row, with leaders and hall) plus last edition's byte mix. The lead edits and confirms instead of typing | Confirm the plan at T-3 |
-| 11 | Videos → transcript | Paste transcripts / caption files | **AI** | Transcribe inside the platform with the built-in AI model if it accepts audio (check the Lovable AI gateway); otherwise a transcription API key the team creates itself. The browser extracts audio from the video, so no server is needed for files up to ~1 GB | None for transcription |
+| 11 | Videos → transcript | Paste transcripts / caption files | **AI** | **Gemini transcribes directly from the video or audio file** (Gemini API, File API upload; or the YouTube URL once published). Prompt for verbatim text with timestamps and speaker turns, temperature 0, in 10–15 minute chunks. Use a paid-tier key the team creates in Google AI Studio (paid-tier data isn't used for training) | Hear the quote at its timestamp while approving |
 | 12 | Videos → who spoke, photo | Pick the leader, find a photo | **AI** + **Automation** | File name → plan row → leader (automation). Panels: AI maps voices to the plan's names with evidence. Photo: the browser grabs frames from the video (`<video>` + canvas) and scores sharpness; fallback to the website photo | One click per panel voice when confidence is low |
 | 13 | Videos → insights | Write the quotes | **AI** | 1–3 insights per leader, with an exact-substring check on each quote | **Approve insights** (by design) |
 | 14 | Event photos | Choose 12 photos | **Automation** + **AI** | List a Drive folder shared "anyone with the link" using a Google API key (no service account needed); dedupe, score, tag scenes, link to sessions by time | Approve the 12 (by design) |
 | 15 | Social: YouTube | Export from Studio | **Automation** | The **YouTube Data API with a simple API key** reads public views, likes and comments for the channel's videos. Find event videos by title/description keys. No OAuth, no approval | None (impressions stay out of v1) |
-| 16 | Social: LinkedIn, Instagram | Export one page-level file per platform at T+1 and T+14 | **Not removable in v1** | Impressions are private analytics and need the official APIs (approval). Scraping is not allowed | **2 uploads per platform per event** |
+| 16 | Social: LinkedIn | Export the page analytics file at T+1 and T+14 | **Not removable in v1** | Impressions are private admin analytics, and scraping breaks LinkedIn's terms (see §3). If ET already uses a LinkedIn-approved social tool (e.g. Sprout Social, Hootsuite, Metricool), pull from that tool instead | **1 export per checkpoint** |
+| 16b | Social: Instagram | Export from Meta Business Suite | **Automation** | **Instagram Graph API on ET's own business account.** A social-team admin connects once through a Meta app in development mode. For accounts whose admins have a role on the app, App Review usually isn't needed (confirm in Sprint 0). Gives per-post reach/views, likes, comments, saves and shares | One-time connection |
 | 17 | Market insights | Find stats and copy them | **AI** | AI searches for theme-matched stats and returns each with a source URL and year; code checks the number appears on the linked page | Open the link and approve (by design) |
 | 18 | Feedback (optional) | Build and send a form, export results | **Automation** | The platform hosts its own 3-question form. A short link and QR code go on the closing slide and T0 email; responses land directly, matched by email | None |
 
@@ -42,7 +43,7 @@ Two layers do the removing:
 ## 2. What that leaves
 
 ### Fully automatic in v1 (no human step)
-Agenda · YouTube numbers · transcription · feedback collection
+Agenda · YouTube numbers · Instagram numbers (after a one-time connect) · transcription (Gemini) · feedback collection
 
 ### Automatic, with a one-time or one-click human confirmation
 - Event details and theme (approve once)
@@ -60,13 +61,31 @@ Insights · photos · market stats · freezing and sending the report
 | What | Why it can't be removed yet | Workaround in v1 | Removed in v2 by |
 |---|---|---|---|
 | Attendees, check-in, wishlist from OneWorld | No API; admin pages are behind login | Bookmarklet: one click on the page the lead already has open | OneWorld API (ET engineering) |
-| LinkedIn and Instagram impressions | Private analytics; official APIs need approval | One page-level export per platform at T+1 and T+14 | LinkedIn Community Management API, Meta app review |
+| LinkedIn impressions | Private admin analytics; official API needs approval; scraping not allowed | One page-level export at T+1 and T+14 | LinkedIn Community Management API, or an approved social tool ET already pays for |
 
-So in v1 the human pipe work per event shrinks to: **about 3 bookmarklet clicks + 4 file uploads**. Everything else is either automatic or a judgement call.
+So in v1 the human pipe work per event shrinks to: **about 3 bookmarklet clicks + 2 LinkedIn exports**. Everything else is either automatic or a judgement call.
 
 ---
 
-## 3. What to build (in order)
+## 3. Can we scrape LinkedIn, Instagram and YouTube instead?
+
+No, and there's rarely a need to. For each platform:
+
+| Platform | Scraping | Why not | What to do instead (still automatic) |
+|---|---|---|---|
+| **YouTube** | Not needed | YouTube's terms forbid scraping, and the official route is free | **YouTube Data API with an API key**: per-video views, likes and comments for the channel's public videos. Posts are found by title or description containing the event keys |
+| **Instagram** | Not allowed by Meta's terms; public pages sit behind login walls; public pages don't show reach or impressions | Scraped numbers break silently when the page changes, and the logged-in account used for it risks being blocked. That would be ETBrandEquity's own account | **Instagram Graph API** on ET's own business account (one-time connect, see row 16b) |
+| **LinkedIn** | Prohibited by LinkedIn's User Agreement, which LinkedIn enforces actively; public posts show reactions and comments, but **impressions are only visible to page admins** | Even a perfect scraper can't get impressions, the number the deck leads with. Risk to the ETBrandEquity page if an admin session is used | Page analytics export (1 file) until the Community Management API is approved, or pull from an approved social tool ET already uses |
+
+**How the predefined channel links are still used:** the event lead or social team registers the channel links once per vertical:
+- ETBrandEquity on LinkedIn, Instagram and YouTube
+- the event keys: `#ETBWS2025`, "Brand World Summit"
+
+Then:
+- **YouTube and Instagram** posts are found and counted automatically every day until T+14.
+- **LinkedIn** posts are matched from the export by the same keys, so nobody collects post links by hand.
+
+## 4. What to build (in order)
 
 1. **Website harvester** (automation): event, theme CSS, sponsors, speakers, agenda from the public event URL. Scheduled daily from T-30. The BWS 2025 page already parses.
 2. **Promises extractor** (AI): sponsorship grid / sales deck → tier promises, with the number-in-source check.
@@ -78,8 +97,8 @@ So in v1 the human pipe work per event shrinks to: **about 3 bookmarklet clicks 
 8. **Market stats finder** (AI): suggestions with a URL and year, checked against the page.
 9. **Feedback form** (automation): hosted form + QR code.
 
-## 4. Risks to note
+## 5. Risks to note
 - **Public Drive links:** "anyone with the link" photo folders contain attendee faces. Keep the folder unlisted, time-limited and removed after T+14. Move to a service account in v2.
 - **Website parsing** depends on ET B2B page templates. Keep the AI extraction path as a fallback and alert when the parser finds zero rows.
-- **Built-in AI for audio:** confirm the model accepts audio and handles Indian English. If not, the team creates a transcription API key; that's a purchase, not an approval.
+- **Gemini transcripts:** an LLM transcript can drop or smooth over words in noisy passages, and a quote check can only confirm a quote matches the transcript, not the audio. So the reviewer plays the 10-second clip at each quote's timestamp before approving. Use chunks of 10–15 minutes and a paid-tier key.
 - **Bookmarklet:** it reads only what the logged-in lead can already see. Get IT's written OK before use.

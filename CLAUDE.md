@@ -174,7 +174,10 @@ Internal capture → accurate ROI report → the sponsor's marketing manager has
   - a OneWorld bookmarklet for attendees and wishlist (needs IT's OK)
   - a hosted feedback form
 
-  Left in v1: about 3 bookmarklet clicks plus the LinkedIn and Instagram exports (4 uploads per event), plus approvals by design.
+  - **Gemini** for transcription, straight from the video file or YouTube URL, with the reviewer playing each quote's clip
+  - the **Instagram Graph API** on ET's own account, connected once
+
+  **Scraping is ruled out:** it breaks the terms of LinkedIn, Instagram and YouTube, and LinkedIn impressions are admin-only anyway. Left in v1: about 3 bookmarklet clicks plus 2 LinkedIn exports per event, plus approvals by design.
 - **Lovable integrations:** see `docs/lovable-integrations.md`. It covers:
   - Feasibility: Excel upload, Drive, transcription, the summary / quotes / themes prompt and photo scoring are fine. LinkedIn impressions can't be read from public URLs; use the page-analytics export now and the official API after approval. OneWorld needs an ET engineering API plus DPDP sign-off.
   - The setup checklist.
