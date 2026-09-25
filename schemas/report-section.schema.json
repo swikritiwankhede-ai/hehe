@@ -1,0 +1,237 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "report-section.schema.json",
+  "title": "Report section spec",
+  "description": "One section of a post-event report. Rendered by the platform into the web report and the PPT using the frozen theme. Produced by the default template, the 'Add section' prompt, or by hand.",
+  "type": "object",
+  "required": [
+    "section_id",
+    "title",
+    "kind",
+    "blocks",
+    "include_in_ppt",
+    "status"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "section_id": {
+      "type": "string",
+      "pattern": "^sec_[a-z0-9_]+$"
+    },
+    "title": {
+      "type": "string",
+      "maxLength": 80,
+      "description": "States the takeaway, e.g. '74% of speakers were CXOs'"
+    },
+    "kind": {
+      "enum": [
+        "standard",
+        "custom"
+      ]
+    },
+    "standard_ref": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 15,
+      "description": "Index in the 16-section IP template, for kind=standard"
+    },
+    "created_by_prompt": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "blocks": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 4,
+      "items": {
+        "$ref": "#/$defs/block"
+      }
+    },
+    "narrative": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "text": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 400
+        },
+        "generate_from": {
+          "enum": [
+            "data_only",
+            "none"
+          ]
+        }
+      }
+    },
+    "include_in_ppt": {
+      "type": "boolean"
+    },
+    "hide_when_empty": {
+      "type": "boolean",
+      "default": true
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "approved",
+        "hidden"
+      ]
+    }
+  },
+  "$defs": {
+    "data": {
+      "type": "object",
+      "required": [
+        "source"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "source": {
+          "enum": [
+            "event",
+            "sponsors",
+            "speakers",
+            "agenda",
+            "attendees_aggregate",
+            "wishlist_aggregate",
+            "insights",
+            "photos",
+            "social",
+            "market_stats",
+            "metrics",
+            "custom_dataset",
+            "manual"
+          ]
+        },
+        "dataset_id": {
+          "type": "string",
+          "pattern": "^ds_[a-z0-9_]+$"
+        },
+        "metric_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "filter": {
+          "type": "object"
+        },
+        "group_by": {
+          "type": "string"
+        },
+        "sort": {
+          "type": "string"
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 50
+        },
+        "values": {
+          "type": "array",
+          "description": "Only for source=manual: [{label, value, source_note}]; every value needs a source_note",
+          "items": {
+            "type": "object",
+            "required": [
+              "label",
+              "value",
+              "source_note"
+            ],
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "value": {
+                "type": [
+                  "string",
+                  "number"
+                ]
+              },
+              "source_note": {
+                "type": "string",
+                "minLength": 3
+              }
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "source": {
+                "const": "custom_dataset"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "dataset_id"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "source": {
+                "const": "manual"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "values"
+            ]
+          }
+        }
+      ]
+    },
+    "block": {
+      "type": "object",
+      "required": [
+        "type",
+        "data"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "enum": [
+            "stat_tiles",
+            "bar_chart",
+            "compare",
+            "table",
+            "quote_cards",
+            "photo_grid",
+            "logo_wall",
+            "people_grid",
+            "text",
+            "callout"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "maxLength": 60
+        },
+        "columns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 6
+        },
+        "data": {
+          "$ref": "#/$defs/data"
+        },
+        "show_not_stated": {
+          "type": "boolean",
+          "description": "bar_chart: show blanks as 'Not stated' with count"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,113 @@
+[
+  {
+    "section_id": "sec_custom_gifting",
+    "title": "Gifting partners made the day memorable",
+    "kind": "custom",
+    "created_by_prompt": "Add a section on the gifting partners with their logos and one line each on what they gave delegates",
+    "blocks": [
+      {
+        "type": "logo_wall",
+        "data": {
+          "source": "sponsors",
+          "filter": {
+            "group": "Gifting Partners"
+          }
+        }
+      },
+      {
+        "type": "table",
+        "columns": [
+          "Partner",
+          "What delegates received"
+        ],
+        "data": {
+          "source": "custom_dataset",
+          "dataset_id": "ds_gifting_notes"
+        }
+      }
+    ],
+    "narrative": {
+      "text": null,
+      "generate_from": "data_only"
+    },
+    "include_in_ppt": true,
+    "hide_when_empty": true,
+    "status": "draft"
+  },
+  {
+    "section_id": "sec_custom_ooh",
+    "title": "The summit was visible across Mumbai before the day",
+    "kind": "custom",
+    "created_by_prompt": "Make a section from this OOH site list: sites, cities and days live",
+    "blocks": [
+      {
+        "type": "stat_tiles",
+        "data": {
+          "source": "custom_dataset",
+          "dataset_id": "ds_ooh_sites",
+          "metric_ids": [
+            "count_sites",
+            "count_cities",
+            "sum_days_live"
+          ]
+        }
+      },
+      {
+        "type": "table",
+        "columns": [
+          "Site",
+          "City",
+          "Format",
+          "Live from",
+          "Live to"
+        ],
+        "data": {
+          "source": "custom_dataset",
+          "dataset_id": "ds_ooh_sites",
+          "limit": 8
+        }
+      }
+    ],
+    "narrative": {
+      "text": null,
+      "generate_from": "data_only"
+    },
+    "include_in_ppt": true,
+    "hide_when_empty": true,
+    "status": "draft"
+  },
+  {
+    "section_id": "sec_custom_speaker_industry",
+    "title": "Speakers came from across consumer industries",
+    "kind": "custom",
+    "created_by_prompt": "Show the speakers by industry",
+    "blocks": [
+      {
+        "type": "bar_chart",
+        "data": {
+          "source": "speakers",
+          "group_by": "industry",
+          "sort": "count_desc"
+        },
+        "show_not_stated": true
+      },
+      {
+        "type": "people_grid",
+        "data": {
+          "source": "speakers",
+          "filter": {
+            "is_key": true
+          },
+          "limit": 8
+        }
+      }
+    ],
+    "narrative": {
+      "text": null,
+      "generate_from": "data_only"
+    },
+    "include_in_ppt": true,
+    "hide_when_empty": true,
+    "status": "draft"
+  }
+]

@@ -149,6 +149,12 @@ Internal capture → accurate ROI report → the sponsor's marketing manager has
   - **Representation:** seniority, location and industry. BWS 2025 speakers are 26 of 35 CXO.
   - **Market stats library:** each stat needs a source URL and year.
   - Also covers the event-day runbook, a 6-sprint build and Lovable Prompt G.
+- **Report v1 with zero dependencies:** see `docs/report-v1-no-dependency.md`.
+  - Every input comes from links, pages and exports the team already has, through one prompt-driven **"Add data" box**: URL, paste, screenshot or file → classify → extract to a fixed schema → check in code that every number and name appears in the source → confirm → save with the source.
+  - **Design** has three layers: the theme from OneWorld (`thm_…`), a fixed **block library** of 10 blocks, each with a web and a slide layout, and a reusable **report template** (16 sections, empty ones hidden automatically).
+  - **"+ Add section"** works from a prompt, a paste plus prompt, or by picking a block. The output is a section spec validated against `schemas/report-section.schema.json`; examples are in `samples/custom-sections.example.json`.
+  - Guardrails: numbers only from bound data, and custom sections start as drafts.
+  - The APIs in the execution plan become v2 upgrades. Lovable Prompts H and I are in the doc.
 - **Lovable integrations:** see `docs/lovable-integrations.md`. It covers:
   - Feasibility: Excel upload, Drive, transcription, the summary / quotes / themes prompt and photo scoring are fine. LinkedIn impressions can't be read from public URLs; use the page-analytics export now and the official API after approval. OneWorld needs an ET engineering API plus DPDP sign-off.
   - The setup checklist.
