@@ -137,6 +137,18 @@ Internal capture → accurate ROI report → the sponsor's marketing manager has
   - The theme is frozen with each report version, and the PPT reads only the frozen theme. The ID is stamped in the PPT file properties, the slide-1 notes and the file name.
   - `tools/build-ppt-from-theme.mjs` (pptxgenjs) generates the sample deck in `samples/`. Lovable Prompt F is in the spec.
   - The theme line is content, not theme.
+- **Execution plan:** see `docs/execution-plan.md`. It removes manual dependencies with "define before, approve after":
+  - **Video plan** (`templates/video-plan-template.xlsx`), filled by T-3. It builds the exact Drive file names.
+  - **Media pipeline:** a Drive changes feed every 5 minutes on T0, then a media worker with ffmpeg, then diarised transcription.
+  - **Speaker naming:** single-leader videos come from the plan; panels use an LLM choosing only from the plan's names, with evidence, then review. No face or voice identification.
+  - **Leader photo:** best video frame, then OneWorld, then website, then manual upload.
+  - **Insights:** 1–3 verbatim-checked insights per leader.
+  - **Social:** posts auto-discovered on the vertical's own accounts using the event keys (hashtag, name). Needs LinkedIn Community Management API approval, a Meta app and YouTube OAuth; until then, use page exports.
+  - **Attendees:** OneWorld, the built-in template or any file.
+  - **Speakers:** OneWorld plus manual add.
+  - **Representation:** seniority, location and industry. BWS 2025 speakers are 26 of 35 CXO.
+  - **Market stats library:** each stat needs a source URL and year.
+  - Also covers the event-day runbook, a 6-sprint build and Lovable Prompt G.
 - **Lovable integrations:** see `docs/lovable-integrations.md`. It covers:
   - Feasibility: Excel upload, Drive, transcription, the summary / quotes / themes prompt and photo scoring are fine. LinkedIn impressions can't be read from public URLs; use the page-analytics export now and the official API after approval. OneWorld needs an ET engineering API plus DPDP sign-off.
   - The setup checklist.
