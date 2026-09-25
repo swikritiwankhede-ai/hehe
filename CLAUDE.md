@@ -178,6 +178,11 @@ Internal capture → accurate ROI report → the sponsor's marketing manager has
   - the **Instagram Graph API** on ET's own account, connected once
 
   **Scraping is ruled out:** it breaks the terms of LinkedIn, Instagram and YouTube, and LinkedIn impressions are admin-only anyway. Left in v1: about 3 bookmarklet clicks plus 2 LinkedIn exports per event, plus approvals by design.
+- **No-code build playbook:** see `docs/no-code-build-playbook.md`. A PM can build it alone in Lovable (with Lovable Cloud) plus Gemini.
+  - **Scope:** everything except the OneWorld and social-media integrations. Those come in as file uploads (OneWorld exports or templates; LinkedIn, Instagram and YouTube analytics exports) until a tech team builds the connectors.
+  - It covers Week 0 accounts and keys, Lovable working rules, and a 19-step, 6–8 week build order that names which prompt to paste and when each step is "done".
+  - New Prompts K (website harvester), L (video plan → browser audio → Gemini transcripts → insights), M (social from exports) and N (market insights finder).
+  - It also covers costs, troubleshooting and the pilot definition of done.
 - **Lovable integrations:** see `docs/lovable-integrations.md`. It covers:
   - Feasibility: Excel upload, Drive, transcription, the summary / quotes / themes prompt and photo scoring are fine. LinkedIn impressions can't be read from public URLs; use the page-analytics export now and the official API after approval. OneWorld needs an ET engineering API plus DPDP sign-off.
   - The setup checklist.
