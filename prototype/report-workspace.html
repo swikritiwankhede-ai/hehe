@@ -1,0 +1,379 @@
+<title>Report Studio Workspace</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Montserrat:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F4F2F0; --surface:#FFFFFF; --surface-2:#F9F7F5; --ink:#1C1B1E; --ink-2:#48434A; --muted:#766F73; --line:#E4DEDA; --line-2:#EFEAE6;
+  --accent:#C8232C; --accent-soft:#F8E4E3;
+  --good:#1D7349; --good-soft:#E2F1E8; --warn:#9A5D08; --warn-soft:#FAEFD9; --bad:#B4431A; --bad-soft:#F9E3D8; --info:#2D5B85; --info-soft:#E3ECF5;
+  --btn:#1C1B1E; --btn-ink:#FFFFFF;
+  --serif:"Newsreader", Georgia, "Times New Roman", serif; --sans:"IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif; --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+  /* Event theme: thm_etbe-bws_2025_v1 (OneWorld Colors & Fonts). Sponsor view is deliberately single-theme: it carries the event's look. */
+  --ev-accent:#E7425F; --ev-dark:#B9354C; --ev-tint:#FCE8EC; --ev-bg:#FFFFFF; --ev-ink:#000000; --ev-muted:#5A5A5A; --ev-line:#ECE6E7;
+  --ev-body:"Montserrat", Arial, sans-serif; --ev-head:Georgia, "Times New Roman", serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){color-scheme:dark;
+  --bg:#141315; --surface:#1C1B1E; --surface-2:#222024; --ink:#F2EEEC; --ink-2:#CEC7C5; --muted:#9A9195; --line:#34303A; --line-2:#29262B;
+  --accent:#F0575E; --accent-soft:#3A1D20; --good:#5CC08D; --good-soft:#17301F; --warn:#E3A948; --warn-soft:#33270F; --bad:#F08A5D; --bad-soft:#3A2216; --info:#7FB0DD; --info-soft:#18283A; --btn:#F2EEEC; --btn-ink:#1C1B1E}}
+:root[data-theme="dark"]{color-scheme:dark;
+  --bg:#141315; --surface:#1C1B1E; --surface-2:#222024; --ink:#F2EEEC; --ink-2:#CEC7C5; --muted:#9A9195; --line:#34303A; --line-2:#29262B;
+  --accent:#F0575E; --accent-soft:#3A1D20; --good:#5CC08D; --good-soft:#17301F; --warn:#E3A948; --warn-soft:#33270F; --bad:#F08A5D; --bad-soft:#3A2216; --info:#7FB0DD; --info-soft:#18283A; --btn:#F2EEEC; --btn-ink:#1C1B1E}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.5}
+h1,h2,h3{font-family:var(--serif);font-weight:600;margin:0;text-wrap:balance}
+p{margin:0}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.wrap{max-width:1320px;margin:0 auto;padding-inline:16px;padding-block:0 56px}
+
+/* top switch */
+.switch{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;padding-block:12px;border-bottom:1px solid var(--line);margin-bottom:18px}
+.brand{display:flex;align-items:center;gap:10px}
+.mark{width:28px;height:28px;border-radius:7px;background:var(--accent);color:#fff;display:grid;place-items:center;font-family:var(--serif);font-weight:600}
+.brand b{font-family:var(--serif);font-size:17px;font-weight:600;display:block;line-height:1.1}
+.brand small{color:var(--muted);font-size:12px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:9px;background:var(--surface);padding:3px;gap:2px}
+.seg button{border:0;background:none;padding:6px 12px;border-radius:6px;font-size:13px;color:var(--ink-2)}
+.seg button[aria-pressed="true"]{background:var(--btn);color:var(--btn-ink)}
+.chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:3px 10px;font-size:12px;color:var(--ink-2)}
+.grow{flex:1}
+
+/* lead workspace */
+.lead{display:grid;grid-template-columns:210px minmax(0,1fr);gap:24px;align-items:start}
+.nav{position:sticky;top:12px;display:flex;flex-direction:column;gap:2px}
+.nav .who{padding:0 10px 12px;border-bottom:1px solid var(--line-2);margin-bottom:8px}
+.nav .who b{display:block}
+.nav .who span{font-size:12px;color:var(--muted)}
+.nav button{display:flex;justify-content:space-between;align-items:center;text-align:left;border:0;background:none;padding:8px 10px;border-radius:8px;color:var(--ink-2)}
+.nav button[aria-current="page"]{background:var(--surface);color:var(--ink);box-shadow:inset 0 0 0 1px var(--line)}
+.count{font-family:var(--mono);font-size:11.5px;background:var(--accent-soft);color:var(--accent);border-radius:999px;padding:0 7px}
+.count.plain{background:var(--line-2);color:var(--muted)}
+.head{display:flex;flex-wrap:wrap;align-items:flex-end;gap:10px 16px;margin-bottom:16px}
+.head h1{font-size:26px}
+.head p{color:var(--ink-2);max-width:68ch}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+.stack{display:flex;flex-direction:column;gap:16px}
+.two{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:16px;align-items:start}
+.panel h2{font-size:18px}
+.hint{font-size:12.5px;color:var(--muted)}
+.pill{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:1px 9px;font-size:11.5px;font-weight:500;white-space:nowrap}
+.pill.good{background:var(--good-soft);color:var(--good)}.pill.warn{background:var(--warn-soft);color:var(--warn)}.pill.bad{background:var(--bad-soft);color:var(--bad)}.pill.info{background:var(--info-soft);color:var(--info)}.pill.neutral{background:var(--line-2);color:var(--ink-2)}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:6px 12px;font-size:13px}
+.btn.primary{background:var(--btn);color:var(--btn-ink);border-color:var(--btn)}
+.btn.small{padding:3px 9px;font-size:12px}
+
+/* today queue */
+.task{display:grid;grid-template-columns:4px minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px 0;border-top:1px solid var(--line-2)}
+.task:first-of-type{border-top:0}
+.sev{align-self:stretch;border-radius:2px;background:var(--line)}
+.sev.bad{background:var(--bad)}.sev.warn{background:var(--warn)}.sev.info{background:var(--info)}
+.task b{font-weight:600}
+.task small{display:block;color:var(--muted);font-size:12px}
+
+/* event rows */
+.ev{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1.6fr) minmax(0,1fr) auto;gap:14px;align-items:center;padding:14px 0;border-top:1px solid var(--line-2)}
+.ev:first-of-type{border-top:0}
+.ev .name{display:flex;gap:10px;align-items:flex-start}
+.sw{width:12px;height:12px;border-radius:3px;margin-top:4px;flex:none;border:1px solid var(--line)}
+.ev .name b{display:block;font-weight:600}
+.ev .name small{color:var(--muted);font-size:12px}
+.life{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
+.life i{display:block;height:6px;border-radius:3px;background:var(--line)}
+.life i.done{background:var(--ink-2)}.life i.now{background:var(--accent)}
+.lifelab{display:flex;justify-content:space-between;font-size:10.5px;color:var(--muted);margin-top:4px;font-family:var(--mono)}
+.srcdots{display:flex;gap:4px;flex-wrap:wrap}
+.srcdots span{width:18px;height:18px;border-radius:5px;display:grid;place-items:center;font-size:10px;font-family:var(--mono)}
+.srcdots .g{background:var(--good-soft);color:var(--good)}.srcdots .w{background:var(--warn-soft);color:var(--warn)}.srcdots .n{background:var(--line-2);color:var(--muted)}
+.meta{font-size:12.5px;color:var(--ink-2);display:flex;flex-direction:column;gap:2px}
+
+/* tables */
+.tbl{overflow-x:auto;border:1px solid var(--line-2);border-radius:8px}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th{text-align:left;font-weight:500;font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);background:var(--surface-2);padding:8px 10px;border-bottom:1px solid var(--line-2);white-space:nowrap}
+td{padding:8px 10px;border-bottom:1px solid var(--line-2);vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.r,th.r{text-align:right}
+.mono{font-family:var(--mono);font-size:12px}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);overflow-x:auto}
+.tabs button{border:0;background:none;padding:8px 12px;border-bottom:2px solid transparent;color:var(--ink-2);white-space:nowrap}
+.tabs button[aria-selected="true"]{border-bottom-color:var(--accent);color:var(--ink);font-weight:600}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
+.stat{border:1px solid var(--line-2);border-radius:10px;padding:10px 12px}
+.stat b{display:block;font-family:var(--mono);font-size:20px;font-weight:500}
+.stat span{font-size:12px;color:var(--muted)}
+.bar{display:flex;align-items:center;gap:8px;font-size:12.5px}
+.bar .trk{flex:1;height:8px;background:var(--line-2);border-radius:4px;overflow:hidden;display:block}
+.bar .fil{display:block;height:100%;background:var(--ink-2);border-radius:4px}
+.back{border:0;background:none;color:var(--muted);padding:0;font-size:13px}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom, 0px));background:var(--btn);color:var(--btn-ink);padding:9px 14px;border-radius:9px;font-size:13px;max-width:calc(100% - 32px);z-index:5}
+
+/* ---------- sponsor view (event theme) ---------- */
+.sp-frame{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:24px;align-items:start}
+.sp-note{position:sticky;top:12px}
+.sp{background:var(--ev-bg);color:var(--ev-ink);font-family:var(--ev-body);border-radius:14px;overflow:hidden;border:1px solid var(--line);max-width:760px;width:100%;margin-inline:auto}
+.sp h1,.sp h2,.sp h3{font-family:var(--ev-head);font-weight:700}
+.sp-top{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 20px;border-bottom:1px solid var(--ev-line);font-size:12px;color:var(--ev-muted)}
+.sp-top b{color:var(--ev-ink);font-weight:700;letter-spacing:.02em}
+.sp-hero{background:var(--ev-accent);color:#fff;padding:26px 22px 22px;display:flex;flex-direction:column;gap:10px}
+.sp-hero .ed{font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase}
+.sp-hero h1{font-size:34px;line-height:1.1}
+.sp-hero .line{font-family:var(--ev-head);font-size:20px;font-weight:700}
+.sp-hero .dv{font-size:14px;font-weight:600}
+.sp-for{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;padding:12px 22px;background:var(--ev-tint);color:var(--ev-ink);font-size:13px}
+.sp-for b{font-weight:700}
+.sp-sec{padding:22px;border-top:1px solid var(--ev-line);display:flex;flex-direction:column;gap:12px}
+.sp-sec h2{font-size:22px;color:var(--ev-accent);line-height:1.2}
+.sp-sec .src{font-size:11px;color:var(--ev-muted)}
+.sp-tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.sp-tile{background:var(--ev-tint);border-radius:10px;padding:12px}
+.sp-tile b{display:block;font-family:var(--ev-head);font-size:30px;color:var(--ev-dark);line-height:1.1;font-variant-numeric:tabular-nums}
+.sp-tile span{font-size:12.5px}
+.sp-bar{display:grid;grid-template-columns:90px minmax(0,1fr) 44px;gap:10px;align-items:center;font-size:13px}
+.sp-bar .trk{height:12px;background:var(--ev-tint);border-radius:6px;overflow:hidden;display:block}
+.sp-bar .fil{display:block;height:100%;background:var(--ev-accent);border-radius:6px}
+.sp-bar .v{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+.sp-quotes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.sp-q{border:1px solid var(--ev-line);border-radius:10px;padding:12px;display:grid;grid-template-columns:44px minmax(0,1fr);gap:10px}
+.sp-av{width:44px;height:44px;border-radius:50%;background:var(--ev-tint);color:var(--ev-dark);display:grid;place-items:center;font-weight:700;font-size:14px}
+.sp-q b{display:block;font-size:13px}
+.sp-q small{display:block;font-size:11.5px;color:var(--ev-muted)}
+.sp-q p{grid-column:1/-1;font-size:13px;color:var(--ev-muted);font-style:italic;border-left:3px solid var(--ev-tint);padding-left:10px}
+.sp-logos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 16px}
+.sp-logos .grp{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ev-muted);margin-bottom:4px}
+.sp-logos .row{display:flex;flex-wrap:wrap;gap:6px}
+.sp-logos .row span{border:1px solid var(--ev-line);border-radius:6px;padding:4px 9px;font-size:12px;font-weight:600}
+.sp-photos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.sp-photos div{aspect-ratio:4/3;max-width:100%;border-radius:8px;background:linear-gradient(135deg,var(--ev-tint),#F3D3DA);display:grid;place-items:end start;padding:6px;font-size:11px;color:var(--ev-dark);font-weight:600}
+.sp-cta{display:flex;flex-wrap:wrap;gap:8px}
+.sp-btn{border:1px solid var(--ev-ink);background:var(--ev-ink);color:#fff;border-radius:8px;padding:9px 14px;font-weight:600;font-size:13px;font-family:var(--ev-body)}
+.sp-btn.ghost{background:transparent;color:var(--ev-ink)}
+.sp-foot{padding:18px 22px;background:var(--ev-ink);color:#fff;font-size:12.5px;display:flex;flex-direction:column;gap:4px}
+.sp-share{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.sp-share input{flex:1;min-width:0;border:1px solid var(--ev-line);border-radius:8px;padding:8px 10px;font-family:var(--ev-body);font-size:13px;background:#fff;color:#000}
+.sp-msg{font-size:12.5px}
+.sp-msg.ok{color:#1D7349}.sp-msg.err{color:#B4431A}
+.sp-verify{padding:34px 22px;display:flex;flex-direction:column;gap:14px;max-width:420px}
+.sp-verify input{border:1px solid var(--ev-line);border-radius:8px;padding:10px 12px;font-family:var(--mono);font-size:18px;letter-spacing:.3em;width:190px;background:#fff;color:#000}
+.sp-sample{font-size:10.5px;font-weight:700;letter-spacing:.06em;color:var(--ev-dark);background:var(--ev-tint);border-radius:4px;padding:1px 6px;align-self:flex-start}
+.notecard{display:flex;flex-direction:column;gap:10px}
+.notecard ol{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;color:var(--ink-2);font-size:13px}
+
+@media (max-width:980px){.two{grid-template-columns:minmax(0,1fr)}.sp-frame{grid-template-columns:minmax(0,1fr)}.sp-note{position:static}}
+@media (max-width:880px){.lead{grid-template-columns:minmax(0,1fr)}.nav{position:static;flex-direction:row;overflow-x:auto}.nav .who{display:none}.nav button{white-space:nowrap;gap:8px}
+  .ev{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:560px){.sp-logos{grid-template-columns:minmax(0,1fr)}.sp-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}.sp-quotes{grid-template-columns:minmax(0,1fr)}.sp-hero h1{font-size:28px}.sp-photos{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <div class="switch">
+    <div class="brand"><div class="mark" aria-hidden="true">R</div><div><b>Report Studio</b><small>ETBrandEquity · Events</small></div></div>
+    <div class="seg" role="group" aria-label="Choose a view">
+      <button id="modeLead" aria-pressed="true">Event leads</button>
+      <button id="modeSponsor" aria-pressed="false">Sponsor link</button>
+    </div>
+    <span class="grow"></span>
+    <span class="chip">Demo date: Sat 5 Jul 2025 · names, schedules and counts are samples</span>
+  </div>
+  <main id="main"></main>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+var SPEAKERS=[["Sanjiv Mehta","Executive Chairman","L Catterton India"],["Prabha Narasimhan","MD & CEO","Colgate-Palmolive India"],["Prasoon Joshi","CEO, McCann World Group India",""],["Sudhanshu Vats","Managing Director","Pidilite Industries"],["Rohit Bhasin","President and CMO","Kotak Mahindra Bank"],["Ashwin Moorthy","CMO","Godrej Consumer Products"],["Kapil Grover","CMO","Restaurant Brands Asia"],["Lakshmi Narayanan","CMO","CEAT"],["Anuradha Aggarwal","Director User Growth and CMO","Amazon Pay"],["Chandrika Jain","CMO","Lenovo India"],["Nipun Kaushal","CMO","Yes Bank"],["Sunder Balasubramanian","CMO","Myntra"]];
+var SPONSORS=[["Presenting Partner",["Samsung ads"]],["Powered By",["Monotype"]],["Co-Powered by",["Route Mobile"]],["In Association With",["Google Messages"]],["Gold Partners",["2 partners"]],["Silver Partner",["1 partner"]],["Associate Partners",["2 partners"]],["Gifting Partners",["3 partners"]],["Category partners",["NBFC Fintech","Outdoor Media","Creative"]],["Exhibitors",["6 exhibitors"]],["Startup Arena Showcase",["5 start-ups"]]];
+var STATS=[["Indian advertising market","₹1,64,137 crore; +7% YoY, digital 60%","GroupM TYNY","2025","approved"],["Internet users","971.5 million","TRAI","2025","approved"],["High-net-worth individuals","85,698; +6% a year","Knight Frank","2025","approved"],["E-commerce market by 2030","$350 billion","Redseer","2024","approved"],["Middle class share by 2047","61% of population","PwC","2024","approved"],["AI adoption among Indian marketers","Suggested: needs a source link","—","—","needs-source"]];
+
+var EVENTS=[
+ {id:'bws25',name:'Brand World Summit 2025',kind:'IP',date:'4 Jul 2025',venue:'Grand Hyatt, BKC, Mumbai',rel:'T+1',stage:3,lead:'Priya (you)',color:'#E7425F',src:['g','g','g','g','w','g','g'],
+  meta:['24 of 30 videos received','14 insights waiting','Report v1 due today 12:00'],status:['warn','Report in review']},
+ {id:'dp10',name:'ET DigiPlus · 10th edition',kind:'IP',date:'17 Jul 2025',venue:'Mumbai',rel:'T-12',stage:1,lead:'Arjun',color:'#2D5B85',src:['g','g','w','n','n','n','g'],
+  meta:['Video brief 18 of 30 rows','Theme approved','2 market stats to review'],status:['info','Setting up']},
+ {id:'llc26',name:"Lenovo Leaders Circle '26",kind:'Custom',date:'8 Aug 2025',venue:'Bengaluru',rel:'T-34',stage:0,lead:'Meera',color:'#6B5B95',src:['g','n','w','n','n','n','g'],
+  meta:['Wishlist: 40 accounts','Video brief not started','Committed deliverables: 12'],status:['neutral','Planning']},
+ {id:'bws24',name:'Brand World Summit 2024',kind:'IP',date:'2024',venue:'Mumbai',rel:'Sent',stage:4,lead:'Priya (you)',color:'#E7425F',src:['g','g','g','g','g','g','g'],
+  meta:['v2 sent to all partners','Opened by 19 of 24 partners','Renewal window open'],status:['good','Sent · v2']}
+];
+var SRC_LABELS=['Event and theme','Sponsors','Speakers','Attendees','Media','Social','Market insights'];
+
+var VIDEOS=[
+ ['10:15','Panel','Prabha Narasimhan; Sudhanshu Vats','Kabir (video)','insights',3],
+ ['10:55','Keynote','Sanjiv Mehta','Kabir (video)','insights',2],
+ ['11:40','Panel','Rohit Bhasin; Ashwin Moorthy','Kabir (video)','review-speakers',0],
+ ['12:30','Social byte (TicTac)','Kapil Grover','Neha (social)','insights',2],
+ ['13:15','Social byte (TicTac)','Lakshmi Narayanan','Neha (social)','transcribing',0],
+ ['14:00','Panel','Anuradha Aggarwal; Chandrika Jain','Kabir (video)','received',0],
+ ['15:10','5D byte','Nipun Kaushal','Neha (social)','expected',0],
+ ['16:00','Fireside chat','Sunder Balasubramanian','Kabir (video)','expected',0],
+ ['—','Reel','Crowd montage','Neha (social)','received',0]
+];
+var VSTATE={insights:['good','Insights ready'],'review-speakers':['warn','Name speakers'],transcribing:['info','Transcribing'],received:['neutral','Received'],expected:['bad','Expected']};
+
+var S={mode:'lead',nav:'events',event:null,tab:'overview',sp:'verify',stats:STATS.map(function(r){return r[4]})};
+
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function pill(k,t){return '<span class="pill '+k+'">'+esc(t)+'</span>'}
+function toast(t){var el=document.getElementById('toast');el.textContent=t;el.hidden=false;clearTimeout(toast._t);toast._t=setTimeout(function(){el.hidden=true},2600)}
+
+function render(){
+  document.getElementById('modeLead').setAttribute('aria-pressed',S.mode==='lead');
+  document.getElementById('modeSponsor').setAttribute('aria-pressed',S.mode==='sponsor');
+  document.getElementById('main').innerHTML=S.mode==='lead'?leadView():sponsorView();
+}
+
+/* ---------- lead workspace ---------- */
+function navBtn(id,label,count,plain){return '<button data-nav="'+id+'" '+(S.nav===id?'aria-current="page"':'')+'><span>'+label+'</span>'+(count!=null?'<span class="count'+(plain?' plain':'')+'">'+count+'</span>':'')+'</button>'}
+function leadView(){
+  var pendingStats=S.stats.filter(function(s){return s!=='approved'&&s!=='rejected'}).length;
+  var h='<div class="lead"><nav class="nav" aria-label="Workspace"><div class="who"><b>Priya</b><span>Event lead · BrandEquity</span></div>'+
+    navBtn('today','Today',6)+navBtn('events','Events',EVENTS.length,true)+navBtn('videos','Video briefs',2)+navBtn('insights','Market insights',pendingStats)+navBtn('sent','Sent reports',null)+'</nav><div>';
+  if(S.event) h+=eventDetail(); else if(S.nav==='insights') h+=insightsView(true); else if(S.nav==='videos') h+=videosAll(); else if(S.nav==='sent') h+=sentView(); else h+=portfolio();
+  return h+'</div></div>';
+}
+function todayQueue(){
+  var t=[
+   ['bad','Approve 14 leader insights','Brand World Summit 2025 · report v1 is due at 12:00','bws25','videos','Review'],
+   ['bad','6 briefed videos not received','Brand World Summit 2025 · owner: Kabir (video team)','bws25','videos','Nudge'],
+   ['warn','Name the speakers in the 11:40 panel','Brand World Summit 2025 · 2 voices, 1 click each','bws25','videos','Open'],
+   ['warn','Video brief is 18 of 30 rows','ET DigiPlus · due T-3 (14 Jul)','dp10','videos','Open'],
+   ['info','1 suggested market stat has no source','BrandEquity library · used by 2 events','','insights','Review'],
+   ['info','Start the video brief','Lenovo Leaders Circle ’26 · due 5 Aug','llc26','videos','Open']];
+  return '<div class="panel"><div class="head" style="margin:0"><h2>Today</h2><span class="hint">Across your events, most urgent first</span></div><div>'+
+   t.map(function(x){return '<div class="task"><span class="sev '+x[0]+'"></span><div><b>'+esc(x[1])+'</b><small>'+esc(x[2])+'</small></div><button class="btn small" data-go="'+x[3]+'" data-tab="'+x[4]+'">'+x[5]+'</button></div>'}).join('')+'</div></div>';
+}
+function portfolio(){
+  var h='<div class="head"><div><h1>BrandEquity events</h1><p>Every event you lead or support, where it is between setup and the sponsor report, and what each one needs from you today.</p></div></div>';
+  h+='<div class="two"><div class="panel"><div class="head" style="margin:0"><h2>Events</h2><span class="grow"></span><span class="hint">Setup → Brief → Live → Report → Sent</span></div><div>'+
+   EVENTS.map(function(e){
+     var life='';for(var i=0;i<5;i++)life+='<i class="'+(i<e.stage?'done':i===e.stage?'now':'')+'"></i>';
+     return '<div class="ev"><div class="name"><span class="sw" style="background:'+e.color+'" title="Event theme colour from OneWorld"></span><div><b>'+esc(e.name)+'</b><small>'+e.kind+' · '+esc(e.date)+' · '+esc(e.venue)+'</small><br><small>Lead: '+esc(e.lead)+'</small></div></div>'+
+     '<div><div class="life" aria-label="Stage">'+life+'</div><div class="lifelab"><span>Setup</span><span>Brief</span><span>Live</span><span>Report</span><span>Sent</span></div>'+
+     '<div class="srcdots" style="margin-top:8px">'+e.src.map(function(s,i){return '<span class="'+s+'" title="'+SRC_LABELS[i]+': '+(s==='g'?'ready':s==='w'?'needs attention':'not started')+'">'+(i+1)+'</span>'}).join('')+'</div></div>'+
+     '<div class="meta"><span>'+pill(e.status[0],e.status[1])+' <span class="num">'+e.rel+'</span></span>'+e.meta.map(function(m){return '<span>'+esc(m)+'</span>'}).join('')+'</div>'+
+     '<button class="btn" data-open="'+e.id+'">Open</button></div>'}).join('')+
+   '</div><p class="hint">Numbered squares are the 7 data sources: 1 event and theme · 2 sponsors · 3 speakers · 4 attendees · 5 media · 6 social · 7 market insights.</p></div>'+todayQueue()+'</div>';
+  return h;
+}
+function eventDetail(){
+  var e=EVENTS.filter(function(x){return x.id===S.event})[0];
+  var h='<button class="back" data-back>← All events</button><div class="head" style="margin-top:6px"><span class="sw" style="background:'+e.color+';margin:0"></span><div><h1>'+esc(e.name)+'</h1><p>'+e.kind+' · '+esc(e.date)+' · '+esc(e.venue)+' · Lead: '+esc(e.lead)+' · '+pill(e.status[0],e.status[1])+'</p></div><span class="grow"></span>'+
+    (e.id==='bws25'?'<button class="btn primary" data-mode="sponsor">Preview sponsor link</button>':'')+'</div>';
+  var tabs=[['overview','Overview'],['videos','Video brief'],['insights','Market insights'],['sponsors','Sponsor links']];
+  h+='<div class="tabs" role="tablist">'+tabs.map(function(t){return '<button role="tab" data-tabbtn="'+t[0]+'" aria-selected="'+(S.tab===t[0])+'">'+t[1]+'</button>'}).join('')+'</div><div class="stack" style="margin-top:16px">';
+  if(e.id!=='bws25'&&S.tab!=='insights') h+='<div class="panel"><h2>'+esc(e.name)+'</h2><p class="hint">This prototype fills in Brand World Summit 2025 in detail. Other events use the same screens.</p></div>';
+  else if(S.tab==='overview') h+=overviewTab(e); else if(S.tab==='videos') h+=videosTab(); else if(S.tab==='insights') h+=insightsView(false); else h+=sponsorsTab();
+  return h+'</div>';
+}
+function overviewTab(e){
+  var rows=[['Event and theme','OneWorld Colors & Fonts · thm_etbe-bws_2025_v1 approved','good','Ready','Priya'],['Sponsors','26 sponsors · 13 groups · tiers mapped','good','Ready','Priya'],['Speakers','35 speakers · 26 CXO · 5 missing a company fixed','good','Ready','Priya'],['Attendees','Registrations upload · check-in synced 18:40','good','Ready','Delegate team'],['Media','24 of 30 briefed videos received · 14 insights waiting','warn','Needs you','Kabir, Priya'],['Social','LinkedIn + Instagram + YouTube exports · pre-event and event day','good','Ready','Neha'],['Market insights','5 approved for BrandEquity · 1 suggested without source','good','Ready','Priya']];
+  return '<div class="stats"><div class="stat"><b>6 / 7</b><span>sources ready</span></div><div class="stat"><b>24 / 30</b><span>briefed videos received</span></div><div class="stat"><b>14</b><span>insights to approve</span></div><div class="stat"><b>12:00</b><span>report v1 due today</span></div></div>'+
+   '<div class="panel"><h2>Readiness for report v1</h2><div class="tbl"><table><thead><tr><th>Source</th><th>What is in</th><th>Status</th><th>Owner</th></tr></thead><tbody>'+
+   rows.map(function(r){return '<tr><td>'+r[0]+'</td><td>'+esc(r[1])+'</td><td>'+pill(r[2],r[3])+'</td><td>'+esc(r[4])+'</td></tr>'}).join('')+'</tbody></table></div>'+
+   '<div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" data-tabbtn="videos">Approve insights</button><button class="btn primary" data-freeze>Freeze v1 and send links</button></div></div>';
+}
+function videosTab(){
+  var got=VIDEOS.filter(function(v){return v[4]!=='expected'}).length;
+  return '<div class="panel"><div class="head" style="margin:0"><div><h2>Video brief · same-day processing</h2><p class="hint">Briefed by T-3 from the video plan. Each row is one expected video; uploads to the event Drive folder are matched by file name, transcribed and turned into insights the same day.</p></div></div>'+
+   '<div class="stats"><div class="stat"><b>'+got+' / '+VIDEOS.length+'</b><span>received (sample rows)</span></div><div class="stat"><b>4</b><span>with insights ready</span></div><div class="stat"><b>1</b><span>panel needs speaker names</span></div><div class="stat"><b>2</b><span>not received yet</span></div></div>'+
+   '<div class="tbl"><table><thead><tr><th>Time</th><th>Type</th><th>Leader(s)</th><th>Owner</th><th>Status</th><th class="r">Insights</th><th></th></tr></thead><tbody>'+
+   VIDEOS.map(function(v,i){var st=VSTATE[v[4]];var act=v[4]==='insights'?'<button class="btn small" data-act="approve" data-i="'+i+'">Review '+v[5]+'</button>':v[4]==='review-speakers'?'<button class="btn small" data-act="name" data-i="'+i+'">Name speakers</button>':v[4]==='expected'?'<button class="btn small" data-act="nudge" data-i="'+i+'">Nudge '+esc(v[3].split(' ')[0])+'</button>':'';
+     return '<tr><td class="mono">'+v[0]+'</td><td>'+esc(v[1])+'</td><td>'+esc(v[2])+'</td><td>'+esc(v[3])+'</td><td>'+pill(st[0],st[1])+'</td><td class="r num">'+(v[5]||'—')+'</td><td>'+act+'</td></tr>'}).join('')+
+   '</tbody></table></div><p class="hint">Rows still "Expected" at 18:00 go to the owner as a list. Leader names come from the OneWorld speaker list; statuses here are samples.</p></div>';
+}
+function videosAll(){
+  return '<div class="head"><div><h1>Video briefs</h1><p>The video plan for each event. Brief by T-3 so the video team names files correctly and insights arrive the same day.</p></div></div>'+
+  '<div class="panel"><div class="tbl"><table><thead><tr><th>Event</th><th>Brief</th><th>Received</th><th>Insights waiting</th><th>Due</th><th></th></tr></thead><tbody>'+
+  '<tr><td>Brand World Summit 2025</td><td>'+pill('good','30 of 30 rows')+'</td><td class="num">24 / 30</td><td class="num">14</td><td>Live today</td><td><button class="btn small" data-go="bws25" data-tab="videos">Open</button></td></tr>'+
+  '<tr><td>ET DigiPlus · 10th edition</td><td>'+pill('warn','18 of 30 rows')+'</td><td class="num">—</td><td class="num">—</td><td>14 Jul (T-3)</td><td><button class="btn small" data-go="dp10" data-tab="videos">Open</button></td></tr>'+
+  '<tr><td>Lenovo Leaders Circle ’26</td><td>'+pill('neutral','Not started')+'</td><td class="num">—</td><td class="num">—</td><td>5 Aug (T-3)</td><td><button class="btn small" data-go="llc26" data-tab="videos">Open</button></td></tr>'+
+  '</tbody></table></div></div>';
+}
+function insightsView(top){
+  var h=top?'<div class="head"><div><h1>Market insights</h1><p>The BrandEquity statistics library. Shared by every BrandEquity event, reviewed once a year, and every number keeps its source and year.</p></div></div>':'';
+  h+='<div class="panel"><div class="head" style="margin:0"><div><h2>BrandEquity library</h2><p class="hint">Last reviewed Jun 2025 · stats tagged to this event’s theme are used in the report</p></div></div><div class="tbl"><table><thead><tr><th>Statistic</th><th>Value</th><th>Source</th><th>Year</th><th>Status</th><th></th></tr></thead><tbody>'+
+   STATS.map(function(r,i){var st=S.stats[i];var p=st==='approved'?pill('good','Approved'):st==='rejected'?pill('neutral','Rejected'):pill('warn','Needs a source link');
+     return '<tr><td>'+esc(r[0])+'</td><td>'+esc(r[1])+'</td><td>'+esc(r[2])+'</td><td class="mono">'+r[3]+'</td><td>'+p+'</td><td>'+(st==='needs-source'?'<button class="btn small" data-stat="'+i+'">Reject</button>':'')+'</td></tr>'}).join('')+
+   '</tbody></table></div><p class="hint">A suggested stat can be approved only after someone adds its source link and year and opens it. The report never shows a number without a source.</p></div>';
+  return h;
+}
+function sponsorsTab(){
+  var rows=[['Presenting partner','2 contacts','Opened','3 viewers','Downloaded PPT'],['Powered by partner','1 contact','Opened','1 viewer','—'],['Co-powered partner','2 contacts','Not opened','—','—'],['Gold partner A','1 contact','Opened','2 viewers','Shared with CMO'],['Gold partner B','1 contact','Not opened','—','—']];
+  return '<div class="panel"><div class="head" style="margin:0"><div><h2>Sponsor links</h2><p class="hint">Sent when v1 is frozen. Each contact gets a personal link; forwarding it asks the new reader to verify a work email on the same company domain.</p></div></div>'+
+   '<div class="stats"><div class="stat"><b>26</b><span>partners to receive links</span></div><div class="stat"><b>0</b><span>sent (v1 not frozen yet)</span></div><div class="stat"><b>T+14</b><span>same link updates to v2</span></div></div>'+
+   '<p class="hint">After sending, this table fills in. Example of how it reads for a sent report (sample):</p><div class="tbl"><table><thead><tr><th>Partner</th><th>Contacts</th><th>Status</th><th>Viewers</th><th>Activity</th></tr></thead><tbody>'+
+   rows.map(function(r){return '<tr><td>'+r[0]+'</td><td>'+r[1]+'</td><td>'+(r[2]==='Opened'?pill('good','Opened'):pill('warn','Not opened'))+'</td><td>'+r[3]+'</td><td>'+r[4]+'</td></tr>'}).join('')+'</tbody></table></div>'+
+   '<div><button class="btn" data-mode="sponsor">See what a partner sees</button></div></div>';
+}
+function sentView(){
+  return '<div class="head"><div><h1>Sent reports</h1><p>Reports already with sponsors, and whether they are being read. Unopened partners get one reminder from their account manager at T+3.</p></div></div>'+
+  '<div class="panel"><div class="tbl"><table><thead><tr><th>Event</th><th>Version</th><th>Partners</th><th>Opened</th><th>Shared inside the partner</th><th>Last activity</th></tr></thead><tbody>'+
+  '<tr><td>Brand World Summit 2024</td><td>v2 (T+14)</td><td class="num">24</td><td class="num">19</td><td class="num">7</td><td>Renewal window open</td></tr></tbody></table></div><p class="hint">Sample figures.</p></div>';
+}
+
+/* ---------- sponsor view ---------- */
+function sponsorView(){
+  var inner=S.sp==='verify'?verifyScreen():reportScreen();
+  return '<div class="sp-frame"><div class="sp">'+
+    '<div class="sp-top"><b>ETBrandEquity</b><span>Post-event report</span></div>'+inner+'</div>'+
+    '<aside class="panel sp-note notecard"><h2>How partners get here</h2><ol><li>On T+1 each partner contact gets an email: “Your Brand World Summit 2025 report is ready”, with three headline numbers and one button.</li><li>The link is personal. The first click signs them in; later visits ask for a 6-digit code sent to the same work email.</li><li>Forwarding works by invitation: a colleague on the same company domain verifies their email, and the event lead can see they joined.</li><li>The page carries the event’s own look from OneWorld (theme thm_etbe-bws_2025_v1), shows totals only, and never shows attendee names or emails.</li><li>At T+14 the same link updates to v2 with final video views and social numbers.</li></ol>'+
+    '<div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" data-spstep="verify">Show sign-in</button><button class="btn" data-spstep="report">Show report</button></div></aside></div>';
+}
+function verifyScreen(){
+  return '<div class="sp-hero"><span class="ed">7th Edition</span><h1>Brand World Summit 2025</h1><span class="dv">4 July 2025 · Grand Hyatt, BKC, Mumbai</span></div>'+
+  '<form class="sp-verify" id="verifyForm"><h2 style="font-size:20px">Check your email</h2><p style="font-size:13px">We sent a 6-digit code to <b>a.partner@yourcompany.com</b>. It keeps this report private to your team.</p>'+
+  '<label for="code" style="font-size:12px;color:var(--ev-muted)">Code (demo: any 6 digits)</label><input id="code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="••••••">'+
+  '<div><button class="sp-btn" type="submit">View report</button></div><p class="sp-msg" id="codeMsg" aria-live="polite"></p><p style="font-size:12px;color:var(--ev-muted)">Didn’t get it? The code comes from reports@ ETBrandEquity’s domain and is valid for 10 minutes.</p></form>';
+}
+function spBar(l,n,t){var p=Math.round(n/t*100);return '<div class="sp-bar"><span>'+l+'</span><span class="trk"><span class="fil" style="width:'+p+'%"></span></span><span class="v">'+n+'</span></div>'}
+function reportScreen(){
+  var q=SPEAKERS.slice(0,4).map(function(s){var ini=s[0].split(' ').map(function(w){return w[0]}).join('').slice(0,2);
+    return '<div class="sp-q"><div class="sp-av">'+ini+'</div><div><b>'+esc(s[0])+'</b><small>'+esc(s[1])+(s[2]?', '+esc(s[2]):'')+'</small></div><p>Approved verbatim quote from this leader’s session appears here, with the theme it speaks to.</p></div>'}).join('');
+  return '<div class="sp-hero"><span class="ed">7th Edition · #ETBWS2025</span><h1>Brand World Summit 2025</h1><span class="line">Reimagining Marketing In The Age of AI</span><span class="dv">4 July 2025 · Grand Hyatt, BKC, Mumbai</span></div>'+
+  '<div class="sp-for"><span>Prepared for <b>your team</b> · Gold Partner</span><span>Report v1 · 5 Jul 2025</span><span>Final numbers on 18 Jul (v2)</span></div>'+
+  '<section class="sp-sec"><span class="sp-sample">SAMPLE FIGURES</span><h2>The day at a glance</h2><div class="sp-tiles"><div class="sp-tile"><b>245</b><span>Marketing leaders attended</span></div><div class="sp-tile"><b>35</b><span>Speakers on stage</span></div><div class="sp-tile"><b>26</b><span>Partners across 13 groups</span></div><div class="sp-tile"><b>29%</b><span>Attendees at CXO level</span></div><div class="sp-tile"><b>9</b><span>Sessions filmed and published</span></div><div class="sp-tile"><b>4.1M</b><span>Social impressions, pre-event and event day</span></div></div><span class="src">Sources: OneWorld registrations and check-in · OneWorld Speakers and Sponsors · LinkedIn, Instagram and YouTube analytics, as of 5 Jul 2025</span></section>'+
+  '<section class="sp-sec"><h2>74% of speakers were CXOs</h2>'+spBar('CXO',26,35)+spBar('VP',4,35)+spBar('Director',4,35)+spBar('Guest',1,35)+'<span class="src">35 speakers · seniority from job titles in OneWorld</span></section>'+
+  '<section class="sp-sec"><h2>What leaders said</h2><div class="sp-quotes">'+q+'</div><span class="src">Quotes are taken word for word from session recordings and approved by the ETBrandEquity events team.</span></section>'+
+  '<section class="sp-sec"><h2>In the room with 26 partners</h2><div class="sp-logos">'+SPONSORS.map(function(g){return '<div><div class="grp">'+esc(g[0])+'</div><div class="row">'+g[1].map(function(n){return '<span>'+esc(n)+'</span>'}).join('')+'</div></div>'}).join('')+'</div><span class="src">Logos appear here in the live report.</span></section>'+
+  '<section class="sp-sec"><h2>Moments from the day</h2><div class="sp-photos"><div>Main stage</div><div>Panel</div><div>Audience</div><div>Networking</div><div>Partner lounge</div><div>ET Studio</div></div></section>'+
+  '<section class="sp-sec"><h2>Take it to your team</h2><div class="sp-cta"><button class="sp-btn" data-dl="PPT">Download PPT</button><button class="sp-btn ghost" data-dl="PDF">Download PDF</button></div>'+
+  '<form class="sp-share" id="shareForm"><label for="shareEmail" style="width:100%;font-size:13px;font-weight:600">Share with a colleague</label><input id="shareEmail" type="email" placeholder="colleague@yourcompany.com"><button class="sp-btn ghost" type="submit">Invite</button></form><p class="sp-msg" id="shareMsg" aria-live="polite"></p>'+
+  '<span class="src">Downloads carry your name and company. Colleagues on the same company domain can be invited; others need approval from the events team.</span></section>'+
+  '<div class="sp-foot"><b>Questions about this report?</b><span>Reply to the email from your ETBrandEquity account manager.</span><span style="opacity:.7">See you at the 8th edition · #ETBWS2025</span></div>';
+}
+
+/* ---------- events ---------- */
+document.addEventListener('click',function(ev){
+  var t=ev.target.closest('button');if(!t)return;
+  if(t.id==='modeLead'){S.mode='lead';render();return}
+  if(t.id==='modeSponsor'||t.dataset.mode==='sponsor'){S.mode='sponsor';render();window.scrollTo(0,0);return}
+  if(t.dataset.nav){S.nav=t.dataset.nav;S.event=null;render();return}
+  if(t.dataset.open){S.event=t.dataset.open;S.tab='overview';render();window.scrollTo(0,0);return}
+  if(t.dataset.go!=null){if(t.dataset.go){S.event=t.dataset.go;S.tab=t.dataset.tab}else{S.event=null;S.nav=t.dataset.tab}render();window.scrollTo(0,0);return}
+  if(t.hasAttribute('data-back')){S.event=null;S.nav='events';render();return}
+  if(t.dataset.tabbtn){S.tab=t.dataset.tabbtn;render();return}
+  if(t.dataset.stat){S.stats[+t.dataset.stat]='rejected';render();toast('Rejected. It won’t appear in any report.');return}
+  if(t.dataset.act){var v=VIDEOS[+t.dataset.i];
+    if(t.dataset.act==='approve'){toast('Opens the review queue: '+v[5]+' insights from the '+v[0]+' '+v[1].toLowerCase()+'.')}
+    else if(t.dataset.act==='name'){v[4]='insights';v[5]=3;render();toast('Speakers named. 3 insights drafted for review.')}
+    else if(t.dataset.act==='nudge'){toast('Reminder sent to '+v[3].split(' ')[0]+' with the expected file name.')}
+    return}
+  if(t.hasAttribute('data-freeze')){toast('Freezing is blocked until the 14 insights are reviewed.');return}
+  if(t.dataset.spstep){S.sp=t.dataset.spstep;render();return}
+  if(t.dataset.dl){toast('In the product this downloads a '+t.dataset.dl+' watermarked with your name.');return}
+});
+document.addEventListener('submit',function(ev){
+  ev.preventDefault();
+  if(ev.target.id==='verifyForm'){var c=document.getElementById('code').value.trim();var m=document.getElementById('codeMsg');
+    if(!/^\d{6}$/.test(c)){m.className='sp-msg err';m.textContent='Enter the 6 digits from the email.';return}
+    S.sp='report';render();window.scrollTo(0,0)}
+  if(ev.target.id==='shareForm'){var e=document.getElementById('shareEmail').value.trim();var sm=document.getElementById('shareMsg');
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e)){sm.className='sp-msg err';sm.textContent='Enter a work email address.';return}
+    if(!/@yourcompany\.com$/i.test(e)){sm.className='sp-msg err';sm.textContent='That address is outside your company domain, so the events team will approve it first.';return}
+    sm.className='sp-msg ok';sm.textContent='Invite sent to '+e+'. They’ll verify their email to open the report.'}
+});
+if(location.hash==='#sponsor'){S.mode='sponsor';S.sp='report'}
+render();
+</script>

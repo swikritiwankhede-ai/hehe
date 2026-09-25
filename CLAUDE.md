@@ -155,6 +155,10 @@ Internal capture → accurate ROI report → the sponsor's marketing manager has
   - **"+ Add section"** works from a prompt, a paste plus prompt, or by picking a block. The output is a section spec validated against `schemas/report-section.schema.json`; examples are in `samples/custom-sections.example.json`.
   - Guardrails: numbers only from bound data, and custom sections start as drafts.
   - The APIs in the execution plan become v2 upgrades. Lovable Prompts H and I are in the doc.
+- **Workspace and sponsor views:** see `docs/workspace-and-sponsor-views.md` and `prototype/report-workspace.html` (published as a private artifact).
+  - **Event leads' workspace:** a Today queue across events; an Events list (theme swatch, lifecycle bar, 7 source squares, stage facts); event tabs for Overview, Video brief (status actions), Market insights and Sponsor links.
+  - **Sponsor view:** personal link plus email code, in the event's own theme, totals only. Order: at a glance, seniority, leader quotes, partner wall, photos, then watermarked downloads and same-domain sharing. The same link updates at T+14.
+  - Lovable Prompt J is in the doc.
 - **Lovable integrations:** see `docs/lovable-integrations.md`. It covers:
   - Feasibility: Excel upload, Drive, transcription, the summary / quotes / themes prompt and photo scoring are fine. LinkedIn impressions can't be read from public URLs; use the page-analytics export now and the official API after approval. OneWorld needs an ET engineering API plus DPDP sign-off.
   - The setup checklist.
