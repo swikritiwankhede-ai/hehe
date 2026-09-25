@@ -183,6 +183,12 @@ Internal capture → accurate ROI report → the sponsor's marketing manager has
   - It covers Week 0 accounts and keys, Lovable working rules, and a 19-step, 6–8 week build order that names which prompt to paste and when each step is "done".
   - New Prompts K (website harvester), L (video plan → browser audio → Gemini transcripts → insights), M (social from exports) and N (market insights finder).
   - It also covers costs, troubleshooting and the pilot definition of done.
+  - **Tool choice (§0):**
+    - Claude Design for the visual design only; it doesn't build a working app.
+    - Lovable is recommended for the product.
+    - Replit Agent if video processing needs a real server.
+    - Firebase Studio as the Google-native alternative.
+    - Bolt, v0, Claude Code and artifacts are compared too.
 - **Lovable integrations:** see `docs/lovable-integrations.md`. It covers:
   - Feasibility: Excel upload, Drive, transcription, the summary / quotes / themes prompt and photo scoring are fine. LinkedIn impressions can't be read from public URLs; use the page-analytics export now and the official API after approval. OneWorld needs an ET engineering API plus DPDP sign-off.
   - The setup checklist.

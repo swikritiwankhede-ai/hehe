@@ -25,6 +25,38 @@ Because every upload lands in the same tables a connector would fill, the report
 
 ---
 
+## 0. Choosing the tool
+
+The product needs:
+- a database
+- company login
+- file storage (audio, photos)
+- server functions that hold secret keys (Gemini)
+- scheduled jobs (every 5 minutes on event day, daily to T+14)
+- PPT generation
+- a public sponsor page
+
+A tool has to do all of these from prompts.
+
+| Tool | What it's good for here | Builds the working product? | Watch out for |
+|---|---|---|---|
+| **Claude Design** | Designing the screens: workspace, intake, report, sponsor page. Fast visual iteration from the prompt in `docs/intake-prompts.md` | **No.** It makes designs and prototypes, not a running app with a database, login, secrets and scheduled jobs | Use it first for the look, then hand the screens (images or exported HTML) to the builder |
+| **Lovable** (recommended) | Full app from prompts, with built-in backend (database, login, storage, server functions), GitHub backup | **Yes** | Heavy video must be reduced to audio in the browser first (Prompt L) |
+| **Replit Agent** | Full app with a real server, so it can run ffmpeg for video directly; built-in database, secrets, scheduled deployments | **Yes** | UI is less polished by default (give it the screenshots); check Google sign-in domain restriction |
+| **Firebase Studio / Google AI Studio "Build"** | Google-native: Gemini, Google sign-in, Drive, YouTube in one place; scheduled functions | **Yes**, but more technical when it breaks | Server functions and schedules need the paid Firebase plan; more setup screens |
+| **Bolt.new** | Similar to Lovable (prompt → full app, database via its cloud or Supabase) | **Yes** | Very similar trade-offs to Lovable; pick one, not both |
+| **v0 (Vercel)** | Best-looking UI components | Partly: backend and scheduled jobs need connected services | More wiring than Lovable for a non-technical builder |
+| **Claude Code** | Can write the whole app in this repo and keep it in sync with these specs | **Yes**, as code | You still need hosting accounts (e.g. Vercel + Supabase) set up and deployed. Fine with guidance, but it's the most technical route |
+| **claude.ai artifacts** | Click-through prototypes (like the ones already made) and light internal tools with saved data | **No** for this product: no scheduled jobs, no secret keys for Gemini, can't fetch external sites | Good for demos to leadership, not for T+1 operations |
+
+**Recommendation:**
+1. **Claude Design** for the visual design.
+2. **Lovable** for the product, following the build order below.
+3. If video processing in the browser becomes the bottleneck, move only that step to **Replit** (a small server that turns videos into audio and transcripts), or switch the whole build to Replit.
+4. If ET IT prefers everything inside Google Cloud, **Firebase Studio** is the Google-native alternative. The prompts in this playbook work there with small wording changes ("Firebase" instead of "Lovable Cloud").
+
+All of these change quickly. Check current features and pricing before committing *(check)*.
+
 ## 1. What you can and can't do alone
 
 | You can do alone | You need someone for (ask early, in parallel) |
