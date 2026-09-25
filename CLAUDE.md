@@ -165,6 +165,16 @@ Internal capture → accurate ROI report → the sponsor's marketing manager has
   3. the video plan by T-3
   4. the event hashtag on every post
   5. check-in as "attended", with tier promises entered once
+- **v1 automation gaps:** see `docs/v1-automation-gaps.md`. It lists 18 sources, each with the human step left in v1 and the automation or AI layer that removes it, without outside dependencies:
+  - a website harvester for event, theme CSS, sponsors, speakers and agenda
+  - an AI extractor for tier promises
+  - a video-plan drafter
+  - a browser-side media pipeline
+  - public YouTube stats via an API key
+  - a OneWorld bookmarklet for attendees and wishlist (needs IT's OK)
+  - a hosted feedback form
+
+  Left in v1: about 3 bookmarklet clicks plus the LinkedIn and Instagram exports (4 uploads per event), plus approvals by design.
 - **Lovable integrations:** see `docs/lovable-integrations.md`. It covers:
   - Feasibility: Excel upload, Drive, transcription, the summary / quotes / themes prompt and photo scoring are fine. LinkedIn impressions can't be read from public URLs; use the page-analytics export now and the official API after approval. OneWorld needs an ET engineering API plus DPDP sign-off.
   - The setup checklist.
