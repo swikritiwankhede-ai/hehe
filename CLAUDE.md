@@ -132,6 +132,11 @@ Internal capture → accurate ROI report → the sponsor's marketing manager has
   - a **recommended** sponsor viewer: personal magic link, then a one-time code, same domain only, watermarked downloads, view tracking. This is still a proposal; the current decision is PPT/PDF only.
   - the T-30 → T+30 communication timeline
   - login-first design mechanisms, and Lovable Prompt E
+- **Theme ID:** see `docs/theme-id-spec.md`.
+  - Each report is bound to one approved, immutable theme, e.g. `thm_etbe-bws_2025_v1`, stored in `themes/`. The theme's tokens come from OneWorld Colors & Fonts, with a SHA-256 checksum.
+  - The theme is frozen with each report version, and the PPT reads only the frozen theme. The ID is stamped in the PPT file properties, the slide-1 notes and the file name.
+  - `tools/build-ppt-from-theme.mjs` (pptxgenjs) generates the sample deck in `samples/`. Lovable Prompt F is in the spec.
+  - The theme line is content, not theme.
 - **Lovable integrations:** see `docs/lovable-integrations.md`. It covers:
   - Feasibility: Excel upload, Drive, transcription, the summary / quotes / themes prompt and photo scoring are fine. LinkedIn impressions can't be read from public URLs; use the page-analytics export now and the official API after approval. OneWorld needs an ET engineering API plus DPDP sign-off.
   - The setup checklist.

@@ -1,0 +1,73 @@
+{
+  "theme_id": "thm_etbe-bws_2025_v1",
+  "checksum": "sha256:3f51e30323bc5ca2d64026e36861d2dc0596e2dd464f8256a7c10a63317ff106",
+  "status": "approved",
+  "event": {
+    "event_key": "etbe-bws-2025",
+    "name": "Brand World Summit 2025",
+    "vertical": "BrandEquity",
+    "series": "bws",
+    "edition": 7,
+    "date": "2025-07-04"
+  },
+  "source": {
+    "system": "OneWorld",
+    "screen": "Event Website → Colors & Fonts; Templates → Top Banner",
+    "captured_from": "settings screenshots shared by the events team",
+    "captured_at": "2026-09-25",
+    "website_crosscheck": "5 of 5 fields match"
+  },
+  "tokens": {
+    "font.body": "Montserrat",
+    "font.heading": "SangBleu Versailles",
+    "size.h1": 24,
+    "size.h2": 20,
+    "size.body": 14,
+    "color.bg": "rgba(255, 255, 255, 1)",
+    "color.text": "rgba(0, 0, 0, 1)",
+    "color.accent": "rgba(231, 66, 95, 1)",
+    "color.heading": "rgba(231, 66, 95, 1)",
+    "weight.heading": 700,
+    "case.heading": "Initial",
+    "layout.heading": "Style 1",
+    "space.section": 50,
+    "event.hashtag": "#ETBWS2025",
+    "event.edition": "7th Edition",
+    "image.banner": "https://img.etb2bimg.com/files/data_file_1741773556_14436.jpg",
+    "image.edition": null,
+    "image.bg": null
+  },
+  "derived": {
+    "hex.accent": "#E7425F",
+    "hex.heading": "#E7425F",
+    "hex.bg": "#FFFFFF",
+    "hex.text": "#000000",
+    "hex.accent_tint": "#FCE8EC",
+    "hex.accent_dark": "#B9354C",
+    "contrast.white_on_accent": 3.93,
+    "rule.small_text_on_accent": "use hex.text on hex.accent_tint (white on accent only at >= 18pt bold)",
+    "ppt.size.title": 36,
+    "ppt.size.subtitle": 30,
+    "ppt.size.body": 16,
+    "ppt.size.caption": 11
+  },
+  "fonts": {
+    "body": {
+      "name": "Montserrat",
+      "license": "OFL (Google Fonts)",
+      "ppt_face": "Montserrat",
+      "fallback": "Arial"
+    },
+    "heading": {
+      "name": "SangBleu Versailles",
+      "license": "commercial (legacy value in OneWorld)",
+      "ppt_face": "Georgia",
+      "fallback": "Georgia",
+      "note": "Use SangBleu only if the design team supplies a licence that allows embedding"
+    }
+  },
+  "notes": [
+    "The theme line ('Reimagining Marketing In The Age of AI') is event content from Event Details, not part of the theme.",
+    "image.edition not yet exported; the cover uses edition text until the file is available."
+  ]
+}

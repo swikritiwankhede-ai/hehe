@@ -1,0 +1,16 @@
+{
+  "report_id": "rpt_etbe-bws_2025",
+  "report_version": "v1",
+  "theme_id": "thm_etbe-bws_2025_v1",
+  "sample": true,
+  "theme_line": "Reimagining Marketing In The Age of AI",
+  "date_venue": "4 July 2025 · Grand Hyatt, BKC, Mumbai",
+  "headline": [
+    { "value": "412", "label": "Delegates registered", "source": "OneWorld registrations (sample)" },
+    { "value": "245", "label": "Delegates attended", "source": "Check-in (sample)" },
+    { "value": "35", "label": "Speakers on stage", "source": "OneWorld Speakers" },
+    { "value": "26", "label": "Partners across 13 groups", "source": "OneWorld Sponsors" },
+    { "value": "29%", "label": "CXO-level attendees", "source": "Seniority rule (sample)" },
+    { "value": "7th", "label": "Edition", "source": "OneWorld Colors & Fonts" }
+  ]
+}
