@@ -196,6 +196,22 @@ Internal capture → accurate ROI report → the sponsor's marketing manager has
     - Replit Agent if video processing needs a real server.
     - Firebase Studio as the Google-native alternative.
     - Bolt, v0, Claude Code and artifacts are compared too.
+- **Workflows and go-live:** see `docs/workflows-and-go-live.md`. It covers:
+  - 10 workflows, each with a trigger, its steps, what it writes and where it shows up:
+    1. website harvest
+    2. Drive watch
+    3. transcribe and draft insights
+    4. photo sorting
+    5. attendee import
+    6. social import
+    7. readiness and nudges
+    8. freeze and send
+    9. sponsor engagement
+    10. T+14 refresh
+  - Rules: every run is logged, safe to repeat, retried then alerted, can be switched on or off, scheduled in IST (UTC = IST − 5:30), and keys stay server-side.
+  - Lovable Prompt O: workflow engine, run log and live database subscriptions, so screens update without a refresh.
+  - A go-live runbook from T-30 to T+14.
+  - `prototype/report-workspace.html` now has a simulated **Automations** view: workflow cards with on/off, Run now and Retry, plus a live run log. A briefed video moves through the Video brief on its own.
 - **Lovable integrations:** see `docs/lovable-integrations.md`. It covers:
   - Feasibility: Excel upload, Drive, transcription, the summary / quotes / themes prompt and photo scoring are fine. LinkedIn impressions can't be read from public URLs; use the page-analytics export now and the official API after approval. OneWorld needs an ET engineering API plus DPDP sign-off.
   - The setup checklist.

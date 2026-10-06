@@ -108,6 +108,19 @@ td.r,th.r{text-align:right}
 .bar .trk{flex:1;height:8px;background:var(--line-2);border-radius:4px;overflow:hidden;display:block}
 .bar .fil{display:block;height:100%;background:var(--ink-2);border-radius:4px}
 .back{border:0;background:none;color:var(--muted);padding:0;font-size:13px}
+.wf{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.wfc{border:1px solid var(--line-2);border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:6px}
+.wfc .top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.wfc b{font-weight:600}
+.wfc small{color:var(--muted);font-size:12px}
+.wfc .row{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.live{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--good)}
+.live i{width:8px;height:8px;border-radius:50%;background:var(--good);display:inline-block;animation:pulse 1.6s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.sw2{position:relative;width:34px;height:20px;border-radius:10px;border:0;background:var(--line);padding:0;flex:none}
+.sw2[aria-checked="true"]{background:var(--good)}
+.sw2::after{content:"";position:absolute;top:3px;left:3px;width:14px;height:14px;border-radius:50%;background:#fff;transition:left .15s}
+.sw2[aria-checked="true"]::after{left:17px}
 .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom, 0px));background:var(--btn);color:var(--btn-ink);padding:9px 14px;border-radius:9px;font-size:13px;max-width:calc(100% - 32px);z-index:5}
 
 /* ---------- sponsor view (event theme) ---------- */
@@ -229,8 +242,8 @@ function navBtn(id,label,count,plain){return '<button data-nav="'+id+'" '+(S.nav
 function leadView(){
   var pendingStats=S.stats.filter(function(s){return s!=='approved'&&s!=='rejected'}).length;
   var h='<div class="lead"><nav class="nav" aria-label="Workspace"><div class="who"><b>Priya</b><span>Event lead · BrandEquity</span></div>'+
-    navBtn('today','Today',6)+navBtn('events','Events',EVENTS.length,true)+navBtn('videos','Video briefs',2)+navBtn('insights','Market insights',pendingStats)+navBtn('sent','Sent reports',null)+'</nav><div>';
-  if(S.event) h+=eventDetail(); else if(S.nav==='insights') h+=insightsView(true); else if(S.nav==='videos') h+=videosAll(); else if(S.nav==='sent') h+=sentView(); else h+=portfolio();
+    navBtn('today','Today',6)+navBtn('events','Events',EVENTS.length,true)+navBtn('videos','Video briefs',2)+navBtn('insights','Market insights',pendingStats)+navBtn('automations','Automations',S.failed()||null)+navBtn('sent','Sent reports',null)+'</nav><div>';
+  if(S.event) h+=eventDetail(); else if(S.nav==='insights') h+=insightsView(true); else if(S.nav==='videos') h+=videosAll(); else if(S.nav==='sent') h+=sentView(); else if(S.nav==='automations') h+=automationsView(); else h+=portfolio();
   return h+'</div></div>';
 }
 function todayQueue(){
@@ -350,6 +363,9 @@ document.addEventListener('click',function(ev){
   if(t.id==='modeLead'){S.mode='lead';render();return}
   if(t.id==='modeSponsor'||t.dataset.mode==='sponsor'){S.mode='sponsor';render();window.scrollTo(0,0);return}
   if(t.dataset.nav){S.nav=t.dataset.nav;S.event=null;render();return}
+  if(t.dataset.wfrun){runWf(t.dataset.wfrun,'Run now');return}
+  if(t.dataset.wftoggle){var w=WF.filter(function(x){return x.k===t.dataset.wftoggle})[0];w.on=!w.on;render();toast(w.name+(w.on?' switched on':' switched off')+' for this event.');return}
+  if(t.dataset.wffix){var w2=WF.filter(function(x){return x.k===t.dataset.wffix})[0];runWf(w2.k,'Retry after fix');return}
   if(t.dataset.open){S.event=t.dataset.open;S.tab='overview';render();window.scrollTo(0,0);return}
   if(t.dataset.go!=null){if(t.dataset.go){S.event=t.dataset.go;S.tab=t.dataset.tab}else{S.event=null;S.nav=t.dataset.tab}render();window.scrollTo(0,0);return}
   if(t.hasAttribute('data-back')){S.event=null;S.nav='events';render();return}
@@ -375,5 +391,55 @@ document.addEventListener('submit',function(ev){
     sm.className='sp-msg ok';sm.textContent='Invite sent to '+e+'. They’ll verify their email to open the report.'}
 });
 if(location.hash==='#sponsor'){S.mode='sponsor';S.sp='report'}
+/* ---------- automations (simulated runs; in the product these are server workflows) ---------- */
+var WF=[
+ {k:'W1',name:'Website harvest',when:'Daily 07:00 IST',on:true,last:['good','Succeeded','07:00','35 speakers · 26 sponsors · no changes'],next:'Tomorrow 07:00'},
+ {k:'W2',name:'Drive watch',when:'Every 5 min on event day',on:true,last:['good','Succeeded','11:55','2 new files matched'],next:'in 5 min'},
+ {k:'W3',name:'Transcribe and draft insights',when:'When a briefed video arrives',on:true,last:['good','Succeeded','11:42','12:30 TicTac → 2 insights'],next:'On next video'},
+ {k:'W4',name:'Photo sorting',when:'When photos arrive',on:true,last:['good','Succeeded','11:50','140 photos → 12 suggested'],next:'On next photos'},
+ {k:'W5',name:'Attendee import',when:'On upload',on:true,last:['neutral','Waiting','—','OneWorld export due this evening'],next:'On upload'},
+ {k:'W6',name:'Social import',when:'On upload',on:true,last:['failed','Failed','10:05','Instagram export: column \u201cReach\u201d missing'],next:'On upload',fix:'Export again from Meta Business Suite \u2192 Content, or map the column by hand'},
+ {k:'W7',name:'Readiness and nudges',when:'Every 15 min; 18:00 and 22:00 IST',on:true,last:['good','Succeeded','11:45','1 nudge sent (Kabir)'],next:'12:00'},
+ {k:'W8',name:'Freeze and send',when:'Owner clicks Freeze v1',on:true,last:['neutral','Not run','—','Blocked until insights are reviewed'],next:'On button'},
+ {k:'W9',name:'Sponsor engagement',when:'On every sponsor view; summary 09:00 IST',on:true,last:['neutral','Not run','—','Starts after links are sent'],next:'After send'},
+ {k:'W10',name:'T+14 refresh',when:'18 Jul 09:00 IST',on:true,last:['neutral','Scheduled','—','Final social exports → v2'],next:'18 Jul 09:00'}];
+var RUNS=[
+ ['11:55','W2','Drive watch','schedule','good','Succeeded','2 new files; matched to video plan'],
+ ['11:50','W4','Photo sorting','file','good','Succeeded','140 in · 31 duplicates · 12 suggested'],
+ ['11:45','W7','Readiness and nudges','schedule','good','Succeeded','Media 24/30; nudged Kabir'],
+ ['11:42','W3','Transcribe and draft insights','event','good','Succeeded','12:30 TicTac · 2 insights pending'],
+ ['10:05','W6','Social import','file','bad','Failed (2 retries)','Instagram export: column \u201cReach\u201d missing']];
+S.failed=function(){return WF.filter(function(w){return w.last[0]==='failed'}).length};
+var clock=['11:56','11:57','11:58','11:59','12:00','12:01'];var ci=0;
+function nowT(){return clock[Math.min(ci,clock.length-1)]}
+function pillFor(k){return k==='good'?'good':k==='failed'||k==='bad'?'bad':k==='running'?'info':'neutral'}
+function automationsView(){
+  var h='<div class="head"><div><h1>Automations</h1><p>Brand World Summit 2025 \u00b7 the workflows that pull, check and process data on their own. Each run is logged; failures retry twice, then land in Today with the fix.</p></div><span class="grow"></span><span class="live"><i></i>Live</span></div>';
+  h+='<div class="stack"><div class="panel"><h2>Workflows</h2><div class="wf">'+WF.map(function(w){
+    return '<div class="wfc"><div class="top"><div><b>'+w.k+' \u00b7 '+esc(w.name)+'</b><br><small>'+esc(w.when)+'</small></div><button class="sw2" role="switch" aria-label="'+esc(w.name)+' on or off" aria-checked="'+w.on+'" data-wftoggle="'+w.k+'"></button></div>'+
+    '<div class="row">'+pill(pillFor(w.last[0]),w.last[1])+'<span class="num hint">'+w.last[2]+'</span></div><small>'+esc(w.last[3])+'</small>'+
+    (w.fix?'<small style="color:var(--bad)">Fix: '+esc(w.fix)+'</small>':'')+
+    '<div class="row"><small>Next: '+esc(w.next)+'</small><span class="grow"></span>'+(w.fix?'<button class="btn small" data-wffix="'+w.k+'">Retry</button>':'')+'<button class="btn small" data-wfrun="'+w.k+'"'+(w.on?'':' disabled')+'>Run now</button></div></div>'}).join('')+'</div></div>';
+  h+='<div class="panel"><div class="head" style="margin:0"><h2>Run log</h2><span class="grow"></span><span class="hint">Newest first \u00b7 updates without refreshing</span></div><div class="tbl"><table><thead><tr><th>Time</th><th>Workflow</th><th>Trigger</th><th>Status</th><th>Result</th></tr></thead><tbody>'+
+    RUNS.map(function(r){return '<tr><td class="mono">'+r[0]+'</td><td>'+r[1]+' \u00b7 '+esc(r[2])+'</td><td>'+r[3]+'</td><td>'+pill(pillFor(r[4]),r[5])+'</td><td>'+esc(r[6])+'</td></tr>'}).join('')+
+    '</tbody></table></div><p class="hint">Prototype: runs are simulated every few seconds. In the product they are server workflows on a schedule or trigger, writing to the same tables the screens watch.</p></div></div>';
+  return h;
+}
+function dropRunning(k){for(var i=0;i<RUNS.length;i++){if(RUNS[i][1]===k&&RUNS[i][4]==='running'){RUNS.splice(i,1);return}}}
+function logRun(k,trig,st,label,res){var w=WF.filter(function(x){return x.k===k})[0];RUNS.unshift([nowT(),k,w.name,trig,st,label,res]);if(RUNS.length>14)RUNS.pop();if(st!=='running'){w.last=[st==='bad'?'failed':st,label,nowT(),res];if(st==='good')delete w.fix}}
+function runWf(k,why){var w=WF.filter(function(x){return x.k===k})[0];if(!w.on)return;logRun(k,'button','running','Running',why+'\u2026');rerenderIfAuto();
+  setTimeout(function(){
+    var res={W1:'35 speakers \u00b7 26 sponsors \u00b7 no changes',W2:'0 new files',W3:'Nothing waiting',W4:'0 new photos',W5:'No upload yet',W6:'Instagram export re-read: 28 posts matched',W7:'Readiness 6/7 \u00b7 no new nudges',W8:'Blocked: 14 insights to review',W9:'No views yet',W10:'Not due until 18 Jul'}[k];
+    var blocked=(k==='W8');dropRunning(k);logRun(k,'button',blocked?'neutral':'good',blocked?'Skipped':'Succeeded',res);rerenderIfAuto();toast(w.name+': '+res)},1400)}
+function rerenderIfAuto(){if(S.mode==='lead'&&!S.event&&S.nav==='automations')render()}
+/* live simulation: a briefed video arrives, is transcribed, and its insights land in the Video brief */
+var steps=[
+ function(){ci++;var v=VIDEOS[6];v[4]='received';logRun('W2','schedule','good','Succeeded','1 new file: BYTE_NA_5Dbyte_Nipun-Kaushal \u2192 matched');},
+ function(){ci++;var v=VIDEOS[6];v[4]='transcribing';logRun('W3','event','running','Running','Transcribing 1510 5D byte (Gemini, 2 chunks)');},
+ function(){ci++;var v=VIDEOS[6];v[4]='insights';v[5]=2;dropRunning('W3');logRun('W3','event','good','Succeeded','1510 5D byte \u00b7 2 insights pending approval');},
+ function(){ci++;logRun('W7','schedule','good','Succeeded','Media 25/30 \u00b7 Today updated');}];
+var si=0;
+var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+setInterval(function(){if(si>=steps.length)return;steps[si++]();if(S.mode==='lead'&&(S.nav==='automations'||S.event==='bws25'))render()},reduce?9000:6000);
 render();
 </script>
