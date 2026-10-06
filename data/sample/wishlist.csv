@@ -1,0 +1,26 @@
+row_key,event_key,sponsor,person_name,email,company,outcome
+92a5b6ca,etbe-northwind-25,Northwind Cloud,Aditi Rao,aditi.rao@aurorasteel.example.com,Aurora Steel,Met
+7d5c860c,etbe-northwind-25,Northwind Cloud,Arjun Sethi,arjun.sethi@bluepeakpharma.example.com,Bluepeak Pharma,Met
+b6914a82,etbe-northwind-25,Northwind Cloud,Bhavna Verma,bhavna.verma@cedarlinemotors.example.com,Cedarline Motors,Met
+124bd445,etbe-northwind-25,Northwind Cloud,Chirag Nair,chirag.nair@deltagridpower.example.com,Delta Grid Power,Met
+5c4790aa,etbe-northwind-25,Northwind Cloud,Deepa Reddy,deepa.reddy@everestfinserv.example.com,Everest Finserv,Met
+8cb49621,etbe-northwind-25,Northwind Cloud,Farhan Shah,farhan.shah@falconlogistics.example.com,Falcon Logistics,Met
+f531111e,etbe-northwind-25,Northwind Cloud,Gauri Pillai,gauri.pillai@granitecement.example.com,Granite Cement,Met
+73beceee,etbe-northwind-25,Northwind Cloud,Harsh Menon,harsh.menon@horizonhospitals.example.com,Horizon Hospitals,Met
+f579ea21,etbe-northwind-25,Northwind Cloud,Isha Joshi,isha.joshi@industextiles.example.com,Indus Textiles,Met
+298629a2,etbe-northwind-25,Northwind Cloud,Jatin Kulkarni,jatin.kulkarni@jadesoftware.example.com,Jade Software,Met
+167dbfb0,etbe-northwind-25,Northwind Cloud,Kavya Gupta,kavya.gupta@kestrelairways.example.com,Kestrel Airways,Met
+2c8d7842,etbe-northwind-25,Northwind Cloud,Lakshay Malhotra,lakshay.malhotra@lumentelecom.example.com,Lumen Telecom,Met
+121cf726,etbe-northwind-25,Northwind Cloud,Mira Kapoor,mira.kapoor@monarchbank.example.com,Monarch Bank,Met
+d09fbd86,etbe-northwind-25,Northwind Cloud,Nakul Desai,nakul.desai@nimbusretail.example.com,Nimbus Retail,Met
+9874b27d,etbe-northwind-25,Northwind Cloud,Ojas Iyer,ojas.iyer@orionchemicals.example.com,Orion Chemicals,Met
+619cf267,etbe-northwind-25,Northwind Cloud,Pallavi Bose,pallavi.bose@pinnacleinsurance.example.com,Pinnacle Insurance,"Attended, not met"
+615fb534,etbe-northwind-25,Northwind Cloud,Raghav Rao,raghav.rao@quartzsemiconductors.example.com,Quartz Semiconductors,"Attended, not met"
+cb922c61,etbe-northwind-25,Northwind Cloud,Sana Sethi,sana.sethi@radiantfoods.example.com,Radiant Foods,"Attended, not met"
+22c3579c,etbe-northwind-25,Northwind Cloud,Tara Verma,tara.verma@sapphirerealty.example.com,Sapphire Realty,"Attended, not met"
+bcbb40dd,etbe-northwind-25,Northwind Cloud,Target contact,,Omega Shipping,Did not attend
+e1f94d98,etbe-northwind-25,Northwind Cloud,Target contact,,Prism Paints,Did not attend
+2b5a36cc,etbe-northwind-25,Northwind Cloud,Target contact,,Regal Hotels,Did not attend
+bdc20275,etbe-northwind-25,Northwind Cloud,Target contact,,Summit Cables,Did not attend
+61417b70,etbe-northwind-25,Northwind Cloud,Target contact,,Trident Glass,Did not attend
+5195b041,etbe-northwind-25,Northwind Cloud,Target contact,,Ultra Polymers,Did not attend

@@ -1,0 +1,240 @@
+{
+  "model": "IP",
+  "event_key": "etbe-bws-2025",
+  "engine": "1.0.0",
+  "placeholders": {
+    "event_name": "Brand World Summit 2025",
+    "edition": "7th Edition",
+    "theme_line": "Reimagining Marketing In The Age of AI",
+    "date_venue": "4 Jul 2025 · Grand Hyatt, BKC, Mumbai",
+    "hashtag": "#ETBWS2025",
+    "next_edition": "See you at the 8th edition",
+    "as_of": "Data as of 2025-07-05",
+    "report_version": "v1",
+    "registrations": "413",
+    "attended": "260",
+    "show_up_pct": "63%",
+    "unique_orgs": "15",
+    "speakers_count": "35",
+    "sessions_count": "13",
+    "content_hours": "6.7 hrs",
+    "partners_count": "26",
+    "impressions_total": "625K",
+    "src_glance": "Sources: OneWorld registrations and check-in · OneWorld speakers, agenda and sponsors · platform analytics exports. Data as of 2025-07-05",
+    "target_attendees": "1,000+",
+    "target_speakers": "100+",
+    "attendees_vs_target": "26% of target",
+    "speakers_vs_target": "35% of target",
+    "cxo_count": "73",
+    "cxo_pct": "28%",
+    "room_title": "28% of the room were CXOs",
+    "src_room": "n = 260 attendees (checked in) · seniority from job titles",
+    "top_brands": "Lotus Naturals  ·  Crescent Pharma  ·  Kestrel Motors  ·  Quartz Electronics  ·  Tidal Beverages  ·  Pinewood Insurance  ·  Meridian Bank  ·  Saffron Foods  ·  Harbor Telecom  ·  Cedar Home Care  ·  Indigo Retail  ·  Banyan Finance",
+    "orgs_title": "81% of attendees came from brands",
+    "src_orgs": "n = 260 attendees, 15 organisations · organisation type from the companies tab",
+    "content_title": "13 sessions, 6.7 hrs of content",
+    "speakers_title": "74% of speakers were CXOs",
+    "speaker_highlights": "Sanjiv Mehta, Executive Chairman, L Catterton India\nPrabha Narasimhan, MD & CEO, Colgate-Palmolive India\nSudhanshu Vats, Managing Director, Pidilite Industries\nRohit Bhasin, President and CMO, Kotak Mahindra Bank\nKapil Grover, CMO, Restaurant Brands Asia (Burger King)\nAshwin Moorthy, CMO, Godrej Consumer Products\nLakshmi Narayanan, CMO, CEAT\nAnuradha Aggarwal, Director User Growth and CMO, Amazon Pay",
+    "src_speakers": "n = 35 speakers · OneWorld speakers / event website",
+    "q1_name": "Sanjiv Mehta",
+    "q1_role": "Executive Chairman, L Catterton India",
+    "q1_headline": "Sample headline: replaced by the approved insight",
+    "q1_quote": "“Sample quote. The approved, word-for-word excerpt from this leader's session appears here.”",
+    "q2_name": "Prabha Narasimhan",
+    "q2_role": "MD & CEO, Colgate-Palmolive India",
+    "q2_headline": "Sample headline: replaced by the approved insight",
+    "q2_quote": "“Sample quote. The approved, word-for-word excerpt from this leader's session appears here.”",
+    "q3_name": "Rohit Bhasin",
+    "q3_role": "President and CMO, Kotak Mahindra Bank",
+    "q3_headline": "Sample headline: replaced by the approved insight",
+    "q3_quote": "“Sample quote. The approved, word-for-word excerpt from this leader's session appears here.”",
+    "q4_name": "Kapil Grover",
+    "q4_role": "CMO, Restaurant Brands Asia (Burger King)",
+    "q4_headline": "Sample headline: replaced by the approved insight",
+    "q4_quote": "“Sample quote. The approved, word-for-word excerpt from this leader's session appears here.”",
+    "partners_title": "26 partners across 13 groups",
+    "partners_by_tier": "Presenting Partner: Samsung ads\nPowered By: Monotype\nCo-Powered by: Route Mobile\nIn Association With: Flipkart Ads\nGold Partners: Google Messages, TATA Communication\nSilver Partner: Trade Desk\nAssociate Partners: FROG, Shakuniya\nNBFC Fintech Partner: L&T\nOutdoor Media Partner: Roshan Space\nExhibitors: ImageKit, Gobble cube, Notify Visitors, oogw.ai, WhilterAi, Big City Promotions\nGifting Partners: Lenskart, fixderma, Good Bug\nCreative Partner: Refreshing\nStartup Arena Showcase: Analytics LIV, Crewtangle LP, Envigo, FilterYou, POOCHO",
+    "li_pre": "271K",
+    "li_event": "41K",
+    "ig_pre": "132K",
+    "ig_event": "43K",
+    "yt_pre": "69K",
+    "yt_event": "70K",
+    "total_pre": "471K",
+    "total_event": "154K",
+    "social_title": "625K impressions and views across 3 platforms",
+    "multiplier_line": "Event-day reach ran at 17.3x the pre-event daily average",
+    "multiplier_basis": "Daily average on event day ÷ daily average from first event post (2025-05-12) to event start",
+    "src_social": "Platform analytics exports (LinkedIn page, Meta Business Suite, YouTube Studio) · 30 event posts · as of 2025-07-05",
+    "m1_value": "₹1,64,137 crore; +7% YoY, digital 60%",
+    "m1_stat": "Indian advertising market",
+    "m1_src": "GroupM TYNY 2025",
+    "m2_value": "971.5 million",
+    "m2_stat": "Internet users",
+    "m2_src": "TRAI 2025",
+    "m3_value": "85,698; +6% a year",
+    "m3_stat": "High-net-worth individuals",
+    "m3_src": "Knight Frank 2025",
+    "m4_value": "$350 billion",
+    "m4_stat": "E-commerce market by 2030",
+    "m4_src": "Redseer 2024",
+    "photo1_caption": "",
+    "photo2_caption": "",
+    "photo3_caption": "",
+    "photo4_caption": "",
+    "photo5_caption": "",
+    "photo6_caption": "",
+    "award_line": "Shark Awards (sample custom field)"
+  },
+  "charts": {
+    "seniority": [
+      [
+        "CXO",
+        73,
+        "73 (28%)"
+      ],
+      [
+        "VP",
+        44,
+        "44 (17%)"
+      ],
+      [
+        "Director",
+        52,
+        "52 (20%)"
+      ],
+      [
+        "Manager",
+        91,
+        "91 (35%)"
+      ]
+    ],
+    "orgtype": [
+      [
+        "Brand",
+        211,
+        "211 (81%)"
+      ],
+      [
+        "Agency",
+        49,
+        "49 (19%)"
+      ]
+    ],
+    "formats": [
+      [
+        "Panel",
+        6,
+        "6"
+      ],
+      [
+        "Keynote",
+        3,
+        "3"
+      ],
+      [
+        "Case study",
+        2,
+        "2"
+      ],
+      [
+        "Fireside",
+        2,
+        "2"
+      ]
+    ],
+    "speaker_seniority": [
+      [
+        "CXO",
+        26,
+        "26 (74%)"
+      ],
+      [
+        "VP",
+        4,
+        "4 (11%)"
+      ],
+      [
+        "Director",
+        4,
+        "4 (11%)"
+      ],
+      [
+        "Other",
+        1,
+        "1 (3%)"
+      ]
+    ]
+  },
+  "images": {
+    "logo1": "https://img.etb2bimg.com/files/retail_files/file_1750847125_SA_logo_PPTshape_1_.pptx.png",
+    "logo2": "https://img.etb2bimg.com/files/retail_files/file_1751376697_MT_Monotype_Logo_Black_RGB_1_2.png",
+    "logo3": "https://img.etb2bimg.com/files/retail_files/file_1750156918_TS_BICS_RM_Proximus_Global_SMALL_PXS_Global_RGB_1_.png",
+    "logo4": "https://img.etb2bimg.com/files/retail_files/file_1750917223_Logo_new_2_02_1_.png",
+    "logo5": "https://img.etb2bimg.com/files/retail_files/file_1746534561_Google_Messages_logo_vertical_CMYK.png",
+    "logo6": "https://img.etb2bimg.com/files/retail_files/file_1751264577_Tata_communication_logo_3_.png",
+    "logo7": "https://img.etb2bimg.com/files/retail_files/file_1747804283_TTD_Lockup_BlueSky_2_1_.png",
+    "logo8": "https://img.etb2bimg.com/files/retail_files/file_1750760037_frog_Cap_Invent_logo_horizontal_black_1_.png",
+    "logo9": "https://img.etb2bimg.com/files/retail_files/file_1751271208_SSPL_1x3_Logo_1_.png",
+    "logo10": "https://img.etb2bimg.com/files/retail_files/file_1750682712_L_T_logo_1_.jpg",
+    "logo11": "https://img.etb2bimg.com/files/retail_files/file_1751271612_For_Logo_PNGs_02_1_.png",
+    "logo12": "https://img.etb2bimg.com/files/retail_files/file_1749533369_imagekit_logo_true_size.png"
+  },
+  "sections": [
+    "glance",
+    "promise",
+    "room",
+    "orgs",
+    "content",
+    "speakers",
+    "quotes",
+    "partners",
+    "social",
+    "market",
+    "photos",
+    "cover",
+    "close"
+  ],
+  "drop": [
+    "photos"
+  ],
+  "readiness": [
+    {
+      "source": "Event details",
+      "status": "ready",
+      "note": ""
+    },
+    {
+      "source": "Attendees",
+      "status": "ready",
+      "note": "260 attended of 413 registered"
+    },
+    {
+      "source": "Speakers",
+      "status": "ready",
+      "note": "35 speakers"
+    },
+    {
+      "source": "Agenda",
+      "status": "ready",
+      "note": "14 sessions"
+    },
+    {
+      "source": "Sponsors",
+      "status": "ready",
+      "note": "26 sponsors"
+    },
+    {
+      "source": "Social",
+      "status": "ready",
+      "note": "30 posts"
+    },
+    {
+      "source": "Leader insights",
+      "status": "ready",
+      "note": "Approved quotes: 4"
+    }
+  ],
+  "blockers": [],
+  "warnings": []
+}

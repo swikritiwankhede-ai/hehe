@@ -1,0 +1,8 @@
+row_key,event_key,sponsor,item,committed,delivered,status,day,evidence
+835c667f,etbe-northwind-25,Northwind Cloud,Event identity and co-branding,Yes,Yes,Delivered,All days,Ops checklist (sample)
+3be4096c,etbe-northwind-25,Northwind Cloud,Sponsor keynote,1,1,Delivered,Day 2,Ops checklist (sample)
+4110c7c3,etbe-northwind-25,Northwind Cloud,Solution sessions,5,5,Delivered,Day 2,Ops checklist (sample)
+b0d48905,etbe-northwind-25,Northwind Cloud,Emcee mentions,6,6,Delivered,Day 2,Ops checklist (sample)
+aa2b9b6d,etbe-northwind-25,Northwind Cloud,Experiential zone,1,1,Delivered,Day 1–3,Ops checklist (sample)
+e0dec57c,etbe-northwind-25,Northwind Cloud,On-ground branding,12 assets,12 assets,Delivered,All days,Ops checklist (sample)
+f0f837dd,etbe-northwind-25,Northwind Cloud,Curated gifting,30,34,Delivered,Day 3,Ops checklist (sample)

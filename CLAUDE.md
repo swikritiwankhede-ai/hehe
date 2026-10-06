@@ -215,6 +215,25 @@ Internal capture → accurate ROI report → the sponsor's marketing manager has
 - **IP vs Custom deck comparison:** see `docs/ip-vs-custom-deck-comparison.md`. It compares BWS 2024 actuals with the Lenovo deck, data point by data point, with the source for each.
   - **IP** proves event scale and reach on an ET-set agenda. **Custom** proves one sponsor's commitments were delivered.
   - **Wishlist-met is not an IP data point.** It applies only to IP partners who bought access add-ons, and even then it isn't measured today.
+- **n8n build (running prototype):** see `docs/n8n-build-blueprint.md`. It covers:
+  - **Stack:** n8n + Claude + Google Workspace (Sheets as the database, Drive, Slides templates and decks, Gmail, Forms) + a Gemini key. Looker Studio is optional. Lovable + Supabase is Phase 2.
+  - **Built and tested:**
+    - `engine/report-engine.js`: computes the IP and Custom numbers and the Slides batchUpdate fill (sentinel theme colours #FF00AA/#AA0077/#FFD6F0, `[[section:x]]` auto-hide, `{{chart:x}}` bars, `{{img:x}}`, `custom` tab for team-added slides). Has 7 tests.
+    - 5 n8n workflows in `n8n/workflows/`, built by `tools/build-n8n.mjs` with the engine embedded:
+      1. upload form
+      2. Drive video → Gemini → verbatim insights
+      3. build deck form
+      4. daily readiness
+      5. theme from website
+
+      Their Code nodes are tested by `n8n/test-workflows.mjs`.
+    - Data workbook (17 tabs): `data/report-studio-data-template.xlsx` / `-sample.xlsx`. Sample data: real BWS 2025 IP plus the fictional "Northwind Cloud" Custom.
+    - Slides templates and placeholder guide in `templates/slides/`. Local run: `tools/run-pipeline.mjs` → `out/`.
+  - Data point → tool → workaround tables for IP and Custom.
+  - The OneWorld ladder: Gmail scheduled report → Drive inbox → form upload → bookmarklet → API.
+  - Prompts P1–P7.
+  - Roles. Phase 1 multi-user uses Workspace sharing, protected ranges, Slides co-editing, form Basic Auth, and sponsor sharing to named emails (visitor sharing if IT enables it).
+  - Evals with pass bars, guardrails, and a 16-step build.
 - **Lovable integrations:** see `docs/lovable-integrations.md`. It covers:
   - Feasibility: Excel upload, Drive, transcription, the summary / quotes / themes prompt and photo scoring are fine. LinkedIn impressions can't be read from public URLs; use the page-analytics export now and the official API after approval. OneWorld needs an ET engineering API plus DPDP sign-off.
   - The setup checklist.

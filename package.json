@@ -1,0 +1,13 @@
+{
+  "name": "report-studio",
+  "private": true,
+  "type": "module",
+  "description": "ETBrandEquity post-event report engine, n8n workflows and deck templates",
+  "scripts": {
+    "test": "node engine/test.mjs && node n8n/test-workflows.mjs",
+    "data": "python3 tools/build-sample-data.py",
+    "decks": "node tools/run-pipeline.mjs",
+    "n8n": "node tools/build-n8n.mjs"
+  },
+  "dependencies": { "pptxgenjs": "4.0.1" }
+}

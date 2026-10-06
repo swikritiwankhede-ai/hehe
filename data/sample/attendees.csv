@@ -1,0 +1,458 @@
+row_key,event_key,first_name,last_name,email,company,designation,city,status,lead_source,conversion_source,registered_at,checked_in_at
+60e51ebb,etbe-bws-2025,Arjun,Rao,arjun.rao0@northstar.example.com,Northstar Apparel,Vice President - Marketing,Bengaluru,Attended,Emailer,linkedin_organic,2025-06-10,2025-07-04 09:51
+4c866134,etbe-bws-2025,Karan,Sethi,karan.sethi1@crescent.example.com,Crescent Pharma,Vice President - Marketing,Pune,Attended,Emailer,linkedin_organic,2025-06-08,2025-07-04 09:06
+55961554,etbe-bws-2025,Priya,Desai,priya.desai2@lotus.example.com,Lotus Naturals,Marketing Lead,Bengaluru,Attended,Emailer,instagram_ads,2025-05-11,2025-07-04 09:27
+9abc70b7,etbe-bws-2025,Kavya,Banerjee,kavya.banerjee3@kestrel.example.com,Kestrel Motors,Director - Digital,Chennai,Attended,Website,emailer,2025-05-07,2025-07-04 09:21
+ef1ddc0a,etbe-bws-2025,Kavya,Iyer,kavya.iyer4@meridian.example.com,Meridian Bank,CMO,Chennai,Attended,Website,linkedin_organic,2025-06-18,2025-07-04 09:13
+1550e0a2,etbe-bws-2025,Ananya,Joshi,ananya.joshi5@kestrel.example.com,Kestrel Motors,Brand Manager,Mumbai,Attended,Others,emailer,2025-06-02,2025-07-04 09:15
+d4b82744,etbe-bws-2025,Arjun,Sharma,arjun.sharma6@indigo.example.com,Indigo Retail,Marketing Lead,Chennai,Attended,Emailer,sales_invite,2025-06-20,2025-07-04 09:14
+baf5269a,etbe-bws-2025,Kavya,Bhatia,kavya.bhatia8@quartz.example.com,Quartz Electronics,Founder & CEO,Bengaluru,Attended,Sales team,emailer,2025-06-10,2025-07-04 09:48
+3d48a420,etbe-bws-2025,Nikhil,Joshi,nikhil.joshi9@pinewood.example.com,Pinewood Insurance,Marketing Lead,Chennai,Attended,Sales team,emailer,2025-05-16,2025-07-04 09:35
+76a4e8ef,etbe-bws-2025,Rohan,Iyer,rohan.iyer10@saffron.example.com,Saffron Foods,"Senior Manager, Media",Mumbai,Attended,Others,sales_invite,2025-05-15,2025-07-04 09:02
+8be112cc,etbe-bws-2025,Kabir,Kapoor,kabir.kapoor11@saffron.example.com,Saffron Foods,"Senior Manager, Media",Bengaluru,Attended,Others,sales_invite,2025-05-01,2025-07-04 09:36
+cc647db6,etbe-bws-2025,Meera,Desai,meera.desai12@monsoon.example.com,Monsoon Media,Founder & CEO,Chennai,Shortlisted,Emailer,sales_invite,2025-05-07,
+a97fb1ee,etbe-bws-2025,Varun,Menon,varun.menon13@lotus.example.com,Lotus Naturals,Vice President - Marketing,Chennai,Attended,Sales team,direct,2025-06-05,2025-07-04 09:38
+a60eaadd,etbe-bws-2025,Karan,Banerjee,karan.banerjee14@pinewood.example.com,Pinewood Insurance,Chief Marketing Officer,Mumbai,Registered,Website,instagram_ads,2025-05-08,
+ca942220,etbe-bws-2025,Riya,Menon,riya.menon15@indigo.example.com,Indigo Retail,Vice President - Marketing,Hyderabad,Shortlisted,Others,instagram_ads,2025-06-03,
+78619efa,etbe-bws-2025,Pooja,Bhatia,pooja.bhatia16@amber.example.com,Amber Fashion,Head of Brand,Bengaluru,Shortlisted,Website,linkedin_organic,2025-06-18,
+2267a158,etbe-bws-2025,Arjun,Menon,arjun.menon17@meridian.example.com,Meridian Bank,Marketing Lead,Bengaluru,Attended,Website,instagram_ads,2025-06-19,2025-07-04 09:24
+c808e5cc,etbe-bws-2025,Shreya,Menon,shreya.menon18@kestrel.example.com,Kestrel Motors,"Senior Manager, Media",Mumbai,Attended,Emailer,instagram_ads,2025-06-27,2025-07-04 09:57
+09c431db,etbe-bws-2025,Ishita,Nair,ishita.nair19@saffron.example.com,Saffron Foods,Head of Brand,Pune,Registered,Website,sales_invite,2025-05-15,
+7c5f44d3,etbe-bws-2025,Shreya,Joshi,shreya.joshi20@kestrel.example.com,Kestrel Motors,Brand Manager,Delhi NCR,Registered,Sales team,emailer,2025-06-20,
+35c0ee63,etbe-bws-2025,Riya,Menon,riya.menon21@indigo.example.com,Indigo Retail,Founder & CEO,Chennai,Registered,Website,emailer,2025-05-20,
+eff19de9,etbe-bws-2025,Rohan,Kapoor,rohan.kapoor22@crescent.example.com,Crescent Pharma,Vice President - Marketing,Pune,Attended,Others,sales_invite,2025-05-07,2025-07-04 09:06
+6aaaf5ed,etbe-bws-2025,Rahul,Bhatia,rahul.bhatia23@lotus.example.com,Lotus Naturals,Head of Brand,Hyderabad,Shortlisted,Website,linkedin_organic,2025-06-12,
+2bb976b1,etbe-bws-2025,Neha,Iyer,neha.iyer24@kestrel.example.com,Kestrel Motors,Head of Brand,Hyderabad,Attended,Others,sales_invite,2025-05-11,2025-07-04 09:36
+5ed4c76a,etbe-bws-2025,Meera,Kapoor,meera.kapoor25@meridian.example.com,Meridian Bank,Director - Digital,Bengaluru,Registered,Website,linkedin_organic,2025-05-08,
+ddb3eee4,etbe-bws-2025,Meera,Menon,meera.menon26@saffron.example.com,Saffron Foods,Marketing Lead,Bengaluru,Shortlisted,Others,sales_invite,2025-05-02,
+734dc756,etbe-bws-2025,Varun,Rao,varun.rao27@lotus.example.com,Lotus Naturals,CMO,Bengaluru,Registered,Sales team,instagram_ads,2025-05-11,
+73ebbbf0,etbe-bws-2025,Rohan,Kapoor,rohan.kapoor28@kestrel.example.com,Kestrel Motors,"Senior Manager, Media",Bengaluru,Shortlisted,Sales team,emailer,2025-06-08,
+604c4e3d,etbe-bws-2025,Aarav,Iyer,aarav.iyer29@indigo.example.com,Indigo Retail,Brand Manager,Delhi NCR,Registered,Emailer,linkedin_organic,2025-06-09,
+26ab5be7,etbe-bws-2025,Nikhil,Desai,nikhil.desai30@monsoon.example.com,Monsoon Media,"Senior Manager, Media",Pune,Attended,Emailer,instagram_ads,2025-05-12,2025-07-04 09:34
+cd76d7b1,etbe-bws-2025,Aarav,Sethi,aarav.sethi31@northstar.example.com,Northstar Apparel,"Senior Manager, Media",Pune,Attended,Emailer,linkedin_organic,2025-06-05,2025-07-04 09:52
+9aa8c0fd,etbe-bws-2025,Kabir,Rao,kabir.rao32@quartz.example.com,Quartz Electronics,Head of Brand,Chennai,Attended,Others,linkedin_organic,2025-05-05,2025-07-04 09:17
+dd4a0b95,etbe-bws-2025,Vikram,Sethi,vikram.sethi33@harbor.example.com,Harbor Telecom,"Senior Manager, Media",Mumbai,Attended,Emailer,instagram_ads,2025-06-28,2025-07-04 09:25
+34e7b29a,etbe-bws-2025,Shreya,Sethi,shreya.sethi34@tidal.example.com,Tidal Beverages,CMO,Mumbai,Attended,Sales team,emailer,2025-06-16,2025-07-04 09:55
+51cac600,etbe-bws-2025,Kavya,Mehta,kavya.mehta35@quartz.example.com,Quartz Electronics,AVP Growth,Hyderabad,Shortlisted,Emailer,direct,2025-06-11,
+970d5e63,etbe-bws-2025,Priya,Gupta,priya.gupta36@kestrel.example.com,Kestrel Motors,Founder & CEO,Hyderabad,Registered,Others,sales_invite,2025-06-24,
+56215c8a,etbe-bws-2025,Shreya,Desai,shreya.desai37@indigo.example.com,Indigo Retail,Chief Marketing Officer,Mumbai,Registered,Emailer,emailer,2025-06-23,
+85100552,etbe-bws-2025,Ishita,Banerjee,ishita.banerjee38@monsoon.example.com,Monsoon Media,Director - Digital,Bengaluru,Registered,Website,sales_invite,2025-05-02,
+bac04913,etbe-bws-2025,Rohan,Desai,rohan.desai39@cedar.example.com,Cedar Home Care,CMO,Bengaluru,Attended,Sales team,instagram_ads,2025-06-02,2025-07-04 09:35
+06637afe,etbe-bws-2025,Arjun,Iyer,arjun.iyer40@crescent.example.com,Crescent Pharma,"Senior Manager, Media",Bengaluru,Shortlisted,Others,direct,2025-05-26,
+d631bc8a,etbe-bws-2025,Varun,Bhatia,varun.bhatia41@tidal.example.com,Tidal Beverages,Marketing Lead,Delhi NCR,Registered,Website,direct,2025-05-27,
+42e9b80f,etbe-bws-2025,Neha,Menon,neha.menon42@harbor.example.com,Harbor Telecom,"Associate Director, Insights",Chennai,Attended,Sales team,emailer,2025-06-03,2025-07-04 09:44
+2abe217b,etbe-bws-2025,Rohan,Joshi,rohan.joshi43@saffron.example.com,Saffron Foods,Brand Manager,Chennai,Shortlisted,Website,instagram_ads,2025-06-03,
+f1320ae6,etbe-bws-2025,Varun,Pillai,varun.pillai44@monsoon.example.com,Monsoon Media,DGM – Brand Marketing,Pune,Attended,Website,sales_invite,2025-05-03,2025-07-04 09:11
+aa7e2cb2,etbe-bws-2025,Tanvi,Kapoor,tanvi.kapoor45@meridian.example.com,Meridian Bank,DGM – Brand Marketing,Chennai,Registered,Emailer,linkedin_organic,2025-06-16,
+13ff1626,etbe-bws-2025,Shreya,Iyer,shreya.iyer46@amber.example.com,Amber Fashion,DGM – Brand Marketing,Chennai,Registered,Website,direct,2025-05-21,
+fac49e00,etbe-bws-2025,Nikhil,Joshi,nikhil.joshi47@banyan.example.com,Banyan Finance,Vice President - Marketing,Hyderabad,Attended,Website,sales_invite,2025-05-09,2025-07-04 09:15
+7a9a9b2f,etbe-bws-2025,Vikram,Malhotra,vikram.malhotra48@pinewood.example.com,Pinewood Insurance,"Senior Manager, Media",Pune,Registered,Sales team,direct,2025-05-28,
+72a1ad9f,etbe-bws-2025,Ananya,Joshi,ananya.joshi49@amber.example.com,Amber Fashion,Marketing Lead,Hyderabad,Attended,Emailer,direct,2025-05-22,2025-07-04 09:09
+124ec9b9,etbe-bws-2025,Arjun,Joshi,arjun.joshi50@northstar.example.com,Northstar Apparel,Founder & CEO,Chennai,Attended,Emailer,emailer,2025-06-25,2025-07-04 09:52
+09a0bc92,etbe-bws-2025,Vikram,Menon,vikram.menon51@saffron.example.com,Saffron Foods,Vice President - Marketing,Hyderabad,Shortlisted,Website,linkedin_organic,2025-06-04,
+2910ba48,etbe-bws-2025,Kavya,Kapoor,kavya.kapoor52@banyan.example.com,Banyan Finance,Chief Marketing Officer,Delhi NCR,Registered,Sales team,emailer,2025-06-28,
+63d6ea4b,etbe-bws-2025,Meera,Malhotra,meera.malhotra53@meridian.example.com,Meridian Bank,Chief Marketing Officer,Mumbai,Attended,Sales team,instagram_ads,2025-06-13,2025-07-04 09:37
+df97f585,etbe-bws-2025,Vikram,Sharma,vikram.sharma54@indigo.example.com,Indigo Retail,DGM – Brand Marketing,Delhi NCR,Attended,Website,linkedin_organic,2025-05-07,2025-07-04 09:04
+72afb3f9,etbe-bws-2025,Vikram,Bhatia,vikram.bhatia55@kestrel.example.com,Kestrel Motors,AVP Growth,Chennai,Registered,Website,emailer,2025-05-17,
+30145cb4,etbe-bws-2025,Rahul,Banerjee,rahul.banerjee56@crescent.example.com,Crescent Pharma,CMO,Chennai,Attended,Others,emailer,2025-05-23,2025-07-04 09:04
+09aa111a,etbe-bws-2025,Ananya,Rao,ananya.rao57@tidal.example.com,Tidal Beverages,AVP Growth,Mumbai,Registered,Website,direct,2025-05-11,
+edc8a912,etbe-bws-2025,Ishita,Menon,ishita.menon58@tidal.example.com,Tidal Beverages,Chief Marketing Officer,Bengaluru,Shortlisted,Sales team,instagram_ads,2025-06-08,
+bf758722,etbe-bws-2025,Varun,Bhatia,varun.bhatia59@pinewood.example.com,Pinewood Insurance,Brand Manager,Bengaluru,Attended,Others,sales_invite,2025-05-01,2025-07-04 09:58
+c456db6f,etbe-bws-2025,Priya,Sethi,priya.sethi60@northstar.example.com,Northstar Apparel,Marketing Lead,Chennai,Attended,Sales team,sales_invite,2025-06-16,2025-07-04 09:48
+d941690a,etbe-bws-2025,Karan,Pillai,karan.pillai61@lotus.example.com,Lotus Naturals,Marketing Lead,Chennai,Registered,Sales team,sales_invite,2025-06-02,
+6d8e2003,etbe-bws-2025,Karan,Sethi,karan.sethi62@saffron.example.com,Saffron Foods,Founder & CEO,Delhi NCR,Attended,Emailer,instagram_ads,2025-06-06,2025-07-04 09:15
+fc3cf030,etbe-bws-2025,Riya,Mehta,riya.mehta63@amber.example.com,Amber Fashion,"Senior Manager, Media",Mumbai,Registered,Others,instagram_ads,2025-06-02,
+62f706f4,etbe-bws-2025,Meera,Sharma,meera.sharma64@kestrel.example.com,Kestrel Motors,"Senior Manager, Media",Hyderabad,Attended,Emailer,sales_invite,2025-05-09,2025-07-04 09:00
+1a43b69a,etbe-bws-2025,Ananya,Malhotra,ananya.malhotra65@northstar.example.com,Northstar Apparel,DGM – Brand Marketing,Delhi NCR,Attended,Emailer,direct,2025-05-08,2025-07-04 09:03
+b8b9be91,etbe-bws-2025,Tanvi,Rao,tanvi.rao66@quartz.example.com,Quartz Electronics,Head of Brand,Chennai,Attended,Others,instagram_ads,2025-06-25,2025-07-04 09:46
+df9f1991,etbe-bws-2025,Kabir,Malhotra,kabir.malhotra67@meridian.example.com,Meridian Bank,Marketing Lead,Chennai,Attended,Others,sales_invite,2025-06-15,2025-07-04 09:06
+80846d44,etbe-bws-2025,Varun,Rao,varun.rao69@crescent.example.com,Crescent Pharma,Chief Marketing Officer,Pune,Attended,Others,direct,2025-06-23,2025-07-04 09:50
+b89e0198,etbe-bws-2025,Varun,Mehta,varun.mehta70@indigo.example.com,Indigo Retail,Chief Marketing Officer,Hyderabad,Registered,Website,direct,2025-05-26,
+98b9549b,etbe-bws-2025,Ananya,Nair,ananya.nair71@saffron.example.com,Saffron Foods,CMO,Mumbai,Registered,Emailer,direct,2025-05-15,
+aa2d3a15,etbe-bws-2025,Priya,Banerjee,priya.banerjee72@northstar.example.com,Northstar Apparel,AVP Growth,Mumbai,Attended,Sales team,sales_invite,2025-05-10,2025-07-04 09:51
+0138d9b8,etbe-bws-2025,Aditya,Bhatia,aditya.bhatia73@lotus.example.com,Lotus Naturals,Head of Brand,Bengaluru,Attended,Website,sales_invite,2025-06-22,2025-07-04 09:56
+e4c3423b,etbe-bws-2025,Ishita,Gupta,ishita.gupta74@monsoon.example.com,Monsoon Media,Vice President - Marketing,Bengaluru,Attended,Others,sales_invite,2025-05-13,2025-07-04 09:40
+e3e6d8ad,etbe-bws-2025,Rahul,Desai,rahul.desai75@quartz.example.com,Quartz Electronics,Vice President - Marketing,Bengaluru,Attended,Website,emailer,2025-05-23,2025-07-04 09:03
+4ba69fef,etbe-bws-2025,Nikhil,Sharma,nikhil.sharma76@cedar.example.com,Cedar Home Care,Brand Manager,Pune,Registered,Website,emailer,2025-05-01,
+0f0fbb1d,etbe-bws-2025,Vikram,Pillai,vikram.pillai77@harbor.example.com,Harbor Telecom,Founder & CEO,Mumbai,Registered,Emailer,linkedin_organic,2025-05-21,
+b31979ea,etbe-bws-2025,Pooja,Iyer,pooja.iyer78@quartz.example.com,Quartz Electronics,AVP Growth,Pune,Registered,Sales team,instagram_ads,2025-06-16,
+b35bc266,etbe-bws-2025,Tanvi,Sharma,tanvi.sharma79@indigo.example.com,Indigo Retail,Founder & CEO,Mumbai,Attended,Emailer,direct,2025-05-04,2025-07-04 09:02
+fa89aac3,etbe-bws-2025,Vikram,Malhotra,vikram.malhotra80@monsoon.example.com,Monsoon Media,"Senior Manager, Media",Bengaluru,Attended,Emailer,emailer,2025-05-13,2025-07-04 09:56
+13ba7b2c,etbe-bws-2025,Vikram,Desai,vikram.desai81@northstar.example.com,Northstar Apparel,Marketing Lead,Hyderabad,Attended,Others,linkedin_organic,2025-06-19,2025-07-04 09:02
+0fd6d5ae,etbe-bws-2025,Tanvi,Gupta,tanvi.gupta82@pinewood.example.com,Pinewood Insurance,AVP Growth,Chennai,Registered,Sales team,instagram_ads,2025-06-25,
+9269473f,etbe-bws-2025,Shreya,Joshi,shreya.joshi83@saffron.example.com,Saffron Foods,Founder & CEO,Pune,Attended,Sales team,instagram_ads,2025-06-12,2025-07-04 09:32
+1e1dd40c,etbe-bws-2025,Riya,Nair,riya.nair84@crescent.example.com,Crescent Pharma,Marketing Lead,Mumbai,Registered,Others,instagram_ads,2025-06-15,
+82e3b50b,etbe-bws-2025,Kavya,Mehta,kavya.mehta85@meridian.example.com,Meridian Bank,CMO,Delhi NCR,Registered,Emailer,emailer,2025-05-11,
+48a33556,etbe-bws-2025,Pooja,Kapoor,pooja.kapoor86@crescent.example.com,Crescent Pharma,CMO,Mumbai,Registered,Sales team,instagram_ads,2025-05-08,
+05d6671f,etbe-bws-2025,Vikram,Nair,vikram.nair87@tidal.example.com,Tidal Beverages,Marketing Lead,Chennai,Attended,Website,sales_invite,2025-05-23,2025-07-04 09:56
+f3171874,etbe-bws-2025,Vikram,Mehta,vikram.mehta88@crescent.example.com,Crescent Pharma,"Associate Director, Insights",Hyderabad,Attended,Website,emailer,2025-05-05,2025-07-04 09:24
+3a042425,etbe-bws-2025,Neha,Pillai,neha.pillai89@crescent.example.com,Crescent Pharma,"Associate Director, Insights",Mumbai,Attended,Sales team,instagram_ads,2025-06-22,2025-07-04 09:42
+348dcd7c,etbe-bws-2025,Riya,Joshi,riya.joshi90@northstar.example.com,Northstar Apparel,CMO,Delhi NCR,Attended,Emailer,linkedin_organic,2025-05-04,2025-07-04 09:01
+73aa1fcc,etbe-bws-2025,Arjun,Pillai,arjun.pillai91@meridian.example.com,Meridian Bank,CMO,Mumbai,Attended,Emailer,linkedin_organic,2025-06-24,2025-07-04 09:56
+d1ac430f,etbe-bws-2025,Varun,Joshi,varun.joshi92@monsoon.example.com,Monsoon Media,Director - Digital,Pune,Registered,Others,instagram_ads,2025-05-21,
+3ab2b522,etbe-bws-2025,Priya,Sharma,priya.sharma93@northstar.example.com,Northstar Apparel,Marketing Lead,Mumbai,Shortlisted,Others,sales_invite,2025-05-09,
+c46fb1c1,etbe-bws-2025,Rohan,Kapoor,rohan.kapoor94@kestrel.example.com,Kestrel Motors,DGM – Brand Marketing,Pune,Attended,Others,emailer,2025-05-26,2025-07-04 09:03
+ac55fefd,etbe-bws-2025,Rohan,Desai,rohan.desai95@amber.example.com,Amber Fashion,Marketing Lead,Chennai,Attended,Sales team,direct,2025-05-05,2025-07-04 09:43
+104a8d7f,etbe-bws-2025,Aditya,Iyer,aditya.iyer96@northstar.example.com,Northstar Apparel,Marketing Lead,Chennai,Registered,Sales team,direct,2025-05-12,
+7521a649,etbe-bws-2025,Vikram,Gupta,vikram.gupta97@tidal.example.com,Tidal Beverages,Chief Marketing Officer,Pune,Attended,Sales team,linkedin_organic,2025-05-22,2025-07-04 09:03
+5c9f0fde,etbe-bws-2025,Priya,Sethi,priya.sethi98@lotus.example.com,Lotus Naturals,Brand Manager,Chennai,Attended,Website,sales_invite,2025-06-01,2025-07-04 09:44
+5c5caa06,etbe-bws-2025,Rahul,Pillai,rahul.pillai99@northstar.example.com,Northstar Apparel,Founder & CEO,Hyderabad,Registered,Sales team,emailer,2025-06-06,
+5d49d4fa,etbe-bws-2025,Arjun,Desai,arjun.desai100@banyan.example.com,Banyan Finance,CMO,Mumbai,Attended,Emailer,sales_invite,2025-05-03,2025-07-04 09:36
+f0829d7b,etbe-bws-2025,Aarav,Gupta,aarav.gupta101@saffron.example.com,Saffron Foods,CMO,Mumbai,Registered,Emailer,emailer,2025-05-28,
+50a937c2,etbe-bws-2025,Aarav,Menon,aarav.menon102@cedar.example.com,Cedar Home Care,Chief Marketing Officer,Chennai,Attended,Others,emailer,2025-06-24,2025-07-04 09:22
+19cbed20,etbe-bws-2025,Aditya,Joshi,aditya.joshi103@saffron.example.com,Saffron Foods,DGM – Brand Marketing,Pune,Attended,Emailer,linkedin_organic,2025-06-12,2025-07-04 09:10
+7bc72ed6,etbe-bws-2025,Rahul,Banerjee,rahul.banerjee104@lotus.example.com,Lotus Naturals,DGM – Brand Marketing,Chennai,Attended,Others,emailer,2025-05-23,2025-07-04 09:58
+d7bad01c,etbe-bws-2025,Riya,Nair,riya.nair105@meridian.example.com,Meridian Bank,Head of Brand,Mumbai,Registered,Website,instagram_ads,2025-05-26,
+b4a19162,etbe-bws-2025,Neha,Banerjee,neha.banerjee106@banyan.example.com,Banyan Finance,AVP Growth,Pune,Attended,Others,instagram_ads,2025-06-07,2025-07-04 09:26
+3ae6c95b,etbe-bws-2025,Kavya,Iyer,kavya.iyer107@tidal.example.com,Tidal Beverages,Vice President - Marketing,Chennai,Attended,Emailer,linkedin_organic,2025-05-24,2025-07-04 09:57
+796ab1e4,etbe-bws-2025,Kavya,Sharma,kavya.sharma108@crescent.example.com,Crescent Pharma,Marketing Lead,Delhi NCR,Attended,Emailer,emailer,2025-05-21,2025-07-04 09:46
+7ffcbf27,etbe-bws-2025,Arjun,Sharma,arjun.sharma109@quartz.example.com,Quartz Electronics,Founder & CEO,Mumbai,Attended,Website,direct,2025-05-14,2025-07-04 09:11
+eb37cdc7,etbe-bws-2025,Aditya,Banerjee,aditya.banerjee110@lotus.example.com,Lotus Naturals,"Associate Director, Insights",Delhi NCR,Registered,Others,direct,2025-05-14,
+b9a3b593,etbe-bws-2025,Vikram,Pillai,vikram.pillai111@monsoon.example.com,Monsoon Media,"Associate Director, Insights",Bengaluru,Attended,Others,instagram_ads,2025-05-20,2025-07-04 09:48
+4a28adec,etbe-bws-2025,Aarav,Malhotra,aarav.malhotra112@meridian.example.com,Meridian Bank,DGM – Brand Marketing,Hyderabad,Registered,Sales team,direct,2025-06-07,
+361fb9c2,etbe-bws-2025,Priya,Sethi,priya.sethi113@saffron.example.com,Saffron Foods,"Senior Manager, Media",Mumbai,Attended,Website,instagram_ads,2025-05-18,2025-07-04 09:45
+a98003bc,etbe-bws-2025,Arjun,Gupta,arjun.gupta114@lotus.example.com,Lotus Naturals,Marketing Lead,Hyderabad,Attended,Others,instagram_ads,2025-05-22,2025-07-04 09:13
+3f4f5774,etbe-bws-2025,Arjun,Banerjee,arjun.banerjee115@monsoon.example.com,Monsoon Media,Head of Brand,Hyderabad,Attended,Website,direct,2025-05-14,2025-07-04 09:10
+2dcc7ada,etbe-bws-2025,Neha,Joshi,neha.joshi116@lotus.example.com,Lotus Naturals,AVP Growth,Bengaluru,Attended,Emailer,linkedin_organic,2025-05-07,2025-07-04 09:21
+9145dbc0,etbe-bws-2025,Kabir,Rao,kabir.rao117@kestrel.example.com,Kestrel Motors,DGM – Brand Marketing,Mumbai,Attended,Website,linkedin_organic,2025-05-08,2025-07-04 09:54
+95d9cab1,etbe-bws-2025,Aditya,Sharma,aditya.sharma118@monsoon.example.com,Monsoon Media,Founder & CEO,Bengaluru,Registered,Website,sales_invite,2025-06-23,
+0cfa8373,etbe-bws-2025,Ishita,Menon,ishita.menon119@monsoon.example.com,Monsoon Media,Brand Manager,Hyderabad,Attended,Website,direct,2025-05-14,2025-07-04 09:03
+da3b3465,etbe-bws-2025,Tanvi,Menon,tanvi.menon120@northstar.example.com,Northstar Apparel,Vice President - Marketing,Chennai,Shortlisted,Others,emailer,2025-06-22,
+e55d5b0f,etbe-bws-2025,Varun,Kapoor,varun.kapoor121@lotus.example.com,Lotus Naturals,"Senior Manager, Media",Chennai,Registered,Others,emailer,2025-06-26,
+6d91a939,etbe-bws-2025,Shreya,Menon,shreya.menon122@monsoon.example.com,Monsoon Media,Chief Marketing Officer,Mumbai,Attended,Website,linkedin_organic,2025-05-09,2025-07-04 09:55
+1882829a,etbe-bws-2025,Varun,Menon,varun.menon123@meridian.example.com,Meridian Bank,Chief Marketing Officer,Chennai,Attended,Others,emailer,2025-05-10,2025-07-04 09:11
+b5d84d8b,etbe-bws-2025,Kavya,Bhatia,kavya.bhatia124@meridian.example.com,Meridian Bank,Head of Brand,Hyderabad,Attended,Website,linkedin_organic,2025-05-27,2025-07-04 09:23
+2a56ea81,etbe-bws-2025,Kavya,Banerjee,kavya.banerjee125@banyan.example.com,Banyan Finance,Director - Digital,Mumbai,Shortlisted,Website,sales_invite,2025-05-15,
+8b727572,etbe-bws-2025,Tanvi,Nair,tanvi.nair126@quartz.example.com,Quartz Electronics,CMO,Delhi NCR,Registered,Others,sales_invite,2025-06-03,
+8ae3dfeb,etbe-bws-2025,Ishita,Sharma,ishita.sharma127@amber.example.com,Amber Fashion,Founder & CEO,Mumbai,Registered,Others,direct,2025-05-17,
+25e874be,etbe-bws-2025,Rohan,Desai,rohan.desai128@meridian.example.com,Meridian Bank,Marketing Lead,Bengaluru,Attended,Emailer,linkedin_organic,2025-06-17,2025-07-04 09:02
+6c59b204,etbe-bws-2025,Nikhil,Desai,nikhil.desai130@meridian.example.com,Meridian Bank,Chief Marketing Officer,Chennai,Registered,Others,direct,2025-05-23,
+1a07747f,etbe-bws-2025,Tanvi,Bhatia,tanvi.bhatia131@meridian.example.com,Meridian Bank,Brand Manager,Bengaluru,Attended,Sales team,emailer,2025-05-19,2025-07-04 09:23
+09c4062e,etbe-bws-2025,Rahul,Sharma,rahul.sharma132@harbor.example.com,Harbor Telecom,CMO,Chennai,Attended,Emailer,instagram_ads,2025-06-09,2025-07-04 09:51
+9138daa2,etbe-bws-2025,Ishita,Kapoor,ishita.kapoor133@pinewood.example.com,Pinewood Insurance,Chief Marketing Officer,Pune,Attended,Website,sales_invite,2025-06-13,2025-07-04 09:35
+9faff856,etbe-bws-2025,Nikhil,Bhatia,nikhil.bhatia134@kestrel.example.com,Kestrel Motors,"Senior Manager, Media",Pune,Shortlisted,Website,instagram_ads,2025-06-02,
+ebc1a4a7,etbe-bws-2025,Pooja,Kapoor,pooja.kapoor135@monsoon.example.com,Monsoon Media,Vice President - Marketing,Hyderabad,Attended,Sales team,direct,2025-05-12,2025-07-04 09:45
+38b2d812,etbe-bws-2025,Meera,Menon,meera.menon136@meridian.example.com,Meridian Bank,CMO,Bengaluru,Registered,Others,emailer,2025-05-28,
+b1bce82d,etbe-bws-2025,Nikhil,Menon,nikhil.menon137@indigo.example.com,Indigo Retail,Chief Marketing Officer,Chennai,Shortlisted,Others,linkedin_organic,2025-06-07,
+25d296e4,etbe-bws-2025,Rohan,Gupta,rohan.gupta138@meridian.example.com,Meridian Bank,DGM – Brand Marketing,Hyderabad,Attended,Sales team,instagram_ads,2025-06-24,2025-07-04 09:49
+c01370bc,etbe-bws-2025,Tanvi,Kapoor,tanvi.kapoor139@banyan.example.com,Banyan Finance,Head of Brand,Chennai,Registered,Emailer,emailer,2025-06-20,
+384158bb,etbe-bws-2025,Tanvi,Nair,tanvi.nair140@kestrel.example.com,Kestrel Motors,Brand Manager,Hyderabad,Attended,Sales team,linkedin_organic,2025-05-16,2025-07-04 09:50
+63e3c42c,etbe-bws-2025,Meera,Mehta,meera.mehta141@cedar.example.com,Cedar Home Care,Chief Marketing Officer,Pune,Attended,Others,emailer,2025-05-12,2025-07-04 09:35
+7ee3d2a7,etbe-bws-2025,Ishita,Menon,ishita.menon142@pinewood.example.com,Pinewood Insurance,Head of Brand,Bengaluru,Attended,Others,linkedin_organic,2025-05-01,2025-07-04 09:29
+66994826,etbe-bws-2025,Kavya,Banerjee,kavya.banerjee143@kestrel.example.com,Kestrel Motors,Marketing Lead,Pune,Attended,Others,linkedin_organic,2025-06-15,2025-07-04 09:24
+a7ed22d1,etbe-bws-2025,Ishita,Sethi,ishita.sethi144@amber.example.com,Amber Fashion,DGM – Brand Marketing,Hyderabad,Attended,Website,linkedin_organic,2025-06-25,2025-07-04 09:46
+141f4a79,etbe-bws-2025,Arjun,Desai,arjun.desai145@crescent.example.com,Crescent Pharma,Brand Manager,Mumbai,Attended,Others,emailer,2025-05-27,2025-07-04 09:22
+9c77881a,etbe-bws-2025,Rahul,Desai,rahul.desai146@saffron.example.com,Saffron Foods,"Associate Director, Insights",Hyderabad,Attended,Sales team,sales_invite,2025-06-25,2025-07-04 09:35
+318a684d,etbe-bws-2025,Pooja,Iyer,pooja.iyer147@meridian.example.com,Meridian Bank,Vice President - Marketing,Mumbai,Attended,Others,direct,2025-05-12,2025-07-04 09:59
+2d99c2c0,etbe-bws-2025,Aditya,Bhatia,aditya.bhatia148@tidal.example.com,Tidal Beverages,Founder & CEO,Mumbai,Attended,Emailer,instagram_ads,2025-06-27,2025-07-04 09:08
+d7aec0cc,etbe-bws-2025,Shreya,Kapoor,shreya.kapoor149@kestrel.example.com,Kestrel Motors,Chief Marketing Officer,Pune,Shortlisted,Emailer,sales_invite,2025-06-27,
+b4e08a3d,etbe-bws-2025,Kavya,Banerjee,kavya.banerjee150@monsoon.example.com,Monsoon Media,Brand Manager,Mumbai,Shortlisted,Website,instagram_ads,2025-05-23,
+ff7a172a,etbe-bws-2025,Nikhil,Sethi,nikhil.sethi151@quartz.example.com,Quartz Electronics,Head of Brand,Hyderabad,Attended,Sales team,emailer,2025-05-14,2025-07-04 09:43
+08f3d452,etbe-bws-2025,Vikram,Pillai,vikram.pillai152@northstar.example.com,Northstar Apparel,DGM – Brand Marketing,Mumbai,Registered,Sales team,linkedin_organic,2025-06-17,
+38181cbb,etbe-bws-2025,Ishita,Iyer,ishita.iyer153@banyan.example.com,Banyan Finance,Vice President - Marketing,Delhi NCR,Attended,Emailer,direct,2025-05-11,2025-07-04 09:30
+fa1b89a9,etbe-bws-2025,Shreya,Malhotra,shreya.malhotra154@crescent.example.com,Crescent Pharma,AVP Growth,Pune,Attended,Emailer,instagram_ads,2025-05-24,2025-07-04 09:14
+453efe54,etbe-bws-2025,Varun,Banerjee,varun.banerjee155@crescent.example.com,Crescent Pharma,Director - Digital,Hyderabad,Registered,Others,emailer,2025-06-26,
+4a539016,etbe-bws-2025,Priya,Bhatia,priya.bhatia156@indigo.example.com,Indigo Retail,"Senior Manager, Media",Delhi NCR,Attended,Website,direct,2025-06-05,2025-07-04 09:52
+9b4014c5,etbe-bws-2025,Aditya,Malhotra,aditya.malhotra157@tidal.example.com,Tidal Beverages,CMO,Bengaluru,Attended,Sales team,direct,2025-06-27,2025-07-04 09:49
+7dcc68fe,etbe-bws-2025,Riya,Sethi,riya.sethi158@kestrel.example.com,Kestrel Motors,AVP Growth,Hyderabad,Shortlisted,Others,emailer,2025-06-26,
+c8b1ba9a,etbe-bws-2025,Varun,Kapoor,varun.kapoor159@quartz.example.com,Quartz Electronics,DGM – Brand Marketing,Chennai,Attended,Others,linkedin_organic,2025-06-01,2025-07-04 09:07
+3c3dc39b,etbe-bws-2025,Varun,Mehta,varun.mehta160@pinewood.example.com,Pinewood Insurance,Marketing Lead,Bengaluru,Attended,Emailer,linkedin_organic,2025-05-13,2025-07-04 09:47
+86994d68,etbe-bws-2025,Shreya,Mehta,shreya.mehta161@pinewood.example.com,Pinewood Insurance,Director - Digital,Pune,Attended,Website,instagram_ads,2025-05-13,2025-07-04 09:47
+d5ce38f3,etbe-bws-2025,Arjun,Menon,arjun.menon162@monsoon.example.com,Monsoon Media,Founder & CEO,Delhi NCR,Attended,Others,linkedin_organic,2025-05-18,2025-07-04 09:42
+a0d407d2,etbe-bws-2025,Karan,Malhotra,karan.malhotra163@amber.example.com,Amber Fashion,DGM – Brand Marketing,Delhi NCR,Attended,Emailer,sales_invite,2025-05-14,2025-07-04 09:11
+b8de4f88,etbe-bws-2025,Arjun,Bhatia,arjun.bhatia164@kestrel.example.com,Kestrel Motors,Head of Brand,Mumbai,Attended,Website,direct,2025-06-11,2025-07-04 09:23
+efc3fc6d,etbe-bws-2025,Pooja,Sethi,pooja.sethi165@amber.example.com,Amber Fashion,"Associate Director, Insights",Mumbai,Registered,Website,linkedin_organic,2025-06-25,
+f86aeead,etbe-bws-2025,Kabir,Pillai,kabir.pillai166@tidal.example.com,Tidal Beverages,AVP Growth,Pune,Attended,Sales team,sales_invite,2025-05-11,2025-07-04 09:00
+ac6c2313,etbe-bws-2025,Vikram,Nair,vikram.nair167@pinewood.example.com,Pinewood Insurance,Chief Marketing Officer,Delhi NCR,Registered,Website,linkedin_organic,2025-05-07,
+0be8298d,etbe-bws-2025,Vikram,Menon,vikram.menon168@crescent.example.com,Crescent Pharma,Head of Brand,Hyderabad,Attended,Sales team,instagram_ads,2025-05-01,2025-07-04 09:13
+b3b0a81c,etbe-bws-2025,Kabir,Gupta,kabir.gupta169@tidal.example.com,Tidal Beverages,DGM – Brand Marketing,Chennai,Registered,Emailer,sales_invite,2025-06-25,
+193fd037,etbe-bws-2025,Shreya,Malhotra,shreya.malhotra170@pinewood.example.com,Pinewood Insurance,Chief Marketing Officer,Hyderabad,Attended,Emailer,sales_invite,2025-05-13,2025-07-04 09:46
+66a8f015,etbe-bws-2025,Kavya,Gupta,kavya.gupta171@pinewood.example.com,Pinewood Insurance,Chief Marketing Officer,Chennai,Attended,Others,direct,2025-05-25,2025-07-04 09:38
+b8db5ae1,etbe-bws-2025,Varun,Rao,varun.rao172@quartz.example.com,Quartz Electronics,Head of Brand,Bengaluru,Registered,Emailer,emailer,2025-05-17,
+3fd644bc,etbe-bws-2025,Aditya,Rao,aditya.rao173@pinewood.example.com,Pinewood Insurance,Vice President - Marketing,Mumbai,Attended,Website,sales_invite,2025-05-12,2025-07-04 09:45
+0eeff72f,etbe-bws-2025,Rohan,Sharma,rohan.sharma174@northstar.example.com,Northstar Apparel,"Senior Manager, Media",Delhi NCR,Registered,Others,direct,2025-05-08,
+4b6fe139,etbe-bws-2025,Vikram,Gupta,vikram.gupta175@meridian.example.com,Meridian Bank,Chief Marketing Officer,Hyderabad,Registered,Website,linkedin_organic,2025-05-18,
+2f2ec03f,etbe-bws-2025,Shreya,Menon,shreya.menon176@tidal.example.com,Tidal Beverages,Founder & CEO,Mumbai,Attended,Others,linkedin_organic,2025-06-04,2025-07-04 09:11
+b19e1dd1,etbe-bws-2025,Meera,Mehta,meera.mehta177@banyan.example.com,Banyan Finance,Director - Digital,Pune,Registered,Others,direct,2025-05-18,
+7b7a9441,etbe-bws-2025,Rahul,Joshi,rahul.joshi178@indigo.example.com,Indigo Retail,Brand Manager,Chennai,Attended,Sales team,linkedin_organic,2025-06-23,2025-07-04 09:10
+d8881b12,etbe-bws-2025,Neha,Menon,neha.menon179@tidal.example.com,Tidal Beverages,Marketing Lead,Chennai,Attended,Others,linkedin_organic,2025-06-07,2025-07-04 09:47
+3989bfef,etbe-bws-2025,Ananya,Kapoor,ananya.kapoor180@harbor.example.com,Harbor Telecom,CMO,Chennai,Attended,Sales team,direct,2025-05-06,2025-07-04 09:30
+f7032e1c,etbe-bws-2025,Tanvi,Pillai,tanvi.pillai181@pinewood.example.com,Pinewood Insurance,Founder & CEO,Pune,Attended,Sales team,direct,2025-06-13,2025-07-04 09:48
+8f2e9d6b,etbe-bws-2025,Varun,Bhatia,varun.bhatia182@lotus.example.com,Lotus Naturals,Chief Marketing Officer,Mumbai,Attended,Sales team,sales_invite,2025-05-09,2025-07-04 09:40
+e252daa1,etbe-bws-2025,Vikram,Joshi,vikram.joshi183@kestrel.example.com,Kestrel Motors,"Associate Director, Insights",Delhi NCR,Attended,Sales team,linkedin_organic,2025-06-25,2025-07-04 09:00
+06d5255f,etbe-bws-2025,Tanvi,Pillai,tanvi.pillai184@quartz.example.com,Quartz Electronics,"Senior Manager, Media",Bengaluru,Registered,Sales team,instagram_ads,2025-06-09,
+85e22022,etbe-bws-2025,Aditya,Joshi,aditya.joshi185@crescent.example.com,Crescent Pharma,"Senior Manager, Media",Chennai,Registered,Sales team,linkedin_organic,2025-06-04,
+4eb37f3f,etbe-bws-2025,Varun,Rao,varun.rao186@kestrel.example.com,Kestrel Motors,AVP Growth,Mumbai,Attended,Sales team,emailer,2025-06-28,2025-07-04 09:55
+51cf7ba4,etbe-bws-2025,Vikram,Sethi,vikram.sethi187@crescent.example.com,Crescent Pharma,Founder & CEO,Mumbai,Shortlisted,Others,emailer,2025-05-08,
+195d01e2,etbe-bws-2025,Kavya,Desai,kavya.desai188@saffron.example.com,Saffron Foods,CMO,Pune,Attended,Sales team,direct,2025-06-02,2025-07-04 09:15
+34ec9fa7,etbe-bws-2025,Pooja,Bhatia,pooja.bhatia189@banyan.example.com,Banyan Finance,Chief Marketing Officer,Mumbai,Registered,Website,sales_invite,2025-06-28,
+c6c04901,etbe-bws-2025,Meera,Sethi,meera.sethi191@cedar.example.com,Cedar Home Care,Chief Marketing Officer,Mumbai,Attended,Emailer,instagram_ads,2025-06-06,2025-07-04 09:21
+a924743b,etbe-bws-2025,Rahul,Kapoor,rahul.kapoor192@meridian.example.com,Meridian Bank,DGM – Brand Marketing,Chennai,Shortlisted,Website,linkedin_organic,2025-06-14,
+5442ba67,etbe-bws-2025,Vikram,Menon,vikram.menon193@banyan.example.com,Banyan Finance,Founder & CEO,Mumbai,Registered,Sales team,emailer,2025-06-21,
+ee9ae585,etbe-bws-2025,Varun,Desai,varun.desai194@banyan.example.com,Banyan Finance,Founder & CEO,Chennai,Attended,Emailer,sales_invite,2025-05-05,2025-07-04 09:40
+d6ff4aa5,etbe-bws-2025,Meera,Pillai,meera.pillai195@lotus.example.com,Lotus Naturals,Vice President - Marketing,Mumbai,Attended,Website,instagram_ads,2025-05-02,2025-07-04 09:17
+a4132e8b,etbe-bws-2025,Riya,Malhotra,riya.malhotra196@kestrel.example.com,Kestrel Motors,"Senior Manager, Media",Mumbai,Attended,Others,sales_invite,2025-06-16,2025-07-04 09:44
+92151da1,etbe-bws-2025,Kavya,Gupta,kavya.gupta197@meridian.example.com,Meridian Bank,Brand Manager,Delhi NCR,Registered,Others,instagram_ads,2025-05-02,
+e403ba5e,etbe-bws-2025,Tanvi,Iyer,tanvi.iyer198@amber.example.com,Amber Fashion,Brand Manager,Bengaluru,Registered,Others,linkedin_organic,2025-06-04,
+01c4b59d,etbe-bws-2025,Kavya,Sharma,kavya.sharma199@tidal.example.com,Tidal Beverages,AVP Growth,Chennai,Shortlisted,Website,instagram_ads,2025-05-05,
+2460cb1f,etbe-bws-2025,Riya,Menon,riya.menon200@crescent.example.com,Crescent Pharma,AVP Growth,Delhi NCR,Attended,Sales team,direct,2025-05-11,2025-07-04 09:30
+6bf195e0,etbe-bws-2025,Varun,Sharma,varun.sharma201@lotus.example.com,Lotus Naturals,"Senior Manager, Media",Chennai,Registered,Website,sales_invite,2025-06-24,
+e27fcab7,etbe-bws-2025,Ishita,Sharma,ishita.sharma202@northstar.example.com,Northstar Apparel,CMO,Chennai,Shortlisted,Sales team,emailer,2025-06-10,
+d59ad2a7,etbe-bws-2025,Varun,Malhotra,varun.malhotra203@tidal.example.com,Tidal Beverages,Brand Manager,Mumbai,Attended,Sales team,sales_invite,2025-05-20,2025-07-04 09:20
+d1acfde9,etbe-bws-2025,Rahul,Sharma,rahul.sharma204@amber.example.com,Amber Fashion,"Associate Director, Insights",Delhi NCR,Attended,Sales team,direct,2025-05-05,2025-07-04 09:53
+93c0bb53,etbe-bws-2025,Arjun,Mehta,arjun.mehta205@amber.example.com,Amber Fashion,Marketing Lead,Chennai,Registered,Sales team,sales_invite,2025-06-03,
+0bfbd766,etbe-bws-2025,Aditya,Iyer,aditya.iyer206@lotus.example.com,Lotus Naturals,"Senior Manager, Media",Delhi NCR,Registered,Emailer,instagram_ads,2025-05-09,
+18700221,etbe-bws-2025,Varun,Sethi,varun.sethi207@northstar.example.com,Northstar Apparel,AVP Growth,Pune,Attended,Sales team,direct,2025-05-02,2025-07-04 09:37
+678d5efb,etbe-bws-2025,Arjun,Rao,arjun.rao208@pinewood.example.com,Pinewood Insurance,AVP Growth,Chennai,Attended,Website,direct,2025-06-11,2025-07-04 09:41
+77282f96,etbe-bws-2025,Karan,Gupta,karan.gupta209@quartz.example.com,Quartz Electronics,DGM – Brand Marketing,Delhi NCR,Attended,Sales team,sales_invite,2025-06-09,2025-07-04 09:11
+00793105,etbe-bws-2025,Varun,Bhatia,varun.bhatia210@lotus.example.com,Lotus Naturals,CMO,Hyderabad,Attended,Website,sales_invite,2025-05-23,2025-07-04 09:35
+3a9aed12,etbe-bws-2025,Aarav,Banerjee,aarav.banerjee211@crescent.example.com,Crescent Pharma,Marketing Lead,Delhi NCR,Attended,Sales team,sales_invite,2025-06-04,2025-07-04 09:15
+8c6d6818,etbe-bws-2025,Shreya,Joshi,shreya.joshi212@tidal.example.com,Tidal Beverages,"Senior Manager, Media",Chennai,Attended,Others,linkedin_organic,2025-05-27,2025-07-04 09:32
+67f65b68,etbe-bws-2025,Tanvi,Bhatia,tanvi.bhatia213@monsoon.example.com,Monsoon Media,DGM – Brand Marketing,Hyderabad,Attended,Emailer,instagram_ads,2025-05-20,2025-07-04 09:22
+f28757ad,etbe-bws-2025,Karan,Gupta,karan.gupta214@indigo.example.com,Indigo Retail,Director - Digital,Hyderabad,Attended,Sales team,instagram_ads,2025-06-07,2025-07-04 09:49
+76081ff0,etbe-bws-2025,Tanvi,Joshi,tanvi.joshi215@northstar.example.com,Northstar Apparel,Head of Brand,Delhi NCR,Attended,Sales team,instagram_ads,2025-05-19,2025-07-04 09:58
+eb1b93fe,etbe-bws-2025,Tanvi,Desai,tanvi.desai216@lotus.example.com,Lotus Naturals,AVP Growth,Chennai,Attended,Sales team,sales_invite,2025-05-25,2025-07-04 09:32
+af845f80,etbe-bws-2025,Aditya,Pillai,aditya.pillai217@cedar.example.com,Cedar Home Care,Chief Marketing Officer,Mumbai,Attended,Emailer,direct,2025-05-23,2025-07-04 09:00
+8f47ea5b,etbe-bws-2025,Nikhil,Banerjee,nikhil.banerjee218@monsoon.example.com,Monsoon Media,DGM – Brand Marketing,Hyderabad,Shortlisted,Emailer,linkedin_organic,2025-06-20,
+66388f36,etbe-bws-2025,Pooja,Mehta,pooja.mehta219@harbor.example.com,Harbor Telecom,"Senior Manager, Media",Pune,Shortlisted,Sales team,instagram_ads,2025-06-08,
+1fce651d,etbe-bws-2025,Ananya,Desai,ananya.desai220@quartz.example.com,Quartz Electronics,AVP Growth,Mumbai,Attended,Others,sales_invite,2025-06-08,2025-07-04 09:03
+ffb4538d,etbe-bws-2025,Pooja,Malhotra,pooja.malhotra221@cedar.example.com,Cedar Home Care,Founder & CEO,Hyderabad,Attended,Website,sales_invite,2025-05-04,2025-07-04 09:41
+ae9f81f8,etbe-bws-2025,Neha,Gupta,neha.gupta222@lotus.example.com,Lotus Naturals,Marketing Lead,Pune,Registered,Sales team,sales_invite,2025-06-22,
+1a282efa,etbe-bws-2025,Varun,Desai,varun.desai223@pinewood.example.com,Pinewood Insurance,Founder & CEO,Pune,Attended,Website,emailer,2025-05-04,2025-07-04 09:06
+5b9883d8,etbe-bws-2025,Tanvi,Sharma,tanvi.sharma224@tidal.example.com,Tidal Beverages,Vice President - Marketing,Mumbai,Registered,Emailer,instagram_ads,2025-05-04,
+6ff2a59e,etbe-bws-2025,Ananya,Kapoor,ananya.kapoor225@cedar.example.com,Cedar Home Care,Vice President - Marketing,Chennai,Attended,Others,emailer,2025-05-03,2025-07-04 09:48
+aac2cec7,etbe-bws-2025,Shreya,Nair,shreya.nair226@monsoon.example.com,Monsoon Media,Founder & CEO,Pune,Attended,Emailer,sales_invite,2025-05-27,2025-07-04 09:50
+0f4eb64c,etbe-bws-2025,Meera,Mehta,meera.mehta227@indigo.example.com,Indigo Retail,Head of Brand,Chennai,Registered,Others,emailer,2025-05-12,
+116923fa,etbe-bws-2025,Priya,Mehta,priya.mehta228@harbor.example.com,Harbor Telecom,Marketing Lead,Chennai,Shortlisted,Others,instagram_ads,2025-06-15,
+ca0ad69d,etbe-bws-2025,Nikhil,Malhotra,nikhil.malhotra229@meridian.example.com,Meridian Bank,CMO,Chennai,Shortlisted,Website,emailer,2025-06-14,
+21301b53,etbe-bws-2025,Ishita,Joshi,ishita.joshi230@amber.example.com,Amber Fashion,Vice President - Marketing,Hyderabad,Registered,Others,direct,2025-05-24,
+731d7a01,etbe-bws-2025,Nikhil,Bhatia,nikhil.bhatia231@cedar.example.com,Cedar Home Care,Chief Marketing Officer,Hyderabad,Shortlisted,Website,linkedin_organic,2025-05-22,
+5ed30fe6,etbe-bws-2025,Ananya,Kapoor,ananya.kapoor232@crescent.example.com,Crescent Pharma,AVP Growth,Delhi NCR,Attended,Emailer,linkedin_organic,2025-05-06,2025-07-04 09:11
+7c0f5f6c,etbe-bws-2025,Rohan,Mehta,rohan.mehta233@monsoon.example.com,Monsoon Media,Marketing Lead,Chennai,Registered,Sales team,instagram_ads,2025-06-23,
+2e60d54f,etbe-bws-2025,Aditya,Banerjee,aditya.banerjee234@kestrel.example.com,Kestrel Motors,Brand Manager,Pune,Attended,Website,direct,2025-06-07,2025-07-04 09:25
+31ba1d27,etbe-bws-2025,Meera,Sharma,meera.sharma235@saffron.example.com,Saffron Foods,"Senior Manager, Media",Bengaluru,Attended,Emailer,direct,2025-05-22,2025-07-04 09:42
+f83746de,etbe-bws-2025,Ishita,Gupta,ishita.gupta236@tidal.example.com,Tidal Beverages,Head of Brand,Delhi NCR,Attended,Others,sales_invite,2025-06-09,2025-07-04 09:09
+eb710f05,etbe-bws-2025,Karan,Desai,karan.desai237@harbor.example.com,Harbor Telecom,Chief Marketing Officer,Delhi NCR,Registered,Sales team,sales_invite,2025-05-14,
+6dbe864b,etbe-bws-2025,Rahul,Gupta,rahul.gupta238@cedar.example.com,Cedar Home Care,AVP Growth,Chennai,Shortlisted,Emailer,direct,2025-06-23,
+8c8357d7,etbe-bws-2025,Shreya,Sharma,shreya.sharma239@quartz.example.com,Quartz Electronics,AVP Growth,Pune,Registered,Sales team,direct,2025-05-03,
+8707da0b,etbe-bws-2025,Shreya,Iyer,shreya.iyer240@indigo.example.com,Indigo Retail,Brand Manager,Hyderabad,Registered,Others,emailer,2025-05-24,
+ad58293e,etbe-bws-2025,Ishita,Kapoor,ishita.kapoor241@cedar.example.com,Cedar Home Care,Vice President - Marketing,Mumbai,Registered,Others,emailer,2025-06-15,
+bf59ccb0,etbe-bws-2025,Rohan,Joshi,rohan.joshi242@northstar.example.com,Northstar Apparel,CMO,Delhi NCR,Registered,Sales team,instagram_ads,2025-06-24,
+981a8396,etbe-bws-2025,Aditya,Desai,aditya.desai243@quartz.example.com,Quartz Electronics,Vice President - Marketing,Chennai,Attended,Website,instagram_ads,2025-06-01,2025-07-04 09:08
+9f9b0292,etbe-bws-2025,Ananya,Desai,ananya.desai244@harbor.example.com,Harbor Telecom,DGM – Brand Marketing,Pune,Registered,Others,emailer,2025-06-08,
+48952294,etbe-bws-2025,Ishita,Sethi,ishita.sethi245@harbor.example.com,Harbor Telecom,Founder & CEO,Delhi NCR,Attended,Emailer,instagram_ads,2025-06-19,2025-07-04 09:20
+8dfb9ce1,etbe-bws-2025,Pooja,Gupta,pooja.gupta246@meridian.example.com,Meridian Bank,Marketing Lead,Bengaluru,Attended,Emailer,sales_invite,2025-06-23,2025-07-04 09:31
+6ae14664,etbe-bws-2025,Karan,Pillai,karan.pillai247@monsoon.example.com,Monsoon Media,Vice President - Marketing,Chennai,Attended,Sales team,sales_invite,2025-05-25,2025-07-04 09:56
+01950e8b,etbe-bws-2025,Ananya,Malhotra,ananya.malhotra248@meridian.example.com,Meridian Bank,Head of Brand,Mumbai,Shortlisted,Sales team,emailer,2025-06-18,
+0bf998a9,etbe-bws-2025,Kavya,Bhatia,kavya.bhatia249@lotus.example.com,Lotus Naturals,Vice President - Marketing,Bengaluru,Attended,Sales team,emailer,2025-05-18,2025-07-04 09:39
+c2f08002,etbe-bws-2025,Vikram,Desai,vikram.desai250@northstar.example.com,Northstar Apparel,Chief Marketing Officer,Delhi NCR,Attended,Others,instagram_ads,2025-06-22,2025-07-04 09:24
+1021a501,etbe-bws-2025,Tanvi,Iyer,tanvi.iyer252@pinewood.example.com,Pinewood Insurance,CMO,Bengaluru,Attended,Website,sales_invite,2025-06-15,2025-07-04 09:11
+8df99333,etbe-bws-2025,Varun,Sharma,varun.sharma253@monsoon.example.com,Monsoon Media,Director - Digital,Mumbai,Registered,Emailer,linkedin_organic,2025-05-13,
+6a68b660,etbe-bws-2025,Ananya,Malhotra,ananya.malhotra254@monsoon.example.com,Monsoon Media,"Associate Director, Insights",Mumbai,Attended,Others,sales_invite,2025-05-06,2025-07-04 09:29
+62dd6dd0,etbe-bws-2025,Rahul,Joshi,rahul.joshi255@banyan.example.com,Banyan Finance,Chief Marketing Officer,Hyderabad,Registered,Others,direct,2025-05-27,
+d97dcc36,etbe-bws-2025,Aarav,Banerjee,aarav.banerjee256@indigo.example.com,Indigo Retail,"Associate Director, Insights",Hyderabad,Shortlisted,Website,instagram_ads,2025-06-10,
+85303227,etbe-bws-2025,Shreya,Pillai,shreya.pillai257@kestrel.example.com,Kestrel Motors,Director - Digital,Pune,Registered,Sales team,direct,2025-06-14,
+25c7531c,etbe-bws-2025,Tanvi,Pillai,tanvi.pillai258@kestrel.example.com,Kestrel Motors,CMO,Mumbai,Attended,Website,instagram_ads,2025-06-19,2025-07-04 09:24
+7f0158cc,etbe-bws-2025,Neha,Rao,neha.rao259@harbor.example.com,Harbor Telecom,"Senior Manager, Media",Bengaluru,Attended,Emailer,instagram_ads,2025-05-21,2025-07-04 09:47
+3be9569f,etbe-bws-2025,Riya,Gupta,riya.gupta260@meridian.example.com,Meridian Bank,Director - Digital,Bengaluru,Registered,Website,instagram_ads,2025-05-18,
+6a378c53,etbe-bws-2025,Kavya,Mehta,kavya.mehta261@crescent.example.com,Crescent Pharma,Chief Marketing Officer,Bengaluru,Attended,Website,linkedin_organic,2025-06-01,2025-07-04 09:43
+27a6e6f3,etbe-bws-2025,Kabir,Gupta,kabir.gupta262@northstar.example.com,Northstar Apparel,CMO,Bengaluru,Registered,Others,direct,2025-06-21,
+c9e2443f,etbe-bws-2025,Meera,Mehta,meera.mehta263@lotus.example.com,Lotus Naturals,"Senior Manager, Media",Bengaluru,Attended,Website,linkedin_organic,2025-05-02,2025-07-04 09:23
+8b7a8416,etbe-bws-2025,Tanvi,Pillai,tanvi.pillai264@monsoon.example.com,Monsoon Media,Chief Marketing Officer,Delhi NCR,Attended,Website,sales_invite,2025-06-27,2025-07-04 09:47
+7d249fa4,etbe-bws-2025,Pooja,Bhatia,pooja.bhatia265@meridian.example.com,Meridian Bank,Director - Digital,Chennai,Registered,Website,linkedin_organic,2025-06-15,
+3a4afad0,etbe-bws-2025,Vikram,Mehta,vikram.mehta266@monsoon.example.com,Monsoon Media,"Senior Manager, Media",Pune,Attended,Others,instagram_ads,2025-06-26,2025-07-04 09:59
+fc78c564,etbe-bws-2025,Pooja,Sethi,pooja.sethi267@lotus.example.com,Lotus Naturals,Vice President - Marketing,Delhi NCR,Registered,Others,sales_invite,2025-06-07,
+bbb731a4,etbe-bws-2025,Neha,Mehta,neha.mehta268@pinewood.example.com,Pinewood Insurance,Head of Brand,Delhi NCR,Shortlisted,Emailer,emailer,2025-05-12,
+c78f45ef,etbe-bws-2025,Rohan,Iyer,rohan.iyer269@meridian.example.com,Meridian Bank,Brand Manager,Mumbai,Registered,Others,emailer,2025-05-02,
+57b3b640,etbe-bws-2025,Aarav,Sethi,aarav.sethi270@crescent.example.com,Crescent Pharma,Head of Brand,Chennai,Attended,Others,instagram_ads,2025-06-21,2025-07-04 09:44
+de4b8a38,etbe-bws-2025,Priya,Nair,priya.nair271@crescent.example.com,Crescent Pharma,Founder & CEO,Pune,Attended,Sales team,instagram_ads,2025-06-10,2025-07-04 09:42
+8eab9654,etbe-bws-2025,Aditya,Kapoor,aditya.kapoor272@monsoon.example.com,Monsoon Media,Founder & CEO,Chennai,Attended,Emailer,linkedin_organic,2025-06-14,2025-07-04 09:49
+a3f37bb6,etbe-bws-2025,Ananya,Sethi,ananya.sethi273@cedar.example.com,Cedar Home Care,AVP Growth,Hyderabad,Attended,Website,emailer,2025-05-06,2025-07-04 09:17
+31f10b87,etbe-bws-2025,Neha,Sethi,neha.sethi274@crescent.example.com,Crescent Pharma,DGM – Brand Marketing,Chennai,Registered,Others,instagram_ads,2025-06-23,
+ab96dd47,etbe-bws-2025,Nikhil,Joshi,nikhil.joshi275@saffron.example.com,Saffron Foods,Head of Brand,Delhi NCR,Attended,Sales team,linkedin_organic,2025-06-16,2025-07-04 09:43
+1f939a96,etbe-bws-2025,Kabir,Nair,kabir.nair276@tidal.example.com,Tidal Beverages,Founder & CEO,Bengaluru,Attended,Sales team,instagram_ads,2025-05-15,2025-07-04 09:41
+089ad624,etbe-bws-2025,Aarav,Sethi,aarav.sethi277@tidal.example.com,Tidal Beverages,"Associate Director, Insights",Hyderabad,Attended,Sales team,emailer,2025-05-10,2025-07-04 09:50
+dcc0dbfa,etbe-bws-2025,Neha,Nair,neha.nair278@quartz.example.com,Quartz Electronics,Chief Marketing Officer,Pune,Attended,Others,linkedin_organic,2025-05-28,2025-07-04 09:18
+da3c2a63,etbe-bws-2025,Ishita,Joshi,ishita.joshi279@harbor.example.com,Harbor Telecom,"Senior Manager, Media",Pune,Attended,Website,sales_invite,2025-06-03,2025-07-04 09:15
+5f87789a,etbe-bws-2025,Neha,Sharma,neha.sharma280@kestrel.example.com,Kestrel Motors,DGM – Brand Marketing,Pune,Attended,Website,instagram_ads,2025-06-14,2025-07-04 09:18
+74de8d61,etbe-bws-2025,Shreya,Gupta,shreya.gupta281@monsoon.example.com,Monsoon Media,"Associate Director, Insights",Hyderabad,Registered,Sales team,linkedin_organic,2025-05-06,
+d1d07df3,etbe-bws-2025,Vikram,Pillai,vikram.pillai282@harbor.example.com,Harbor Telecom,CMO,Pune,Attended,Website,linkedin_organic,2025-06-15,2025-07-04 09:42
+147cc873,etbe-bws-2025,Aarav,Rao,aarav.rao283@cedar.example.com,Cedar Home Care,Marketing Lead,Bengaluru,Shortlisted,Sales team,sales_invite,2025-05-02,
+2b7a147b,etbe-bws-2025,Neha,Mehta,neha.mehta284@kestrel.example.com,Kestrel Motors,CMO,Mumbai,Registered,Sales team,instagram_ads,2025-05-26,
+67f83e7a,etbe-bws-2025,Pooja,Pillai,pooja.pillai285@saffron.example.com,Saffron Foods,CMO,Bengaluru,Attended,Emailer,sales_invite,2025-06-18,2025-07-04 09:22
+f277534c,etbe-bws-2025,Varun,Nair,varun.nair286@harbor.example.com,Harbor Telecom,"Senior Manager, Media",Bengaluru,Shortlisted,Website,sales_invite,2025-06-08,
+7cf7c103,etbe-bws-2025,Karan,Malhotra,karan.malhotra287@cedar.example.com,Cedar Home Care,Director - Digital,Mumbai,Attended,Emailer,instagram_ads,2025-05-10,2025-07-04 09:25
+c4454066,etbe-bws-2025,Varun,Bhatia,varun.bhatia288@pinewood.example.com,Pinewood Insurance,Marketing Lead,Delhi NCR,Attended,Others,emailer,2025-06-23,2025-07-04 09:15
+fa2ac7d4,etbe-bws-2025,Varun,Iyer,varun.iyer289@harbor.example.com,Harbor Telecom,Chief Marketing Officer,Pune,Attended,Emailer,emailer,2025-05-14,2025-07-04 09:41
+3e47fa28,etbe-bws-2025,Kavya,Desai,kavya.desai290@monsoon.example.com,Monsoon Media,Founder & CEO,Bengaluru,Attended,Sales team,emailer,2025-06-26,2025-07-04 09:45
+99723946,etbe-bws-2025,Varun,Mehta,varun.mehta291@amber.example.com,Amber Fashion,"Associate Director, Insights",Bengaluru,Attended,Others,emailer,2025-05-08,2025-07-04 09:48
+7ed8a091,etbe-bws-2025,Varun,Malhotra,varun.malhotra292@tidal.example.com,Tidal Beverages,"Associate Director, Insights",Chennai,Attended,Website,linkedin_organic,2025-05-14,2025-07-04 09:29
+b1722a96,etbe-bws-2025,Kabir,Iyer,kabir.iyer293@harbor.example.com,Harbor Telecom,"Associate Director, Insights",Chennai,Attended,Sales team,emailer,2025-06-21,2025-07-04 09:25
+ad16bf77,etbe-bws-2025,Nikhil,Sharma,nikhil.sharma294@meridian.example.com,Meridian Bank,Head of Brand,Mumbai,Attended,Emailer,linkedin_organic,2025-06-03,2025-07-04 09:39
+8a36f3a2,etbe-bws-2025,Ishita,Malhotra,ishita.malhotra295@harbor.example.com,Harbor Telecom,Chief Marketing Officer,Hyderabad,Shortlisted,Sales team,direct,2025-06-13,
+52d81240,etbe-bws-2025,Varun,Nair,varun.nair296@banyan.example.com,Banyan Finance,AVP Growth,Mumbai,Attended,Sales team,direct,2025-05-22,2025-07-04 09:01
+5555efd3,etbe-bws-2025,Ishita,Malhotra,ishita.malhotra297@saffron.example.com,Saffron Foods,"Senior Manager, Media",Delhi NCR,Attended,Emailer,instagram_ads,2025-05-16,2025-07-04 09:11
+a81f13d1,etbe-bws-2025,Karan,Bhatia,karan.bhatia298@tidal.example.com,Tidal Beverages,Chief Marketing Officer,Mumbai,Registered,Website,linkedin_organic,2025-06-19,
+cd0c63e5,etbe-bws-2025,Vikram,Kapoor,vikram.kapoor299@crescent.example.com,Crescent Pharma,Director - Digital,Bengaluru,Registered,Emailer,instagram_ads,2025-05-05,
+0716f4b0,etbe-bws-2025,Neha,Menon,neha.menon300@tidal.example.com,Tidal Beverages,CMO,Mumbai,Shortlisted,Sales team,emailer,2025-05-21,
+3dd9fe86,etbe-bws-2025,Riya,Sharma,riya.sharma301@quartz.example.com,Quartz Electronics,AVP Growth,Mumbai,Attended,Website,emailer,2025-06-22,2025-07-04 09:44
+13326564,etbe-bws-2025,Varun,Kapoor,varun.kapoor302@cedar.example.com,Cedar Home Care,CMO,Mumbai,Registered,Sales team,emailer,2025-05-24,
+0a495f30,etbe-bws-2025,Kabir,Sharma,kabir.sharma303@saffron.example.com,Saffron Foods,Brand Manager,Delhi NCR,Attended,Emailer,direct,2025-06-22,2025-07-04 09:12
+b9eb46be,etbe-bws-2025,Vikram,Desai,vikram.desai304@monsoon.example.com,Monsoon Media,Marketing Lead,Delhi NCR,Attended,Others,emailer,2025-06-12,2025-07-04 09:00
+94273333,etbe-bws-2025,Rahul,Iyer,rahul.iyer305@kestrel.example.com,Kestrel Motors,Vice President - Marketing,Hyderabad,Attended,Emailer,sales_invite,2025-05-15,2025-07-04 09:32
+a95c0fe1,etbe-bws-2025,Tanvi,Gupta,tanvi.gupta306@amber.example.com,Amber Fashion,"Senior Manager, Media",Bengaluru,Attended,Website,instagram_ads,2025-06-01,2025-07-04 09:22
+dd673a3e,etbe-bws-2025,Pooja,Nair,pooja.nair307@lotus.example.com,Lotus Naturals,DGM – Brand Marketing,Delhi NCR,Registered,Website,linkedin_organic,2025-06-18,
+33a49ae3,etbe-bws-2025,Rohan,Mehta,rohan.mehta308@quartz.example.com,Quartz Electronics,Vice President - Marketing,Pune,Attended,Others,linkedin_organic,2025-06-09,2025-07-04 09:21
+a2e92a68,etbe-bws-2025,Kabir,Malhotra,kabir.malhotra309@northstar.example.com,Northstar Apparel,"Senior Manager, Media",Delhi NCR,Attended,Emailer,instagram_ads,2025-05-08,2025-07-04 09:31
+3e1911a7,etbe-bws-2025,Tanvi,Kapoor,tanvi.kapoor310@quartz.example.com,Quartz Electronics,CMO,Mumbai,Attended,Sales team,instagram_ads,2025-06-01,2025-07-04 09:07
+d1e573b4,etbe-bws-2025,Ishita,Menon,ishita.menon311@tidal.example.com,Tidal Beverages,"Associate Director, Insights",Hyderabad,Attended,Others,linkedin_organic,2025-05-03,2025-07-04 09:46
+9ece6728,etbe-bws-2025,Rohan,Sethi,rohan.sethi313@indigo.example.com,Indigo Retail,Chief Marketing Officer,Mumbai,Attended,Website,instagram_ads,2025-06-24,2025-07-04 09:40
+8e273939,etbe-bws-2025,Rohan,Malhotra,rohan.malhotra314@lotus.example.com,Lotus Naturals,DGM – Brand Marketing,Pune,Attended,Emailer,linkedin_organic,2025-06-22,2025-07-04 09:43
+6aee0806,etbe-bws-2025,Ishita,Banerjee,ishita.banerjee315@northstar.example.com,Northstar Apparel,DGM – Brand Marketing,Hyderabad,Attended,Sales team,linkedin_organic,2025-05-11,2025-07-04 09:28
+e93c50a9,etbe-bws-2025,Aditya,Bhatia,aditya.bhatia316@kestrel.example.com,Kestrel Motors,Head of Brand,Mumbai,Attended,Emailer,emailer,2025-06-02,2025-07-04 09:26
+776ae258,etbe-bws-2025,Tanvi,Sharma,tanvi.sharma317@crescent.example.com,Crescent Pharma,Chief Marketing Officer,Pune,Attended,Emailer,instagram_ads,2025-05-01,2025-07-04 09:09
+b58857e2,etbe-bws-2025,Nikhil,Desai,nikhil.desai318@monsoon.example.com,Monsoon Media,"Associate Director, Insights",Chennai,Attended,Others,sales_invite,2025-06-23,2025-07-04 09:51
+ebf6f7c9,etbe-bws-2025,Meera,Iyer,meera.iyer319@banyan.example.com,Banyan Finance,Head of Brand,Pune,Attended,Emailer,sales_invite,2025-06-15,2025-07-04 09:48
+bc74aaf1,etbe-bws-2025,Kabir,Desai,kabir.desai320@amber.example.com,Amber Fashion,"Senior Manager, Media",Chennai,Attended,Emailer,sales_invite,2025-06-25,2025-07-04 09:05
+558b3253,etbe-bws-2025,Kavya,Nair,kavya.nair321@banyan.example.com,Banyan Finance,"Associate Director, Insights",Pune,Shortlisted,Emailer,instagram_ads,2025-05-14,
+fa11cdd8,etbe-bws-2025,Arjun,Mehta,arjun.mehta322@tidal.example.com,Tidal Beverages,Brand Manager,Delhi NCR,Registered,Website,instagram_ads,2025-05-15,
+712d97d0,etbe-bws-2025,Neha,Nair,neha.nair323@indigo.example.com,Indigo Retail,Marketing Lead,Chennai,Attended,Others,linkedin_organic,2025-06-15,2025-07-04 09:05
+01f037a7,etbe-bws-2025,Tanvi,Iyer,tanvi.iyer324@monsoon.example.com,Monsoon Media,"Associate Director, Insights",Delhi NCR,Registered,Sales team,sales_invite,2025-06-26,
+ad247d55,etbe-bws-2025,Shreya,Sethi,shreya.sethi325@indigo.example.com,Indigo Retail,DGM – Brand Marketing,Delhi NCR,Attended,Sales team,emailer,2025-05-15,2025-07-04 09:46
+9ba0ac02,etbe-bws-2025,Karan,Sharma,karan.sharma326@kestrel.example.com,Kestrel Motors,Director - Digital,Pune,Registered,Emailer,linkedin_organic,2025-05-08,
+8efb3d5f,etbe-bws-2025,Ananya,Mehta,ananya.mehta327@harbor.example.com,Harbor Telecom,Chief Marketing Officer,Pune,Attended,Others,sales_invite,2025-06-13,2025-07-04 09:27
+3e8499b5,etbe-bws-2025,Ishita,Gupta,ishita.gupta328@amber.example.com,Amber Fashion,Chief Marketing Officer,Mumbai,Shortlisted,Website,linkedin_organic,2025-06-11,
+f5c8e449,etbe-bws-2025,Pooja,Joshi,pooja.joshi329@crescent.example.com,Crescent Pharma,"Senior Manager, Media",Hyderabad,Attended,Emailer,instagram_ads,2025-05-02,2025-07-04 09:57
+d61b145a,etbe-bws-2025,Ishita,Iyer,ishita.iyer330@pinewood.example.com,Pinewood Insurance,CMO,Hyderabad,Registered,Others,sales_invite,2025-06-01,
+e6981066,etbe-bws-2025,Riya,Gupta,riya.gupta331@crescent.example.com,Crescent Pharma,Chief Marketing Officer,Bengaluru,Attended,Website,instagram_ads,2025-06-03,2025-07-04 09:14
+5f37081d,etbe-bws-2025,Riya,Iyer,riya.iyer332@meridian.example.com,Meridian Bank,Director - Digital,Hyderabad,Registered,Sales team,linkedin_organic,2025-05-05,
+05186d85,etbe-bws-2025,Ishita,Mehta,ishita.mehta333@monsoon.example.com,Monsoon Media,Chief Marketing Officer,Pune,Shortlisted,Emailer,sales_invite,2025-06-25,
+093f64fa,etbe-bws-2025,Shreya,Gupta,shreya.gupta334@quartz.example.com,Quartz Electronics,"Associate Director, Insights",Hyderabad,Attended,Emailer,emailer,2025-05-05,2025-07-04 09:50
+0be356da,etbe-bws-2025,Riya,Rao,riya.rao335@kestrel.example.com,Kestrel Motors,Director - Digital,Mumbai,Attended,Sales team,direct,2025-05-09,2025-07-04 09:05
+a87ace02,etbe-bws-2025,Priya,Bhatia,priya.bhatia336@harbor.example.com,Harbor Telecom,CMO,Delhi NCR,Attended,Others,emailer,2025-06-07,2025-07-04 09:43
+71ac066f,etbe-bws-2025,Varun,Sethi,varun.sethi337@quartz.example.com,Quartz Electronics,Head of Brand,Hyderabad,Attended,Website,sales_invite,2025-05-19,2025-07-04 09:59
+eac064eb,etbe-bws-2025,Rahul,Desai,rahul.desai338@lotus.example.com,Lotus Naturals,AVP Growth,Delhi NCR,Attended,Emailer,emailer,2025-06-15,2025-07-04 09:51
+f00b388c,etbe-bws-2025,Neha,Menon,neha.menon339@indigo.example.com,Indigo Retail,"Senior Manager, Media",Pune,Attended,Others,sales_invite,2025-05-20,2025-07-04 09:02
+2050aeed,etbe-bws-2025,Ishita,Bhatia,ishita.bhatia340@monsoon.example.com,Monsoon Media,DGM – Brand Marketing,Hyderabad,Attended,Website,sales_invite,2025-06-17,2025-07-04 09:46
+b852afe6,etbe-bws-2025,Shreya,Pillai,shreya.pillai341@lotus.example.com,Lotus Naturals,"Associate Director, Insights",Pune,Attended,Sales team,instagram_ads,2025-05-14,2025-07-04 09:49
+c3ff7bb0,etbe-bws-2025,Pooja,Pillai,pooja.pillai342@saffron.example.com,Saffron Foods,"Senior Manager, Media",Delhi NCR,Attended,Others,linkedin_organic,2025-05-13,2025-07-04 09:09
+82565628,etbe-bws-2025,Rahul,Iyer,rahul.iyer343@banyan.example.com,Banyan Finance,AVP Growth,Bengaluru,Attended,Website,emailer,2025-05-10,2025-07-04 09:19
+20d0788b,etbe-bws-2025,Neha,Sethi,neha.sethi344@banyan.example.com,Banyan Finance,DGM – Brand Marketing,Bengaluru,Attended,Website,direct,2025-05-10,2025-07-04 09:49
+98357350,etbe-bws-2025,Shreya,Nair,shreya.nair345@kestrel.example.com,Kestrel Motors,Chief Marketing Officer,Pune,Registered,Others,sales_invite,2025-06-19,
+71dcc076,etbe-bws-2025,Priya,Sethi,priya.sethi346@saffron.example.com,Saffron Foods,Director - Digital,Delhi NCR,Attended,Website,instagram_ads,2025-06-11,2025-07-04 09:19
+7a29db76,etbe-bws-2025,Aditya,Nair,aditya.nair347@harbor.example.com,Harbor Telecom,Marketing Lead,Chennai,Attended,Sales team,linkedin_organic,2025-05-01,2025-07-04 09:03
+e70f419b,etbe-bws-2025,Shreya,Iyer,shreya.iyer348@northstar.example.com,Northstar Apparel,"Senior Manager, Media",Chennai,Registered,Website,linkedin_organic,2025-05-20,
+4ddbc1b1,etbe-bws-2025,Kabir,Menon,kabir.menon349@cedar.example.com,Cedar Home Care,CMO,Hyderabad,Attended,Sales team,instagram_ads,2025-05-27,2025-07-04 09:24
+c9ef0043,etbe-bws-2025,Varun,Rao,varun.rao350@meridian.example.com,Meridian Bank,CMO,Delhi NCR,Attended,Others,linkedin_organic,2025-05-06,2025-07-04 09:38
+449b661f,etbe-bws-2025,Kavya,Kapoor,kavya.kapoor351@harbor.example.com,Harbor Telecom,Brand Manager,Chennai,Registered,Sales team,sales_invite,2025-06-28,
+ed8d9224,etbe-bws-2025,Priya,Rao,priya.rao352@pinewood.example.com,Pinewood Insurance,Director - Digital,Bengaluru,Attended,Website,direct,2025-05-11,2025-07-04 09:10
+c5cc74e2,etbe-bws-2025,Arjun,Banerjee,arjun.banerjee353@lotus.example.com,Lotus Naturals,"Senior Manager, Media",Delhi NCR,Attended,Website,instagram_ads,2025-05-10,2025-07-04 09:46
+5c2d0188,etbe-bws-2025,Neha,Kapoor,neha.kapoor354@harbor.example.com,Harbor Telecom,Head of Brand,Delhi NCR,Registered,Sales team,direct,2025-06-14,
+f1ce373b,etbe-bws-2025,Riya,Malhotra,riya.malhotra355@lotus.example.com,Lotus Naturals,AVP Growth,Chennai,Attended,Emailer,instagram_ads,2025-06-18,2025-07-04 09:28
+ea2a70ca,etbe-bws-2025,Shreya,Gupta,shreya.gupta356@northstar.example.com,Northstar Apparel,"Senior Manager, Media",Delhi NCR,Attended,Emailer,emailer,2025-05-27,2025-07-04 09:05
+b12a85c2,etbe-bws-2025,Ananya,Banerjee,ananya.banerjee357@pinewood.example.com,Pinewood Insurance,Vice President - Marketing,Hyderabad,Attended,Others,linkedin_organic,2025-06-18,2025-07-04 09:28
+23d20075,etbe-bws-2025,Aarav,Malhotra,aarav.malhotra358@indigo.example.com,Indigo Retail,Founder & CEO,Hyderabad,Attended,Others,instagram_ads,2025-06-01,2025-07-04 09:50
+ff4ee259,etbe-bws-2025,Ananya,Gupta,ananya.gupta359@meridian.example.com,Meridian Bank,DGM – Brand Marketing,Delhi NCR,Attended,Emailer,emailer,2025-06-08,2025-07-04 09:04
+6cba96d1,etbe-bws-2025,Arjun,Pillai,arjun.pillai360@crescent.example.com,Crescent Pharma,CMO,Pune,Attended,Emailer,linkedin_organic,2025-06-27,2025-07-04 09:33
+c4037549,etbe-bws-2025,Pooja,Malhotra,pooja.malhotra361@harbor.example.com,Harbor Telecom,AVP Growth,Hyderabad,Attended,Sales team,linkedin_organic,2025-06-21,2025-07-04 09:16
+f5dcf19d,etbe-bws-2025,Karan,Iyer,karan.iyer362@indigo.example.com,Indigo Retail,Brand Manager,Mumbai,Registered,Website,instagram_ads,2025-05-13,
+f9e4deec,etbe-bws-2025,Pooja,Nair,pooja.nair363@crescent.example.com,Crescent Pharma,Vice President - Marketing,Bengaluru,Attended,Website,direct,2025-06-18,2025-07-04 09:49
+216ded6e,etbe-bws-2025,Nikhil,Sharma,nikhil.sharma364@harbor.example.com,Harbor Telecom,Marketing Lead,Chennai,Registered,Website,sales_invite,2025-05-21,
+39f12a5c,etbe-bws-2025,Rahul,Iyer,rahul.iyer365@lotus.example.com,Lotus Naturals,DGM – Brand Marketing,Mumbai,Attended,Others,linkedin_organic,2025-06-22,2025-07-04 09:09
+9c316f4e,etbe-bws-2025,Priya,Menon,priya.menon366@lotus.example.com,Lotus Naturals,Director - Digital,Hyderabad,Attended,Emailer,direct,2025-05-20,2025-07-04 09:38
+1620d738,etbe-bws-2025,Neha,Bhatia,neha.bhatia367@cedar.example.com,Cedar Home Care,AVP Growth,Bengaluru,Shortlisted,Emailer,sales_invite,2025-05-07,
+a509843a,etbe-bws-2025,Priya,Gupta,priya.gupta368@quartz.example.com,Quartz Electronics,DGM – Brand Marketing,Delhi NCR,Attended,Sales team,instagram_ads,2025-05-23,2025-07-04 09:02
+cb31bf85,etbe-bws-2025,Vikram,Kapoor,vikram.kapoor369@monsoon.example.com,Monsoon Media,Chief Marketing Officer,Hyderabad,Shortlisted,Website,sales_invite,2025-06-19,
+be99b73a,etbe-bws-2025,Neha,Mehta,neha.mehta370@pinewood.example.com,Pinewood Insurance,Brand Manager,Bengaluru,Attended,Website,emailer,2025-06-22,2025-07-04 09:09
+bcd8efd8,etbe-bws-2025,Kavya,Desai,kavya.desai371@banyan.example.com,Banyan Finance,CMO,Chennai,Attended,Sales team,linkedin_organic,2025-06-13,2025-07-04 09:21
+b50ec2a1,etbe-bws-2025,Varun,Sharma,varun.sharma372@quartz.example.com,Quartz Electronics,CMO,Bengaluru,Attended,Emailer,direct,2025-06-09,2025-07-04 09:23
+60a352c8,etbe-bws-2025,Shreya,Mehta,shreya.mehta374@cedar.example.com,Cedar Home Care,Head of Brand,Mumbai,Attended,Sales team,direct,2025-06-28,2025-07-04 09:52
+9354034c,etbe-bws-2025,Tanvi,Nair,tanvi.nair375@amber.example.com,Amber Fashion,Brand Manager,Hyderabad,Registered,Emailer,direct,2025-06-16,
+671bd7a7,etbe-bws-2025,Varun,Rao,varun.rao376@pinewood.example.com,Pinewood Insurance,Director - Digital,Bengaluru,Attended,Sales team,emailer,2025-05-14,2025-07-04 09:13
+352c0769,etbe-bws-2025,Arjun,Bhatia,arjun.bhatia377@crescent.example.com,Crescent Pharma,Marketing Lead,Bengaluru,Attended,Sales team,direct,2025-05-02,2025-07-04 09:26
+95cfb590,etbe-bws-2025,Varun,Rao,varun.rao378@tidal.example.com,Tidal Beverages,"Senior Manager, Media",Delhi NCR,Attended,Website,instagram_ads,2025-05-24,2025-07-04 09:50
+e19d553e,etbe-bws-2025,Tanvi,Mehta,tanvi.mehta379@harbor.example.com,Harbor Telecom,DGM – Brand Marketing,Delhi NCR,Shortlisted,Sales team,direct,2025-06-13,
+ca553294,etbe-bws-2025,Tanvi,Nair,tanvi.nair380@meridian.example.com,Meridian Bank,"Associate Director, Insights",Delhi NCR,Attended,Website,emailer,2025-06-15,2025-07-04 09:23
+4f6a8009,etbe-bws-2025,Kavya,Bhatia,kavya.bhatia381@kestrel.example.com,Kestrel Motors,DGM – Brand Marketing,Chennai,Attended,Emailer,linkedin_organic,2025-05-12,2025-07-04 09:53
+d380d018,etbe-bws-2025,Pooja,Rao,pooja.rao382@indigo.example.com,Indigo Retail,Vice President - Marketing,Hyderabad,Registered,Others,direct,2025-05-26,
+4022eb48,etbe-bws-2025,Nikhil,Bhatia,nikhil.bhatia383@indigo.example.com,Indigo Retail,Founder & CEO,Delhi NCR,Shortlisted,Website,linkedin_organic,2025-05-18,
+bcb08721,etbe-bws-2025,Aditya,Bhatia,aditya.bhatia384@saffron.example.com,Saffron Foods,DGM – Brand Marketing,Chennai,Attended,Website,direct,2025-06-22,2025-07-04 09:00
+90e28f73,etbe-bws-2025,Aditya,Sethi,aditya.sethi385@tidal.example.com,Tidal Beverages,Marketing Lead,Pune,Shortlisted,Sales team,emailer,2025-06-05,
+19c96380,etbe-bws-2025,Tanvi,Sharma,tanvi.sharma386@monsoon.example.com,Monsoon Media,Vice President - Marketing,Pune,Attended,Emailer,linkedin_organic,2025-06-05,2025-07-04 09:37
+981d668c,etbe-bws-2025,Kavya,Menon,kavya.menon387@quartz.example.com,Quartz Electronics,Marketing Lead,Chennai,Attended,Others,linkedin_organic,2025-05-08,2025-07-04 09:19
+4caac3c5,etbe-bws-2025,Aditya,Iyer,aditya.iyer388@northstar.example.com,Northstar Apparel,Vice President - Marketing,Chennai,Registered,Website,linkedin_organic,2025-06-24,
+a8d41b46,etbe-bws-2025,Rohan,Bhatia,rohan.bhatia389@cedar.example.com,Cedar Home Care,Chief Marketing Officer,Hyderabad,Attended,Sales team,sales_invite,2025-05-25,2025-07-04 09:28
+dcc45241,etbe-bws-2025,Aditya,Nair,aditya.nair390@lotus.example.com,Lotus Naturals,Founder & CEO,Pune,Attended,Emailer,linkedin_organic,2025-05-27,2025-07-04 09:52
+128b95b5,etbe-bws-2025,Kavya,Sharma,kavya.sharma391@kestrel.example.com,Kestrel Motors,Brand Manager,Bengaluru,Registered,Website,direct,2025-05-03,
+eb19e542,etbe-bws-2025,Rahul,Iyer,rahul.iyer392@northstar.example.com,Northstar Apparel,Director - Digital,Hyderabad,Attended,Website,direct,2025-05-01,2025-07-04 09:38
+b0110710,etbe-bws-2025,Ananya,Mehta,ananya.mehta393@indigo.example.com,Indigo Retail,DGM – Brand Marketing,Chennai,Attended,Sales team,instagram_ads,2025-06-23,2025-07-04 09:54
+67d17a97,etbe-bws-2025,Ananya,Sethi,ananya.sethi394@indigo.example.com,Indigo Retail,"Associate Director, Insights",Chennai,Attended,Others,linkedin_organic,2025-05-17,2025-07-04 09:32
+e373c3f5,etbe-bws-2025,Shreya,Sethi,shreya.sethi395@cedar.example.com,Cedar Home Care,Chief Marketing Officer,Hyderabad,Attended,Others,direct,2025-05-13,2025-07-04 09:25
+57cb8b60,etbe-bws-2025,Neha,Iyer,neha.iyer396@lotus.example.com,Lotus Naturals,Vice President - Marketing,Bengaluru,Attended,Others,instagram_ads,2025-05-19,2025-07-04 09:42
+2c6af22a,etbe-bws-2025,Shreya,Desai,shreya.desai397@quartz.example.com,Quartz Electronics,Brand Manager,Hyderabad,Registered,Others,emailer,2025-06-13,
+ae938f52,etbe-bws-2025,Aarav,Sharma,aarav.sharma398@northstar.example.com,Northstar Apparel,Chief Marketing Officer,Hyderabad,Registered,Website,emailer,2025-06-22,
+cdccd814,etbe-bws-2025,Karan,Gupta,karan.gupta399@amber.example.com,Amber Fashion,CMO,Bengaluru,Attended,Sales team,direct,2025-06-25,2025-07-04 09:33
+16db0f22,etbe-bws-2025,Pooja,Malhotra,pooja.malhotra400@monsoon.example.com,Monsoon Media,Marketing Lead,Pune,Attended,Others,instagram_ads,2025-06-20,2025-07-04 09:31
+65e729aa,etbe-bws-2025,Vikram,Menon,vikram.menon401@tidal.example.com,Tidal Beverages,CMO,Delhi NCR,Attended,Others,direct,2025-06-06,2025-07-04 09:18
+42ac5018,etbe-bws-2025,Karan,Sethi,karan.sethi402@tidal.example.com,Tidal Beverages,"Associate Director, Insights",Pune,Attended,Website,direct,2025-05-01,2025-07-04 09:50
+1e023f44,etbe-bws-2025,Rahul,Sharma,rahul.sharma403@meridian.example.com,Meridian Bank,Vice President - Marketing,Delhi NCR,Attended,Sales team,direct,2025-05-04,2025-07-04 09:53
+e5a1d320,etbe-bws-2025,Varun,Sethi,varun.sethi404@meridian.example.com,Meridian Bank,Brand Manager,Delhi NCR,Attended,Website,emailer,2025-06-07,2025-07-04 09:42
+7e3fd676,etbe-bws-2025,Kabir,Menon,kabir.menon405@lotus.example.com,Lotus Naturals,Chief Marketing Officer,Chennai,Attended,Emailer,instagram_ads,2025-05-05,2025-07-04 09:26
+b7788aa9,etbe-bws-2025,Tanvi,Joshi,tanvi.joshi406@tidal.example.com,Tidal Beverages,AVP Growth,Bengaluru,Attended,Emailer,emailer,2025-05-26,2025-07-04 09:11
+43041a42,etbe-bws-2025,Karan,Rao,karan.rao407@kestrel.example.com,Kestrel Motors,Marketing Lead,Hyderabad,Registered,Others,emailer,2025-05-04,
+fb851cce,etbe-bws-2025,Arjun,Gupta,arjun.gupta408@lotus.example.com,Lotus Naturals,Director - Digital,Mumbai,Shortlisted,Sales team,direct,2025-05-17,
+998a98d1,etbe-bws-2025,Kavya,Menon,kavya.menon409@northstar.example.com,Northstar Apparel,Vice President - Marketing,Pune,Registered,Sales team,direct,2025-06-26,
+6c09727a,etbe-bws-2025,Shreya,Kapoor,shreya.kapoor410@crescent.example.com,Crescent Pharma,Marketing Lead,Pune,Registered,Sales team,sales_invite,2025-05-07,
+b70380ff,etbe-bws-2025,Arjun,Kapoor,arjun.kapoor411@quartz.example.com,Quartz Electronics,Director - Digital,Chennai,Attended,Emailer,direct,2025-06-07,2025-07-04 09:40
+2f4ff9bd,etbe-bws-2025,Kabir,Sethi,kabir.sethi412@harbor.example.com,Harbor Telecom,CMO,Hyderabad,Attended,Website,emailer,2025-06-22,2025-07-04 09:29
+56f6777a,etbe-bws-2025,Ananya,Gupta,ananya.gupta413@amber.example.com,Amber Fashion,Founder & CEO,Delhi NCR,Attended,Website,sales_invite,2025-06-02,2025-07-04 09:51
+e370fc34,etbe-bws-2025,Aarav,Joshi,aarav.joshi414@lotus.example.com,Lotus Naturals,Director - Digital,Hyderabad,Attended,Others,sales_invite,2025-06-19,2025-07-04 09:09
+85b878ce,etbe-bws-2025,Aditya,Bhatia,aditya.bhatia415@monsoon.example.com,Monsoon Media,Head of Brand,Pune,Attended,Emailer,direct,2025-06-03,2025-07-04 09:46
+af7eacb6,etbe-bws-2025,Shreya,Sharma,shreya.sharma416@northstar.example.com,Northstar Apparel,Brand Manager,Hyderabad,Registered,Website,linkedin_organic,2025-05-01,
+353aeab1,etbe-bws-2025,Riya,Iyer,riya.iyer417@banyan.example.com,Banyan Finance,"Senior Manager, Media",Mumbai,Registered,Others,sales_invite,2025-06-05,
+582d428a,etbe-bws-2025,Priya,Pillai,priya.pillai418@saffron.example.com,Saffron Foods,Marketing Lead,Mumbai,Attended,Emailer,direct,2025-05-08,2025-07-04 09:33
+165a3108,etbe-bws-2025,Aarav,Banerjee,aarav.banerjee419@pinewood.example.com,Pinewood Insurance,Director - Digital,Mumbai,Attended,Others,emailer,2025-06-07,2025-07-04 09:11
+b4e08a3d,etbe-bws-2025,Kavya,Banerjee,kavya.banerjee150@monsoon.example.com,Monsoon Media,Brand Manager,Mumbai,Shortlisted,Website,instagram_ads,2025-05-23,
+e4c3423b,etbe-bws-2025,Ishita,Gupta,ishita.gupta74@monsoon.example.com,Monsoon Media,Vice President - Marketing,Bengaluru,Attended,Others,sales_invite,2025-05-13,2025-07-04 09:14
+7b7a9441,etbe-bws-2025,Rahul,Joshi,rahul.joshi178@indigo.example.com,Indigo Retail,Brand Manager,Chennai,Attended,Sales team,linkedin_organic,2025-06-23,2025-07-04 09:42
+6bf195e0,etbe-bws-2025,Varun,Sharma,varun.sharma201@lotus.example.com,Lotus Naturals,"Senior Manager, Media",Chennai,Registered,Website,sales_invite,2025-06-24,
+f277534c,etbe-bws-2025,Varun,Nair,varun.nair286@harbor.example.com,Harbor Telecom,"Senior Manager, Media",Bengaluru,Shortlisted,Website,sales_invite,2025-06-08,
+c46fb1c1,etbe-bws-2025,Rohan,Kapoor,rohan.kapoor94@kestrel.example.com,Kestrel Motors,DGM – Brand Marketing,Pune,Attended,Others,emailer,2025-05-26,2025-07-04 09:28
+c7d9a9ed,etbe-northwind-25,Aditi,Rao,aditi.rao@aurorasteel.example.com,Aurora Steel,Chief Information Officer,,Attended,,,,2025-09-12 17:05
+4fdfd516,etbe-northwind-25,Arjun,Sethi,arjun.sethi@bluepeakpharma.example.com,Bluepeak Pharma,Vice President - IT,,Attended,,,,2025-09-12 17:48
+7261c115,etbe-northwind-25,Bhavna,Verma,bhavna.verma@cedarlinemotors.example.com,Cedarline Motors,Senior Manager - IT,,Attended,,,,2025-09-12 17:18
+d92321d2,etbe-northwind-25,Chirag,Nair,chirag.nair@deltagridpower.example.com,Delta Grid Power,Chief Digital Officer,,Attended,,,,2025-09-12 17:51
+ea803e15,etbe-northwind-25,Deepa,Reddy,deepa.reddy@everestfinserv.example.com,Everest Finserv,CIO,,Attended,,,,2025-09-12 17:56
+b1036a85,etbe-northwind-25,Farhan,Shah,farhan.shah@falconlogistics.example.com,Falcon Logistics,Chief Technology Officer,,Attended,,,,2025-09-12 17:08
+c98537d0,etbe-northwind-25,Gauri,Pillai,gauri.pillai@granitecement.example.com,Granite Cement,Director - Infrastructure,,Attended,,,,2025-09-12 17:17
+44d10d3c,etbe-northwind-25,Harsh,Menon,harsh.menon@horizonhospitals.example.com,Horizon Hospitals,Chief Data Officer,,Attended,,,,2025-09-12 17:24
+03f3302e,etbe-northwind-25,Isha,Joshi,isha.joshi@industextiles.example.com,Indus Textiles,VP Engineering,,Attended,,,,2025-09-12 17:43
+29d903e7,etbe-northwind-25,Jatin,Kulkarni,jatin.kulkarni@jadesoftware.example.com,Jade Software,Director Technology,,Attended,,,,2025-09-12 17:14
+efe187b6,etbe-northwind-25,Kavya,Gupta,kavya.gupta@kestrelairways.example.com,Kestrel Airways,CEO,,Attended,,,,2025-09-12 17:26
+db5256dc,etbe-northwind-25,Lakshay,Malhotra,lakshay.malhotra@lumentelecom.example.com,Lumen Telecom,Head of Data,,Attended,,,,2025-09-12 17:47
+d89c5182,etbe-northwind-25,Mira,Kapoor,mira.kapoor@monarchbank.example.com,Monarch Bank,Chief Information Officer,,Attended,,,,2025-09-12 17:19
+a74e4ab5,etbe-northwind-25,Nakul,Desai,nakul.desai@nimbusretail.example.com,Nimbus Retail,Vice President - IT,,Attended,,,,2025-09-12 17:40
+c0f6165d,etbe-northwind-25,Ojas,Iyer,ojas.iyer@orionchemicals.example.com,Orion Chemicals,Senior Manager - IT,,Attended,,,,2025-09-12 17:07
+7c1939eb,etbe-northwind-25,Pallavi,Bose,pallavi.bose@pinnacleinsurance.example.com,Pinnacle Insurance,Chief Digital Officer,,Attended,,,,2025-09-12 17:27
+505fafb9,etbe-northwind-25,Raghav,Rao,raghav.rao@quartzsemiconductors.example.com,Quartz Semiconductors,CIO,,Attended,,,,2025-09-12 17:33
+5de2f9eb,etbe-northwind-25,Sana,Sethi,sana.sethi@radiantfoods.example.com,Radiant Foods,Chief Technology Officer,,Attended,,,,2025-09-12 17:10
+4454d5a7,etbe-northwind-25,Tara,Verma,tara.verma@sapphirerealty.example.com,Sapphire Realty,Director - Infrastructure,,Attended,,,,2025-09-12 17:14
+5d966730,etbe-northwind-25,Uday,Nair,uday.nair@titanports.example.com,Titan Ports,Chief Data Officer,,Attended,,,,2025-09-12 17:44
+7c1ad0f4,etbe-northwind-25,Vani,Reddy,vani.reddy@unityhealth.example.com,Unity Health,VP Engineering,,Attended,,,,2025-09-12 17:37
+4bd1ede0,etbe-northwind-25,Yash,Shah,yash.shah@vertexanalytics.example.com,Vertex Analytics,Director Technology,,Attended,,,,2025-09-12 17:32
+0eb5b4e6,etbe-northwind-25,Zoya,Pillai,zoya.pillai@willowagro.example.com,Willow Agro,CEO,,Attended,,,,2025-09-12 17:11
+20846db6,etbe-northwind-25,Neil,Menon,neil.menon@xenonenergy.example.com,Xenon Energy,Head of Data,,Attended,,,,2025-09-12 17:09
+3b8b129f,etbe-northwind-25,Ritu,Joshi,ritu.joshi@yarrowmobility.example.com,Yarrow Mobility,Chief Information Officer,,Attended,,,,2025-09-12 17:50
+a9f36cbf,etbe-northwind-25,Kunal,Kulkarni,kunal.kulkarni@zenithmedia.example.com,Zenith Media,Vice President - IT,,Attended,,,,2025-09-12 17:56
+266e287a,etbe-northwind-25,Sneha,Gupta,sneha.gupta@apextyres.example.com,Apex Tyres,Senior Manager - IT,,Attended,,,,2025-09-12 17:45
+7c6c2c9d,etbe-northwind-25,Varun,Malhotra,varun.malhotra@beaconlabs.example.com,Beacon Labs,Chief Digital Officer,,Attended,,,,2025-09-12 17:27
+a86d4022,etbe-northwind-25,Ira,Kapoor,ira.kapoor@aurorasteel.example.com,Aurora Steel,CIO,,Attended,,,,2025-09-12 17:38
+9a9464f6,etbe-northwind-25,Dev,Desai,dev.desai@bluepeakpharma.example.com,Bluepeak Pharma,Chief Technology Officer,,Attended,,,,2025-09-12 17:58
+9cc9122d,etbe-northwind-25,Anika,Iyer,anika.iyer@cedarlinemotors.example.com,Cedarline Motors,Director - Infrastructure,,Attended,,,,2025-09-12 17:08
+14124722,etbe-northwind-25,Kabir,Bose,kabir.bose@deltagridpower.example.com,Delta Grid Power,Chief Data Officer,,Attended,,,,2025-09-12 17:13
+9774afff,etbe-northwind-25,Leela,Rao,leela.rao@everestfinserv.example.com,Everest Finserv,VP Engineering,,Attended,,,,2025-09-12 17:20
+f92ff230,etbe-northwind-25,Omkar,Sethi,omkar.sethi@falconlogistics.example.com,Falcon Logistics,Director Technology,,Attended,,,,2025-09-12 17:52
+a853b9a7,etbe-northwind-25,Pooja,Verma,pooja.verma@granitecement.example.com,Granite Cement,CEO,,No-show,,,,
+41cb332b,etbe-northwind-25,Rhea,Nair,rhea.nair@horizonhospitals.example.com,Horizon Hospitals,Head of Data,,No-show,,,,
+3f72baeb,etbe-northwind-25,Aditi,Reddy,aditi.reddy@industextiles.example.com,Indus Textiles,Chief Information Officer,,No-show,,,,
+0d125c4a,etbe-northwind-25,Arjun,Shah,arjun.shah@jadesoftware.example.com,Jade Software,Vice President - IT,,No-show,,,,

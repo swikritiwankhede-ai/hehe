@@ -1,0 +1,241 @@
+{
+  "model": "Custom",
+  "event_key": "etbe-northwind-25",
+  "engine": "1.0.0",
+  "placeholders": {
+    "event_name": "Northwind Leaders Circle 2025 (sample)",
+    "edition": "",
+    "theme_line": "From Pilot to Scale: AI in the Enterprise",
+    "date_venue": "12–14 Sep 2025 · Sample resort, Goa",
+    "hashtag": "",
+    "next_edition": "Thank you from ETBrandEquity Custom Solutions",
+    "as_of": "Data as of 2025-07-05",
+    "report_version": "v1",
+    "sponsor_name": "Northwind Cloud",
+    "obj1": "Convene 30 CXOs from target accounts",
+    "obj2": "Land the \"pilot to scale\" narrative",
+    "obj3": "Build relationships beyond the sales cycle",
+    "obj4": "Turn conversations into follow-ups",
+    "leaders_attended": "34",
+    "leaders_committed": "30",
+    "attendance_vs_commit": "113%",
+    "touchpoints": "13",
+    "content_minutes": "200",
+    "sponsor_minutes": "145",
+    "sov_pct": "73%",
+    "cxo_count": "17",
+    "sectors_count": "9",
+    "kpi_title": "34 leaders in the room against 30 committed",
+    "src_kpis": "Sources: room check-in · run-of-show with session owners · signed proposal. Data as of 2025-07-05",
+    "wishlist_total": "25",
+    "wishlist_attended": "19",
+    "wishlist_met": "15",
+    "wishlist_met_pct": "60%",
+    "wishlist_title": "19 of 25 target accounts were in the room",
+    "accounts_met": "Aurora Steel  ·  Bluepeak Pharma  ·  Cedarline Motors  ·  Delta Grid Power  ·  Everest Finserv  ·  Falcon Logistics  ·  Granite Cement  ·  Horizon Hospitals  ·  Indus Textiles  ·  Jade Software  ·  Kestrel Airways  ·  Lumen Telecom  ·  Monarch Bank  ·  Nimbus Retail  ·  Orion Chemicals",
+    "src_wishlist": "Target list agreed with Northwind Cloud · outcomes from the session desk and check-in",
+    "audience_title": "91% of the room were CXO, VP or Director",
+    "orgs_count": "28",
+    "src_audience": "n = 34 leaders · seniority from job titles · sector and region from the companies tab",
+    "sov_title": "Northwind Cloud owned 73% of content minutes (145 of 200)",
+    "src_sov": "Run-of-show: sessions tagged by owner; informal blocks excluded",
+    "delivered_title": "7 of 7 commitments delivered",
+    "delivered_lines": "✓ Event identity and co-branding · All days · committed Yes, delivered Yes\n✓ Sponsor keynote · Day 2 · committed 1, delivered 1\n✓ Solution sessions · Day 2 · committed 5, delivered 5\n✓ Emcee mentions · Day 2 · committed 6, delivered 6\n✓ Experiential zone · Day 1–3 · committed 1, delivered 1\n✓ On-ground branding · All days · committed 12 assets, delivered 12 assets\n✓ Curated gifting · Day 3 · committed 30, delivered 34",
+    "src_delivered": "Committed: signed proposal · delivered: ops checklist with evidence",
+    "q1_name": "Deepa Nair",
+    "q1_role": "Chief Information Officer, Delta Grid Power",
+    "q1_headline": "Sample headline",
+    "q1_quote": "“Sample quote from a fictional attendee, used to show the layout.”",
+    "q2_name": "Aditi Rao",
+    "q2_role": "Chief Technology Officer, Aurora Steel",
+    "q2_headline": "Sample headline",
+    "q2_quote": "“Another sample quote, for layout only.”",
+    "followups_title": "6 leaders asked Northwind Cloud to follow up",
+    "followup_lines": "Aurora Steel: Infrastructure assessment\nCedarline Motors: Pricing workshop\nEverest Finserv: Device pilot for 200 users\nGranite Cement: AI cost review\nIndus Textiles: Executive briefing\nKestrel Airways: Site visit",
+    "feedback_avg": "4.7 / 5",
+    "would_return_pct": "85%",
+    "feedback_n": "n = 20 responses",
+    "feedback_quote": "“The smallest room I have been in with peers who are actually scaling AI.”",
+    "roster_col1": "Aditi Rao · Chief Information Officer, Aurora Steel\nChirag Nair · Chief Digital Officer, Delta Grid Power\nDeepa Reddy · CIO, Everest Finserv\nDev Desai · Chief Technology Officer, Bluepeak Pharma\nFarhan Shah · Chief Technology Officer, Falcon Logistics\nHarsh Menon · Chief Data Officer, Horizon Hospitals\nIra Kapoor · CIO, Aurora Steel\nKabir Bose · Chief Data Officer, Delta Grid Power\nKavya Gupta · CEO, Kestrel Airways\nMira Kapoor · Chief Information Officer, Monarch Bank\nPallavi Bose · Chief Digital Officer, Pinnacle Insurance\nRaghav Rao · CIO, Quartz Semiconductors\nRitu Joshi · Chief Information Officer, Yarrow Mobility\nSana Sethi · Chief Technology Officer, Radiant Foods\nUday Nair · Chief Data Officer, Titan Ports\nVarun Malhotra · Chief Digital Officer, Beacon Labs\nZoya Pillai · CEO, Willow Agro",
+    "roster_col2": "Arjun Sethi · Vice President - IT, Bluepeak Pharma\nIsha Joshi · VP Engineering, Indus Textiles\nKunal Kulkarni · Vice President - IT, Zenith Media\nLeela Rao · VP Engineering, Everest Finserv\nNakul Desai · Vice President - IT, Nimbus Retail\nVani Reddy · VP Engineering, Unity Health\nAnika Iyer · Director - Infrastructure, Cedarline Motors\nGauri Pillai · Director - Infrastructure, Granite Cement\nJatin Kulkarni · Director Technology, Jade Software\nLakshay Malhotra · Head of Data, Lumen Telecom\nNeil Menon · Head of Data, Xenon Energy\nOmkar Sethi · Director Technology, Falcon Logistics\nTara Verma · Director - Infrastructure, Sapphire Realty\nYash Shah · Director Technology, Vertex Analytics\nBhavna Verma · Senior Manager - IT, Cedarline Motors\nOjas Iyer · Senior Manager - IT, Orion Chemicals\nSneha Gupta · Senior Manager - IT, Apex Tyres",
+    "photo1_caption": "",
+    "photo2_caption": "",
+    "photo3_caption": "",
+    "photo4_caption": "",
+    "photo5_caption": "",
+    "photo6_caption": ""
+  },
+  "charts": {
+    "seniority": [
+      [
+        "CXO",
+        17,
+        "17 (50%)"
+      ],
+      [
+        "VP",
+        6,
+        "6 (18%)"
+      ],
+      [
+        "Director",
+        8,
+        "8 (24%)"
+      ],
+      [
+        "Manager",
+        3,
+        "3 (9%)"
+      ]
+    ],
+    "sector": [
+      [
+        "Manufacturing",
+        9,
+        "9 (26%)"
+      ],
+      [
+        "Infrastructure",
+        7,
+        "7 (21%)"
+      ],
+      [
+        "Healthcare",
+        5,
+        "5 (15%)"
+      ],
+      [
+        "BFSI",
+        4,
+        "4 (12%)"
+      ],
+      [
+        "Technology",
+        4,
+        "4 (12%)"
+      ],
+      [
+        "Other",
+        5,
+        "5 (15%)"
+      ]
+    ],
+    "geo": [
+      [
+        "South",
+        11,
+        "11 (32%)"
+      ],
+      [
+        "West",
+        11,
+        "11 (32%)"
+      ],
+      [
+        "North",
+        6,
+        "6 (18%)"
+      ],
+      [
+        "East",
+        4,
+        "4 (12%)"
+      ],
+      [
+        "Central",
+        2,
+        "2 (6%)"
+      ]
+    ],
+    "sov": [
+      [
+        "Northwind Cloud keynote: pilot to scale",
+        15,
+        "15 min"
+      ],
+      [
+        "Modernising core infrastructure",
+        45,
+        "45 min"
+      ],
+      [
+        "Devices for the hybrid workforce",
+        30,
+        "30 min"
+      ],
+      [
+        "Consumption pricing for AI workloads",
+        20,
+        "20 min"
+      ],
+      [
+        "The real cost of AI at scale",
+        20,
+        "20 min"
+      ],
+      [
+        "Fast-track deployment programme",
+        15,
+        "15 min"
+      ]
+    ]
+  },
+  "images": {},
+  "sections": [
+    "mandate",
+    "kpis",
+    "wishlist",
+    "audience",
+    "sov",
+    "delivered",
+    "quotes",
+    "followups",
+    "feedback",
+    "roster",
+    "photos",
+    "cover",
+    "close"
+  ],
+  "drop": [
+    "photos"
+  ],
+  "readiness": [
+    {
+      "source": "Event details",
+      "status": "ready",
+      "note": ""
+    },
+    {
+      "source": "Room check-in",
+      "status": "ready",
+      "note": "34 leaders checked in"
+    },
+    {
+      "source": "Run-of-show",
+      "status": "ready",
+      "note": "13 sessions"
+    },
+    {
+      "source": "Wishlist",
+      "status": "ready",
+      "note": "25 target accounts"
+    },
+    {
+      "source": "Commitments",
+      "status": "ready",
+      "note": "7 committed deliverables"
+    },
+    {
+      "source": "Follow-ups",
+      "status": "ready",
+      "note": "6 requests"
+    },
+    {
+      "source": "Feedback",
+      "status": "ready",
+      "note": "20 responses"
+    }
+  ],
+  "blockers": [],
+  "warnings": []
+}

@@ -1,0 +1,28 @@
+row_key,event_key,day,start,end,hall,title,format,owner,speakers
+5b4b0326,etbe-bws-2025,Day 1,10:00,10:20,Audi2,Keynote 1 (sample title),Keynote,ET,Sanjiv Mehta
+682e9e6d,etbe-bws-2025,Day 1,10:25,10:45,Audi1,Keynote 2 (sample title),Keynote,ET,Sudhanshu Vats
+92dd5b8d,etbe-bws-2025,Day 1,10:50,11:30,Audi1,Panel 3 (sample title),Panel,ET,Virat Khullar; Daniel Kim; Jan Bures
+003db822,etbe-bws-2025,Day 1,11:35,12:05,Audi2,Fireside 4 (sample title),Fireside,ET,Sandeep Tanwani
+a29bfc35,etbe-bws-2025,Day 1,12:10,12:50,Audi1,Panel 5 (sample title),Panel,ET,Lakshmi Narayanan; Anuradha Aggarwal; Chandrika Jain
+4e323362,etbe-bws-2025,Day 1,12:55,13:15,Audi1,Case study 6 (sample title),Case study,ET,Nipun Kaushal
+ff1070d7,etbe-bws-2025,Day 1,14:15,14:55,Audi2,Panel 7 (sample title),Panel,ET,Maneesh Mittal; Zameer kochar; Darshana Shah
+e23d7199,etbe-bws-2025,Day 1,15:00,15:20,Audi1,Keynote 8 (sample title),Keynote,ET,Sachin Vashishtha
+3bf11608,etbe-bws-2025,Day 1,15:25,16:05,Audi1,Panel 9 (sample title),Panel,ET,Saloni Anand; Kavita Jagtiani; Robin Das
+68fd12f1,etbe-bws-2025,Day 1,16:10,16:40,Audi2,Fireside 10 (sample title),Fireside,ET,Gagandeep Gadri
+57e39894,etbe-bws-2025,Day 1,16:45,17:25,Audi1,Panel 11 (sample title),Panel,ET,Saikot Das; Namrata Soni; Nisha khatri
+3d42e7eb,etbe-bws-2025,Day 1,17:30,17:50,Audi1,Case study 12 (sample title),Case study,ET,Tarun Sharma
+34c68e3f,etbe-bws-2025,Day 1,17:55,18:35,Audi2,Panel 13 (sample title),Panel,ET,Prabha Narasimhan; Prasoon Joshi; Sudhanshu Vats
+244f019c,etbe-bws-2025,Day 1,13:30,14:30,Foyer,Networking lunch,Informal,ET,
+d46c110f,etbe-northwind-25,Day 1,16:00,19:30,Main,Arrival and welcome (informal),Informal,ET,
+2cba27c9,etbe-northwind-25,Day 2,09:30,09:45,Main,Welcome note,Keynote,ET,
+6ff79f17,etbe-northwind-25,Day 2,09:45,10:00,Main,Northwind Cloud keynote: pilot to scale,Keynote,Northwind Cloud,
+25c3444f,etbe-northwind-25,Day 2,10:00,10:45,Main,Modernising core infrastructure,Session,Northwind Cloud,
+9ecb7b1c,etbe-northwind-25,Day 2,10:45,11:15,Main,Tea break,Informal,ET,
+f5bbc9e2,etbe-northwind-25,Day 2,11:15,11:45,Main,Devices for the hybrid workforce,Session,Northwind Cloud,
+d41263e8,etbe-northwind-25,Day 2,11:45,12:05,Main,Consumption pricing for AI workloads,Session,Northwind Cloud,
+baf39125,etbe-northwind-25,Day 2,12:05,12:25,Main,The real cost of AI at scale,Session,Northwind Cloud,
+8bf54969,etbe-northwind-25,Day 2,12:25,12:40,Main,Fast-track deployment programme,Session,Northwind Cloud,
+49d8cb18,etbe-northwind-25,Day 2,12:40,13:20,Main,CXO panel: what scaled and what stalled,Panel,ET,
+a397258b,etbe-northwind-25,Day 2,13:20,14:30,Main,Lunch,Informal,ET,
+46ad3b83,etbe-northwind-25,Day 2,15:00,18:00,Main,Cricket and music by the beach,Informal,ET,
+7d984129,etbe-northwind-25,Day 3,09:00,12:00,Main,Trails and farewell,Informal,ET,

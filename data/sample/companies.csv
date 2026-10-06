@@ -1,0 +1,44 @@
+row_key,company,org_type,industry,hq_region
+d1f40399,Amber Fashion,Agency,FMCG,West
+7b0774f7,Banyan Finance,Brand,BFSI,North
+1b2296b5,Cedar Home Care,Brand,Retail & e-commerce,South
+81424f36,Crescent Pharma,Brand,Automotive,East
+689697a7,Harbor Telecom,Brand,Telecom,West
+71a69495,Indigo Retail,Brand,Retail & e-commerce,North
+a4145f8c,Kestrel Motors,Brand,Apparel & lifestyle,South
+84f10e01,Lotus Naturals,Brand,Consumer durables,East
+270caae1,Meridian Bank,Brand,FMCG,West
+7f1e543f,Monsoon Media,Agency,Media & advertising,North
+43e92d44,Northstar Apparel,Agency,Retail & e-commerce,South
+19c62415,Pinewood Insurance,Brand,Automotive,East
+cc47e0ae,Quartz Electronics,Brand,Telecom,West
+54c80eac,Saffron Foods,Brand,Healthcare & pharma,North
+4ccbb686,Tidal Beverages,Brand,Apparel & lifestyle,South
+4a59dd1f,Aurora Steel,Brand,Manufacturing,East
+e8bb8c36,Bluepeak Pharma,Brand,Healthcare,South
+e9c2f2a3,Cedarline Motors,Brand,Manufacturing,West
+034a8463,Delta Grid Power,Brand,Infrastructure,North
+426f4ccd,Everest Finserv,Brand,BFSI,West
+bd08bffc,Falcon Logistics,Brand,Infrastructure,South
+132c90f6,Granite Cement,Brand,Manufacturing,Central
+2e9c211a,Horizon Hospitals,Brand,Healthcare,South
+900d41d7,Indus Textiles,Brand,Manufacturing,West
+fe5fd967,Jade Software,Brand,Technology,South
+48aa1bae,Kestrel Airways,Brand,Infrastructure,North
+d2cc8136,Lumen Telecom,Brand,Technology,North
+966b9670,Monarch Bank,Brand,BFSI,West
+f5ef06f9,Nimbus Retail,Brand,Retail,South
+1cf30de2,Orion Chemicals,Brand,Manufacturing,West
+cf98ee0c,Pinnacle Insurance,Brand,BFSI,North
+a567b01f,Quartz Semiconductors,Brand,Technology,South
+8657c068,Radiant Foods,Brand,FMCG,East
+859d4575,Sapphire Realty,Brand,Real estate,West
+5ee2d736,Titan Ports,Brand,Infrastructure,West
+c2197093,Unity Health,Brand,Healthcare,North
+0e1c6392,Vertex Analytics,Brand,Technology,South
+9e82ecd1,Willow Agro,Brand,FMCG,Central
+2e0411c2,Xenon Energy,Brand,Infrastructure,East
+322349e9,Yarrow Mobility,Brand,Manufacturing,South
+cdf5c348,Zenith Media,Brand,Media,West
+74204db7,Apex Tyres,Brand,Manufacturing,South
+388b048c,Beacon Labs,Brand,Healthcare,West
