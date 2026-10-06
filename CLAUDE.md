@@ -212,6 +212,9 @@ Internal capture → accurate ROI report → the sponsor's marketing manager has
   - Lovable Prompt O: workflow engine, run log and live database subscriptions, so screens update without a refresh.
   - A go-live runbook from T-30 to T+14.
   - `prototype/report-workspace.html` now has a simulated **Automations** view: workflow cards with on/off, Run now and Retry, plus a live run log. A briefed video moves through the Video brief on its own.
+- **IP vs Custom deck comparison:** see `docs/ip-vs-custom-deck-comparison.md`. It compares BWS 2024 actuals with the Lenovo deck, data point by data point, with the source for each.
+  - **IP** proves event scale and reach on an ET-set agenda. **Custom** proves one sponsor's commitments were delivered.
+  - **Wishlist-met is not an IP data point.** It applies only to IP partners who bought access add-ons, and even then it isn't measured today.
 - **Lovable integrations:** see `docs/lovable-integrations.md`. It covers:
   - Feasibility: Excel upload, Drive, transcription, the summary / quotes / themes prompt and photo scoring are fine. LinkedIn impressions can't be read from public URLs; use the page-analytics export now and the official API after approval. OneWorld needs an ET engineering API plus DPDP sign-off.
   - The setup checklist.
