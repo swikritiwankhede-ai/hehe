@@ -1,7 +1,6 @@
 {
   "name": "report-studio",
   "private": true,
-  "type": "module",
   "description": "ETBrandEquity post-event report engine, n8n workflows and deck templates",
   "scripts": {
     "test": "node engine/test.mjs && node n8n/test-workflows.mjs",

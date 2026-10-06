@@ -9,6 +9,9 @@ import crypto from 'node:crypto';
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const ENGINE = fs.readFileSync(path.join(ROOT, 'engine/report-engine.js'), 'utf8').replace(/^if \(typeof module.*$/m, '');
 const OUT = path.join(ROOT, 'n8n/workflows'); fs.mkdirSync(OUT, { recursive: true });
+// Deterministic ids so rebuilding only changes what actually changed.
+let idCounter = 0;
+const detId = () => { const h = crypto.createHash('sha1').update('report-studio-' + (idCounter++)).digest('hex'); return [h.slice(0, 8), h.slice(8, 12), '4' + h.slice(13, 16), '8' + h.slice(17, 20), h.slice(20, 32)].join('-'); };
 
 const CONFIG = `// Edit these once. IDs are the long strings in Google Drive / Sheets / Slides URLs.
 return [{ json: {
@@ -32,7 +35,7 @@ function wf(name, nodes, links, extra = {}) {
 let x = 0;
 function node(name, type, typeVersion, parameters, more = {}) {
   x += 240;
-  return { parameters, id: crypto.randomUUID(), name, type, typeVersion, position: [x, more.y ?? 300], ...more.props };
+  return { parameters, id: detId(), name, type, typeVersion, position: [x, more.y ?? 300], ...more.props };
 }
 const reset = () => { x = 0; };
 const code = (name, js, more) => node(name, 'n8n-nodes-base.code', 2, { jsCode: js }, more);
@@ -63,7 +66,7 @@ const w1 = [
       { fieldLabel: 'File', fieldType: 'file', multipleFiles: false, acceptFileTypes: '.xlsx,.xls,.csv', requiredField: true }] },
     responseMode: 'lastNode', options: { appendAttribution: false } }),
   code('Config', CONFIG),
-  node('Is CSV?', 'n8n-nodes-base.if', 2, { conditions: { options: { caseSensitive: false, leftValue: '', typeValidation: 'loose' }, conditions: [{ id: crypto.randomUUID(), leftValue: '={{ $binary[Object.keys($binary)[0]].fileExtension }}', rightValue: 'csv', operator: { type: 'string', operation: 'equals' } }], combinator: 'and' }, options: {} }),
+  node('Is CSV?', 'n8n-nodes-base.if', 2, { conditions: { options: { caseSensitive: false, leftValue: '', typeValidation: 'loose' }, conditions: [{ id: detId(), leftValue: '={{ $binary[Object.keys($binary)[0]].fileExtension }}', rightValue: 'csv', operator: { type: 'string', operation: 'equals' } }], combinator: 'and' }, options: {} }),
   node('Read CSV', 'n8n-nodes-base.extractFromFile', 1, { operation: 'csv', binaryPropertyName: '={{ Object.keys($binary)[0] }}', options: {} }, { y: 200 }),
   node('Read Excel', 'n8n-nodes-base.extractFromFile', 1, { operation: 'xlsx', binaryPropertyName: '={{ Object.keys($binary)[0] }}', options: {} }, { y: 400 }),
   code('Normalise rows', `${ENGINE}
@@ -110,7 +113,7 @@ if (!row) return [{ json: { matched: false, file_id: file.id, file_name: name } 
 const ev = $('Read events').all().map((i) => i.json).find((e) => e.event_key === row.event_key) || {};
 return [{ json: { matched: true, file_id: file.id, file_name: name, mime: file.mimeType || 'video/mp4', event_key: row.event_key, event_name: ev.name || row.event_key,
   leaders: row.leaders, video_type: row.video_type, plan_row_key: row.row_key, plan_filename: row.planned_filename } }];`),
-  node('Matched?', 'n8n-nodes-base.if', 2, { conditions: { options: { caseSensitive: true, leftValue: '', typeValidation: 'loose' }, conditions: [{ id: crypto.randomUUID(), leftValue: '={{ $json.matched }}', rightValue: 'true', operator: { type: 'boolean', operation: 'true', singleValue: true } }], combinator: 'and' }, options: {} }),
+  node('Matched?', 'n8n-nodes-base.if', 2, { conditions: { options: { caseSensitive: true, leftValue: '', typeValidation: 'loose' }, conditions: [{ id: detId(), leftValue: '={{ $json.matched }}', rightValue: 'true', operator: { type: 'boolean', operation: 'true', singleValue: true } }], combinator: 'and' }, options: {} }),
   node('Download video', 'n8n-nodes-base.googleDrive', 3, { operation: 'download', fileId: { __rl: true, value: '={{ $json.file_id }}', mode: 'id' }, options: {} }, { y: 200 }),
   code('Measure file', `const out = [];
 for (let i = 0; i < $input.all().length; i++) { const buf = await this.helpers.getBinaryDataBuffer(i, 'data'); const it = $input.all()[i]; out.push({ json: Object.assign({}, $('Match to video plan').first().json, { bytes: buf.length }), binary: it.binary }); }
@@ -123,7 +126,7 @@ return out;`, { y: 200 }),
     sendBody: true, contentType: 'binaryData', inputDataFieldName: 'data', options: {} }, { y: 200 }),
   node('Wait for processing', 'n8n-nodes-base.wait', 1.1, { amount: 20, unit: 'seconds' }, { y: 200 }),
   node('Gemini: file state', 'n8n-nodes-base.httpRequest', 4.2, { method: 'GET', url: "={{ 'https://generativelanguage.googleapis.com/v1beta/' + ($json.file ? $json.file.name : $json.name) }}", ...geminiAuth, options: {} }, { y: 200 }),
-  node('Ready?', 'n8n-nodes-base.if', 2, { conditions: { options: { caseSensitive: true, leftValue: '', typeValidation: 'loose' }, conditions: [{ id: crypto.randomUUID(), leftValue: '={{ $json.state }}', rightValue: 'ACTIVE', operator: { type: 'string', operation: 'equals' } }], combinator: 'and' }, options: {} }, { y: 200 }),
+  node('Ready?', 'n8n-nodes-base.if', 2, { conditions: { options: { caseSensitive: true, leftValue: '', typeValidation: 'loose' }, conditions: [{ id: detId(), leftValue: '={{ $json.state }}', rightValue: 'ACTIVE', operator: { type: 'string', operation: 'equals' } }], combinator: 'and' }, options: {} }, { y: 200 }),
   node('Gemini: transcribe + insights', 'n8n-nodes-base.httpRequest', 4.2, { method: 'POST', url: "={{ 'https://generativelanguage.googleapis.com/v1beta/models/' + $('Config').first().json.GEMINI_MODEL + ':generateContent' }}", ...geminiAuth,
     sendBody: true, specifyBody: 'json',
     jsonBody: `={{ JSON.stringify({ contents: [{ parts: [ { file_data: { mime_type: $json.mimeType, file_uri: $json.uri } }, { text: ${JSON.stringify(PROMPT_TRANSCRIBE)}.replace('{{event}}', $('Match to video plan').first().json.event_name).replace('{{type}}', $('Match to video plan').first().json.video_type).replace('{{leaders}}', $('Match to video plan').first().json.leaders).replace('{{themes}}', $('Config').first().json.EVENT_THEMES) } ] }], generationConfig: { temperature: 0, responseMimeType: 'application/json' } }) }}`,
@@ -176,7 +179,7 @@ const theme = ReportEngine.themeFrom(data.event.accent_hex);
 const title = [data.event.name, res.model === 'Custom' ? data.event.sponsor_name : '', 'Post-event report', form['Version'], data.event.theme_id || ''].filter(Boolean).join(' · ');
 return [{ json: { res, theme, title, model: res.model, blocked: res.blockers.length > 0, summary: ReportEngine.summaryText(res),
   templateId: res.model === 'Custom' ? cfg.TEMPLATE_CUSTOM_ID : cfg.TEMPLATE_IP_ID, sendTo: form['Send to'] } }];`),
-  node('Blocked?', 'n8n-nodes-base.if', 2, { conditions: { options: { caseSensitive: true, leftValue: '', typeValidation: 'loose' }, conditions: [{ id: crypto.randomUUID(), leftValue: '={{ $json.blocked }}', rightValue: 'true', operator: { type: 'boolean', operation: 'true', singleValue: true } }], combinator: 'and' }, options: {} }),
+  node('Blocked?', 'n8n-nodes-base.if', 2, { conditions: { options: { caseSensitive: true, leftValue: '', typeValidation: 'loose' }, conditions: [{ id: detId(), leftValue: '={{ $json.blocked }}', rightValue: 'true', operator: { type: 'boolean', operation: 'true', singleValue: true } }], combinator: 'and' }, options: {} }),
   node('Copy template', 'n8n-nodes-base.googleDrive', 3, { operation: 'copy', fileId: { __rl: true, value: '={{ $json.templateId }}', mode: 'id' }, name: '={{ $json.title }}', sameFolder: false,
     driveId: { __rl: true, value: 'My Drive', mode: 'list', cachedResultName: 'My Drive' }, folderId: { __rl: true, value: "={{ $('Config').first().json.OUTPUT_FOLDER_ID }}", mode: 'id' }, options: {} }, { y: 200 }),
   node('Read copied deck', 'n8n-nodes-base.httpRequest', 4.2, { method: 'GET', url: '={{ "https://slides.googleapis.com/v1/presentations/" + $json.id }}', authentication: 'predefinedCredentialType', nodeCredentialType: 'googleSlidesOAuth2Api', options: {} }, { y: 200 }),
